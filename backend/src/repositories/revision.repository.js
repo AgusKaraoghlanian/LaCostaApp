@@ -13,10 +13,11 @@ export const obtenerRevisionPorId = async (id) => {
     return await prisma.revisionNegocio.findUnique({ where: { id } });
 }
 
-// Cómo se ordena el listado público. El id al final desempata dos iguales: así ninguno se
-// repite o se saltea entre páginas.
+// Cómo se ordena el listado público. recomendados: los destacados primero y después en el orden
+// en que se cargaron (como la demo). El último criterio no se repite entre dos negocios: así
+// ninguno aparece dos veces o se saltea entre páginas.
 const ORDENES = {
-    recomendados: [{ destacado: "desc" }, { nombre: "asc" }, { id: "asc" }],
+    recomendados: [{ destacado: "desc" }, { negocioId: "asc" }],
     precio: [{ precio: { sort: "asc", nulls: "last" } }, { nombre: "asc" }, { id: "asc" }],
     nombre: [{ nombre: "asc" }, { id: "asc" }],
 };
