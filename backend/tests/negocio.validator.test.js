@@ -44,7 +44,7 @@ describe('crearNegocioSchema', () => {
     expect(validar({ instagram: 'https://www.instagram.com/laorilla' }).error).toBeUndefined();
     expect(validar({ instagram: 'https://facebook.com/laorilla' }).error).toBeDefined();
     expect(validar({ whatsapp: 'https://wa.me/5492255123456' }).error).toBeUndefined();
-    expect(validar({ whatsapp: 'https://wa.me/hola' }).error).toBeDefined();
+    expect(validar({ whatsapp: 'https://wa.me/hola' }).error.message).toMatch(/wa\.me\/549/);
     expect(validar({ web: 'javascript:alert(1)' }).error).toBeDefined();
     expect(validar({ web: 'https://usuario:clave@laorilla.com' }).error).toBeDefined();
   });

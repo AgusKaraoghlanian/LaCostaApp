@@ -67,6 +67,7 @@ src/errors/                 errores propios con su código HTTP, por tema (auth,
 src/utils/jwt.js            crear y verificar tokens
 src/utils/texto.js          slugs para las URLs y claves sin tildes para buscar
 src/utils/enlaces.js        qué links se aceptan en una ficha
+src/utils/comparar.js       si dos objetos tienen los mismos datos (Postgres reordena las claves de los Json)
 tests/                      tests de services, validadores y entorno (vitest, repositories simulados)
 ```
 
@@ -86,7 +87,7 @@ Las rutas de `/v1/admin` piden `Authorization: Bearer <token>` de un administrad
 | `POST /v1/admin/negocios` | admin | crea la ficha como borrador |
 | `GET /v1/admin/negocios/:id` | admin | el borrador, `revisionBorrador`, cuál está publicada y el historial |
 | `PUT /v1/admin/negocios/:id` | admin | guarda el borrador: los datos completos y `revisionEsperada` |
-| `POST /v1/admin/negocios/:id/revisiones` | admin | aprueba una revisión con el borrador actual: `{ revisionEsperada }` |
+| `POST /v1/admin/negocios/:id/revisiones` | admin | aprueba una revisión con el borrador actual: `{ revisionEsperada }` (409 si no cambió nada desde la última) |
 | `POST /v1/admin/negocios/:id/publicar` | admin | publica la última revisión aprobada: `{ revisionEsperada }` |
 | `POST /v1/admin/negocios/:id/retirar` | admin | lo saca del sitio: `{ revisionEsperada }` |
 | `POST /v1/admin/negocios/:id/restaurar` | admin | copia una revisión al borrador: `{ revisionId, revisionEsperada }` |

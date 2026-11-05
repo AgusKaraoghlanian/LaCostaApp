@@ -27,7 +27,8 @@ export const buscarPublicadas = async ({ categoriaId, localidadId, precio, prest
     const [revisiones, total] = await Promise.all([
         prisma.revisionNegocio.findMany({
             where,
-            orderBy: { nombre: "asc" },
+            // El id desempata dos con el mismo nombre: así ninguno se repite o se saltea entre páginas.
+            orderBy: [{ nombre: "asc" }, { id: "asc" }],
             skip: saltear,
             take: cantidad,
             include: { negocio: { select: { slug: true } } },

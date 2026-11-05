@@ -26,7 +26,7 @@ export const buscarNegocios = async ({ nombreClave, saltear, cantidad }) => {
     const [negocios, total] = await Promise.all([
         prisma.negocio.findMany({
             where,
-            orderBy: { actualizadoEn: "desc" },
+            orderBy: [{ actualizadoEn: "desc" }, { id: "desc" }],
             skip: saltear,
             take: cantidad,
             include: { localidad: true, categoria: true },

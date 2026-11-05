@@ -17,9 +17,17 @@ const texto = (nombre, maximo) => Joi.string().trim().max(maximo).allow('').defa
 });
 
 // Un link de la ficha (ver utils/enlaces.js). tipo: 'web', 'instagram', 'facebook' o 'whatsapp'.
+// Un ejemplo por tipo, para que el mensaje de error diga qué se espera.
+const EJEMPLOS_DE_ENLACE = {
+  web: 'https://www.ejemplo.com',
+  instagram: 'https://instagram.com/tu-negocio',
+  facebook: 'https://facebook.com/tu-negocio',
+  whatsapp: 'https://wa.me/5492255123456',
+};
+
 const enlace = (nombre, tipo, maximo = 500) => texto(nombre, maximo)
   .custom((valor, helpers) => (esEnlacePermitido(valor, tipo) ? valor : helpers.error('enlace.invalido')))
-  .messages({ 'enlace.invalido': `${nombre}: ingresá un link válido (que empiece con http o https).` });
+  .messages({ 'enlace.invalido': `${nombre}: ingresá un link válido (ej. ${EJEMPLOS_DE_ENLACE[tipo]}).` });
 
 // "HH:MM" de 00:00 a 23:59
 const hora = Joi.string().pattern(/^(?:[01]\d|2[0-3]):[0-5]\d$/).messages({
@@ -191,9 +199,10 @@ const listarNegociosSchema = Joi.object({
   texto: Joi.string().trim().max(100).allow('').messages({
     'string.max': 'La búsqueda puede tener hasta 100 caracteres.',
   }),
-  pagina: Joi.number().integer().min(1).default(1).messages({
+  pagina: Joi.number().integer().min(1).max(1000).default(1).messages({
     'number.base': 'La página tiene que ser un número.',
     'number.min': 'La página empieza en 1.',
+    'number.max': 'Esa página no existe.',
   }),
 });
 

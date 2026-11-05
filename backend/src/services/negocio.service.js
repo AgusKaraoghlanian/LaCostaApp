@@ -6,11 +6,13 @@ import { enTransaccion } from '../repositories/transaccion.repository.js';
 import { instantaneaDeNegocio, negocioAdminDto, negocioAdminResumenDto } from '../dtos/negocioDto.js';
 import { NEGOCIOS_POR_PAGINA } from '../config/costa.js';
 import { armarSlug, claveDeTexto } from '../utils/texto.js';
+import { mismosDatos } from '../utils/comparar.js';
 import { NegocioNoEncontrado } from '../errors/negocio/NegocioNoEncontrado.js';
 import { RevisionCambio } from '../errors/negocio/RevisionCambio.js';
 import { RevisionNoEncontrada } from '../errors/negocio/RevisionNoEncontrada.js';
 import { NegocioSinAprobar } from '../errors/negocio/NegocioSinAprobar.js';
 import { NegocioNoPublicado } from '../errors/negocio/NegocioNoPublicado.js';
+import { NegocioSinCambios } from '../errors/negocio/NegocioSinCambios.js';
 import { LocalidadNoEncontrada } from '../errors/catalogo/LocalidadNoEncontrada.js';
 import { CategoriaNoEncontrada } from '../errors/catalogo/CategoriaNoEncontrada.js';
 
@@ -105,10 +107,13 @@ const aprobarRevision = async (usuarioId, id, revisionEsperada) => {
     const negocio = await exigirNegocio(id, tx);
     if (negocio.revisionBorrador !== revisionEsperada) { throw new RevisionCambio(); }
     const ultima = await revisionRepository.obtenerUltimaRevision(id, tx);
+    const datos = instantaneaDeNegocio(negocio);
+    // Aprobar dos veces lo mismo solo llenaría el historial de revisiones iguales.
+    if (ultima && mismosDatos(ultima.datos, datos)) { throw new NegocioSinCambios(); }
     await revisionRepository.crearRevision({
       negocioId: id,
       numero: (ultima?.numero ?? 0) + 1,
-      datos: instantaneaDeNegocio(negocio),
+      datos,
       nombre: negocio.nombre,
       busqueda: textoDeBusqueda(negocio),
       precio: negocio.precio,

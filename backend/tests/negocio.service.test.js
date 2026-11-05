@@ -28,6 +28,7 @@ import * as negocioService from '../src/services/negocio.service.js';
 import { RevisionCambio } from '../src/errors/negocio/RevisionCambio.js';
 import { NegocioSinAprobar } from '../src/errors/negocio/NegocioSinAprobar.js';
 import { NegocioNoPublicado } from '../src/errors/negocio/NegocioNoPublicado.js';
+import { NegocioSinCambios } from '../src/errors/negocio/NegocioSinCambios.js';
 import { NegocioNoEncontrado } from '../src/errors/negocio/NegocioNoEncontrado.js';
 import { RevisionNoEncontrada } from '../src/errors/negocio/RevisionNoEncontrada.js';
 import { LocalidadNoEncontrada } from '../src/errors/catalogo/LocalidadNoEncontrada.js';
@@ -171,6 +172,17 @@ describe('aprobarRevision', () => {
     revisionRepository.obtenerUltimaRevision.mockResolvedValue(null);
     await negocioService.aprobarRevision(5, 7, 3);
     expect(revisionRepository.crearRevision.mock.calls[0][0].numero).toBe(1);
+  });
+
+  it('no aprueba de nuevo si nada cambió (aunque la base haya reordenado las claves)', async () => {
+    revisionRepository.obtenerUltimaRevision.mockResolvedValue(null);
+    await negocioService.aprobarRevision(5, 7, 3);
+    const { datos } = revisionRepository.crearRevision.mock.calls[0][0];
+    const reordenada = { productos: datos.productos, horariosEspeciales: datos.horariosEspeciales, horarios: datos.horarios,
+      categoria: datos.categoria, localidad: datos.localidad, ficha: Object.fromEntries(Object.entries(datos.ficha).reverse()) };
+    revisionRepository.obtenerUltimaRevision.mockResolvedValue({ numero: 1, datos: reordenada });
+
+    await expect(negocioService.aprobarRevision(5, 7, 3)).rejects.toBeInstanceOf(NegocioSinCambios);
   });
 
   it('no aprueba si el borrador cambió desde que se abrió', async () => {
