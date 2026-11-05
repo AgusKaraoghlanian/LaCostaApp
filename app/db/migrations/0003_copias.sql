@@ -1,0 +1,3 @@
+CREATE TABLE backup_exports(id TEXT PRIMARY KEY,state TEXT NOT NULL CHECK(state IN('queued','running','completed','failed')),created_by TEXT NOT NULL REFERENCES users(id),created_at TEXT NOT NULL,row_count INTEGER NOT NULL,lease_token_hash TEXT,lease_device TEXT,lease_expires_at TEXT,manifest_json TEXT,completed_at TEXT);
+CREATE TABLE backup_rows(backup_id TEXT NOT NULL REFERENCES backup_exports(id),sequence INTEGER NOT NULL,table_name TEXT NOT NULL,row_json TEXT NOT NULL CHECK(json_valid(row_json)),PRIMARY KEY(backup_id,sequence));
+CREATE TABLE operation_settings(id TEXT PRIMARY KEY,value TEXT NOT NULL,changed_by TEXT NOT NULL REFERENCES users(id),changed_at TEXT NOT NULL);

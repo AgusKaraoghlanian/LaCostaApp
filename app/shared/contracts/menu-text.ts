@@ -1,0 +1,8 @@
+import {z} from 'zod';
+export const TextLine=z.object({text:z.string().max(2000),confidence:z.number().min(0).max(100),bbox:z.object({x0:z.number().nonnegative(),y0:z.number().nonnegative(),x1:z.number().nonnegative(),y1:z.number().nonnegative()}).optional()});
+// Entrada común: hoy fotografía; un lector futuro puede entregar el mismo texto y líneas.
+export const MenuTextInput=z.object({text:z.string().max(40000),correctedText:z.string().max(40000).optional(),confidence:z.number().min(0).max(100),lines:z.array(TextLine).max(1000).default([]),image:z.object({sha256:z.string().regex(/^[a-f0-9]{64}$/),name:z.string().min(1).max(250),mime:z.enum(['image/png','image/jpeg','image/webp']),width:z.number().int().positive().max(6000),height:z.number().int().positive().max(6000),bytes:z.number().int().positive().max(8*1024*1024),sourceUrl:z.string().max(2000).default('')}).refine(i=>i.width*i.height<=12_000_000),accessReference:z.string().trim().min(10).max(1000),listingId:z.string().uuid().optional(),jobId:z.string().uuid().optional(),imageRequestId:z.string().uuid().optional()}).strict();
+export type MenuText= z.infer<typeof MenuTextInput>;
+// El analizador no depende del formato binario: otros lectores podrán entregar estas líneas.
+export interface MenuDocumentText {text:string;correctedText?:string;confidence:number;lines:z.infer<typeof TextLine>[];source:{url:string;name:string;imageHash?:string};}
+export const OcrProvenance=z.object({readingId:z.string().uuid(),imageHash:z.string().regex(/^[a-f0-9]{64}$/),imageName:z.string().max(250),line:z.number().int().positive(),confidence:z.number().min(0).max(100),reviewed:z.boolean().default(false)});

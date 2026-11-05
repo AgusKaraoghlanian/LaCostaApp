@@ -1,0 +1,1 @@
+ALTER TABLE sources ADD COLUMN config_revision INTEGER NOT NULL DEFAULT 1;

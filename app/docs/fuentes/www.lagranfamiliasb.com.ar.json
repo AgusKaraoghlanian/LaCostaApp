@@ -1,0 +1,197 @@
+{
+  "date": "2026-10-22T05:13:33.410Z",
+  "url": "https://www.lagranfamiliasb.com.ar/",
+  "access": "Lectura de páginas públicas sin login, sujeta a robots; sin descarga ni autorización de fotografías.",
+  "result": {
+    "schemaVersion": "1.0",
+    "runId": "c7f28ae7-6c6e-4d7e-847c-9d76b4da40da",
+    "sourceId": "verificacion-real",
+    "extractor": "html-jsonld",
+    "version": "0.1.0",
+    "status": "complete",
+    "businessCandidates": [
+      {
+        "key": "business-html",
+        "name": "La Gran Familia",
+        "fields": {
+          "nombre": "La Gran Familia",
+          "descripcion": "Restaurant - Amplia carta con todo tipo de platos elaborados, Pescados Mariscos Pastas caseras, Parrilla postres artesanales y una gran variedad de bodegas y cortes de vinos",
+          "web": "https://www.lagranfamiliasb.com.ar/",
+          "facebook": "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.lagranfamiliasb.com.ar",
+          "telefono": "02257464480",
+          "instagram": "https://www.instagram.com/lagranfamiliarestaurant/"
+        }
+      }
+    ],
+    "observations": [
+      {
+        "id": "e956dfe5-6576-46f4-bd49-6364d30a5556",
+        "entityType": "business",
+        "entityKey": "business-html",
+        "fieldPath": "nombre",
+        "rawValue": "La Gran Familia",
+        "normalizedValue": "La Gran Familia",
+        "sourceId": "verificacion-real",
+        "resourceId": "ec4abae6-3c52-4b31-9dde-9aa221665ebc",
+        "runId": "c7f28ae7-6c6e-4d7e-847c-9d76b4da40da",
+        "observedAt": "2026-10-22T05:13:36.320Z",
+        "method": "html-semantico",
+        "extractorVersion": "0.1.0",
+        "pointer": "title",
+        "evidence": "La Gran Familia",
+        "uncertainty": "alta",
+        "reason": "Es un encabezado o título: confirmá que sea el nombre del comercio."
+      },
+      {
+        "id": "791e7435-a0d5-47da-90f7-56361cf14e12",
+        "entityType": "business",
+        "entityKey": "business-html",
+        "fieldPath": "descripcion",
+        "rawValue": "Restaurant - Amplia carta con todo tipo de platos elaborados, Pescados Mariscos Pastas caseras, Parrilla postres artesanales y una gran variedad de bodegas y cortes de vinos",
+        "normalizedValue": "Restaurant - Amplia carta con todo tipo de platos elaborados, Pescados Mariscos Pastas caseras, Parrilla postres artesanales y una gran variedad de bodegas y cortes de vinos",
+        "sourceId": "verificacion-real",
+        "resourceId": "ec4abae6-3c52-4b31-9dde-9aa221665ebc",
+        "runId": "c7f28ae7-6c6e-4d7e-847c-9d76b4da40da",
+        "observedAt": "2026-10-22T05:13:36.320Z",
+        "method": "html-semantico",
+        "extractorVersion": "0.1.0",
+        "pointer": "meta[name=\"description\"]",
+        "evidence": "Restaurant - Amplia carta con todo tipo de platos elaborados, Pescados Mariscos Pastas caseras, Parrilla postres artesanales y una gran variedad de bodegas y cortes de vinos",
+        "uncertainty": "media",
+        "reason": "La fuente lo presenta de forma explícita; requiere revisión editorial."
+      },
+      {
+        "id": "584223dc-6f62-418b-99a0-c195d800bd4d",
+        "entityType": "business",
+        "entityKey": "business-html",
+        "fieldPath": "web",
+        "rawValue": "https://www.lagranfamiliasb.com.ar/",
+        "normalizedValue": "https://www.lagranfamiliasb.com.ar/",
+        "sourceId": "verificacion-real",
+        "resourceId": "ec4abae6-3c52-4b31-9dde-9aa221665ebc",
+        "runId": "c7f28ae7-6c6e-4d7e-847c-9d76b4da40da",
+        "observedAt": "2026-10-22T05:13:36.320Z",
+        "method": "html-semantico",
+        "extractorVersion": "0.1.0",
+        "pointer": "document.URL",
+        "evidence": "https://www.lagranfamiliasb.com.ar/",
+        "uncertainty": "media",
+        "reason": "La fuente lo presenta de forma explícita; requiere revisión editorial."
+      },
+      {
+        "id": "d37543ff-0e2f-4022-87b6-cd84aadcd64e",
+        "entityType": "business",
+        "entityKey": "business-html",
+        "fieldPath": "facebook",
+        "rawValue": "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.lagranfamiliasb.com.ar",
+        "normalizedValue": "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.lagranfamiliasb.com.ar",
+        "sourceId": "verificacion-real",
+        "resourceId": "ec4abae6-3c52-4b31-9dde-9aa221665ebc",
+        "runId": "c7f28ae7-6c6e-4d7e-847c-9d76b4da40da",
+        "observedAt": "2026-10-22T05:13:36.320Z",
+        "method": "html-enlace",
+        "extractorVersion": "0.1.0",
+        "pointer": "a[href=\"https://www.facebook.com/sharer/sharer.php?u=https://www.lagranfamiliasb.com.ar\"]",
+        "evidence": "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.lagranfamiliasb.com.ar",
+        "uncertainty": "media",
+        "reason": "Enlace publicado por el sitio; requiere confirmar que corresponda a este comercio."
+      },
+      {
+        "id": "d7398796-54da-43c3-a2d0-c6d981bf55ef",
+        "entityType": "business",
+        "entityKey": "business-html",
+        "fieldPath": "telefono",
+        "rawValue": "02257464480",
+        "normalizedValue": "02257464480",
+        "sourceId": "verificacion-real",
+        "resourceId": "ec4abae6-3c52-4b31-9dde-9aa221665ebc",
+        "runId": "c7f28ae7-6c6e-4d7e-847c-9d76b4da40da",
+        "observedAt": "2026-10-22T05:13:36.320Z",
+        "method": "html-enlace",
+        "extractorVersion": "0.1.0",
+        "pointer": "a[href=\"tel:(02257) 46-4480\"]",
+        "evidence": "02257464480",
+        "uncertainty": "media",
+        "reason": "Enlace publicado por el sitio; requiere confirmar que corresponda a este comercio."
+      },
+      {
+        "id": "d802ca0f-2d1d-429a-bc12-8744f611dade",
+        "entityType": "business",
+        "entityKey": "business-html",
+        "fieldPath": "instagram",
+        "rawValue": "https://www.instagram.com/lagranfamiliarestaurant/",
+        "normalizedValue": "https://www.instagram.com/lagranfamiliarestaurant/",
+        "sourceId": "verificacion-real",
+        "resourceId": "ec4abae6-3c52-4b31-9dde-9aa221665ebc",
+        "runId": "c7f28ae7-6c6e-4d7e-847c-9d76b4da40da",
+        "observedAt": "2026-10-22T05:13:36.320Z",
+        "method": "html-enlace",
+        "extractorVersion": "0.1.0",
+        "pointer": "a[href=\"https://www.instagram.com/lagranfamiliarestaurant/\"]",
+        "evidence": "https://www.instagram.com/lagranfamiliarestaurant/",
+        "uncertainty": "media",
+        "reason": "Enlace publicado por el sitio; requiere confirmar que corresponda a este comercio."
+      }
+    ],
+    "menuCandidates": [],
+    "mediaCandidates": [
+      {
+        "url": "https://www.lagranfamiliasb.com.ar/assets/global/images/icon_facebook.svg",
+        "kind": "desconocida",
+        "rights": "desconocido",
+        "resourceId": "ec4abae6-3c52-4b31-9dde-9aa221665ebc"
+      },
+      {
+        "url": "https://www.lagranfamiliasb.com.ar/assets/global/images/icon_twitter-x.svg",
+        "kind": "desconocida",
+        "rights": "desconocido",
+        "resourceId": "ec4abae6-3c52-4b31-9dde-9aa221665ebc"
+      },
+      {
+        "url": "https://www.lagranfamiliasb.com.ar/assets/global/images/icon_whatsapp.svg",
+        "kind": "desconocida",
+        "rights": "desconocido",
+        "resourceId": "ec4abae6-3c52-4b31-9dde-9aa221665ebc"
+      },
+      {
+        "url": "https://www.guiastodo.com.ar/minisitios/001416/27940.webp",
+        "kind": "desconocida",
+        "rights": "desconocido",
+        "resourceId": "ec4abae6-3c52-4b31-9dde-9aa221665ebc"
+      },
+      {
+        "url": "https://www.guiastodo.com.ar/minisitios/001416/27937.webp",
+        "kind": "desconocida",
+        "rights": "desconocido",
+        "resourceId": "ec4abae6-3c52-4b31-9dde-9aa221665ebc"
+      },
+      {
+        "url": "https://www.lagranfamiliasb.com.ar/assets/global/images/icon_instagram-square.svg",
+        "kind": "desconocida",
+        "rights": "desconocido",
+        "resourceId": "ec4abae6-3c52-4b31-9dde-9aa221665ebc"
+      },
+      {
+        "url": "https://www.lagranfamiliasb.com.ar/assets/global/images/GT.svg",
+        "kind": "desconocida",
+        "rights": "desconocido",
+        "resourceId": "ec4abae6-3c52-4b31-9dde-9aa221665ebc"
+      }
+    ],
+    "discoveredResources": [],
+    "warnings": [],
+    "errors": [],
+    "coverage": {
+      "processed": [
+        "https://www.lagranfamiliasb.com.ar/"
+      ],
+      "pending": [],
+      "blocked": []
+    },
+    "metrics": {
+      "pages": 1,
+      "bytes": 45076,
+      "durationMs": 2915
+    }
+  }
+}

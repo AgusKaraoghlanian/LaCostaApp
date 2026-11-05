@@ -1,0 +1,2 @@
+# La línea base se compara byte a byte: sin conversión de fin de línea.
+tests/linea-base/** -text

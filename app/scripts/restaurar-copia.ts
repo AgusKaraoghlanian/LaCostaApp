@@ -1,0 +1,17 @@
+import {DatabaseSync} from 'node:sqlite';import {readFile,readdir,writeFile,mkdir} from 'node:fs/promises';import {fileURLToPath} from 'node:url';import {resolve} from 'node:path';
+import {BACKUP_TABLES,BACKUP_FORMAT} from '../shared/contracts/backup.ts';import {digest,json} from '../server/application/common.ts';
+export async function restorePackage(input:any,target:string){
+ if(input.manifest?.schema!==undefined&&![4,5,6].includes(input.manifest.schema))throw new Error('La versión de esta copia necesita otro restaurador. La base activa no se modificó.');
+ if(input.manifest?.format!==BACKUP_FORMAT||input.rows.length!==input.manifest.rows||await digest(json(input.rows))!==input.manifest.sha256)throw new Error('El manifiesto o los hashes de la copia no coinciden.');
+ if(input.manifest.objects!==0)throw new Error('Esta restauración requiere el procesador de medios pendiente.');
+ const raw=new DatabaseSync(target);try{
+ const userTables=raw.prepare("SELECT name FROM sqlite_master WHERE type='table'").all();if(userTables.length)throw new Error('La restauración requiere un entorno vacío.');
+ for(const migration of (await readdir(new URL('../db/migrations/',import.meta.url))).filter(n=>n.endsWith('.sql')).sort())raw.exec(await readFile(new URL('../db/migrations/'+migration,import.meta.url),'utf8'));
+ raw.exec('PRAGMA foreign_keys=OFF;BEGIN');
+ // Solo datos con esquema conocido. Nunca ejecutar SQL del paquete.
+ for(const table of [...BACKUP_TABLES].reverse())raw.exec('DELETE FROM "'+table+'"');
+ for(const entry of input.rows){if(!BACKUP_TABLES.includes(entry.table))throw new Error('La copia incluye una tabla no autorizada.');const columns=(raw.prepare('PRAGMA table_info("'+entry.table+'")').all() as any[]).map(c=>c.name).filter(c=>Object.hasOwn(entry.row,c));const values=columns.map(c=>entry.row[c]??null);raw.prepare('INSERT INTO "'+entry.table+'"('+columns.map(c=>'"'+c+'"').join(',')+') VALUES('+columns.map(()=>'?').join(',')+')').run(...values);}
+ raw.exec('COMMIT;PRAGMA foreign_keys=ON');const relations=raw.prepare('PRAGMA foreign_key_check').all();if(relations.length)throw new Error('La copia tiene relaciones incompletas.');for(const artifact of raw.prepare('SELECT html,sha256 FROM publication_artifacts').all() as any[])if(await digest(artifact.html)!==artifact.sha256)throw new Error('El hash de una ficha pública no coincide.');return {ok:true,rows:input.rows.length,publications:raw.prepare('SELECT count(*) AS n FROM publication_artifacts').get(),sessions:raw.prepare('SELECT count(*) AS n FROM sessions').get(),devices:raw.prepare('SELECT count(*) AS n FROM devices').get(),listings:raw.prepare('SELECT count(*) AS n FROM listings').get(),publishedListings:raw.prepare('SELECT count(*) AS n FROM listings WHERE published_revision_id IS NOT NULL').get(),reviewDrafts:raw.prepare('SELECT count(*) AS n FROM review_drafts').get()};
+ }finally{raw.close()}
+}
+if(process.argv[1]&&resolve(process.argv[1])===resolve(fileURLToPath(import.meta.url))){const source=process.argv[2];if(!source)throw new Error('Seleccioná una copia desde el lanzador.');const root=resolve('.local/restauraciones');await mkdir(root,{recursive:true});const target=resolve(root,crypto.randomUUID()+'.sqlite');const result=await restorePackage(JSON.parse(await readFile(source,'utf8')),target);await writeFile(target+'.informe.json',json(result));console.log('Copia restaurada y verificada en un entorno vacío aislado. La base activa no se reemplazó.');}

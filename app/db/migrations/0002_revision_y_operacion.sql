@@ -1,0 +1,10 @@
+CREATE TABLE listing_menu_drafts(listing_id TEXT PRIMARY KEY REFERENCES listings(id),revision INTEGER NOT NULL,items_json TEXT NOT NULL CHECK(json_valid(items_json)));
+INSERT INTO listing_menu_drafts SELECT l.id,l.draft_revision,coalesce(r.menu_json,'[]') FROM listings l LEFT JOIN listing_revisions r ON r.id=l.approved_revision_id;
+CREATE TABLE revision_field_selections(revision_id TEXT NOT NULL REFERENCES listing_revisions(id),field_path TEXT NOT NULL,observation_id TEXT NOT NULL REFERENCES observations(id),locked INTEGER NOT NULL,reason TEXT NOT NULL,PRIMARY KEY(revision_id,field_path));
+CREATE TABLE review_drafts(job_id TEXT NOT NULL REFERENCES import_jobs(id),user_id TEXT NOT NULL REFERENCES users(id),version INTEGER NOT NULL,payload_json TEXT NOT NULL CHECK(json_valid(payload_json)),saved_at TEXT NOT NULL,PRIMARY KEY(job_id,user_id));
+CREATE TABLE rejected_observations(listing_id TEXT NOT NULL REFERENCES listings(id),source_id TEXT NOT NULL REFERENCES sources(id),field_path TEXT NOT NULL,value_hash TEXT NOT NULL,observation_id TEXT NOT NULL REFERENCES observations(id),rejected_by TEXT NOT NULL REFERENCES users(id),rejected_at TEXT NOT NULL,PRIMARY KEY(listing_id,source_id,field_path,value_hash));
+CREATE TABLE rate_limits(bucket TEXT PRIMARY KEY,window_start INTEGER NOT NULL,hits INTEGER NOT NULL);
+CREATE TABLE revision_menus(revision_id TEXT NOT NULL REFERENCES listing_revisions(id),menu_version_id TEXT NOT NULL REFERENCES menu_versions(id),PRIMARY KEY(revision_id,menu_version_id));
+CREATE TRIGGER menu_version_immutable BEFORE UPDATE ON menu_versions BEGIN SELECT RAISE(ABORT,'Las versiones de carta son inmutables'); END;
+CREATE TRIGGER menu_entries_immutable BEFORE UPDATE ON menu_version_entries BEGIN SELECT RAISE(ABORT,'Las entradas de carta son inmutables'); END;
+CREATE TRIGGER revision_selections_immutable BEFORE UPDATE ON revision_field_selections BEGIN SELECT RAISE(ABORT,'Las selecciones históricas son inmutables'); END;

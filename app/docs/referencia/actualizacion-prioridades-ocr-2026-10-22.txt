@@ -1,0 +1,575 @@
+
+CONTINUACIÓN DEL PROYECTO COSTA A LA CARTA
+ACTUALIZACIÓN DE PRIORIDADES: OCR Y ARQUITECTURA EXPANSIBLE
+
+Quiero actualizar las decisiones del proyecto y continuar el desarrollo existente.
+
+IMPORTANTE:
+
+No empieces otro proyecto.
+No reconstruyas la aplicación.
+No descartes el trabajo realizado.
+No cambies la arquitectura aprobada sin una justificación técnica concreta.
+
+Estamos trabajando en:
+
+D:\Incoming\Videos\Proyectos\Gastronomia\costa-a-la-carta-nuevo-proyecto
+
+El proyecto original debe permanecer intacto.
+
+Esta instrucción complementa y actualiza el PROMPT MAESTRO anterior en los puntos que se detallan aquí.
+
+==================================================
+1. DECISIÓN PRINCIPAL: ARQUITECTURA EXPANSIBLE
+==================================================
+
+Quiero que Costa a la carta sea una aplicación web preparada para crecer progresivamente.
+
+La demo inicial de San Bernardo del Tuyú NO es un desarrollo descartable.
+
+Debe poder convertirse en el portal gastronómico definitivo del Partido de La Costa.
+
+Además, quiero que sea posible incorporar nuevas herramientas y capacidades a medida que el proyecto crezca.
+
+Por ejemplo:
+
+- Nuevos métodos de importación.
+- Nuevos extractores web.
+- OCR.
+- Procesamiento de PDF.
+- Visión mediante IA.
+- Conectores oficiales autorizados.
+- Nuevos sistemas de cartas.
+- Más herramientas administrativas.
+- Funciones para propietarios.
+- Automatizaciones.
+- Nuevos servicios y proveedores.
+- Otras funcionalidades que todavía no definimos.
+
+No significa implementar todo ahora.
+
+Significa diseñar las partes importantes de forma modular para que agregar una capacidad nueva no obligue a reconstruir el proyecto.
+
+REQUISITOS:
+
+1. Separación clara entre frontend, backend, motor de extracción, persistencia y servicios externos.
+
+2. Interfaces y contratos estables entre los componentes que realmente necesiten comunicarse.
+
+3. Extractores independientes que entreguen resultados normalizados.
+
+4. Posibilidad de incorporar nuevas estrategias de procesamiento sin rehacer el motor completo.
+
+5. El administrador debe poder incorporar nuevas herramientas sin perder su diseño ni convertirse en una interfaz complicada.
+
+6. Mantener una única identidad por establecimiento y varias fuentes de información por ficha.
+
+7. Poder ampliar localidades, categorías y establecimientos sin escribir código para cada caso.
+
+8. Permitir posteriormente cambiar o ampliar servicios de infraestructura mediante componentes bien delimitados.
+
+9. No crear una arquitectura gigantesca ni una plataforma abstracta de plugins que todavía no necesitamos.
+
+10. Utilizar modularidad práctica, sencilla y proporcionada al proyecto.
+
+PRINCIPIO:
+
+PREPARAR PARA CRECER, PERO IMPLEMENTAR SOLAMENTE LO QUE NECESITAMOS AHORA.
+
+==================================================
+2. NUEVA DECISIÓN: INCORPORAR OCR AHORA
+==================================================
+
+Después de analizar las necesidades del portal, decidí que sí quiero incorporar OCR en esta etapa.
+
+OCR es importante porque muchos restaurantes publican sus cartas gastronómicas como fotografías.
+
+Quiero que el sistema pueda detectar estas imágenes, leer los textos que contienen y convertirlos en propuestas de platos y precios.
+
+TECNOLOGÍA PREFERIDA:
+
+Tesseract.js o una alternativa local y gratuita técnicamente mejor justificada.
+
+REQUISITOS:
+
+- Ejecutarse en el navegador del administrador cuando sea viable.
+- No requerir una API externa.
+- No requerir contratar IA generativa.
+- No necesitar instalar Linux.
+- No necesitar WSL 2.
+- No enviar las fotografías a terceros para el reconocimiento.
+- Funcionar desde la aplicación web.
+- Poder aprovechar Web Workers para evitar que se congele la interfaz.
+- Procesar texto español y números.
+- Mantener límites razonables de tamaño, memoria y procesamiento.
+- Permitir cancelar un análisis y reintentarlo.
+
+Si Tesseract.js ya está parcialmente instalado o preparado, aprovechá lo existente.
+
+No dupliques bibliotecas ni implementaciones.
+
+==================================================
+3. OCR INTEGRADO CON EL MOTOR UNIVERSAL
+==================================================
+
+No quiero que el OCR sea una herramienta desconectada del portal.
+
+Debe formar parte del sistema de importación de información gastronómica.
+
+FLUJO PRINCIPAL:
+
+1. Entro al administrador.
+
+2. Selecciono "Importar desde web".
+
+3. Pego la URL de un restaurante.
+
+4. El motor analiza la página.
+
+5. Extrae la información comercial que encuentra.
+
+6. Detecta fotografías e imágenes disponibles.
+
+7. Intenta identificar cuáles podrían contener cartas gastronómicas.
+
+8. Me permite seleccionar las imágenes que quiero analizar.
+
+9. El OCR reconoce el texto de esas imágenes.
+
+10. El analizador gastronómico intenta identificar:
+   - Secciones de la carta.
+   - Nombres de platos.
+   - Descripciones.
+   - Tamaños.
+   - Variantes.
+   - Precios.
+   - Bebidas.
+   - Promociones y condiciones.
+
+11. Los resultados aparecen en una pantalla de revisión.
+
+12. Puedo corregir cualquier error.
+
+13. Puedo aceptar, descartar o editar los productos.
+
+14. Los resultados aprobados se incorporan a la ficha correspondiente.
+
+15. La carta queda disponible para publicación.
+
+El OCR debe reutilizar el modelo de cartas, productos, variantes, precios, observaciones y procedencia que ya contempla el proyecto.
+
+No crear un segundo sistema de cartas independiente.
+
+==================================================
+4. EXTRACCIÓN DE FOTOGRAFÍAS
+==================================================
+
+La extracción de imágenes desde una web sigue siendo una función PRIORITARIA.
+
+NO debe descartarse.
+
+El motor debe poder detectar, cuando estén disponibles:
+
+- Foto principal del comercio.
+- Fotografías del restaurante.
+- Fotografías de platos.
+- Galerías.
+- Imágenes de cartas gastronómicas.
+- Imágenes asociadas a productos.
+
+Debe examinar fuentes como:
+
+- Etiquetas img.
+- Atributos src y srcset.
+- Imágenes de carga diferida.
+- Metadatos OpenGraph.
+- Datos estructurados.
+- Enlaces públicos a imágenes.
+- Galerías presentes en el HTML.
+- Otros mecanismos razonables compatibles.
+
+No prometer acceso a fotografías que estén protegidas, requieran autenticación o dependan de mecanismos todavía no implementados.
+
+IMPORTANTE:
+
+Extraer o detectar una fotografía NO equivale a tener autorización para republicarla.
+
+Respetar el sistema de permisos y derechos que ya contempla el proyecto.
+
+El OCR puede analizar material obtenido legítimamente, pero ninguna fotografía externa debe publicarse sin contar con una base de uso válida.
+
+El reconocimiento no debe exigir publicar ni conservar permanentemente la fotografía original.
+
+==================================================
+5. IDENTIFICACIÓN DE CARTAS FOTOGRAFIADAS
+==================================================
+
+Quiero que el motor intente diferenciar entre:
+
+A. Una fotografía de comida.
+
+B. Una fotografía del establecimiento.
+
+C. Una imagen que probablemente contiene una carta o lista de precios.
+
+Para ello puede utilizar señales como:
+
+- Nombre del archivo.
+- Texto alternativo.
+- Página donde aparece.
+- Texto cercano.
+- Palabras como carta, menú, precios, comidas o bebidas.
+- Características del contenido reconocidas mediante OCR.
+
+No es necesario analizar automáticamente todas las fotografías de cada web.
+
+Priorizá las imágenes con mayor probabilidad de contener información gastronómica escrita.
+
+Si el sistema no está seguro, debe permitir que yo seleccione manualmente la imagen que quiero analizar.
+
+Evitá descargar y procesar decenas de fotografías innecesariamente.
+
+==================================================
+6. RECONOCIMIENTO DE PRODUCTOS Y PRECIOS
+==================================================
+
+Después del OCR, el texto debe pasar por el analizador de cartas del motor.
+
+Ejemplo ilustrativo:
+
+MUZZARELLA
+Individual $9.000
+Grande $14.000
+
+NAPOLITANA
+Individual $11.000
+Grande $16.000
+
+El resultado esperado es:
+
+Producto: Muzzarella
+Variante: Individual
+Precio: 9000 ARS
+
+Producto: Muzzarella
+Variante: Grande
+Precio: 14000 ARS
+
+Producto: Napolitana
+Variante: Individual
+Precio: 11000 ARS
+
+Producto: Napolitana
+Variante: Grande
+Precio: 16000 ARS
+
+El ejemplo es ficticio y solo ilustra el comportamiento.
+
+REQUISITOS:
+
+- Reconocer precios argentinos.
+- Interpretar puntos y comas correctamente.
+- Distinguir tamaños.
+- No mezclar productos.
+- No asignar un precio al plato equivocado.
+- Conservar el texto original.
+- Registrar de qué imagen proviene cada resultado.
+- Registrar los datos dudosos.
+- No inventar nombres ni precios ilegibles.
+- Permitir corregir todo desde la interfaz.
+- Nunca publicar resultados automáticamente sin aprobación.
+
+Si no puede reconocer una parte de la carta, debe decirlo claramente.
+
+==================================================
+7. CARGA DIRECTA DE FOTOGRAFÍAS
+==================================================
+
+Además de encontrar imágenes desde la web, quiero poder subir una fotografía desde mi computadora o celular.
+
+Ejemplo:
+
+Entro al administrador.
+
+Selecciono:
+
+"Leer carta desde una foto".
+
+Subo la imagen.
+
+El sistema realiza OCR.
+
+Me muestra los platos y precios encontrados.
+
+Corrijo lo necesario.
+
+Guardo la carta.
+
+Esta función debe aprovechar exactamente el mismo sistema de OCR y análisis gastronómico utilizado en la importación web.
+
+No implementar dos motores distintos para realizar la misma tarea.
+
+Debe poder funcionar aunque el restaurante no tenga página web.
+
+==================================================
+8. PDF: POSTERGADO
+==================================================
+
+Por ahora decidí NO priorizar el procesamiento de PDF.
+
+No necesito que en esta etapa desarrolles:
+
+- Importación de cartas PDF.
+- Lectura automática de PDF.
+- OCR de PDF escaneados.
+- Conversión de páginas PDF a imágenes.
+- Herramientas específicas de procesamiento de PDF.
+
+Si hay código existente relacionado con estas capacidades, no lo borres innecesariamente.
+
+Podés conservarlo desactivado y documentado si resulta útil.
+
+Pero no debe bloquear ni retrasar la finalización de la demo.
+
+IMPORTANTE:
+
+Diseñá el procesamiento de cartas mediante una entrada normalizada.
+
+Así, cuando incorporemos PDF en el futuro, podrá utilizar el mismo analizador de productos y precios.
+
+No construir ahora infraestructura adicional para una herramienta que estamos postergando.
+
+==================================================
+9. WSL 2 Y LINUX
+==================================================
+
+NO AUTORIZO POR AHORA LA INSTALACIÓN DE WSL 2.
+
+No instales Linux.
+
+No modifiques la configuración de Windows.
+
+No habilites características de virtualización ni solicites permisos de administrador para estas instalaciones.
+
+No reinicies la computadora.
+
+La implementación del OCR debe buscar una solución que funcione en el navegador, sin depender de un sistema operativo específico.
+
+La aplicación definitiva será una WEB.
+
+Su uso habitual no debe depender de tener Linux instalado en mi computadora.
+
+Sobre las páginas web que requieren JavaScript:
+
+Mantené deshabilitada la ejecución automatizada de JavaScript externo hasta que exista un mecanismo seguro y verificado.
+
+Podemos continuar con las páginas HTML, datos estructurados, WordPress y otras fuentes compatibles.
+
+El aislamiento mediante WSL 2 no debe imponerse como requisito para concluir la demo.
+
+Si encontrás una necesidad técnica real e inevitable, explicala primero y pedí autorización.
+
+==================================================
+10. SEGURIDAD
+==================================================
+
+El contenido obtenido desde Internet debe tratarse como no confiable.
+
+El OCR no debe introducir nuevos riesgos innecesarios.
+
+REQUISITOS:
+
+- No ejecutar scripts extraídos de las páginas.
+- No insertar HTML externo directamente en nuestra interfaz.
+- Mantener las protecciones SSRF del proxy.
+- Validar URLs y redirecciones.
+- Validar el tipo real de las imágenes.
+- Limitar el tamaño de los archivos.
+- Evitar consumo excesivo de memoria.
+- Mostrar texto reconocido de manera segura.
+- No guardar datos externos como instrucciones ejecutables.
+- No permitir que los resultados de OCR eviten la revisión editorial.
+- Mantener permisos y roles de administración.
+- No abrir la importación general al público antes de completar los controles de seguridad necesarios.
+
+Utilizar recursos de OCR cargados desde dependencias y archivos controlados por nuestra aplicación, no scripts arbitrarios de sitios analizados.
+
+No confundir procesamiento de imágenes con ejecución de JavaScript externo.
+
+==================================================
+11. ESTADO DEL DESARROLLO ACTUAL
+==================================================
+
+En tus últimos informes indicaste que:
+
+- Estás trabajando en la carpeta nueva.
+- Existe una base D1 local.
+- Ya funciona un circuito básico de importación HTML.
+- Se probó una web real de San Bernardo.
+- Existen borradores y fichas publicadas.
+- Se implementó recuperación de revisiones.
+- Hay comparación de cambios.
+- Hay correcciones protegidas.
+- Se comprobaron permisos entre propietarios.
+- La última ejecución informó 47 pruebas aprobadas.
+- La copia local restaurada contenía 96 registros.
+- PDF/OCR y JavaScript permanecían deshabilitados.
+- La importación general estaba restringida a fuentes de evaluación.
+- La auditoría independiente seguía pendiente.
+- No se realizó despliegue público.
+
+Tomá estos puntos como ESTADO REPORTADO, no como garantía de que todo esté terminado.
+
+Antes de continuar:
+
+1. Inspeccioná el estado real del proyecto.
+2. Verificá qué trabajo está completo.
+3. Identificá cambios sin guardar o tareas interrumpidas.
+4. Conservá lo que ya funciona.
+5. Evitá reconstruir componentes existentes.
+6. Confirmá que la estructura permite incorporar OCR sin alterar el resto del motor.
+
+Si encontrás una diferencia significativa entre el desarrollo actual y la arquitectura aprobada, explicala y corregí solo lo necesario, sin iniciar una reescritura.
+
+==================================================
+12. DEMO FUNCIONAL Y EXPANSIÓN
+==================================================
+
+Mantener intacto el objetivo del producto:
+
+Una persona sin conocimientos de programación debe poder:
+
+- Agregar un negocio.
+- Importar información desde una URL.
+- Detectar imágenes del sitio.
+- Leer una carta fotografiada mediante OCR.
+- Revisar productos y precios.
+- Corregir resultados.
+- Publicar una ficha.
+- Agregar fuentes adicionales.
+- Actualizar precios.
+- Mantener correcciones protegidas.
+- Administrar el contenido desde una interfaz intuitiva.
+
+La arquitectura debe permitir que después incorporemos nuevas capacidades sin reconstruir el portal.
+
+Poder expandirnos de San Bernardo al resto del Partido de La Costa debe ser una operación de datos y administración, no un nuevo desarrollo.
+
+La futura incorporación de PDF, IA, otros extractores o nuevos proveedores debe reutilizar los componentes existentes.
+
+No crear dependencias de servicios que no tenemos autorizados.
+
+No utilizar los proyectos de Supabase existentes.
+
+No tocar La Costa en Datos, Territorio ni Emergencias La Costa.
+
+No activar servicios pagos.
+
+No desplegar públicamente ni crear recursos remotos sin autorización.
+
+==================================================
+13. PRUEBAS OBLIGATORIAS
+==================================================
+
+Además de conservar las pruebas que ya existen, verificá:
+
+A. Una web con imágenes detectables.
+
+B. Una imagen de carta que contiene platos y precios.
+
+C. Una carta con tamaños y variantes diferentes.
+
+D. Una imagen donde el precio es ilegible.
+
+E. Una imagen que contiene comida pero no una carta.
+
+F. Un restaurante sin web, cuya carta se sube como fotografía.
+
+G. OCR sin conexión a una API externa de IA.
+
+H. OCR que no congela el administrador.
+
+I. Cancelación y reintento de reconocimiento.
+
+J. Protección frente a archivos grandes y formatos inválidos.
+
+K. Revisión y corrección de resultados.
+
+L. Publicación controlada.
+
+M. Registro de procedencia.
+
+N. Que las correcciones protegidas no se sobrescriben.
+
+O. Que ninguna fotografía sin derechos de publicación aparece en el portal público.
+
+P. Que el sistema funciona sin WSL 2.
+
+Q. Que no se alteraron otros proyectos.
+
+R. Que PDF y JavaScript externo siguen fuera del alcance activo hasta su autorización o verificación.
+
+Usá pruebas controladas y al menos una fotografía legítimamente utilizable para comprobar el recorrido real.
+
+No inventes resultados.
+
+No marques como completada una función que solo tiene pruebas simuladas.
+
+==================================================
+14. QUÉ ESPERO QUE HAGAS AHORA
+==================================================
+
+Continuá con el desarrollo existente.
+
+No necesito otro dictamen arquitectónico completo.
+
+Primero, revisá el estado real y confirmá que no estás por sobrescribir trabajo previo.
+
+Después:
+
+1. Integrá OCR gratuito para cartas fotografiadas.
+
+2. Conectalo al motor universal existente.
+
+3. Integrá la detección de imágenes y selección de cartas en el administrador.
+
+4. Permití cargar fotografías directamente.
+
+5. Reutilizá el modelo de cartas y las pantallas de revisión existentes.
+
+6. Conservá la procedencia y la aprobación humana.
+
+7. Asegurá la modularidad para herramientas futuras, sin sobreingeniería.
+
+8. Ejecutá las pruebas correspondientes.
+
+9. Conservá las restricciones de seguridad y los bloqueos pendientes.
+
+10. Actualizá la documentación, el estado del desarrollo y los criterios de cierre para reflejar que OCR entra en esta demo y PDF queda postergado.
+
+No reabras todos los hitos anteriores.
+
+No generes trabajo adicional sin necesidad.
+
+No autorices despliegues ni cambios remotos.
+
+Cuando termines, informame:
+
+- Qué funcionalidades estaban realmente terminadas.
+- Qué implementaste ahora.
+- Qué pruebas pasaron.
+- Qué pudiste probar de forma real.
+- Qué limitaciones siguen existiendo.
+- Qué falta para tener la demo funcional.
+- Si la arquitectura sigue preparada para incorporar nuevas herramientas sin reconstruirla.
+
+OBJETIVO FINAL:
+
+COSTA A LA CARTA debe crecer como una única aplicación web modular, real, intuitiva y expansible.
+
+Quiero incorporar herramientas progresivamente, no tener que reconstruir el sistema cada vez que se nos ocurra una capacidad nueva.
+
+OCR ENTRA AHORA.
+PDF QUEDA PARA MÁS ADELANTE.
+WSL 2 NO SE INSTALA.
+SE CONSERVA TODO EL TRABAJO ÚTIL EXISTENTE.

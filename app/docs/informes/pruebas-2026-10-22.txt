@@ -1,0 +1,59 @@
+
+> costa-a-la-carta@1.0.0 test
+> node --test tests/*.test.mjs tests/*.test.ts
+
+✔ WordPress consulta solo páginas GET anunciadas y usa contenido publicado sin ejecutar scripts (13.7845ms)
+✔ Una fuente para una ficha inexistente falla antes de guardar datos huérfanos (29.6197ms)
+✔ No hay catálogo demo ni datos privados en la API pública; auth local falla fuera de loopback (7.2926ms)
+✔ Alta real manual sin domicilio, idempotencia y revisión concurrente (15.6216ms)
+✔ Publicación atómica mantiene versión anterior y rechaza artefactos o precondiciones distintas (22.3166ms)
+✔ Cancelación invalida lease; no acepta entrega tardía ni cambia el catálogo (8.3256ms)
+✔ CSRF, permisos y un trabajador sin sesión no pueden editar fichas (7.7593ms)
+✔ Dos lecturas controladas proponen cambio de precio sin sobrescribir la corrección protegida; revisión es idempotente (46.8658ms)
+✔ Un propietario solo lee y edita sus fichas y no puede aprobar ni publicar (13.4561ms)
+✔ Extracción general queda cerrada mientras la auditoría independiente está pendiente (7.683ms)
+✔ Los 20 ejemplos pertenecen a categorías y localidades del directorio (1.2698ms)
+✔ La búsqueda ignora tildes y mayúsculas (4.9049ms)
+✔ Los filtros de categoría, localidad, precio y servicios se combinan (0.2846ms)
+✔ Ninguna ficha pendiente o rechazada aparece en la búsqueda pública (0.1757ms)
+✔ Un filtro sin coincidencias devuelve una lista vacía (0.8956ms)
+✔ JSON-LD @graph mantiene sucursales separadas y extrae ofertas explícitas (7.8186ms)
+✔ Cartas HTML asocian un solo precio dentro de la misma tarjeta (6.3172ms)
+✔ Robots aplica reglas específicas y la coincidencia más larga (0.4936ms)
+✔ No ejecuta scripts ni toma enlaces javascript como contactos (0.6664ms)
+✔ Un botón de compartir en Facebook no se confunde con el perfil del comercio (2.3711ms)
+✔ Una carta circular en JSON-LD se corta y conserva la información útil (1.3502ms)
+✔ Un tercer intento interrumpido queda fallido y rechaza entregas tardías (12.7312ms)
+✔ Checkpoint y resultado conservan observaciones del intento anterior después de vencer el lease (23.8894ms)
+✔ Facebook no inicia red ni interpreta contenido restringido (1.0738ms)
+✔ Reproducción controlada de las observaciones registradas de una carta real acepta todos los checkpoints (1473.5751ms)
+✔ La normalización ignora hashes de assets, año y origen (1.1614ms)
+✔ El build de demostración coincide con la línea base (99.0474ms)
+✔ Servidor adversario local real: ninguna URL interna alcanza su manejador HTTP (18.9437ms)
+✔ Rechaza IPv4 privadas, reservadas, metadata y notaciones alternativas (2.165ms)
+✔ Rechaza IPv6 locales, mapeadas, traducción y documentación (6.0118ms)
+✔ Valida todos los resultados DNS y no solo la primera IP (0.4003ms)
+✔ Normaliza rastreo y bloquea redirecciones a dominios no asociados (0.6305ms)
+✔ Importes argentinos sin flotantes, moneda explícita y ambigüedades (0.7778ms)
+✔ Horarios nocturnos conservan el cambio de día (0.3242ms)
+✔ Comparación de tres vías conserva correcciones y ausencias (0.2777ms)
+✔ Vigencias y excepciones rechazan fechas inexistentes, incluyendo años no bisiestos (4.1295ms)
+✔ Borrador de carta persiste y las versiones históricas congelan los importes; reversión conserva procedencia (18.9518ms)
+✔ Copia paginada restaura relaciones, carta y ficha publicada en DB vacía sin sesiones ni tokens (200.4542ms)
+✔ El servidor rechaza enlaces activos, enlaces sociales falsos y cartas aprobadas ambiguas (0.8068ms)
+✔ Límite del cuerpo usa bytes recibidos aunque no exista Content-Length (14.8714ms)
+✔ Horarios nocturnos por varios días, vigencia y excepciones persisten con selección editorial (12.0534ms)
+✔ HTML y JSON-LD de publicación escapan texto externo y no incluyen datos privados (10.1711ms)
+✔ Registro real fechado: 20 asociaciones contrastadas con la carta oficial; moneda permanece pendiente (9.8247ms)
+✔ SafeFetch fija la IP validada y no toma credenciales ni proxies (10.2911ms)
+✔ Una IP efectiva distinta bloquea una conexión antes de leer contenido (2.4029ms)
+✔ Un redirect a metadata o localhost no genera una segunda conexión (0.5963ms)
+✔ El límite se aplica durante la descompresión y no solo a Content-Length (25.8993ms)
+ℹ tests 47
+ℹ suites 0
+ℹ pass 47
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2006.4715

@@ -1,0 +1,4 @@
+CREATE TABLE ocr_readings(id TEXT PRIMARY KEY,job_id TEXT NOT NULL REFERENCES import_jobs(id),parent_job_id TEXT REFERENCES import_jobs(id),resource_id TEXT NOT NULL REFERENCES source_resources(id),input_json TEXT NOT NULL CHECK(json_valid(input_json)),unmatched_json TEXT NOT NULL CHECK(json_valid(unmatched_json)),created_by TEXT NOT NULL REFERENCES users(id),created_at TEXT NOT NULL);
+--> statement-breakpoint
+-- Fotografías efímeras para reconocimiento. Nunca son medios publicables.
+CREATE TABLE image_requests(id TEXT PRIMARY KEY,job_id TEXT NOT NULL REFERENCES import_jobs(id),url TEXT NOT NULL,created_by TEXT NOT NULL REFERENCES users(id),state TEXT NOT NULL DEFAULT 'queued',lease_device TEXT,lease_token_hash TEXT,expires_at TEXT NOT NULL,metadata_json TEXT,error TEXT,created_at TEXT NOT NULL);

@@ -1,0 +1,5 @@
+// Lista explícita de datos recuperables. Se excluyen sesiones, dispositivos, códigos y tokens.
+export const BACKUP_TABLES=['provinces','districts','locations','categories','users','auth_identities','listings','listing_drafts','listing_categories','services','listing_services','listing_aliases','slug_redirects','listing_memberships','listing_claims','suggestions','leads','reviews','sources','listing_sources','import_jobs','import_runs','source_resources','observations','field_selections','change_sets','change_items','duplicate_candidates','job_checkpoints','opening_periods','opening_exceptions','menus','menu_versions','menu_sections','products','product_variants','price_offers','menu_version_entries','media_assets','media_variants','media_rights','listing_media','listing_revisions','publication_jobs','publication_artifacts','audit_events','listing_menu_drafts','revision_field_selections','review_drafts','rejected_observations','revision_menus'];
+export const BACKUP_FORMAT='costa-local-1';
+// Solo texto/procedencia; los objetos temporales de reconocimiento no se respaldan.
+BACKUP_TABLES.push('ocr_readings','extraction_origins');

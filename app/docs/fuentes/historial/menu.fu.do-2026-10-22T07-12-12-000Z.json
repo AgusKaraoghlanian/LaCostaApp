@@ -1,0 +1,78 @@
+{
+  "date": "2026-10-22T06:26:50.559Z",
+  "url": "https://menu.fu.do/lacocinadetuty",
+  "access": "Lectura de páginas públicas sin login, sujeta a robots; sin descarga ni autorización de fotografías.",
+  "result": {
+    "schemaVersion": "1.0",
+    "runId": "83485d54-ea56-40dd-ad2e-ca123f956cff",
+    "sourceId": "verificacion-real",
+    "extractor": "html-jsonld",
+    "version": "0.1.0",
+    "status": "complete",
+    "businessCandidates": [
+      {
+        "key": "business-html",
+        "name": "Menú Online",
+        "fields": {
+          "nombre": "Menú Online",
+          "web": "https://menu.fu.do/lacocinadetuty"
+        }
+      }
+    ],
+    "observations": [
+      {
+        "id": "3c86093c-8fba-4e36-903f-fb754c0cd191",
+        "entityType": "business",
+        "entityKey": "business-html",
+        "fieldPath": "nombre",
+        "rawValue": "Menú Online",
+        "normalizedValue": "Menú Online",
+        "sourceId": "verificacion-real",
+        "resourceId": "1455c3e7-8a02-4322-af86-d744920e23ee",
+        "runId": "83485d54-ea56-40dd-ad2e-ca123f956cff",
+        "observedAt": "2026-10-22T06:26:53.471Z",
+        "method": "html-semantico",
+        "extractorVersion": "0.1.0",
+        "pointer": "title",
+        "evidence": "Menú Online",
+        "uncertainty": "alta",
+        "reason": "Es un encabezado o título: confirmá que sea el nombre del comercio."
+      },
+      {
+        "id": "fbb8a400-9e20-4db8-83f8-af90c0631acd",
+        "entityType": "business",
+        "entityKey": "business-html",
+        "fieldPath": "web",
+        "rawValue": "https://menu.fu.do/lacocinadetuty",
+        "normalizedValue": "https://menu.fu.do/lacocinadetuty",
+        "sourceId": "verificacion-real",
+        "resourceId": "1455c3e7-8a02-4322-af86-d744920e23ee",
+        "runId": "83485d54-ea56-40dd-ad2e-ca123f956cff",
+        "observedAt": "2026-10-22T06:26:53.471Z",
+        "method": "html-semantico",
+        "extractorVersion": "0.1.0",
+        "pointer": "document.URL",
+        "evidence": "https://menu.fu.do/lacocinadetuty",
+        "uncertainty": "media",
+        "reason": "La fuente lo presenta de forma explícita; requiere revisión editorial."
+      }
+    ],
+    "menuCandidates": [],
+    "mediaCandidates": [],
+    "discoveredResources": [],
+    "warnings": [],
+    "errors": [],
+    "coverage": {
+      "processed": [
+        "https://menu.fu.do/lacocinadetuty"
+      ],
+      "pending": [],
+      "blocked": []
+    },
+    "metrics": {
+      "pages": 1,
+      "bytes": 2518,
+      "durationMs": 2913
+    }
+  }
+}

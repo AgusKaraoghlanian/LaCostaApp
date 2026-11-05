@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.prerender/
+.sites-runtime/
+.env
+.env.local
+*.tar.gz
+*.log

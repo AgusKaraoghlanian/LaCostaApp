@@ -1,0 +1,4 @@
+import {spawn} from 'node:child_process';import {mkdir} from 'node:fs/promises';import {resolve} from 'node:path';
+const command=process.argv[2];if(!['dev','migrate'].includes(command)||process.argv.length!==3)throw new Error('Este lanzador solo permite desarrollo y migraciones locales.');await mkdir('.local/logs',{recursive:true});
+const args=command==='dev'?['dev','--local','--ip','127.0.0.1','--port','8787','--persist-to','.local/state','--config','wrangler.local.jsonc']:['d1','migrations','apply','DB','--local','--persist-to','.local/state','--config','wrangler.local.jsonc'];
+const child=spawn(process.execPath,['node_modules/wrangler/bin/wrangler.js',...args],{cwd:process.cwd(),windowsHide:true,stdio:'inherit',env:{...process.env,WRANGLER_LOG_PATH:resolve('.local/logs/wrangler.log'),WRANGLER_SEND_METRICS:'false',CI:'1'}});for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>child.kill(signal));child.on('exit',code=>process.exit(code||0));
