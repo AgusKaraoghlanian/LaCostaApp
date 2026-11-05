@@ -118,6 +118,7 @@ const aprobarRevision = async (usuarioId, id, revisionEsperada) => {
       busqueda: textoDeBusqueda(negocio),
       precio: negocio.precio,
       prestaciones: negocio.prestaciones,
+      destacado: negocio.destacado,
       categoriaId: negocio.categoriaId,
       localidadId: negocio.localidadId,
       aprobadaPorId: usuarioId,

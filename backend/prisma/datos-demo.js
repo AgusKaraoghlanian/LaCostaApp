@@ -6,6 +6,7 @@ const foto = (id) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1
 export const NEGOCIOS_DEMO = [
   {
     nombre: 'La Orilla',
+    destacado: true,
     categoria: 'restaurantes',
     localidad: 'Costa del Este',
     descripcion: 'Cocina de estación, sobremesas largas y el mar como inspiración.',
@@ -16,6 +17,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Casa Marea',
+    destacado: true,
     categoria: 'cafeterias',
     localidad: 'San Bernardo',
     descripcion: 'Café de especialidad y pastelería artesanal, a pasitos de la playa.',
@@ -26,6 +28,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Fuego Sur',
+    destacado: true,
     categoria: 'parrillas',
     localidad: 'Mar de Ajó',
     descripcion: 'Cortes a las brasas, vegetales al rescoldo y sabor bien argentino.',
@@ -36,6 +39,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Puerto & Sal',
+    destacado: false,
     categoria: 'mariscos',
     localidad: 'San Clemente del Tuyú',
     descripcion: 'Pesca del día y recetas marineras para compartir en familia.',
@@ -46,6 +50,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'La Redonda',
+    destacado: true,
     categoria: 'pizzerias',
     localidad: 'Santa Teresita',
     descripcion: 'Masa madre, horno de piedra y clásicos que nunca fallan.',
@@ -56,6 +61,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Bosque Cervecero',
+    destacado: false,
     categoria: 'bares',
     localidad: 'Costa del Este',
     descripcion: 'Cervezas artesanales y platos para picar bajo los pinos.',
@@ -66,6 +72,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Duna Helados',
+    destacado: false,
     categoria: 'heladerias',
     localidad: 'San Bernardo',
     descripcion: 'Helados hechos en pequeños lotes, con fruta de verdad.',
@@ -76,6 +83,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Harina de Mar',
+    destacado: false,
     categoria: 'panaderias',
     localidad: 'La Lucila del Mar',
     descripcion: 'Panes de fermentación lenta y medialunas recién salidas del horno.',
@@ -86,6 +94,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'El Refugio del Tuyú',
+    destacado: false,
     categoria: 'restaurantes',
     localidad: 'Mar del Tuyú',
     descripcion: 'Pastas caseras y recetas de abuela con una mirada costera.',
@@ -96,6 +105,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Café del Muelle',
+    destacado: false,
     categoria: 'cafeterias',
     localidad: 'Santa Teresita',
     descripcion: 'Desayunos sin apuro, tostados y café mirando al horizonte.',
@@ -106,6 +116,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Las Brasas de Clemente',
+    destacado: false,
     categoria: 'parrillas',
     localidad: 'San Clemente del Tuyú',
     descripcion: 'Parrillada generosa y cocina criolla para toda la familia.',
@@ -116,6 +127,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Nonna Costa',
+    destacado: false,
     categoria: 'pizzerias',
     localidad: 'Mar de Ajó',
     descripcion: 'Pizzas de barrio, empanadas y el secreto de la salsa de Nonna.',
@@ -126,6 +138,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Atlántico Bar',
+    destacado: false,
     categoria: 'bares',
     localidad: 'Las Toninas',
     descripcion: 'Tragos de autor y música suave para cerrar un día de playa.',
@@ -136,6 +149,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Bruma Cocina',
+    destacado: false,
     categoria: 'restaurantes',
     localidad: 'Aguas Verdes',
     descripcion: 'Productos de estación, platos simples y un jardín escondido.',
@@ -146,6 +160,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Salitre Pescadería & Cocina',
+    destacado: false,
     categoria: 'mariscos',
     localidad: 'Mar de Ajó',
     descripcion: 'Rabas, pesca fresca y sabores del mar preparados en el momento.',
@@ -156,6 +171,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Entre Pinos Café',
+    destacado: false,
     categoria: 'cafeterias',
     localidad: 'Costa del Este',
     descripcion: 'Café de origen y tortas caseras en el corazón del bosque.',
@@ -166,6 +182,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Dulce Marea',
+    destacado: false,
     categoria: 'heladerias',
     localidad: 'Santa Teresita',
     descripcion: 'Sabores clásicos y combinaciones de estación, hechos cada día.',
@@ -176,6 +193,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Pan del Bosque',
+    destacado: false,
     categoria: 'panaderias',
     localidad: 'Nueva Atlantis',
     descripcion: 'Pan de campo, bizcochos y cosas ricas para el mate.',
@@ -186,6 +204,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'El Patio de las Toninas',
+    destacado: false,
     categoria: 'restaurantes',
     localidad: 'Las Toninas',
     descripcion: 'Hamburguesas caseras, ensaladas y un patio para reencontrarse.',
@@ -196,6 +215,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Sur Sustento',
+    destacado: false,
     categoria: 'restaurantes',
     localidad: 'La Lucila del Mar',
     descripcion: 'Cocina vegetal, bowls de estación y opciones para todos.',

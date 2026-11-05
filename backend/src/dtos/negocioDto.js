@@ -5,7 +5,7 @@
 const CAMPOS_FICHA = [
   'nombre', 'localidadId', 'categoriaId', 'estadoComercial', 'descripcion', 'direccion',
   'zonaAtencion', 'telefono', 'whatsapp', 'web', 'instagram', 'facebook', 'horariosTexto',
-  'prestaciones', 'precio', 'foto', 'referenciaVerificacion',
+  'prestaciones', 'precio', 'foto', 'destacado', 'referenciaVerificacion',
 ];
 
 const elegir = (objeto, campos) => Object.fromEntries(campos.map((campo) => [campo, objeto[campo]]));
@@ -51,6 +51,7 @@ const negocioResumenDto = (revision) => {
     foto: ficha.foto,
     precio: ficha.precio,
     prestaciones: ficha.prestaciones,
+    destacado: ficha.destacado ?? false,
     estadoComercial: ficha.estadoComercial,
     localidad,
     categoria,

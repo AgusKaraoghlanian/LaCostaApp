@@ -141,6 +141,7 @@ const datosNegocio = {
     'number.max': 'El rango de precio va de 1 a 3.',
   }),
   foto: enlace('La foto', 'web', 1000).empty('').allow(null).default(null),
+  destacado: Joi.boolean().default(false).messages({ 'boolean.base': 'Destacado tiene que ser sí o no.' }),
   referenciaVerificacion: Joi.string().trim().min(3).max(1500).required().messages({
     'string.empty': 'Contá qué verificaste del negocio y cómo.',
     'string.min': 'Contá qué verificaste del negocio y cómo.',
@@ -195,6 +196,11 @@ const listarNegociosSchema = Joi.object({
   // ?prestacion=Reservas&prestacion=Accesible: los que tengan todas.
   prestacion: Joi.array().items(Joi.string().trim().max(100)).single().max(10).messages({
     'array.max': 'Se puede filtrar por hasta 10 prestaciones.',
+  }),
+  destacado: Joi.boolean().messages({ 'boolean.base': 'Destacado tiene que ser true o false.' }),
+  // recomendados: los destacados primero; precio: de menor a mayor; nombre: alfabético.
+  orden: Joi.string().valid('recomendados', 'precio', 'nombre').default('recomendados').messages({
+    'any.only': 'El orden tiene que ser recomendados, precio o nombre.',
   }),
   texto: Joi.string().trim().max(100).allow('').messages({
     'string.max': 'La búsqueda puede tener hasta 100 caracteres.',

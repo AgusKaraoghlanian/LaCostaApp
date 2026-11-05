@@ -10,7 +10,7 @@ import { NegocioNoEncontrado } from '../errors/negocio/NegocioNoEncontrado.js';
 const paginaVacia = (pagina) => ({ negocios: [], total: 0, pagina, porPagina: NEGOCIOS_POR_PAGINA });
 
 // categoria es la clave de la URL ("parrillas"). Si no existe, no hay resultados.
-const listarPublicados = async ({ categoria, localidadId, precio, prestacion, texto, pagina = 1 }) => {
+const listarPublicados = async ({ categoria, localidadId, precio, prestacion, destacado, orden, texto, pagina = 1 }) => {
   let categoriaId;
   if (categoria) {
     const encontrada = await categoriaRepository.obtenerCategoriaPorClave(categoria);
@@ -23,6 +23,8 @@ const listarPublicados = async ({ categoria, localidadId, precio, prestacion, te
     localidadId,
     precio,
     prestaciones: prestacion,
+    destacado,
+    orden,
     busqueda: texto ? claveDeTexto(texto) : null,
     saltear: (pagina - 1) * NEGOCIOS_POR_PAGINA,
     cantidad: NEGOCIOS_POR_PAGINA,

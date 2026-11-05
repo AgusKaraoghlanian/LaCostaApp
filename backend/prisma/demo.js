@@ -40,6 +40,7 @@ const crear = async () => {
       direccion: negocio.direccion,
       precio: negocio.precio,
       foto: negocio.foto,
+      destacado: negocio.destacado,
       prestaciones: negocio.prestaciones,
       referenciaVerificacion: `${MARCA_DEMO} para probar el sitio.`,
       horarios: HORARIOS_DEMO.map((h) => ({ ...h, alDiaSiguiente: false, vigenteDesde: null, vigenteHasta: null, temporada: "" })),
