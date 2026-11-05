@@ -1,0 +1,226 @@
+// Modelos de la base de Costa a la carta (PostgreSQL en Supabase).
+// Después de cambiar algo: `npx prisma migrate dev --config prisma7.config.ts --name <nombre>`
+// y `npx prisma generate --config prisma7.config.ts` (en Prisma 7 el cliente no se regenera solo).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Por ahora solo hay administradores. Los dueños de negocios se suman cuando se habilite
+// que reclamen su ficha.
+enum Rol {
+  ADMINISTRADOR
+}
+
+// Lo que se sabe del negocio. "SIN_CONFIRMAR" hasta que alguien lo verifique: que su web
+// exista no alcanza para decir que está abierto.
+enum EstadoComercial {
+  SIN_CONFIRMAR
+  ACTIVO
+  TEMPORALMENTE_CERRADO
+  CERRADO
+}
+
+// Por dónde vale un precio de la carta.
+enum Canal {
+  SALON
+  DELIVERY
+  RETIRO
+  SIN_ESPECIFICAR
+}
+
+// Cada producto de la carta entra como propuesta y el admin lo aprueba o lo descarta.
+// Solo los aprobados se publican.
+enum EstadoProducto {
+  PROPUESTO
+  APROBADO
+  DESCARTADO
+}
+
+model Usuario {
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
+  password String
+  nombre   String
+  rol      Rol      @default(ADMINISTRADOR)
+  creadoEn DateTime @default(now())
+
+  negociosCreados     Negocio[]         @relation("creadoPor")
+  negociosEditados    Negocio[]         @relation("editadoPor")
+  revisionesAprobadas RevisionNegocio[]
+}
+
+// Geografía: provincia → partido → localidad. Se empieza por el Partido de La Costa.
+model Provincia {
+  id     Int    @id @default(autoincrement())
+  nombre String @unique
+
+  partidos Partido[]
+}
+
+model Partido {
+  id          Int       @id @default(autoincrement())
+  nombre      String
+  provinciaId Int
+  provincia   Provincia @relation(fields: [provinciaId], references: [id])
+
+  localidades Localidad[]
+
+  @@unique([provinciaId, nombre])
+}
+
+model Localidad {
+  id        Int     @id @default(autoincrement())
+  nombre    String
+  partidoId Int
+  partido   Partido @relation(fields: [partidoId], references: [id])
+
+  negocios Negocio[]
+
+  @@unique([partidoId, nombre])
+}
+
+model Categoria {
+  id          Int    @id @default(autoincrement())
+  clave       String @unique // la de la URL: /categoria/parrillas
+  nombre      String @unique
+  descripcion String @default("")
+  color       String @default("#e5eadc") // fondo de la tarjeta de la categoría en la portada
+  icono       String @default("utensils") // nombre del ícono de lucide
+
+  negocios Negocio[]
+}
+
+// La ficha que se edita (el borrador). Lo que ve el público no sale de acá sino de la
+// revisión publicada: así se puede seguir editando sin cambiar lo que ya está en el sitio.
+model Negocio {
+  id                     Int             @id @default(autoincrement())
+  slug                   String          @unique // se arma con el nombre al crearlo y no cambia (los links no se rompen)
+  nombre                 String
+  nombreClave            String // nombre sin tildes ni mayúsculas: para buscar "cafe" y encontrar "Café"
+  localidadId            Int
+  localidad              Localidad       @relation(fields: [localidadId], references: [id])
+  categoriaId            Int
+  categoria              Categoria       @relation(fields: [categoriaId], references: [id])
+  estadoComercial        EstadoComercial @default(SIN_CONFIRMAR)
+  descripcion            String          @default("")
+  direccion              String          @default("")
+  zonaAtencion           String          @default("") // para los que solo hacen delivery
+  telefono               String          @default("")
+  whatsapp               String          @default("")
+  web                    String          @default("")
+  instagram              String          @default("")
+  facebook               String          @default("")
+  horariosTexto          String          @default("") // aclaraciones que no entran en la grilla de horarios
+  prestaciones           String[]        @default([]) // "Mesas al aire libre", "Acepta mascotas"...
+  precio                 Int? // 1 a 3 ($, $$, $$$)
+  foto                   String? // URL de la foto de portada
+  // Qué se verificó y cómo (ej. "Llamé al local el 3/11"). Obligatorio: es lo que respalda la ficha.
+  referenciaVerificacion String
+
+  // Sube con cada cambio guardado. Al guardar se manda la que se tenía: si otra persona guardó
+  // antes, no coincide y se avisa en vez de pisar su cambio.
+  revisionBorrador Int @default(1)
+
+  // La revisión que está en el sitio (null = no está publicado o se retiró).
+  revisionPublicadaId Int?             @unique
+  revisionPublicada   RevisionNegocio? @relation("publicada", fields: [revisionPublicadaId], references: [id])
+
+  creadoPorId   Int
+  creadoPor     Usuario  @relation("creadoPor", fields: [creadoPorId], references: [id])
+  editadoPorId  Int
+  editadoPor    Usuario  @relation("editadoPor", fields: [editadoPorId], references: [id])
+  creadoEn      DateTime @default(now())
+  actualizadoEn DateTime @updatedAt
+
+  horarios           Horario[]
+  horariosEspeciales HorarioEspecial[]
+  productos          ProductoCarta[]
+  revisiones         RevisionNegocio[]
+
+  @@index([localidadId])
+  @@index([categoriaId])
+  @@index([nombreClave])
+}
+
+// Una franja de horario semanal. dia: 0 = domingo ... 6 = sábado. Las horas van "HH:MM" en
+// hora de Argentina. alDiaSiguiente: cierra pasada la medianoche (ej. 20:00 a 02:00).
+model Horario {
+  id             Int     @id @default(autoincrement())
+  negocioId      Int
+  negocio        Negocio @relation(fields: [negocioId], references: [id], onDelete: Cascade)
+  dia            Int
+  abre           String
+  cierra         String
+  alDiaSiguiente Boolean @default(false)
+  vigenteDesde   String? // "AAAA-MM-DD" (ej. solo en temporada de verano)
+  vigenteHasta   String?
+  temporada      String  @default("")
+
+  @@index([negocioId])
+}
+
+// Un día puntual distinto a lo habitual (feriado, cierre por vacaciones...).
+model HorarioEspecial {
+  id        Int     @id @default(autoincrement())
+  negocioId Int
+  negocio   Negocio @relation(fields: [negocioId], references: [id], onDelete: Cascade)
+  fecha     String // "AAAA-MM-DD"
+  cerrado   Boolean @default(false)
+  abre      String?
+  cierra    String?
+
+  @@index([negocioId])
+}
+
+// Un producto (o una variante: "Muzzarella grande") de la carta del borrador.
+model ProductoCarta {
+  id             Int            @id @default(autoincrement())
+  negocioId      Int
+  negocio        Negocio        @relation(fields: [negocioId], references: [id], onDelete: Cascade)
+  orden          Int
+  carta          String         @default("Carta") // "Carta", "Menú del día"...
+  seccion        String         @default("Carta") // "Pizzas", "Bebidas"...
+  nombre         String
+  descripcion    String         @default("")
+  variante       String         @default("Base") // "Chica", "Grande"...
+  // El precio en centavos (así no hay errores de redondeo). null = sin precio publicado.
+  precioCentavos Int?
+  moneda         String? // "ARS", "USD". El símbolo $ solo no alcanza para saber cuál es.
+  precioTexto    String         @default("") // como estaba escrito en la fuente ("$ 12.500")
+  canal          Canal          @default(SIN_ESPECIFICAR)
+  estado         EstadoProducto @default(PROPUESTO)
+
+  @@index([negocioId, orden])
+}
+
+// Una foto fija de la ficha aprobada por el admin (datos, horarios y carta aprobada). Es lo
+// que se publica y lo que queda en el historial; no se modifica nunca.
+// nombre, busqueda, precio, prestaciones, categoriaId y localidadId se copian aparte para
+// filtrar el listado público.
+model RevisionNegocio {
+  id            Int      @id @default(autoincrement())
+  negocioId     Int
+  negocio       Negocio  @relation(fields: [negocioId], references: [id], onDelete: Cascade)
+  numero        Int
+  datos         Json
+  nombre        String
+  busqueda      String // nombre, descripción, localidad y categoría sin tildes ni mayúsculas
+  precio        Int?
+  prestaciones  String[]
+  categoriaId   Int
+  localidadId   Int
+  aprobadaPorId Int
+  aprobadaPor   Usuario  @relation(fields: [aprobadaPorId], references: [id])
+  aprobadaEn    DateTime @default(now())
+
+  publicadaEn Negocio? @relation("publicada")
+
+  @@unique([negocioId, numero])
+  @@index([categoriaId])
+  @@index([localidadId])
+}
