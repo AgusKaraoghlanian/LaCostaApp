@@ -1,13 +1,14 @@
 import { prisma } from "../config/prisma.js";
 
-// Todas las provincias con sus partidos y las localidades de cada uno, por nombre.
+// Todas las provincias con sus partidos y las localidades de cada uno. Las localidades van en
+// el orden en que se cargaron: el seed las carga de norte a sur, como las muestra la portada.
 export const obtenerGeografia = async () => {
     return await prisma.provincia.findMany({
         orderBy: { nombre: "asc" },
         include: {
             partidos: {
                 orderBy: { nombre: "asc" },
-                include: { localidades: { orderBy: { nombre: "asc" } } }
+                include: { localidades: { orderBy: { id: "asc" } } }
             }
         }
     });

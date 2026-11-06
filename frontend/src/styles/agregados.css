@@ -1,0 +1,67 @@
+/* Lo que se sumó a los estilos de la demo (estilos.css y motor.css vienen tal cual de la
+   versión anterior). Usa las mismas variables. */
+
+/* La ficha con una sola foto: ocupa todo el ancho. */
+.galeria.una-foto {
+  grid-template-columns: 1fr;
+  background: #e5e8da;
+}
+.galeria.una-foto img {
+  object-fit: cover;
+}
+
+/* Mientras cargan los datos. */
+.estado-cargando {
+  display: flex;
+  justify-content: center;
+  padding: 90px 0;
+  color: var(--naranja);
+  animation: latido 1.2s ease-in-out infinite;
+}
+@keyframes latido {
+  50% {
+    opacity: 0.35;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .estado-cargando {
+    animation: none;
+  }
+}
+
+/* Solo para lectores de pantalla. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Anterior · Página 2 de 3 · Siguiente */
+.paginacion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 34px;
+  font-size: 13px;
+}
+.paginacion .boton:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* El error de un campo de formulario. */
+.formulario small.error-campo {
+  color: #a5432e;
+}
+
+/* El nombre del administrador y el botón de salir, arriba a la derecha del panel. */
+.motor-status .boton-texto {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+}

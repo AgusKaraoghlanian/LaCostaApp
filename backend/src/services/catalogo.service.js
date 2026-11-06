@@ -1,5 +1,6 @@
 import * as categoriaRepository from '../repositories/categoria.repository.js';
 import * as geografiaRepository from '../repositories/geografia.repository.js';
+import * as revisionRepository from '../repositories/revision.repository.js';
 import { categoriaCompletaDto, geografiaDto } from '../dtos/catalogoDto.js';
 import { armarSlug } from '../utils/texto.js';
 import { CategoriaYaExiste } from '../errors/catalogo/CategoriaYaExiste.js';
@@ -13,9 +14,13 @@ const siYaExiste = (ErrorPropio) => (error) => {
   throw error;
 };
 
+// Con cuántos negocios publicados tiene cada una (la portada lo muestra: "5 lugares").
 const listarCategorias = async () => {
-  const categorias = await categoriaRepository.listarCategorias();
-  return categorias.map(categoriaCompletaDto);
+  const [categorias, publicados] = await Promise.all([
+    categoriaRepository.listarCategorias(),
+    revisionRepository.contarPublicadasPorCategoria(),
+  ]);
+  return categorias.map((categoria) => ({ ...categoriaCompletaDto(categoria), negocios: publicados.get(categoria.id) ?? 0 }));
 };
 
 // La clave (para la URL) sale del nombre: "Bares y cervecerías" → "bares-y-cervecerias".
@@ -25,7 +30,7 @@ const crearCategoria = async ({ nombre, descripcion }) => {
   const categoria = await categoriaRepository
     .crearCategoria({ clave, nombre, descripcion })
     .catch(siYaExiste(CategoriaYaExiste));
-  return categoriaCompletaDto(categoria);
+  return { ...categoriaCompletaDto(categoria), negocios: 0 };
 };
 
 const obtenerGeografia = async () => {

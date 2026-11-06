@@ -119,6 +119,7 @@ model Negocio {
   prestaciones           String[]        @default([]) // "Mesas al aire libre", "Acepta mascotas"...
   precio                 Int? // 1 a 3 ($, $$, $$$)
   foto                   String? // URL de la foto de portada
+  destacado              Boolean         @default(false) // aparece en "Para poner en tu lista" de la portada
   // Qué se verificó y cómo (ej. "Llamé al local el 3/11"). Obligatorio: es lo que respalda la ficha.
   referenciaVerificacion String
 
@@ -200,7 +201,7 @@ model ProductoCarta {
 
 // Una foto fija de la ficha aprobada por el admin (datos, horarios y carta aprobada). Es lo
 // que se publica y lo que queda en el historial; no se modifica nunca.
-// nombre, busqueda, precio, prestaciones, categoriaId y localidadId se copian aparte para
+// nombre, busqueda, precio, prestaciones, destacado, categoriaId y localidadId se copian aparte para
 // filtrar el listado público.
 model RevisionNegocio {
   id            Int      @id @default(autoincrement())
@@ -212,6 +213,7 @@ model RevisionNegocio {
   busqueda      String // nombre, descripción, localidad y categoría sin tildes ni mayúsculas
   precio        Int?
   prestaciones  String[]
+  destacado     Boolean  @default(false)
   categoriaId   Int
   localidadId   Int
   aprobadaPorId Int

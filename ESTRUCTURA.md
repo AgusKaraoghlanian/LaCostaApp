@@ -5,12 +5,14 @@ Mapa rápido de dónde está cada cosa. Se actualiza con cada cambio grande.
 La app se está pasando al mismo stack y la misma forma de trabajar que VPUG. Mientras tanto conviven:
 
 - `backend/`: **la API nueva** (Express + Prisma + PostgreSQL). Es la que hay que seguir.
-- `app/`: la versión anterior (React + Hono + D1 de Cloudflare + motor Node). Queda como referencia hasta terminar la migración: de ahí sale el frontend (siguiente paso) y la importación de webs y OCR (después).
+- `frontend/`: **el sitio nuevo** (React + Vite + react-router), que usa esa API.
+- `app/`: la versión anterior (React + Hono + D1 de Cloudflare + motor Node). Queda como referencia hasta terminar la migración: de ahí sale la importación de webs y OCR (siguiente paso).
 - `demo/`: la demo original con 20 negocios ficticios. Es la referencia de cómo se tiene que ver.
 - `docs/entrega/`: los documentos de arquitectura de la entrega del 1 de noviembre de 2026.
 
 ## Cómo levantarlo
 
+- Frontend: `npm run dev --prefix frontend` → http://localhost:5173 (necesita `frontend/.env` con `VITE_API_BASE_URL`, ver `frontend/.env.example`). Abrirlo como `localhost`, no `127.0.0.1`: CORS solo acepta el origen exacto. `npm run lint` corre oxlint.
 - Backend: `npm run dev --prefix backend` → http://localhost:3001 (se reinicia solo al guardar, con `node --watch`; necesita `backend/.env`, ver `backend/.env.example`).
 - Base de datos: PostgreSQL (Supabase en producción; en local sirve cualquier Postgres). Las tablas se crean con `npx prisma migrate deploy --config prisma7.config.ts` desde `backend/`. **Después de cada migración** hay que correr `npx prisma generate --config prisma7.config.ts` y reiniciar el backend: en Prisma 7 el cliente no se regenera solo.
 - Datos iniciales: `npm run seed` desde `backend/`. Crea Buenos Aires → Partido de La Costa → sus 10 localidades, las 8 categorías de la portada y el primer administrador con `ADMIN_EMAIL`, `ADMIN_PASSWORD` y `ADMIN_NOMBRE` del `.env` (si no están, saltea ese paso). Se puede correr varias veces: lo que ya existe no se cambia.
@@ -79,9 +81,9 @@ Las rutas de `/v1/admin` piden `Authorization: Bearer <token>` de un administrad
 |---|---|---|
 | `GET /salud` | cualquiera | `{ estado: "ok" }` (para el hosting) |
 | `POST /v1/auth/login` | cualquiera | `{ email, password }` → `{ token, usuario }` |
-| `GET /v1/categorias` | **público** | las categorías, en el orden de la portada |
-| `GET /v1/geografia` | **público** | provincias → partidos → localidades |
-| `GET /v1/negocios?categoria&localidadId&precio&prestacion&texto&pagina` | **público** | los publicados, de a 24. `categoria` es la clave de la URL (`parrillas`); `prestacion` se puede repetir (tienen que tener todas); `texto` busca en nombre, descripción, localidad y categoría sin importar tildes |
+| `GET /v1/categorias` | **público** | las categorías, en el orden de la portada, cada una con cuántos negocios publicados tiene (`negocios`) |
+| `GET /v1/geografia` | **público** | provincias → partidos → localidades (en el orden en que se cargaron: de norte a sur) |
+| `GET /v1/negocios?categoria&localidadId&precio&prestacion&destacado&orden&texto&pagina` | **público** | los publicados, de a 24. `categoria` es la clave de la URL (`parrillas`); `prestacion` se puede repetir (tienen que tener todas); `texto` busca en nombre, descripción, localidad y categoría sin importar tildes; `orden`: `recomendados` (destacados primero, después en el orden en que se cargaron), `precio` o `nombre` |
 | `GET /v1/negocios/:slug` | **público** | la ficha publicada, con horarios y carta aprobada |
 | `GET /v1/admin/negocios?texto&pagina` | admin | todas las fichas (publicadas o no), las editadas últimas primero |
 | `POST /v1/admin/negocios` | admin | crea la ficha como borrador |
@@ -94,13 +96,50 @@ Las rutas de `/v1/admin` piden `Authorization: Bearer <token>` de un administrad
 | `POST /v1/admin/categorias` | admin | `{ nombre, descripcion }` (la clave sale del nombre) |
 | `POST /v1/admin/provincias`, `/partidos`, `/localidades` | admin | `{ nombre }`, `{ nombre, provinciaId }`, `{ nombre, partidoId }` |
 
+## Frontend (`frontend/`)
+
+Mismas convenciones que el frontend de VPUG: carpetas por tema en `features/`, lo compartido en `shared/`, todo lo que habla con la API pasa por `config/http.js` (`apiFetch`), los datos se piden con `useCargarDatos` y los formularios usan react-hook-form. Las direcciones son las mismas que la demo (`/explorar`, `/categoria/parrillas`, `/lugar/la-orilla`...).
+
+```
+src/App.jsx                       las rutas
+src/config/http.js                apiFetch: token, errores del backend con su mensaje, filtros en la URL
+src/styles/estilos.css, motor.css los estilos de la demo y del panel anterior, tal cual (formateados)
+src/styles/agregados.css          lo poco que se sumó (paginación, ficha con una sola foto, carga)
+src/shared/api/                   lo público de la API: categorías, geografía, negocios
+src/shared/hooks/                 useCargarDatos, useAccion, useSesion (como VPUG), useCatalogo
+                                  (categorías y localidades, se piden una vez), useFavoritos (en el navegador)
+src/shared/components/            cabecera, pie, tarjeta, migas, paginación, ruta protegida...
+src/shared/formato.js             precios, horarios ("Martes a domingo · 12:00 a 15:30 y 19:30 a 23:30")
+src/shared/costa.js               datos fijos: prestaciones de los filtros, días, estados, monedas
+src/features/inicio/              la portada y su buscador
+src/features/explorar/            el listado con filtros (viven en la URL: ?q=&localidad=&precio=&prestacion=&orden=&pagina=) y las categorías
+src/features/negocio/             la ficha pública: descripción, prestaciones, carta, contacto y horarios
+src/features/guardados/           los lugares con corazón (se guardan en el navegador, por slug)
+src/features/informacion/         Nuestra Costa, Cómo funciona, "próximamente" y la página de no encontrado
+src/features/auth/                el ingreso del administrador
+src/features/admin/               el panel: inicio con números, lista de negocios, editor de la ficha
+                                  (ficha, horarios, carta, historial; guardar, aprobar, publicar, retirar,
+                                  restaurar) y configuración (categorías y geografía)
+```
+
+Comparado con la demo, a propósito no están las valoraciones, las reseñas ni el formulario de consulta (no hay datos reales de eso todavía; la versión anterior también los ocultaba en modo real). "Sumá tu lugar" y "Reclamar mi negocio" muestran que se habilitan más adelante. La ficha tiene una sola foto en vez de galería (el backend guarda una).
+
+**Por qué todavía sin Tailwind** (VPUG lo usa):
+
+1. *Problema*: tiene que verse igual que la demo, y la demo ya tiene todos sus estilos escritos en CSS (`estilos.css`, ~3500 líneas, más `motor.css` del panel).
+2. *Por qué ahora no*: pasarlos a clases de Tailwind al mismo tiempo que se cambia todo el código hace imposible saber si una diferencia visual viene del código nuevo o de la traducción de estilos.
+3. *Alternativa simple (la elegida)*: usar esos mismos archivos CSS y las mismas clases. Se comparó cada pantalla con capturas de la demo y quedan iguales.
+4. *Cuándo sí*: en un PR aparte, pantalla por pantalla, comparando capturas antes y después. Ahí Tailwind sirve para que los estilos nuevos sigan el mismo sistema que VPUG.
+
+**Dependencia nueva respecto de VPUG: `lucide-react`.** La demo usa sus íconos (unos 40). Alternativa: copiar cada SVG a mano, como hace VPUG con los suyos; con tantos íconos es más código para mantener y más fácil equivocarse. Con lucide quedan exactamente los mismos íconos y solo se incluyen los que se usan.
+
 ## Qué falta de la versión anterior
 
-Se pasa en partes, en este orden:
+Se pasa en partes, en este orden (el frontend ya está):
 
-1. **Frontend** (`frontend/`): React + Vite + Tailwind + react-router, separado por features como VPUG, llamando a esta API. Tiene que verse igual que `demo/`: se comparan capturas de cada pantalla antes y después.
-2. **Importar webs y leer fotos de cartas (OCR)**: hoy viven en `app/engine`, `app/worker` y `app/src/features/importaciones`. Proponen datos que el admin revisa antes de guardar.
-3. **Fotos en Supabase Storage** (hoy la foto de portada es una URL).
-4. **Deploy** (`render.yaml`, como VPUG).
+1. **Importar webs y leer fotos de cartas (OCR)**: hoy viven en `app/engine`, `app/worker` y `app/src/features/importaciones`. Proponen datos que el admin revisa antes de guardar.
+2. **Fotos en Supabase Storage** (hoy la foto de portada es una URL).
+3. **Deploy** (`render.yaml`, como VPUG).
+4. **Estilos con Tailwind**, pantalla por pantalla (ver arriba por qué no se hizo junto con el frontend).
 
 Lo que se deja de lado a propósito: las copias de seguridad propias de la versión anterior (Supabase ya hace backups de la base) y el motor que corría en una PC con Windows (lo reemplaza el backend).

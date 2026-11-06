@@ -14,6 +14,10 @@ vi.mock('../src/repositories/geografia.repository.js', () => ({
   crearLocalidad: vi.fn(),
 }));
 
+vi.mock('../src/repositories/revision.repository.js', () => ({
+  contarPublicadasPorCategoria: vi.fn().mockResolvedValue(new Map([[1, 5]])),
+}));
+
 import * as categoriaRepository from '../src/repositories/categoria.repository.js';
 import * as geografiaRepository from '../src/repositories/geografia.repository.js';
 import * as catalogoService from '../src/services/catalogo.service.js';
@@ -22,6 +26,19 @@ import { PartidoNoEncontrado } from '../src/errors/catalogo/PartidoNoEncontrado.
 import { LugarYaExiste } from '../src/errors/catalogo/LugarYaExiste.js';
 
 beforeEach(() => vi.clearAllMocks());
+
+describe('listarCategorias', () => {
+  it('suma cuántos negocios publicados tiene cada una', async () => {
+    categoriaRepository.listarCategorias.mockResolvedValue([
+      { id: 1, clave: 'restaurantes', nombre: 'Restaurantes' },
+      { id: 2, clave: 'cafeterias', nombre: 'Cafeterías' },
+    ]);
+
+    const categorias = await catalogoService.listarCategorias();
+
+    expect(categorias.map((c) => c.negocios)).toEqual([5, 0]);
+  });
+});
 
 describe('crearCategoria', () => {
   it('arma la clave de la URL con el nombre', async () => {
