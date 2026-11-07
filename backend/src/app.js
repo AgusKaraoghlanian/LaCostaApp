@@ -16,7 +16,7 @@ const app = express();
 
 // En producción el servidor está detrás de un proxy: así req.ip es la IP real de quien pide
 // (la usa el límite de pedidos) y no la del proxy.
-if (esProduccion()) app.set("trust proxy", 1);
+if (esProduccion() || process.env.VERCEL) app.set("trust proxy", 1);
 
 // Headers de seguridad (sin "X-Powered-By: Express", no dejar embeber la API, etc.).
 app.use(helmet());
