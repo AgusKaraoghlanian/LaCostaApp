@@ -93,6 +93,7 @@ Las rutas de `/v1/admin` piden `Authorization: Bearer <token>` de un administrad
 | `POST /v1/admin/negocios/:id/publicar` | admin | publica la última revisión aprobada: `{ revisionEsperada }` |
 | `POST /v1/admin/negocios/:id/retirar` | admin | lo saca del sitio: `{ revisionEsperada }` |
 | `POST /v1/admin/negocios/:id/restaurar` | admin | copia una revisión al borrador: `{ revisionId, revisionEsperada }` |
+| `POST /v1/admin/fotos` | admin | el archivo de la foto en el body (`Content-Type: image/jpeg`, `png` o `webp`, hasta 5 MB) → `{ url }`. El tipo se comprueba con los primeros bytes. Con `SUPABASE_URL` y `SUPABASE_SERVICE_ROLE_KEY` va a Supabase Storage (bucket público `SUPABASE_BUCKET`, `fotos` por defecto); sin eso, en desarrollo, a `backend/uploads` (servida en `/uploads`, fuera de git) |
 | `POST /v1/admin/categorias` | admin | `{ nombre, descripcion }` (la clave sale del nombre) |
 | `POST /v1/admin/provincias`, `/partidos`, `/localidades` | admin | `{ nombre }`, `{ nombre, provinciaId }`, `{ nombre, partidoId }` |
 
@@ -138,8 +139,7 @@ Comparado con la demo, a propósito no están las valoraciones, las reseñas ni 
 Se pasa en partes, en este orden (el frontend ya está):
 
 1. **Importar webs y leer fotos de cartas (OCR)**: hoy viven en `app/engine`, `app/worker` y `app/src/features/importaciones`. Proponen datos que el admin revisa antes de guardar.
-2. **Fotos en Supabase Storage** (hoy la foto de portada es una URL).
-3. **Deploy** (`render.yaml`, como VPUG).
-4. **Estilos con Tailwind**, pantalla por pantalla (ver arriba por qué no se hizo junto con el frontend).
+2. **Deploy** (`render.yaml`, como VPUG).
+3. **Estilos con Tailwind**, pantalla por pantalla (ver arriba por qué no se hizo junto con el frontend).
 
 Lo que se deja de lado a propósito: las copias de seguridad propias de la versión anterior (Supabase ya hace backups de la base) y el motor que corría en una PC con Windows (lo reemplaza el backend).

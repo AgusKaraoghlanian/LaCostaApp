@@ -2,6 +2,7 @@ import { CircleHelp } from 'lucide-react'
 import { ESTADOS_COMERCIALES, PRESTACIONES } from '../../../shared/costa.js'
 import { NOMBRES_DE_PRECIO } from '../../../shared/formato.js'
 import { useCatalogo } from '../../../shared/hooks/useCatalogo.jsx'
+import CampoFoto from './CampoFoto.jsx'
 
 // Los links de la ficha. El backend revisa que cada uno sea del sitio que corresponde.
 const ENLACES = [
@@ -22,7 +23,7 @@ const Texto = ({ etiqueta, registro, ...props }) => (
 )
 
 // La pestaña "Ficha": los datos del negocio.
-const CamposFicha = ({ register }) => {
+const CamposFicha = ({ register, control }) => {
   const { categorias, localidades } = useCatalogo()
 
   return (
@@ -103,7 +104,7 @@ const CamposFicha = ({ register }) => {
             </select>
           </label>
         </div>
-        <Texto etiqueta="Foto (link a la imagen)" type="url" maxLength={1000} registro={register('foto')} />
+        <CampoFoto control={control} />
         <div className="motor-field">
           <label>
             Aclaraciones de horario

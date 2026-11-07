@@ -37,6 +37,11 @@ const validarEntorno = () => {
     problemas.push('CORS_ORIGENES falta: la URL del frontend (ej. https://costa-a-la-carta.onrender.com)');
   }
 
+  // Sin Supabase Storage las fotos van al disco del servidor, que en el hosting se borra.
+  if (esProduccion() && !(process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY)) {
+    avisos.push('SUPABASE_URL o SUPABASE_SERVICE_ROLE_KEY faltan: las fotos subidas se van a perder en cada deploy');
+  }
+
   avisos.forEach((aviso) => console.warn(`Aviso: ${aviso}`));
   if (problemas.length > 0) {
     throw new Error(`Revisá las variables de entorno del backend:\n  - ${problemas.join('\n  - ')}`);

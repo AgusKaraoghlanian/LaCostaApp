@@ -1,4 +1,5 @@
 import { apiFetch } from '../../../config/http.js'
+import { BASE_URL } from '../../../config/api.js'
 
 // Todo lo del panel pide el token del administrador.
 const conToken = (path, opciones = {}) => apiFetch(path, { ...opciones, auth: true })
@@ -39,3 +40,16 @@ export const crearPartido = ({ nombre, provinciaId }) =>
 
 export const crearLocalidad = ({ nombre, partidoId }) =>
   conToken('/admin/localidades', { method: 'POST', body: { nombre, partidoId } })
+
+// Sube el archivo de una foto (JPG, PNG o WEBP, hasta 5 MB) y devuelve { url } para la ficha.
+// Va sin apiFetch porque el body es el archivo tal cual, no JSON.
+export const subirFoto = async (archivo) => {
+  const res = await fetch(`${BASE_URL}/admin/fotos`, {
+    method: 'POST',
+    headers: { 'Content-Type': archivo.type, Authorization: `Bearer ${localStorage.getItem('token')}` },
+    body: archivo,
+  })
+  const data = await res.json().catch(() => null)
+  if (!res.ok) throw new Error(data?.message || 'No pudimos subir la foto. Probá de nuevo.')
+  return data
+}

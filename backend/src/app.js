@@ -7,6 +7,8 @@ import { authRouterV1 } from "./routes/auth.router.v1.js";
 import { catalogoRouterV1 } from "./routes/catalogo.router.v1.js";
 import { negocioRouterV1 } from "./routes/negocio.router.v1.js";
 import { negocioAdminRouterV1 } from "./routes/negocioAdmin.router.v1.js";
+import { fotoAdminRouterV1 } from "./routes/fotoAdmin.router.v1.js";
+import { CARPETA_LOCAL } from "./repositories/foto.repository.js";
 import { errorMiddleware } from "./middlewares/error.middleware.js";
 import { logMiddleware } from "./middlewares/logger.middleware.js";
 
@@ -36,6 +38,17 @@ app.get("/salud", (req, res) => {
   res.json({ estado: "ok" });
 });
 
+// Fotos guardadas en disco (solo en desarrollo, sin Supabase Storage). Las muestra el
+// frontend desde otro puerto, así que se permite cargarlas desde otro origen.
+app.use(
+  "/uploads",
+  (req, res, next) => {
+    res.set("Cross-Origin-Resource-Policy", "cross-origin");
+    next();
+  },
+  express.static(CARPETA_LOCAL, { index: false }),
+);
+
 app.use("/v1", limiteGeneral);
 
 // Rutas de la API v1. Cada router declara su propia protección (sesión y rol) en sus
@@ -44,6 +57,7 @@ app.use("/v1", authRouterV1);
 app.use("/v1", catalogoRouterV1);
 app.use("/v1/negocios", negocioRouterV1);
 app.use("/v1/admin/negocios", negocioAdminRouterV1);
+app.use("/v1/admin/fotos", fotoAdminRouterV1);
 
 // Middleware de manejo de errores
 app.use(errorMiddleware);
