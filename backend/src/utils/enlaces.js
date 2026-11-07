@@ -23,9 +23,11 @@ const esWhatsapp = (url) => {
     /^\+?\d{7,15}$/.test(url.searchParams.get('phone') || '');
 };
 
+const esFotoLocal = (url) => ['localhost', '127.0.0.1'].includes(url.hostname) && url.pathname.startsWith('/uploads/');
+
 const REGLAS = { instagram: esInstagram, facebook: esFacebook, whatsapp: esWhatsapp };
 
-// tipo: 'web' (cualquier sitio), 'instagram', 'facebook' o 'whatsapp'. Vacío vale (no tiene).
+// tipo: 'web' (cualquier sitio), 'foto' (como web, más las subidas en desarrollo), 'instagram', 'facebook' o 'whatsapp'. Vacío vale (no tiene).
 export const esEnlacePermitido = (valor, tipo = 'web') => {
   if (!valor) return true;
   let url;
@@ -34,7 +36,9 @@ export const esEnlacePermitido = (valor, tipo = 'web') => {
   } catch {
     return false;
   }
-  if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password || url.port) return false;
+  if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password) return false;
+  // Un puerto solo vale en la foto subida en desarrollo (http://localhost:3001/uploads/...).
+  if (url.port && !(tipo === 'foto' && esFotoLocal(url))) return false;
   const regla = REGLAS[tipo];
   return regla ? regla(url) : true;
 };

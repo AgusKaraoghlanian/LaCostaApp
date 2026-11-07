@@ -156,7 +156,7 @@ const EditorNegocio = ({ negocio, pestana, setPestana, mensaje, setMensaje, onAc
       <form className="formulario" onSubmit={onSubmit}>
         {/* Todas las pestañas quedan armadas (ocultas): así el navegador valida los campos de todas. */}
         <div hidden={pestana !== 'ficha'}>
-          <CamposFicha register={register} />
+          <CamposFicha register={register} control={control} />
         </div>
         <div hidden={pestana !== 'horarios'}>
           <EditorHorarios control={control} register={register} />

@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "node --watch src/server.js",
     "start": "node src/server.js",
+    "vercel-build": "prisma generate --config prisma7.config.ts",
     "test": "vitest run",
     "seed": "node prisma/seed.js",
     "demo": "node prisma/demo.js crear",

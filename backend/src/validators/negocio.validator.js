@@ -20,6 +20,7 @@ const texto = (nombre, maximo) => Joi.string().trim().max(maximo).allow('').defa
 // Un ejemplo por tipo, para que el mensaje de error diga qué se espera.
 const EJEMPLOS_DE_ENLACE = {
   web: 'https://www.ejemplo.com',
+  foto: 'https://www.ejemplo.com/foto.jpg',
   instagram: 'https://instagram.com/tu-negocio',
   facebook: 'https://facebook.com/tu-negocio',
   whatsapp: 'https://wa.me/5492255123456',
@@ -140,7 +141,7 @@ const datosNegocio = {
     'number.min': 'El rango de precio va de 1 a 3.',
     'number.max': 'El rango de precio va de 1 a 3.',
   }),
-  foto: enlace('La foto', 'web', 1000).empty('').allow(null).default(null),
+  foto: enlace('La foto', 'foto', 1000).empty('').allow(null).default(null),
   destacado: Joi.boolean().default(false).messages({ 'boolean.base': 'Destacado tiene que ser sí o no.' }),
   referenciaVerificacion: Joi.string().trim().min(3).max(1500).required().messages({
     'string.empty': 'Contá qué verificaste del negocio y cómo.',

@@ -65,3 +65,34 @@
   gap: 6px;
   margin-top: 6px;
 }
+
+/* La foto de la ficha en el admin: vista previa y botón para subir el archivo. */
+.campo-foto img {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 6px 0 10px;
+}
+.campo-foto-vacio {
+  margin: 6px 0 10px;
+  color: #77806a;
+}
+.campo-foto-acciones {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.campo-foto-acciones .boton {
+  cursor: pointer;
+}
+.campo-foto-acciones .boton:focus-within {
+  outline: 2px solid var(--naranja);
+  outline-offset: 2px;
+}
+.campo-foto-error {
+  margin: 8px 0 0;
+  color: #b3261e;
+}
