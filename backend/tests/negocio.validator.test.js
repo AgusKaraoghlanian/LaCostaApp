@@ -12,6 +12,14 @@ describe('crearNegocioSchema', () => {
     expect(value).toMatchObject({ estadoComercial: 'SIN_CONFIRMAR', descripcion: '', prestaciones: [], precio: null, foto: null, productos: [] });
   });
 
+  it('acepta la foto subida en desarrollo (con puerto) pero no un puerto en otros links', () => {
+    expect(validar({ foto: 'http://localhost:3001/uploads/negocios/a.jpg' }).error).toBeUndefined();
+    expect(validar({ foto: 'https://x.supabase.co/storage/v1/object/public/fotos/negocios/a.jpg' }).error).toBeUndefined();
+    expect(validar({ foto: 'http://localhost:3001/v1/admin/negocios' }).error).toBeDefined();
+    expect(validar({ foto: 'http://ejemplo.com:8080/uploads/a.jpg' }).error).toBeDefined();
+    expect(validar({ web: 'http://localhost:3001/uploads/a.jpg' }).error).toBeDefined();
+  });
+
   it('pide la referencia de verificación', () => {
     const { error } = crearNegocioSchema.validate({ nombre: 'La Orilla', localidadId: 1, categoriaId: 2 });
     expect(error.message).toMatch(/verificaste/);
