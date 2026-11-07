@@ -138,7 +138,7 @@ Comparado con la demo, a propósito no están las valoraciones, las reseñas ni 
 
 Dos proyectos de Vercel del mismo repo: uno con Root Directory `backend` y otro con `frontend`.
 
-- **Backend**: `api/index.js` exporta la app de Express y `vercel.json` manda todos los pedidos ahí (no usa `server.js`). En el build corre `npm run vercel-build` (genera el cliente de Prisma). Variables: `DATABASE_URL` (pooler de transacciones, puerto 6543), `JWT_SECRET`, `NODE_ENV=production`, `CORS_ORIGENES` (la URL del frontend), `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_BUCKET`. Las migraciones no corren en el deploy: se corren a mano con `DIRECT_URL` (`npx prisma migrate deploy --config prisma7.config.ts`).
+- **Backend**: corre en São Paulo (`gru1`, cerca de Supabase). `api/index.js` exporta la app de Express y `vercel.json` manda todos los pedidos ahí (no usa `server.js`). En el build corre `npm run vercel-build` (genera el cliente de Prisma). Variables: `DATABASE_URL` (pooler de transacciones, puerto 6543), `JWT_SECRET`, `NODE_ENV=production`, `CORS_ORIGENES` (la URL del frontend), `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_BUCKET`. Las migraciones no corren en el deploy: se corren a mano con `DIRECT_URL` (`npx prisma migrate deploy --config prisma7.config.ts`).
 - **Frontend**: Vite, con `vercel.json` para que las rutas de React (`/lugar/...`) no den 404. Variable: `VITE_API_BASE_URL` = URL del backend + `/v1`.
 - **Fotos**: bucket público `fotos` en Supabase Storage.
 

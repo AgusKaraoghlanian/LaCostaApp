@@ -1,0 +1,6 @@
+# No subir a Vercel: claves locales, fotos de desarrollo y tests.
+.env*
+!.env.example
+uploads
+tests
+node_modules
