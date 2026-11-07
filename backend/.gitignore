@@ -16,3 +16,6 @@ Thumbs.db
 
 # Fotos subidas en desarrollo (ver repositories/foto.repository.js)
 uploads/
+
+# Configuración local de Vercel (vercel link)
+.vercel
