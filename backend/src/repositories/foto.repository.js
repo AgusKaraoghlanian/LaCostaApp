@@ -25,7 +25,7 @@ const guardarFoto = async (nombre, contenido, tipo, origen) => {
   if (remoto) {
     const res = await fetch(`${remoto.url}/storage/v1/object/${remoto.bucket}/${nombre}`, {
       method: 'POST',
-      headers: { Authorization: `Bearer ${remoto.clave}`, 'Content-Type': tipo, 'Cache-Control': 'max-age=31536000' },
+      headers: { apikey: remoto.clave, Authorization: `Bearer ${remoto.clave}`, 'Content-Type': tipo, 'Cache-Control': 'max-age=31536000' },
       body: contenido,
     }).catch((e) => {
       throw new FotoNoGuardada(`Supabase Storage no responde: ${e.message}`);
