@@ -134,12 +134,19 @@ Comparado con la demo, a propósito no están las valoraciones, las reseñas ni 
 
 **Dependencia nueva respecto de VPUG: `lucide-react`.** La demo usa sus íconos (unos 40). Alternativa: copiar cada SVG a mano, como hace VPUG con los suyos; con tantos íconos es más código para mantener y más fácil equivocarse. Con lucide quedan exactamente los mismos íconos y solo se incluyen los que se usan.
 
+## Deploy (Vercel + Supabase)
+
+Dos proyectos de Vercel del mismo repo: uno con Root Directory `backend` y otro con `frontend`.
+
+- **Backend**: `api/index.js` exporta la app de Express y `vercel.json` manda todos los pedidos ahí (no usa `server.js`). En el build corre `npm run vercel-build` (genera el cliente de Prisma). Variables: `DATABASE_URL` (pooler de transacciones, puerto 6543), `JWT_SECRET`, `NODE_ENV=production`, `CORS_ORIGENES` (la URL del frontend), `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_BUCKET`. Las migraciones no corren en el deploy: se corren a mano con `DIRECT_URL` (`npx prisma migrate deploy --config prisma7.config.ts`).
+- **Frontend**: Vite, con `vercel.json` para que las rutas de React (`/lugar/...`) no den 404. Variable: `VITE_API_BASE_URL` = URL del backend + `/v1`.
+- **Fotos**: bucket público `fotos` en Supabase Storage.
+
 ## Qué falta de la versión anterior
 
 Se pasa en partes, en este orden (el frontend ya está):
 
 1. **Importar webs y leer fotos de cartas (OCR)**: hoy viven en `app/engine`, `app/worker` y `app/src/features/importaciones`. Proponen datos que el admin revisa antes de guardar.
-2. **Deploy** (`render.yaml`, como VPUG).
-3. **Estilos con Tailwind**, pantalla por pantalla (ver arriba por qué no se hizo junto con el frontend).
+2. **Estilos con Tailwind**, pantalla por pantalla (ver arriba por qué no se hizo junto con el frontend).
 
 Lo que se deja de lado a propósito: las copias de seguridad propias de la versión anterior (Supabase ya hace backups de la base) y el motor que corría en una PC con Windows (lo reemplaza el backend).
