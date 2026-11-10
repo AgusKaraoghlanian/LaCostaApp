@@ -137,11 +137,11 @@
   min-width: 0;
 }
 .selector-etiqueta {
-  font-size: 16px;
+  font-size: 19px;
   font-weight: 600;
 }
 .selector-valor {
-  font-size: 16px;
+  font-size: 19px;
   color: #59644f;
   white-space: nowrap;
   overflow: hidden;
@@ -201,7 +201,7 @@
 }
 .selector-grupo {
   margin: 10px 10px 4px;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -213,7 +213,7 @@
   gap: 10px;
   padding: 9px 10px;
   border-radius: 9px;
-  font-size: 17px;
+  font-size: 20px;
   color: #3d4b40;
   cursor: pointer;
   user-select: none;
@@ -275,7 +275,7 @@
   }
   .selector-etiqueta,
   .selector-valor {
-    font-size: 15px;
+    font-size: 17px;
   }
 }
 
@@ -285,10 +285,10 @@
     gap: 13px;
   }
   .selector-etiqueta {
-    font-size: 15px;
+    font-size: 17px;
   }
   .selector-valor {
-    font-size: 16px;
+    font-size: 19px;
   }
   .selector-fondo {
     display: block;
@@ -337,7 +337,7 @@
   }
   .selector-opcion {
     padding: 11px 10px;
-    font-size: 18px;
+    font-size: 21px;
   }
   .selector-opcion-icono {
     width: 32px;
@@ -363,32 +363,32 @@
   }
 }
 
-/* Letra del buscador de la portada un ~45% más grande que en la demo (se veía chica). */
+/* Letra del buscador de la portada bastante más grande que en la demo (se veía chica). */
 .buscador label > span,
 .buscador input {
-  font-size: 16px;
+  font-size: 19px;
 }
 .buscador .boton {
-  font-size: 17px;
+  font-size: 20px;
 }
 @media (max-width: 950px) {
   .buscador label > span,
   .buscador input {
-    font-size: 15px;
+    font-size: 17px;
   }
   .buscador .boton {
-    font-size: 16px;
+    font-size: 19px;
   }
 }
 @media (max-width: 720px) {
   .buscador label > span {
-    font-size: 15px;
+    font-size: 17px;
   }
   .buscador input {
-    font-size: 16px;
+    font-size: 19px;
   }
   .buscador .boton {
-    font-size: 16px;
+    font-size: 19px;
   }
 }
 
@@ -398,4 +398,19 @@
   overflow: visible;
   position: relative;
   z-index: 5;
+}
+
+/* Las sugerencias de abajo del buscador ("Un antojo para empezar"), también más grandes. */
+.sugerencias {
+  font-size: 13px;
+}
+@media (max-width: 950px) {
+  .sugerencias {
+    font-size: 12px;
+  }
+}
+@media (max-width: 720px) {
+  .sugerencias {
+    font-size: 12px;
+  }
 }
