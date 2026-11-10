@@ -8,7 +8,7 @@ import TituloDePagina from '../../../shared/components/TituloDePagina.jsx'
 import { useCargarDatos } from '../../../shared/hooks/useCargarDatos.js'
 import { useCatalogo } from '../../../shared/hooks/useCatalogo.jsx'
 import Buscador from '../components/Buscador.jsx'
-import CarruselLocalidades from '../components/CarruselLocalidades.jsx'
+import PanelLocalidades from '../components/PanelLocalidades.jsx'
 
 // Tres destacados y tres que no lo son, para las dos grillas de la portada.
 const cargarPortada = async () => {
@@ -149,7 +149,7 @@ const Inicio = () => {
       <section className="franja-localidades">
         <div className="contenedor">
           <TituloSeccion sobretitulo="CADA LOCALIDAD, UN NUEVO SABOR" titulo="Tu próximo plan, en La Costa." />
-          <CarruselLocalidades localidades={localidades} />
+          <PanelLocalidades localidades={localidades} />
         </div>
       </section>
 
