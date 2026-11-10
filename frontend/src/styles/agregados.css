@@ -752,18 +752,20 @@
   }
 }
 
-/* "¿Qué tenés ganas de comer?" en el celular: los íconos quedan como en la demo, pero los
-   nombres y la cantidad de lugares van más grandes (de a 3 por fila para que entren). */
+/* "¿Qué tenés ganas de comer?" en el celular: 4 por fila y los íconos como en la demo, pero
+   los nombres y la cantidad de lugares más grandes. Las columnas van casi sin separación
+   para que "Restaurantes" entre entero. */
 @media (max-width: 720px) {
   .fila-categorias {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 26px 12px;
+    gap: 24px 2px;
+    margin-inline: -8px;
   }
   .categoria-circulo > strong {
-    font-size: 18px;
+    font-size: 15px;
+    letter-spacing: -0.2px;
   }
   .categoria-circulo > small {
-    font-size: 16px;
+    font-size: 13px;
   }
 }
 
