@@ -32,3 +32,8 @@ export const CANALES = {
 }
 
 export const MONEDAS = ['ARS', 'USD', 'EUR', 'UYU', 'BRL']
+
+// La foto de cada localidad para el carrusel de la portada, por nombre exacto de la localidad.
+// Las que no tienen foto se muestran con una ilustración de colores de la Costa.
+// Ejemplo: 'San Bernardo': 'https://.../san-bernardo.jpg'
+export const FOTOS_LOCALIDADES = {}
