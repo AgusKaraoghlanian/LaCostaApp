@@ -96,13 +96,6 @@ const Inicio = () => {
           </div>
           <div className="hero-buscador">
             <Buscador />
-            <div className="sugerencias">
-              Un antojo para empezar:<Link to="/categoria/cafeterias">Café de especialidad</Link>
-              <Link to="/categoria/mariscos">Sabores del mar</Link>
-              <Link to="/explorar?prestacion=Mesas+al+aire+libre">
-                Comer al aire libre <ArrowUpRight size={11} />
-              </Link>
-            </div>
           </div>
         </div>
       </section>

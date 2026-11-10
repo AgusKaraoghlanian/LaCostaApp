@@ -1,4 +1,4 @@
-import { Search } from 'lucide-react'
+import { ChevronDown, Search } from 'lucide-react'
 import { useEffect, useId, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router'
 import IconoCategoria from '../../../shared/components/IconoCategoria.jsx'
@@ -111,6 +111,18 @@ const Buscador = () => {
             onKeyDown={alPresionarTecla}
           />
         </label>
+        {/* La misma flechita que "¿Por dónde?": abre o cierra las sugerencias. */}
+        <ChevronDown
+          size={16}
+          className="selector-flecha antojo-flecha"
+          aria-hidden="true"
+          onPointerDown={(e) => e.preventDefault()}
+          onClick={() => {
+            if (mostrarLista) return setAbierto(false)
+            campoRef.current?.querySelector('input')?.focus()
+            setAbierto(true)
+          }}
+        />
 
         <div className="selector-panel antojo-panel" hidden={!mostrarLista}>
           <p className="selector-grupo" aria-hidden="true">
