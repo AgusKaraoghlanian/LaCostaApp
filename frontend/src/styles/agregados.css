@@ -401,21 +401,6 @@
   z-index: 5;
 }
 
-/* Las sugerencias de abajo del buscador ("Un antojo para empezar"), también más grandes. */
-.sugerencias {
-  font-size: 13px;
-}
-@media (max-width: 950px) {
-  .sugerencias {
-    font-size: 12px;
-  }
-}
-@media (max-width: 720px) {
-  .sugerencias {
-    font-size: 12px;
-  }
-}
-
 /* "¿Qué se te antoja?": la lista de categorías sugeridas. Usa el mismo panel que el
    selector de localidad, pero en el celular sigue abriéndose abajo del campo (no como hoja),
    porque el teclado está abierto. */
@@ -767,26 +752,56 @@
   }
 }
 
-/* "¿Qué tenés ganas de comer?" en el celular: íconos más grandes, de a 3 por fila. */
+/* "¿Qué tenés ganas de comer?" en el celular: los íconos quedan como en la demo, pero los
+   nombres y la cantidad de lugares van más grandes (de a 3 por fila para que entren). */
 @media (max-width: 720px) {
   .fila-categorias {
     grid-template-columns: repeat(3, 1fr);
     gap: 26px 12px;
   }
-  .categoria-circulo > span {
-    width: 92px;
-    height: 88px;
-    border-radius: 28px;
-  }
-  .categoria-circulo > span svg {
-    width: 40px;
-    height: 40px;
-  }
   .categoria-circulo > strong {
-    font-size: 15px;
+    font-size: 18px;
   }
   .categoria-circulo > small {
-    font-size: 13px;
+    font-size: 16px;
+  }
+}
+
+/* La flechita de "¿Qué se te antoja?" (igual a la de "¿Por dónde?"): se puede tocar y gira
+   cuando las sugerencias están abiertas. */
+.antojo-flecha {
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.campo-buscar.abierto > .antojo-flecha {
+  transform: rotate(180deg);
+}
+
+/* Celular: la primera parte de la portada (texto, foto y buscador) con más aire. */
+@media (max-width: 720px) {
+  .hero-interior {
+    padding-top: 44px;
+    padding-bottom: 44px;
+  }
+  .hero h1 {
+    margin-top: 26px;
+    margin-bottom: 24px;
+  }
+  .hero-texto > p {
+    margin-bottom: 30px;
+  }
+  .hero-texto {
+    padding-bottom: 40px;
+  }
+  .hero-visual {
+    height: 260px;
+  }
+  .hero-buscador {
+    margin-top: 32px;
+  }
+  /* Alineada con la flechita de "¿Por dónde?". */
+  .antojo-flecha {
+    margin-right: 6px;
   }
 }
 
