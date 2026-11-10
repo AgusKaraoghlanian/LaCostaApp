@@ -1,7 +1,8 @@
-import { ChevronDown, MapPin, Search } from 'lucide-react'
+import { Search } from 'lucide-react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useCatalogo } from '../../../shared/hooks/useCatalogo.jsx'
+import SelectorLocalidad from './SelectorLocalidad.jsx'
 
 // El buscador grande de la portada: lleva a /explorar con lo que se buscó.
 const Buscador = () => {
@@ -32,21 +33,7 @@ const Buscador = () => {
           />
         </label>
       </div>
-      <div className="campo-localidad">
-        <MapPin size={21} />
-        <label>
-          <span>¿Por dónde?</span>
-          <select aria-label="Elegir localidad" value={localidad} onChange={(e) => setLocalidad(e.target.value)}>
-            <option value="">Todas las localidades</option>
-            {localidades.map((l) => (
-              <option key={l.id} value={l.id}>
-                {l.nombre}
-              </option>
-            ))}
-          </select>
-        </label>
-        <ChevronDown size={15} />
-      </div>
+      <SelectorLocalidad localidades={localidades} valor={localidad} onCambiar={setLocalidad} />
       <button className="boton boton-naranja" type="submit">
         <Search size={17} />
         Buscar lugares

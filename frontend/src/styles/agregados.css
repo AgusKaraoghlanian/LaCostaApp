@@ -96,3 +96,306 @@
   margin: 8px 0 0;
   color: #b3261e;
 }
+
+/* "¿Por dónde?" del buscador de la portada: desplegable propio en lugar del <select>
+   del navegador (componente SelectorLocalidad). */
+.selector-boton {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 6px 4px;
+  margin: -6px -4px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  text-align: left;
+  transition: background 0.15s;
+}
+@media (hover: hover) {
+  .selector-boton:hover {
+    background: #f6f2e8;
+  }
+}
+.selector-boton:focus-visible {
+  outline: 2px solid var(--naranja);
+  outline-offset: 2px;
+}
+.selector-pin {
+  color: #8d947f;
+  stroke-width: 1.5;
+  transition: color 0.15s;
+}
+.selector-localidad.abierto .selector-pin {
+  color: var(--naranja);
+}
+.selector-textos {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+}
+.selector-etiqueta {
+  font-size: 14px;
+  font-weight: 600;
+}
+.selector-valor {
+  font-size: 14px;
+  color: #59644f;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.selector-flecha {
+  color: #8d947f;
+  transition: transform 0.2s ease, color 0.15s;
+}
+.selector-localidad.abierto .selector-flecha {
+  transform: rotate(180deg);
+  color: var(--naranja);
+}
+
+/* La lista que se despliega. */
+.selector-panel {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 16px);
+  left: 0;
+  width: max(100%, 290px);
+  padding: 8px;
+  background: var(--blanco);
+  border: 1px solid #e7e6da;
+  border-radius: 14px;
+  box-shadow: 0 18px 40px #2233211f, 0 2px 6px #22332110;
+  transform-origin: top center;
+  animation: selector-entrar 0.16s ease-out;
+}
+.selector-panel[hidden] {
+  display: none;
+}
+@keyframes selector-entrar {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+}
+.selector-titulo {
+  display: none;
+}
+.selector-lista,
+.selector-lista ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.selector-lista {
+  max-height: 320px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #dcd8c8 transparent;
+}
+.selector-lista:focus {
+  outline: none;
+}
+.selector-grupo {
+  margin: 10px 10px 4px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #9a9f8e;
+}
+.selector-opcion {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 9px;
+  font-size: 15px;
+  color: #3d4b40;
+  cursor: pointer;
+  user-select: none;
+}
+/* Una línea fina entre "Todas" y las localidades. */
+.selector-opcion[data-indice="0"] {
+  margin-bottom: 6px;
+  position: relative;
+}
+.selector-opcion[data-indice="0"]::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: -4px;
+  border-bottom: 1px solid var(--borde);
+}
+.selector-opcion-icono {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: #f1eee4;
+  color: #8d947f;
+  transition: background 0.12s, color 0.12s;
+}
+.selector-opcion-nombre {
+  flex: 1;
+  min-width: 0;
+}
+.selector-opcion.activa {
+  background: #f6f1e6;
+}
+.selector-opcion.activa .selector-opcion-icono {
+  background: #f4dfcf;
+  color: var(--naranja);
+}
+.selector-opcion.elegida {
+  color: #c45d2c;
+  font-weight: 600;
+  background: #fcefe6;
+}
+.selector-opcion.elegida .selector-opcion-icono {
+  background: var(--naranja);
+  color: #fff;
+}
+.selector-check {
+  color: var(--naranja);
+}
+.selector-fondo {
+  display: none;
+}
+
+/* Notebooks chicas: un poco más chico, igual que el resto del buscador. */
+@media (max-width: 950px) {
+  .selector-boton {
+    gap: 9px;
+  }
+  .selector-etiqueta,
+  .selector-valor {
+    font-size: 13px;
+  }
+}
+
+/* Celular: la lista sube como una hoja desde abajo, con fondo oscurecido. */
+@media (max-width: 720px) {
+  .selector-boton {
+    gap: 13px;
+  }
+  .selector-etiqueta {
+    font-size: 13px;
+  }
+  .selector-valor {
+    font-size: 14px;
+  }
+  .selector-fondo {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: #1d2a2166;
+    animation: selector-fundido 0.2s ease-out;
+  }
+  .selector-panel {
+    position: fixed;
+    z-index: 61;
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-height: 75vh;
+    max-height: 75dvh;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 12px calc(14px + env(safe-area-inset-bottom));
+    border-radius: 20px 20px 0 0;
+    border-bottom: 0;
+    animation: selector-subir 0.24s cubic-bezier(0.2, 0.8, 0.3, 1);
+  }
+  .selector-panel::before {
+    content: "";
+    align-self: center;
+    width: 40px;
+    height: 4px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    background: #dcd8c8;
+  }
+  .selector-titulo {
+    display: block;
+    margin: 0 10px 8px;
+    font-family: var(--serif);
+    font-size: 21px;
+    color: var(--verde);
+  }
+  .selector-lista {
+    max-height: none;
+    flex: 1;
+  }
+  .selector-opcion {
+    padding: 11px 10px;
+    font-size: 16px;
+  }
+  .selector-opcion-icono {
+    width: 32px;
+    height: 32px;
+  }
+}
+@keyframes selector-subir {
+  from {
+    transform: translateY(100%);
+  }
+}
+@keyframes selector-fundido {
+  from {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .selector-panel,
+  .selector-fondo,
+  .selector-flecha {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Letra del buscador de la portada un 28% más grande que en la demo (se veía chica). */
+.buscador label > span,
+.buscador input {
+  font-size: 14px;
+}
+.buscador .boton {
+  font-size: 15px;
+}
+@media (max-width: 950px) {
+  .buscador label > span,
+  .buscador input {
+    font-size: 13px;
+  }
+  .buscador .boton {
+    font-size: 14px;
+  }
+}
+@media (max-width: 720px) {
+  .buscador label > span {
+    font-size: 13px;
+  }
+  .buscador input {
+    font-size: 14px;
+  }
+  .buscador .boton {
+    font-size: 14px;
+  }
+}
+
+/* El hero recorta lo que sobresale (overflow: hidden); mientras la lista está abierta
+   la dejamos salir para que no quede cortada por la sección de abajo. */
+.hero:has(.selector-localidad.abierto) {
+  overflow: visible;
+  position: relative;
+  z-index: 5;
+}
