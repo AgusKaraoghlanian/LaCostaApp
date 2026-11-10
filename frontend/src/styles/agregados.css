@@ -394,7 +394,8 @@
 
 /* El hero recorta lo que sobresale (overflow: hidden); mientras la lista está abierta
    la dejamos salir para que no quede cortada por la sección de abajo. */
-.hero:has(.selector-localidad.abierto) {
+.hero:has(.selector-localidad.abierto),
+.hero:has(.campo-buscar.abierto) {
   overflow: visible;
   position: relative;
   z-index: 5;
@@ -412,5 +413,266 @@
 @media (max-width: 720px) {
   .sugerencias {
     font-size: 12px;
+  }
+}
+
+/* "¿Qué se te antoja?": la lista de categorías sugeridas. Usa el mismo panel que el
+   selector de localidad, pero en el celular sigue abriéndose abajo del campo (no como hoja),
+   porque el teclado está abierto. */
+.campo-buscar {
+  position: relative;
+}
+.campo-buscar.abierto > svg,
+.campo-buscar:focus-within > svg {
+  color: var(--naranja);
+}
+/* El foco se ve en la lupa naranja y en la lista abierta, sin el recuadro gris. */
+.buscador .campo-buscar input:focus {
+  outline: none;
+}
+.antojo-panel {
+  left: 0;
+  width: max(100%, 320px);
+}
+.antojo-panel .selector-grupo {
+  margin-top: 6px;
+}
+.antojo-icono {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  color: #3d4b40;
+  transition: transform 0.15s;
+}
+.selector-opcion.activa .antojo-icono {
+  transform: rotate(-4deg) scale(1.05);
+}
+.antojo-cantidad {
+  font-size: 13px;
+  color: #8a907f;
+}
+@media (max-width: 720px) {
+  .antojo-panel {
+    position: absolute;
+    z-index: 20;
+    top: calc(100% + 6px);
+    bottom: auto;
+    left: -14px;
+    right: -14px;
+    width: auto;
+    max-height: none;
+    display: block;
+    padding: 8px;
+    border: 1px solid #e7e6da;
+    border-radius: 14px;
+    animation: selector-entrar 0.16s ease-out;
+  }
+  .antojo-panel::before {
+    display: none;
+  }
+  .antojo-panel .selector-lista {
+    max-height: 300px;
+  }
+}
+
+/* "Tu próximo plan, en La Costa": carrusel de localidades. La del medio va a tamaño completo
+   y las demás se achican según --cercania (1 en el centro, 0 a una tarjeta de distancia),
+   que calcula CarruselLocalidades mientras se desliza. */
+.carrusel {
+  position: relative;
+}
+.carrusel-pista {
+  --ancho-tarjeta: 280px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: -14px 0 -30px;
+  padding: 24px calc(50% - var(--ancho-tarjeta) / 2) 46px;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.carrusel-pista::-webkit-scrollbar {
+  display: none;
+}
+.carrusel-item {
+  --cercania: 0;
+  flex: 0 0 auto;
+  scroll-snap-align: center;
+  transform: scale(calc(0.78 + 0.22 * var(--cercania)));
+  opacity: calc(0.6 + 0.4 * var(--cercania));
+  will-change: transform;
+}
+.localidad-tarjeta {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  width: var(--ancho-tarjeta);
+  height: 360px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #d9d6c6;
+  box-shadow: 0 6px 18px #2233210f;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.carrusel-item.central .localidad-tarjeta {
+  box-shadow: 0 18px 40px #22332126;
+}
+.carrusel-item.central .localidad-tarjeta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px #2233211f;
+}
+.localidad-tarjeta:focus-visible {
+  outline: 3px solid var(--naranja);
+  outline-offset: 3px;
+}
+.localidad-tarjeta > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+.localidad-tarjeta:hover > img {
+  transform: scale(1.05);
+}
+/* Degradé abajo para que el nombre se lea sobre la foto. */
+.localidad-tarjeta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, #1d2a21cc 0%, #1d2a2133 45%, transparent 70%);
+}
+.localidad-texto {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 20px;
+  color: #fffefa;
+}
+.localidad-texto small {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+.localidad-texto strong {
+  font-family: var(--serif);
+  font-size: 27px;
+  font-weight: 400;
+  line-height: 1.05;
+}
+.localidad-ver {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.localidad-ver svg {
+  transition: transform 0.2s;
+}
+.localidad-tarjeta:hover .localidad-ver svg {
+  transform: translateX(4px);
+}
+
+/* Sin foto: una ilustración con los colores de la Costa. */
+.localidad-ilustracion {
+  position: absolute;
+  top: 18px;
+  right: -22px;
+  opacity: 0.35;
+}
+.localidad-tarjeta.sin-foto::after {
+  background: linear-gradient(to top, #1d2a2140 0%, transparent 55%);
+}
+.tono-arena {
+  background: linear-gradient(160deg, #f4e6cf 0%, #e3c69c 100%);
+}
+.tono-mar {
+  background: linear-gradient(160deg, #cfe0d6 0%, #7fa595 100%);
+}
+.tono-atardecer {
+  background: linear-gradient(160deg, #f6cfae 0%, #df713c 100%);
+}
+.tono-monte {
+  background: linear-gradient(160deg, #5d7a66 0%, #293e32 100%);
+}
+.tono-arena .localidad-ilustracion {
+  color: #b98a4f;
+}
+.tono-mar .localidad-ilustracion {
+  color: #fffefa;
+}
+.tono-atardecer .localidad-ilustracion {
+  color: #fffefa;
+}
+.tono-monte .localidad-ilustracion {
+  color: #a9c2ae;
+}
+.localidad-tarjeta.tono-arena::after {
+  background: none;
+}
+.tono-arena .localidad-texto {
+  color: var(--verde);
+}
+
+/* Las flechas, arriba a la derecha (a la altura del título de la sección). */
+.carrusel-flechas {
+  position: absolute;
+  top: -66px;
+  right: 0;
+  display: flex;
+  gap: 8px;
+}
+.carrusel-flechas button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid #d6d9c8;
+  background: var(--blanco);
+  color: var(--verde);
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.carrusel-flechas button:hover:not(:disabled) {
+  background: var(--naranja);
+  border-color: var(--naranja);
+  color: #fff;
+}
+.carrusel-flechas button:disabled {
+  cursor: default;
+  opacity: 0.35;
+}
+
+/* En el celular se desliza con el dedo: sin flechas, ocupando todo el ancho. */
+@media (max-width: 720px) {
+  .carrusel-flechas {
+    display: none;
+  }
+  .carrusel-pista {
+    --ancho-tarjeta: 68vw;
+    margin-inline: -18px;
+    /* El 50% es del contenedor, que es 36px más angosto que la pista. */
+    padding-inline: calc(50% + 18px - var(--ancho-tarjeta) / 2);
+  }
+  .localidad-tarjeta {
+    height: 330px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .localidad-tarjeta,
+  .localidad-tarjeta > img,
+  .localidad-ver svg {
+    transition: none;
   }
 }
