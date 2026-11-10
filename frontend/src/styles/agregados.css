@@ -699,6 +699,38 @@
   .carrusel .localidad-texto strong {
     font-size: 30px;
   }
+  .carrusel {
+    position: relative;
+  }
+  .carrusel-flechita {
+    position: absolute;
+    z-index: 2;
+    /* A la altura del medio de las tarjetas (la pista es 24px + 340px + 46px de alto). */
+    top: calc(-14px + 24px + 170px);
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 1px solid #ffffff80;
+    border-radius: 50%;
+    background: #fffefaa6;
+    color: var(--verde);
+    box-shadow: 0 4px 14px #22332118;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    animation: flechita-asomar 1.8s ease-in-out 0.6s 2;
+  }
+  .carrusel-flechita.izquierda {
+    left: -8px;
+  }
+  .carrusel-flechita.derecha {
+    right: -8px;
+  }
+  .carrusel-flechita:active {
+    background: #fffefa;
+  }
   .carrusel-puntos {
     display: flex;
     justify-content: center;
@@ -728,7 +760,40 @@
     background: var(--naranja);
   }
 }
+/* Las flechitas se mueven un poco al principio para que se note que se puede deslizar. */
+@keyframes flechita-asomar {
+  50% {
+    transform: translateY(-50%) translateX(4px);
+  }
+}
+
+/* "¿Qué tenés ganas de comer?" en el celular: íconos más grandes, de a 3 por fila. */
+@media (max-width: 720px) {
+  .fila-categorias {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px 12px;
+  }
+  .categoria-circulo > span {
+    width: 92px;
+    height: 88px;
+    border-radius: 28px;
+  }
+  .categoria-circulo > span svg {
+    width: 40px;
+    height: 40px;
+  }
+  .categoria-circulo > strong {
+    font-size: 15px;
+  }
+  .categoria-circulo > small {
+    font-size: 13px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .carrusel-flechita {
+    animation: none;
+  }
   .panel-item,
   .localidad-tarjeta,
   .localidad-tarjeta > img,
