@@ -477,54 +477,39 @@
   }
 }
 
-/* "Tu próximo plan, en La Costa": carrusel de localidades. La del medio va a tamaño completo
-   y las demás se achican según --cercania (1 en el centro, 0 a una tarjeta de distancia),
-   que calcula CarruselLocalidades mientras se desliza. */
-.carrusel {
-  position: relative;
-}
-.carrusel-pista {
-  --ancho-tarjeta: 280px;
+/* "Tu próximo plan, en La Costa": todas las localidades a la vista (PanelLocalidades).
+   En la compu van una al lado de la otra y la activa se estira; en el celular, una debajo
+   de la otra y la activa se hace más alta. */
+.panel-localidades {
   display: flex;
-  align-items: center;
-  gap: 4px;
-  margin: -14px 0 -30px;
-  padding: 24px calc(50% - var(--ancho-tarjeta) / 2) 46px;
+  gap: 10px;
+  height: 380px;
+  margin: 0;
+  padding: 0;
   list-style: none;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  overscroll-behavior-x: contain;
-  scrollbar-width: none;
 }
-.carrusel-pista::-webkit-scrollbar {
-  display: none;
+.panel-item {
+  flex: 1 1 0;
+  min-width: 0;
+  transition: flex-grow 0.5s cubic-bezier(0.25, 0.8, 0.3, 1);
 }
-.carrusel-item {
-  --cercania: 0;
-  flex: 0 0 auto;
-  scroll-snap-align: center;
-  transform: scale(calc(0.78 + 0.22 * var(--cercania)));
-  opacity: calc(0.6 + 0.4 * var(--cercania));
-  will-change: transform;
+.panel-item.activa {
+  flex-grow: 5;
 }
 .localidad-tarjeta {
   position: relative;
   display: flex;
   align-items: flex-end;
-  width: var(--ancho-tarjeta);
-  height: 360px;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   border-radius: 20px;
   background: #d9d6c6;
   box-shadow: 0 6px 18px #2233210f;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: box-shadow 0.3s ease;
 }
-.carrusel-item.central .localidad-tarjeta {
+.panel-item.activa .localidad-tarjeta {
   box-shadow: 0 18px 40px #22332126;
-}
-.carrusel-item.central .localidad-tarjeta:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 30px #2233211f;
 }
 .localidad-tarjeta:focus-visible {
   outline: 3px solid var(--naranja);
@@ -535,10 +520,10 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s ease;
 }
-.localidad-tarjeta:hover > img {
-  transform: scale(1.05);
+.panel-item.activa .localidad-tarjeta > img {
+  transform: scale(1.04);
 }
 /* Degradé abajo para que el nombre se lea sobre la foto. */
 .localidad-tarjeta::after {
@@ -547,17 +532,46 @@
   inset: 0;
   background: linear-gradient(to top, #1d2a21cc 0%, #1d2a2133 45%, transparent 70%);
 }
+
+/* Achicada: el nombre en vertical, de abajo hacia arriba. */
+.localidad-nombre-corto {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  bottom: 22px;
+  writing-mode: vertical-rl;
+  transform: translateX(-50%) rotate(180deg);
+  white-space: nowrap;
+  font-family: var(--serif);
+  font-size: 21px;
+  color: #fffefa;
+  transition: opacity 0.25s ease;
+}
+.panel-item.activa .localidad-nombre-corto {
+  opacity: 0;
+}
+
+/* Agrandada: el nombre completo y "Ver lugares". Aparece después de que se estira. */
 .localidad-texto {
   position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
   gap: 4px;
-  padding: 20px;
+  min-width: 260px;
+  padding: 24px;
   color: #fffefa;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.panel-item.activa .localidad-texto {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.2s;
 }
 .localidad-texto small {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -565,7 +579,7 @@
 }
 .localidad-texto strong {
   font-family: var(--serif);
-  font-size: 27px;
+  font-size: 32px;
   font-weight: 400;
   line-height: 1.05;
 }
@@ -573,8 +587,8 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-top: 8px;
-  font-size: 14px;
+  margin-top: 10px;
+  font-size: 16px;
   font-weight: 600;
 }
 .localidad-ver svg {
@@ -609,9 +623,7 @@
 .tono-arena .localidad-ilustracion {
   color: #b98a4f;
 }
-.tono-mar .localidad-ilustracion {
-  color: #fffefa;
-}
+.tono-mar .localidad-ilustracion,
 .tono-atardecer .localidad-ilustracion {
   color: #fffefa;
 }
@@ -621,57 +633,60 @@
 .localidad-tarjeta.tono-arena::after {
   background: none;
 }
-.tono-arena .localidad-texto {
+.tono-arena .localidad-texto,
+.tono-arena .localidad-nombre-corto {
   color: var(--verde);
 }
 
-/* Las flechas, arriba a la derecha (a la altura del título de la sección). */
-.carrusel-flechas {
-  position: absolute;
-  top: -66px;
-  right: 0;
-  display: flex;
-  gap: 8px;
-}
-.carrusel-flechas button {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 1px solid #d6d9c8;
-  background: var(--blanco);
-  color: var(--verde);
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
-}
-.carrusel-flechas button:hover:not(:disabled) {
-  background: var(--naranja);
-  border-color: var(--naranja);
-  color: #fff;
-}
-.carrusel-flechas button:disabled {
-  cursor: default;
-  opacity: 0.35;
-}
-
-/* En el celular se desliza con el dedo: sin flechas, ocupando todo el ancho. */
-@media (max-width: 720px) {
-  .carrusel-flechas {
-    display: none;
+/* Notebooks chicas: los nombres verticales un poco más chicos para que entren. */
+@media (max-width: 1180px) {
+  .localidad-nombre-corto {
+    font-size: 18px;
   }
-  .carrusel-pista {
-    --ancho-tarjeta: 68vw;
-    margin-inline: -18px;
-    /* El 50% es del contenedor, que es 36px más angosto que la pista. */
-    padding-inline: calc(50% + 18px - var(--ancho-tarjeta) / 2);
+}
+
+/* Celular: una debajo de la otra. Achicadas son una franja con el nombre; la activa crece. */
+@media (max-width: 720px) {
+  .panel-localidades {
+    flex-direction: column;
+    gap: 8px;
+    height: auto;
+  }
+  .panel-item {
+    flex: none;
+    height: 64px;
+    transition: height 0.45s cubic-bezier(0.25, 0.8, 0.3, 1);
+  }
+  .panel-item.activa {
+    height: 240px;
   }
   .localidad-tarjeta {
-    height: 330px;
+    border-radius: 16px;
+  }
+  .localidad-nombre-corto {
+    left: 20px;
+    bottom: 50%;
+    writing-mode: horizontal-tb;
+    transform: translateY(50%);
+    font-size: 21px;
+  }
+  .localidad-ilustracion {
+    top: -20px;
+  }
+  .localidad-texto {
+    min-width: 0;
+    padding: 20px;
+  }
+  .localidad-texto strong {
+    font-size: 30px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  .panel-item,
   .localidad-tarjeta,
   .localidad-tarjeta > img,
+  .localidad-texto,
+  .localidad-nombre-corto,
   .localidad-ver svg {
     transition: none;
   }
