@@ -1,4 +1,4 @@
-import { ArrowRight, Waves } from 'lucide-react'
+import { ArrowRight, ChevronLeft, ChevronRight, Waves } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router'
 import { FOTOS_LOCALIDADES } from '../../../shared/costa.js'
@@ -111,6 +111,27 @@ const CarruselLocalidades = ({ localidades }) => {
           )
         })}
       </ul>
+      {/* Flechitas semitransparentes a los costados: avisan que hay más para deslizar. */}
+      {central > 0 && (
+        <button
+          type="button"
+          className="carrusel-flechita izquierda"
+          aria-label="Localidad anterior"
+          onClick={() => irA(central - 1)}
+        >
+          <ChevronLeft size={22} />
+        </button>
+      )}
+      {central < localidades.length - 1 && (
+        <button
+          type="button"
+          className="carrusel-flechita derecha"
+          aria-label="Localidad siguiente"
+          onClick={() => irA(central + 1)}
+        >
+          <ChevronRight size={22} />
+        </button>
+      )}
       {/* Un puntito por localidad: muestra cuántas hay y en cuál estás. */}
       <div className="carrusel-puntos">
         {localidades.map((l, i) => (
