@@ -5,17 +5,22 @@ export const PROVINCIA = 'Buenos Aires';
 
 export const PARTIDO = 'Partido de La Costa';
 
+// De norte a sur: la portada las muestra en el orden en que se cargan.
 export const LOCALIDADES = [
   'San Clemente del Tuyú',
   'Las Toninas',
+  'Costa Chica',
   'Santa Teresita',
   'Mar del Tuyú',
   'Costa del Este',
   'Aguas Verdes',
   'La Lucila del Mar',
+  'Costa Azul',
   'San Bernardo',
   'Mar de Ajó',
   'Nueva Atlantis',
+  'Punta Médanos',
+  'Costa Esmeralda',
 ];
 
 export const CATEGORIAS = [
