@@ -807,6 +807,18 @@
   }
 }
 
+/* "¿Tu negocio tiene sabor a Costa?": cuando todavía no hay "Sabores para todos tus planes"
+   (sin negocios publicados), queda pegado a las localidades. Ahí lleva el mismo aire arriba
+   que abajo, para que quede centrado entre la franja y el pie. Con negocios no cambia nada. */
+.franja-localidades + .contenedor > .banner-negocio {
+  margin-top: 64px;
+}
+@media (max-width: 720px) {
+  .franja-localidades + .contenedor > .banner-negocio {
+    margin-top: 40px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .carrusel-flechita {
     animation: none;
