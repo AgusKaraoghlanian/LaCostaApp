@@ -694,13 +694,21 @@
   display: none;
 }
 @media (max-width: 720px) {
+  /* Menos aire entre el título y las tarjetas y debajo de ellas: la franja queda más baja. */
+  .franja-localidades {
+    padding-bottom: 12px;
+  }
+  .franja-localidades .titulo-seccion {
+    margin-bottom: 12px;
+  }
   .panel-localidades {
     /* PanelLocalidades lo usa para llevar a la vista la que se abre. */
     --ancho-cerrada: 58px;
-    height: 340px;
+    /* Tarjetas de 260px (más 4px de margen arriba y 12px abajo para la sombra). */
+    height: 276px;
     gap: 8px;
     margin: 0 -18px;
-    padding: 4px 18px 16px;
+    padding: 4px 18px 12px;
     overflow-x: auto;
     overscroll-behavior-x: contain;
     scrollbar-width: none;
@@ -735,8 +743,8 @@
   .panel-flechita {
     position: absolute;
     z-index: 2;
-    /* A la mitad de las tarjetas (4px de margen arriba + 340px menos 16px de abajo). */
-    top: calc(4px + (340px - 20px) / 2);
+    /* A la mitad de las tarjetas (4px de margen arriba + la mitad de 260px). */
+    top: calc(4px + 260px / 2);
     display: grid;
     place-items: center;
     width: 42px;
