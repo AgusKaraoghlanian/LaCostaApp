@@ -4,16 +4,19 @@ import { useCatalogo } from '../../../shared/hooks/useCatalogo.jsx'
 
 // En el celular, las categorías a mano arriba del listado: el ícono y el nombre chico debajo,
 // en dos filas de cuatro. Tocar la elegida la quita. Cambiar de categoría conserva la
-// localidad y los demás filtros.
+// localidad y los demás filtros, pero no lo escrito en el buscador.
 const AtajosCategorias = ({ elegida, params }) => {
   const { categorias } = useCatalogo()
 
   if (!categorias.length) return null
 
   // Los filtros que se mantienen al cambiar de categoría (la página vuelve a la primera).
+  // Lo escrito en el buscador se borra: tocar un ícono ya dice qué se quiere ver, y si quedaba
+  // "pizza" escrito, Restaurantes mostraba 0 lugares sin que se entendiera por qué.
   const resto = new URLSearchParams(params)
   resto.delete('categoria')
   resto.delete('pagina')
+  resto.delete('q')
   const consulta = resto.toString() ? `?${resto}` : ''
 
   return (
