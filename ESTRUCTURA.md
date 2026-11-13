@@ -123,7 +123,7 @@ src/features/admin/               el panel: inicio con números, lista de negoci
                                   restaurar) y configuración (categorías y geografía)
 ```
 
-Comparado con la demo, a propósito no están las valoraciones, las reseñas ni el formulario de consulta (no hay datos reales de eso todavía; la versión anterior también los ocultaba en modo real). "Sumá tu lugar" y "Reclamar mi negocio" muestran que se habilitan más adelante. La ficha tiene una sola foto en vez de galería (el backend guarda una).
+Comparado con la demo, a propósito no están las valoraciones, las reseñas ni el formulario de consulta (no hay datos reales de eso todavía; la versión anterior también los ocultaba en modo real). "Sumá tu lugar" y "Reclamar mi negocio" muestran que se habilitan más adelante. La ficha tiene una sola foto en vez de galería (el backend guarda una; la ficha ya pasa las fotos como carrusel si algún día llegan varias en `fotos`), y su recuadro de la derecha no lleva el "Armá tu próximo plan" ni el "¿Este es tu negocio?": muestra dónde está, horarios, contacto y precio.
 
 **Por qué todavía sin Tailwind** (VPUG lo usa):
 

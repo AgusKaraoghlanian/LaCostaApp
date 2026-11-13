@@ -1,5 +1,4 @@
-import { ArrowRight, ArrowUpRight, Clock, Mail, MapPin, Phone, Store, Utensils } from 'lucide-react'
-import { Link } from 'react-router'
+import { ArrowUpRight, Clock, Mail, MapPin, Phone, Utensils } from 'lucide-react'
 import { NOMBRES_DE_PRECIO, resumenDeHorarios, signosDePrecio } from '../../../shared/formato.js'
 
 // Un botón a un canal del negocio (WhatsApp, web, redes), en otra pestaña.
@@ -9,7 +8,10 @@ const EnlaceExterno = ({ href, children }) => (
   </a>
 )
 
-// La columna de la derecha de la ficha: cómo contactarlo, dónde está, horarios y precio.
+// La columna de la derecha de la ficha: dónde está, horarios, contacto y precio. Sin el
+// "Armá tu próximo plan" ni el "¿Este es tu negocio?" de la demo: la ficha informa, no invita
+// a reservar ni a reclamarla. Los botones (llamar, WhatsApp, redes) aparecen solo si el
+// negocio publicó esos canales.
 const Contacto = ({ negocio: n }) => {
   const horarios = resumenDeHorarios(n.horarios, n.horariosEspeciales)
   const partido = n.localidad.partido?.replace(/^Partido de /, '') ?? 'La Costa'
@@ -18,8 +20,6 @@ const Contacto = ({ negocio: n }) => {
   return (
     <aside>
       <div className="contacto-tarjeta">
-        <h2>Armá tu próximo plan</h2>
-        <p>Escribile al lugar para consultar disponibilidad, su propuesta o una reserva.</p>
         {hayCanales && (
           <div className="botones-juntos">
             {n.telefono && (
@@ -34,7 +34,7 @@ const Contacto = ({ negocio: n }) => {
             {n.facebook && <EnlaceExterno href={n.facebook}>Facebook</EnlaceExterno>}
           </div>
         )}
-        <hr />
+        {hayCanales && <hr />}
         <div className="dato-contacto">
           <MapPin size={19} />
           <div>
@@ -81,14 +81,6 @@ const Contacto = ({ negocio: n }) => {
             </div>
           </div>
         )}
-      </div>
-      <div className="reclamar-tarjeta">
-        <Store size={23} />
-        <h3>¿Este es tu negocio?</h3>
-        <p>Reclamá tu ficha y mantené tu información al día.</p>
-        <Link to={`/reclamar?lugar=${n.slug}`}>
-          Reclamar este lugar <ArrowRight size={15} />
-        </Link>
       </div>
     </aside>
   )

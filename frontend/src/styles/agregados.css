@@ -10,6 +10,144 @@
   object-fit: cover;
 }
 
+/* Las fotos de la ficha (GaleriaFotos): una pista que se desliza de a una foto. Con varias,
+   flechitas a los costados y puntitos abajo; las flechas se ocultan en la primera y la última. */
+.galeria-pista {
+  display: flex;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.galeria-pista::-webkit-scrollbar {
+  display: none;
+}
+.galeria-pista > li {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
+.galeria-carrusel {
+  position: relative;
+}
+.galeria .galeria-flecha {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid #ffffff80;
+  border-radius: 50%;
+  background: #fffefad9;
+  color: var(--verde);
+  box-shadow: 0 4px 14px #2233211f;
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: opacity 0.2s, background 0.2s;
+}
+.galeria .galeria-flecha:hover {
+  background: #fffefa;
+}
+.galeria .galeria-flecha:focus-visible {
+  outline: 3px solid var(--naranja);
+  outline-offset: 2px;
+}
+.galeria .galeria-flecha:disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+.galeria-flecha.anterior {
+  left: 14px;
+}
+.galeria-flecha.siguiente {
+  right: 14px;
+}
+.galeria-puntos {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  z-index: 1;
+  display: flex;
+  transform: translateX(-50%);
+}
+/* El puntito se ve de 8px, pero se puede tocar en 24px. */
+.galeria .galeria-puntos button {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  cursor: pointer;
+}
+.galeria-puntos button::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fffefa99;
+  box-shadow: 0 1px 3px #0003;
+  transition: background 0.2s, transform 0.2s;
+}
+.galeria-puntos button[aria-current]::before {
+  background: #fffefa;
+  transform: scale(1.25);
+}
+@media (max-width: 720px) {
+  .galeria .galeria-flecha {
+    width: 36px;
+    height: 36px;
+  }
+  .galeria-flecha.anterior {
+    left: 10px;
+  }
+  .galeria-flecha.siguiente {
+    right: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .galeria .galeria-flecha,
+  .galeria-puntos button::before {
+    transition: none;
+  }
+}
+
+/* "Volver" de la ficha en el celular: chiquito, a la altura de la localidad y contra el borde
+   derecho (donde termina la foto, debajo del corazón). En la compu no se muestra: ahí están
+   las migas. */
+.detalle-localidad .volver {
+  display: none;
+}
+@media (max-width: 720px) {
+  .detalle-encabezado {
+    position: relative;
+  }
+  .detalle-localidad .volver {
+    position: absolute;
+    right: 0;
+    bottom: -5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    min-height: 28px;
+    padding: 0 11px 0 8px;
+    border: 1px solid var(--borde);
+    border-radius: 999px;
+    background: var(--blanco);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--verde);
+  }
+  .detalle-localidad .volver:hover {
+    text-decoration: none;
+    background: #edeee6;
+  }
+}
+
 /* Mientras cargan los datos. */
 .estado-cargando {
   display: flex;

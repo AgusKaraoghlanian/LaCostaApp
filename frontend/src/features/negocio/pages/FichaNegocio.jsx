@@ -1,5 +1,5 @@
-import { ArrowRight, CircleHelp, MapPin, Sparkles, Store } from 'lucide-react'
-import { Link, useParams } from 'react-router'
+import { ArrowLeft, ArrowRight, CircleHelp, MapPin, Sparkles, Store } from 'lucide-react'
+import { Link, useLocation, useNavigate, useParams } from 'react-router'
 import { buscarNegocios, obtenerNegocio } from '../../../shared/api/negocios.api.js'
 import BotonFavorito from '../../../shared/components/BotonFavorito.jsx'
 import EstadoCarga from '../../../shared/components/EstadoCarga.jsx'
@@ -11,6 +11,7 @@ import { useCargarDatos } from '../../../shared/hooks/useCargarDatos.js'
 import NoEncontrado from '../../informacion/pages/NoEncontrado.jsx'
 import Carta from '../components/Carta.jsx'
 import Contacto from '../components/Contacto.jsx'
+import GaleriaFotos from '../components/GaleriaFotos.jsx'
 import Prestaciones from '../components/Prestaciones.jsx'
 
 // Lo que se avisa arriba de la ficha si el negocio no está abierto como siempre.
@@ -34,6 +35,10 @@ const cargarFicha = async (slug) => {
 
 const FichaNegocio = () => {
   const { slug } = useParams()
+  const navigate = useNavigate()
+  // Si se llegó desde otra página del sitio (key distinta de 'default'), "Volver" va atrás y
+  // deja la lista como estaba (localidad, filtros y lugar); si se entró directo, va a la categoría.
+  const vieneDelSitio = useLocation().key !== 'default'
   const { datos, error, recargar } = useCargarDatos(() => cargarFicha(slug), [slug])
 
   // Mientras llega otra ficha (al tocar un "También te pueden gustar") no se muestra la anterior.
@@ -42,6 +47,8 @@ const FichaNegocio = () => {
   if (datos.noExiste) return <NoEncontrado />
 
   const { negocio: n, relacionados } = datos
+  // Varias fotos si la ficha las trae (fotos); si no, la única de siempre (foto).
+  const fotos = n.fotos?.length ? n.fotos : n.foto ? [n.foto] : []
 
   return (
     <main className="contenedor pagina detalle">
@@ -68,15 +75,26 @@ const FichaNegocio = () => {
           <p className="detalle-localidad">
             <MapPin size={16} />
             {n.localidad.nombre}
+            {/* Solo en el celular, a la derecha de la localidad (las migas ahí son chiquitas). */}
+            <Link
+              to={`/categoria/${n.categoria.clave}`}
+              className="volver"
+              onClick={(e) => {
+                if (!vieneDelSitio) return
+                e.preventDefault()
+                navigate(-1)
+              }}
+            >
+              <ArrowLeft size={14} />
+              Volver
+            </Link>
           </p>
         </div>
         <BotonFavorito slug={n.slug} grande />
       </div>
 
-      {n.foto ? (
-        <div className="galeria una-foto">
-          <img src={n.foto} alt={`Interior y propuesta de ${n.nombre}`} />
-        </div>
+      {fotos.length ? (
+        <GaleriaFotos key={n.slug} fotos={fotos} nombre={n.nombre} />
       ) : (
         <div className="real-no-gallery">
           <Store size={38} strokeWidth={1.1} />
