@@ -40,19 +40,26 @@ const commons = (archivo) => `https://commons.wikimedia.org/wiki/Special:FilePat
 // Va detrás de una capa con los colores de la tarjeta (arriba → abajo), así se ve la foto pero
 // la tarjeta sigue teniendo su color. posicion: qué parte de la foto queda a la vista; oscura:
 // el texto va verde en vez de blanco. Las que no están acá se muestran con la ilustración.
-// Son fotos reales de Wikimedia Commons: el crédito y la licencia de cada una se muestran en
-// "Sobre La Costa" (las licencias CC piden nombrar al autor).
+// Las de Wikimedia Commons llevan autor y licencia, que se muestran en "Sobre La Costa" (las
+// licencias CC piden nombrar al autor). Las propias están en public/localidades y no llevan.
 export const FOTOS_LOCALIDADES = {
   'San Clemente del Tuyú': {
-    foto: commons('Faro_San_Antonio,_Punta_Rasa_extremo_norte_del_cabo_San_Antonio.jpg'),
-    posicion: '50% 48%',
-    arriba: '#eadfc9',
-    abajo: '#dfc49f',
-    oscura: true,
-    lugar: 'Faro San Antonio (Punta Rasa)',
-    autor: 'Gabrielsus',
-    licencia: 'Dominio público',
-    fuente: 'https://commons.wikimedia.org/wiki/File:Faro_San_Antonio,_Punta_Rasa_extremo_norte_del_cabo_San_Antonio.jpg',
+    foto: '/localidades/san-clemente-del-tuyu.jpg',
+    posicion: '35% 50%',
+    arriba: '#eedcbf',
+    abajo: '#a9825b',
+  },
+  'Costa Chica': {
+    foto: '/localidades/costa-chica.webp',
+    posicion: '50% 50%',
+    arriba: '#d5e0dc',
+    abajo: '#6f8f86',
+  },
+  'Costa Esmeralda': {
+    foto: '/localidades/costa-esmeralda.jpg',
+    posicion: '50% 50%',
+    arriba: '#e9dcc4',
+    abajo: '#a8875c',
   },
   'Las Toninas': {
     foto: commons('Laberinto_de_Las_Toninas.jpg'),
