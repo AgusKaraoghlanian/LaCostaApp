@@ -106,7 +106,7 @@ const Buscador = () => {
             aria-controls={`${idBase}-sugerencias`}
             aria-activedescendant={mostrarLista && activa >= 0 ? idSugerencia(activa) : undefined}
             autoComplete="off"
-            placeholder="Un café, una buena parrilla..."
+            placeholder="Café, parrilla, pizza…"
             value={texto}
             onChange={(e) => {
               setTexto(e.target.value)

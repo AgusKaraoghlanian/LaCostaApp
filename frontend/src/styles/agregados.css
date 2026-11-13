@@ -286,11 +286,18 @@
   .selector-boton {
     gap: 13px;
   }
+  /* Igual que "¿Qué se te antoja?": el título chico y oscuro, la localidad elegida debajo y
+     también oscura (es lo elegido, no un ejemplo). */
+  .selector-textos {
+    gap: 2px;
+  }
   .selector-etiqueta {
-    font-size: 17px;
+    font-size: 14px;
+    color: var(--verde);
   }
   .selector-valor {
-    font-size: 19px;
+    font-size: 16px;
+    color: var(--verde);
   }
   .selector-fondo {
     display: block;
@@ -442,15 +449,21 @@
     font-size: 19px;
   }
 }
+/* Celular: el título de cada campo chico y oscuro, y lo que se escribe debajo un poco más
+   grande (no al revés), con menos espacio entre las dos líneas. */
 @media (max-width: 720px) {
+  .buscador label {
+    gap: 2px;
+  }
   .buscador label > span {
-    font-size: 17px;
+    font-size: 14px;
+    color: var(--verde);
   }
   .buscador input {
-    font-size: 19px;
+    font-size: 16px;
   }
   .buscador .boton {
-    font-size: 19px;
+    font-size: 18px;
   }
 }
 
@@ -1119,20 +1132,51 @@
   }
 }
 
-/* "¿Qué tenés ganas de comer?" en el celular: 4 por fila y los íconos como en la demo, pero
-   los nombres y la cantidad de lugares más grandes. Las columnas van casi sin separación
-   para que "Restaurantes" entre entero. */
+/* "¿Qué tenés ganas de comer?" en el celular: 4 por fila, con los nombres más grandes que en la
+   demo. Las columnas van casi sin separación para que "Restaurantes" entre entero.
+   Cada categoría usa las filas de la grilla (subgrid): ícono, nombre y cantidad quedan a la
+   misma altura en toda la fila aunque un nombre ocupe dos renglones ("Bares y cervecerías"),
+   sin agregar espacio en las filas donde todos entran en uno. */
 @media (max-width: 720px) {
   .fila-categorias {
-    gap: 24px 2px;
+    gap: 0 2px;
     margin-inline: -8px;
   }
+  .categoria-circulo {
+    display: grid;
+    grid-row: span 3;
+    grid-template-rows: subgrid;
+    justify-items: center;
+    row-gap: 4px;
+  }
+  .categoria-circulo > span {
+    width: 58px;
+    height: 56px;
+    border-radius: 18px;
+    margin-bottom: 2px;
+  }
   .categoria-circulo > strong {
-    font-size: 15px;
+    align-self: start;
+    font-size: 14px;
+    line-height: 1.2;
     letter-spacing: -0.2px;
   }
   .categoria-circulo > small {
-    font-size: 13px;
+    align-self: start;
+    padding-bottom: 18px;
+    font-size: 12px;
+    color: #9a9f8f;
+  }
+  /* La última fila no necesita el aire de abajo: ahí ya está el de la sección. */
+  .categoria-circulo:nth-last-child(-n + 4) > small {
+    padding-bottom: 0;
+  }
+  .categorias-inicio {
+    padding-top: 28px;
+    padding-bottom: 24px;
+  }
+  .categorias-inicio .titulo-seccion {
+    margin-bottom: 16px;
   }
 }
 
@@ -1146,27 +1190,41 @@
   transform: rotate(180deg);
 }
 
-/* Celular: la primera parte de la portada (texto, foto y buscador) con más aire. */
+/* Celular: la primera parte de la portada (texto, foto y buscador), compacta para que no haya
+   que bajar tanto: menos aire entre los textos, el carrusel más bajo y sin el renglón "Hecho
+   para quienes disfrutan…" (repetía el texto de arriba). */
 @media (max-width: 720px) {
   .hero-interior {
-    padding-top: 44px;
-    padding-bottom: 44px;
+    padding-top: 30px;
+    padding-bottom: 26px;
   }
   .hero h1 {
-    margin-top: 26px;
-    margin-bottom: 24px;
+    margin-top: 18px;
+    margin-bottom: 14px;
   }
   .hero-texto > p {
-    margin-bottom: 30px;
+    margin-bottom: 0;
+  }
+  .hero-detalle {
+    display: none;
   }
   .hero-texto {
-    padding-bottom: 40px;
+    padding-bottom: 22px;
   }
   .hero-visual {
-    height: 260px;
+    height: 220px;
   }
   .hero-buscador {
-    margin-top: 32px;
+    margin-top: 16px;
+  }
+  /* El buscador más compacto: menos relleno en cada campo. */
+  .buscador {
+    padding: 4px 14px 12px;
+  }
+  .campo-buscar,
+  .campo-localidad {
+    padding-top: 9px;
+    padding-bottom: 10px;
   }
   /* Alineada con la flechita de "¿Por dónde?". */
   .antojo-flecha {
