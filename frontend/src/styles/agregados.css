@@ -769,6 +769,230 @@
   }
 }
 
+/* Explorar en el celular: arriba del listado, la localidad elegida (LocalidadElegida) con el
+   botón Filtros a la derecha y, abajo, las categorías como íconos chicos (AtajosCategorias),
+   porque los filtros quedan escondidos. En la compu no se muestran: ahí ya está la columna
+   de filtros. */
+.explorar-celular,
+.atajos-categorias {
+  display: none;
+}
+@media (max-width: 720px) {
+  .explorar-celular {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: -9px 0 12px;
+  }
+  .explorar-celular .filtros-movil {
+    flex-shrink: 0;
+  }
+  .localidad-elegida {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+    min-height: 34px;
+    margin: 0;
+    padding: 0 12px;
+    border: 1px solid var(--borde);
+    border-radius: 999px;
+    background: #edeee5;
+  }
+  .localidad-elegida:has(button) {
+    padding-right: 0;
+  }
+  .localidad-elegida-texto {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--verde);
+  }
+  .localidad-elegida-texto > span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .localidad-elegida-texto svg {
+    color: var(--naranja);
+    flex-shrink: 0;
+  }
+  .localidad-elegida button {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 34px;
+    min-height: 32px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--gris);
+    cursor: pointer;
+  }
+  .localidad-elegida button:hover,
+  .localidad-elegida button:focus-visible {
+    color: var(--verde);
+  }
+
+  /* Dos filas de cuatro íconos, con el color de cada categoría (como en la portada). */
+  .atajos-categorias {
+    display: block;
+    margin-bottom: 18px;
+  }
+  .atajos-categorias ul {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .atajo-categoria {
+    display: grid;
+    place-items: center;
+    height: 40px;
+    border: 1.5px solid transparent;
+    border-radius: 12px;
+    color: var(--verde);
+    transition: transform 0.2s;
+  }
+  .atajo-categoria:active {
+    transform: scale(0.95);
+  }
+  .atajo-categoria[aria-current] {
+    border-color: var(--verde);
+  }
+}
+
+/* El panel de filtros en el celular se cierra con la cruz de arriba o con "Ver lugares"
+   abajo (Filtros). En la compu la columna está siempre a la vista: no llevan ninguno. */
+.filtros-titulo-acciones {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.filtros-cerrar,
+.filtros-ver {
+  display: none;
+}
+@media (max-width: 720px) {
+  .filtros-cerrar {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    margin: -8px -8px -8px 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--verde);
+    cursor: pointer;
+  }
+  .filtros-cerrar:hover {
+    background: #e7e8dd;
+  }
+  .filtros-ver {
+    display: flex;
+    width: 100%;
+    margin: 4px 0 22px;
+  }
+  /* Sin el título "Filtrá tu búsqueda" (ya se sabe que son filtros): "Limpiar" y la cruz
+     quedan en la esquina, a la altura de "Localidad", sin ocupar una fila propia. */
+  .filtros {
+    position: relative;
+  }
+  .filtros-titulo {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  .filtros-titulo h2 {
+    display: none;
+  }
+}
+
+/* El listado de Explorar en el celular: la misma tarjeta en chiquito, de a cuatro por fila,
+   para recorrer muchos lugares sin bajar tanto. Queda la foto, el nombre y la localidad
+   ("Destacado" queda solo con su ícono); la categoría, el precio, la descripción y los
+   servicios se ven al entrar a la ficha. La portada y la compu no cambian. */
+@media (max-width: 720px) {
+  .grilla-tarjetas.dos-columnas {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .dos-columnas .tarjeta {
+    border-radius: 8px;
+  }
+  .dos-columnas .tarjeta-foto {
+    height: auto;
+    aspect-ratio: 1;
+  }
+  .dos-columnas .tarjeta-cuerpo {
+    padding: 6px 6px 8px;
+  }
+  .dos-columnas .tarjeta-meta,
+  .dos-columnas .tarjeta-descripcion,
+  .dos-columnas .tarjeta-pie {
+    display: none;
+  }
+  /* 12px y hasta tres líneas: los nombres entran enteros (los cortos ocupan una o dos) y,
+     con balance, las líneas quedan parejas en vez de dejar una palabra sola abajo. */
+  .dos-columnas .tarjeta-titulo h3 {
+    font-size: 12px;
+    line-height: 1.18;
+    text-wrap: balance;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  /* En bloque (no flex) para que el nombre largo termine en "…". */
+  .dos-columnas .ubicacion {
+    display: block;
+    margin: 3px 0 0;
+    font-size: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .dos-columnas .ubicacion svg {
+    width: 10px;
+    height: 10px;
+    margin-right: 3px;
+    vertical-align: -1px;
+  }
+  /* Solo el ícono: el texto "Destacado" sigue ahí para los lectores de pantalla. */
+  .dos-columnas .distintivo {
+    top: 5px;
+    left: 5px;
+    gap: 0;
+    padding: 4px;
+    font-size: 0;
+  }
+  .dos-columnas .favorito {
+    top: 4px;
+    right: 4px;
+    width: 26px;
+    height: 26px;
+  }
+  .dos-columnas .favorito svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .atajo-categoria {
+    transition: none;
+  }
+}
+
 /* La flechita de "¿Qué se te antoja?" (igual a la de "¿Por dónde?"): se puede tocar y gira
    cuando las sugerencias están abiertas. */
 .antojo-flecha {
