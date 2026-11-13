@@ -623,6 +623,62 @@
   color: var(--verde);
 }
 
+/* Con foto (FondoLocalidad): la foto atrás y encima una capa con los colores de la tarjeta
+   (--arriba y --abajo, de costa.js), así se ve la foto sin perder el color; después las olas
+   y el texto, como en las tarjetas sin foto. */
+.localidad-tarjeta.con-foto {
+  background: var(--arriba);
+}
+.localidad-tarjeta.con-foto > img {
+  object-fit: cover;
+  filter: saturate(0.88) contrast(1.03) brightness(0.98);
+}
+.localidad-tinte {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--arriba) 73%, transparent) 0%,
+    color-mix(in srgb, var(--arriba) 74%, transparent) 26%,
+    color-mix(in srgb, var(--abajo) 76%, transparent) 62%,
+    color-mix(in srgb, var(--abajo) 94%, transparent) 100%
+  );
+}
+.con-foto .localidad-ilustracion {
+  color: #fffefa;
+}
+.localidad-tarjeta.con-foto::after {
+  background: linear-gradient(180deg, transparent 35%, #141c151a 80%, #111b152e 100%);
+}
+/* Las claras (San Clemente): texto verde y olas tostadas, sin la sombra de abajo. */
+.con-foto.tinta-oscura .localidad-ilustracion {
+  color: #b98a4f;
+}
+.con-foto.tinta-oscura .localidad-texto,
+.con-foto.tinta-oscura .localidad-nombre-corto {
+  color: var(--verde);
+}
+.localidad-tarjeta.con-foto.tinta-oscura::after {
+  background: none;
+}
+
+/* La lista de créditos de las fotos de las localidades, al final de "Sobre La Costa". */
+.creditos-fotos {
+  margin: 0 0 24px;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #7e8a72;
+}
+.creditos-fotos strong {
+  color: var(--verde);
+  font-weight: 600;
+}
+.creditos-fotos a {
+  color: #a27e50;
+  text-decoration: underline;
+}
+
 /* Notebooks chicas: los nombres verticales un poco más chicos para que entren. */
 @media (max-width: 1180px) {
   .localidad-nombre-corto {
@@ -630,69 +686,57 @@
   }
 }
 
-/* Celular: en vez de los paneles, un carrusel (CarruselLocalidades) donde la tarjeta del
-   medio va a tamaño completo y las demás se achican según --cercania (1 en el centro, 0 a
-   una tarjeta de distancia), que calcula el componente mientras se desliza. */
-.carrusel {
+/* Celular: el mismo panel que en la compu, pero en una fila que se desliza de costado.
+   Arrancan todas cerradas (tiras angostas con el nombre en vertical); la que se toca se abre
+   y muestra el nombre completo y "Ver lugares" (el segundo toque entra a /explorar).
+   Las flechitas solo van en el celular: en la compu entran todas. */
+.panel-flechita {
   display: none;
 }
 @media (max-width: 720px) {
   .panel-localidades {
-    display: none;
-  }
-  .carrusel {
-    display: block;
-  }
-  .carrusel-pista {
-    --ancho-tarjeta: 68vw;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    margin: -14px -18px -30px;
-    /* El 50% es del contenedor, que es 36px más angosto que la pista. */
-    padding: 24px calc(50% + 18px - var(--ancho-tarjeta) / 2) 46px;
-    list-style: none;
+    /* PanelLocalidades lo usa para llevar a la vista la que se abre. */
+    --ancho-cerrada: 58px;
+    height: 340px;
+    gap: 8px;
+    margin: 0 -18px;
+    padding: 4px 18px 16px;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
     overscroll-behavior-x: contain;
     scrollbar-width: none;
+    /* Un fundido a la derecha avisa que hay más para deslizar. */
+    mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
   }
-  .carrusel-pista::-webkit-scrollbar {
+  .panel-localidades::-webkit-scrollbar {
     display: none;
   }
-  .carrusel-item {
-    --cercania: 0;
-    flex: 0 0 auto;
-    scroll-snap-align: center;
-    transform: scale(calc(0.78 + 0.22 * var(--cercania)));
-    opacity: calc(0.6 + 0.4 * var(--cercania));
-    will-change: transform;
+  .panel-item {
+    flex: 0 0 var(--ancho-cerrada);
+    transition: flex-basis 0.5s cubic-bezier(0.25, 0.8, 0.3, 1);
   }
-  .carrusel .localidad-tarjeta {
-    width: var(--ancho-tarjeta);
-    height: 340px;
+  .panel-item.activa {
+    flex: 0 0 min(72vw, 300px);
   }
-  .carrusel-item.central .localidad-tarjeta {
-    box-shadow: 0 18px 40px #22332126;
+  .panel-localidades .localidad-nombre-corto {
+    font-size: 18px;
   }
-  .carrusel .localidad-texto {
-    min-width: 0;
+  .panel-localidades .localidad-texto {
+    min-width: min(72vw, 300px);
     padding: 20px;
-    opacity: 1;
-    transform: none;
   }
-  .carrusel .localidad-texto strong {
+  .panel-localidades .localidad-texto strong {
     font-size: 30px;
   }
-  .carrusel {
+  /* Flechitas a los costados para pasar a la anterior o a la siguiente. */
+  .panel-envoltura {
     position: relative;
   }
-  .carrusel-flechita {
+  .panel-flechita {
     position: absolute;
     z-index: 2;
-    /* A la altura del medio de las tarjetas (la pista es 24px + 340px + 46px de alto). */
-    top: calc(-14px + 24px + 170px);
-    transform: translateY(-50%);
+    /* A la mitad de las tarjetas (4px de margen arriba + 340px menos 16px de abajo). */
+    top: calc(4px + (340px - 20px) / 2);
     display: grid;
     place-items: center;
     width: 42px;
@@ -700,55 +744,26 @@
     padding: 0;
     border: 1px solid #ffffff80;
     border-radius: 50%;
-    background: #fffefaa6;
+    background: #fffefad9;
     color: var(--verde);
-    box-shadow: 0 4px 14px #22332118;
+    box-shadow: 0 4px 14px #2233211f;
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
-    animation: flechita-asomar 1.8s ease-in-out 0.6s 2;
+    transform: translateY(-50%);
+    cursor: pointer;
   }
-  .carrusel-flechita.izquierda {
-    left: -8px;
-  }
-  .carrusel-flechita.derecha {
-    right: -8px;
-  }
-  .carrusel-flechita:active {
+  .panel-flechita:active {
     background: #fffefa;
   }
-  .carrusel-puntos {
-    display: flex;
-    justify-content: center;
-    gap: 2px;
-    margin-top: 8px;
+  .panel-flechita:focus-visible {
+    outline: 3px solid var(--naranja);
+    outline-offset: 2px;
   }
-  /* El botón mide 24px para tocarlo fácil; el puntito se dibuja adentro. */
-  .carrusel-puntos button {
-    display: grid;
-    place-items: center;
-    width: 24px;
-    height: 24px;
-    padding: 0;
-    border: 0;
-    background: none;
+  .panel-flechita.izquierda {
+    left: -8px;
   }
-  .carrusel-puntos button::before {
-    content: "";
-    width: 8px;
-    height: 8px;
-    border-radius: 8px;
-    background: #c9ccbb;
-    transition: width 0.25s ease, background 0.25s ease;
-  }
-  .carrusel-puntos button.activo::before {
-    width: 20px;
-    background: var(--naranja);
-  }
-}
-/* Las flechitas se mueven un poco al principio para que se note que se puede deslizar. */
-@keyframes flechita-asomar {
-  50% {
-    transform: translateY(-50%) translateX(4px);
+  .panel-flechita.derecha {
+    right: -8px;
   }
 }
 
@@ -808,9 +823,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .carrusel-flechita {
-    animation: none;
-  }
   .panel-item,
   .localidad-tarjeta,
   .localidad-tarjeta > img,

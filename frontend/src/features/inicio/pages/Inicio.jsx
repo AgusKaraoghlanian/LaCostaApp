@@ -8,7 +8,6 @@ import TituloDePagina from '../../../shared/components/TituloDePagina.jsx'
 import { useCargarDatos } from '../../../shared/hooks/useCargarDatos.js'
 import { useCatalogo } from '../../../shared/hooks/useCatalogo.jsx'
 import Buscador from '../components/Buscador.jsx'
-import CarruselLocalidades from '../components/CarruselLocalidades.jsx'
 import PanelLocalidades from '../components/PanelLocalidades.jsx'
 
 // Tres destacados y tres que no lo son, para las dos grillas de la portada.
@@ -144,7 +143,6 @@ const Inicio = () => {
         <div className="contenedor">
           <TituloSeccion sobretitulo="CADA LOCALIDAD, UN NUEVO SABOR" titulo="Tu próximo plan, en La Costa." />
           <PanelLocalidades localidades={localidades} />
-          <CarruselLocalidades localidades={localidades} />
         </div>
       </section>
 
