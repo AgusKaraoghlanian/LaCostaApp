@@ -116,6 +116,19 @@ describe('crearNegocio', () => {
     );
   });
 
+  it('el plan de portada decide si es destacado', async () => {
+    negocioRepository.existeSlug.mockResolvedValue(false);
+    negocioRepository.crearNegocio.mockResolvedValue({ id: 7 });
+
+    await negocioService.crearNegocio(5, datos({ plan: 'CARRUSEL' }));
+    await negocioService.crearNegocio(5, datos({ plan: 'LISTA' }));
+    await negocioService.crearNegocio(5, datos({ plan: 'SABORES' }));
+    await negocioService.crearNegocio(5, datos({ plan: 'NINGUNO' }));
+
+    const fichas = negocioRepository.crearNegocio.mock.calls.map(([ficha]) => [ficha.plan, ficha.destacado]);
+    expect(fichas).toEqual([['CARRUSEL', true], ['LISTA', true], ['SABORES', false], ['NINGUNO', false]]);
+  });
+
   it('rechaza una localidad o una categoría que no existen', async () => {
     geografiaRepository.obtenerLocalidadPorId.mockResolvedValueOnce(null);
     await expect(negocioService.crearNegocio(5, datos())).rejects.toBeInstanceOf(LocalidadNoEncontrada);
@@ -166,6 +179,17 @@ describe('aprobarRevision', () => {
       busqueda: 'la orilla cocina de estacion mar de ajo parrillas',
     });
     expect(revision.datos.ficha.referenciaVerificacion).toBe('Llamé al local');
+  });
+
+  it('copia el plan de portada para filtrar la portada', async () => {
+    negocioRepository.obtenerNegocioPorId.mockResolvedValue(negocio({ plan: 'CARRUSEL', destacado: true }));
+    revisionRepository.obtenerUltimaRevision.mockResolvedValue(null);
+
+    await negocioService.aprobarRevision(5, 7, 3);
+
+    const revision = revisionRepository.crearRevision.mock.calls[0][0];
+    expect(revision).toMatchObject({ plan: 'CARRUSEL', destacado: true });
+    expect(revision.datos.ficha.plan).toBe('CARRUSEL');
   });
 
   it('la primera revisión es la 1', async () => {
@@ -232,6 +256,20 @@ describe('restaurarRevision', () => {
 
     expect(negocioRepository.actualizarBorrador).toHaveBeenCalledWith(
       7, 3, expect.objectContaining({ descripcion: 'Vieja' }), 'tx',
+    );
+  });
+
+  it('una revisión de antes de los planes que era destacada vuelve a "Para poner en tu lista"', async () => {
+    revisionRepository.obtenerRevisionPorId.mockResolvedValue({
+      negocioId: 7,
+      datos: { ficha: { ...datos(), destacado: true }, horarios: [], horariosEspeciales: [], productos: [] },
+    });
+    negocioRepository.actualizarBorrador.mockResolvedValue(true);
+
+    await negocioService.restaurarRevision(5, 7, { revisionId: 40, revisionEsperada: 3 });
+
+    expect(negocioRepository.actualizarBorrador).toHaveBeenCalledWith(
+      7, 3, expect.objectContaining({ plan: 'LISTA', destacado: true }), 'tx',
     );
   });
 

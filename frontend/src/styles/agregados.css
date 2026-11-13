@@ -463,6 +463,284 @@
   z-index: 5;
 }
 
+/* "Para poner en tu lista" y "Sabores para todos tus planes" en el celular: tarjetas compactas,
+   una debajo de la otra, con la foto chica a la izquierda y el texto a la derecha (antes cada
+   una ocupaba una pantalla). El corazón y "Destacado" (solo el ícono) van sobre la foto; lo de
+   abajo de la tarjeta (servicio y flechita) se ve en la ficha. La compu no cambia. */
+@media (max-width: 720px) {
+  .destacados .grilla-tarjetas,
+  .descubrimientos .grilla-tarjetas {
+    gap: 12px;
+  }
+  .destacados .tarjeta,
+  .descubrimientos .tarjeta {
+    display: grid;
+    grid-template-columns: 116px minmax(0, 1fr);
+  }
+  .destacados .tarjeta-foto,
+  .descubrimientos .tarjeta-foto {
+    height: auto;
+    min-height: 124px;
+  }
+  /* La foto llena el cuadrado exacto (recortada al centro), sea cual sea su tamaño. */
+  .destacados .tarjeta-foto > img,
+  .descubrimientos .tarjeta-foto > img {
+    position: absolute;
+    inset: 0;
+  }
+  .destacados .tarjeta-cuerpo,
+  .descubrimientos .tarjeta-cuerpo {
+    padding: 11px 13px 12px;
+  }
+  .destacados .tarjeta-meta,
+  .descubrimientos .tarjeta-meta {
+    margin-bottom: 3px;
+    font-size: 11px;
+  }
+  .destacados .tarjeta-titulo h3,
+  .descubrimientos .tarjeta-titulo h3 {
+    font-size: 20px;
+    line-height: 1.15;
+  }
+  .destacados .ubicacion,
+  .descubrimientos .ubicacion {
+    margin: 4px 0 5px;
+    font-size: 11px;
+  }
+  .destacados .tarjeta-descripcion,
+  .descubrimientos .tarjeta-descripcion {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .destacados .tarjeta-pie,
+  .descubrimientos .tarjeta-pie {
+    display: none;
+  }
+  .destacados .distintivo,
+  .descubrimientos .distintivo {
+    top: 6px;
+    left: 6px;
+    gap: 0;
+    padding: 4px;
+    font-size: 0;
+  }
+  .destacados .favorito,
+  .descubrimientos .favorito {
+    top: 6px;
+    right: auto;
+    left: 84px;
+    width: 26px;
+    height: 26px;
+  }
+  .destacados .favorito svg,
+  .descubrimientos .favorito svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* La foto de la portada como carrusel (CarruselPortada): las fotos se funden una sobre otra y
+   toda la foto lleva a la ficha. Abajo a la izquierda, el nombre y la localidad sobre un
+   degradé oscuro (para que se lea) y debajo los puntitos. El sello y "El mejor plan" quedan
+   encima, más chicos, y dejan pasar los toques a la foto. */
+.hero-carrusel:after {
+  display: none;
+}
+.hero-enlace {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  border-radius: 120px 9px 9px 9px;
+  color: #fffefa;
+}
+.hero-enlace::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, #101a12cc 0%, #101a1259 32%, transparent 58%);
+  pointer-events: none;
+}
+.hero-enlace:focus-visible {
+  outline: 3px solid var(--naranja);
+  outline-offset: 3px;
+}
+.hero-diapositiva {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+.hero-diapositiva.visible {
+  opacity: 1;
+}
+.hero-leyenda {
+  position: absolute;
+  z-index: 1;
+  left: 24px;
+  right: 42%;
+  bottom: 42px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  text-shadow: 0 1px 8px #0006;
+}
+.hero-leyenda strong {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.1;
+}
+.hero-leyenda small {
+  font-size: 13px;
+  opacity: 0.92;
+}
+.hero-enlace:hover .hero-leyenda strong {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+.hero-carrusel .hero-nota {
+  bottom: 18px;
+  right: 16px;
+  gap: 8px;
+  padding: 8px 12px;
+  pointer-events: none;
+}
+.hero-carrusel .hero-nota > div {
+  font-size: 14px;
+}
+.hero-carrusel .sello-costero {
+  top: 16px;
+  right: 14px;
+  transform: rotate(10deg) scale(0.82);
+  pointer-events: none;
+}
+.hero-flecha {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid #ffffff80;
+  border-radius: 50%;
+  background: #fffefac7;
+  color: var(--verde);
+  box-shadow: 0 4px 14px #2233211f;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+.hero-flecha:hover {
+  background: #fffefa;
+}
+.hero-flecha.anterior {
+  left: 14px;
+}
+.hero-flecha.siguiente {
+  right: 14px;
+}
+.hero-controles {
+  position: absolute;
+  z-index: 3;
+  left: 18px;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+.hero-pausa {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  margin-right: 4px;
+  padding: 0;
+  border: 1px solid #fffefa66;
+  border-radius: 50%;
+  background: #fffefa26;
+  color: #fffefa;
+  cursor: pointer;
+}
+/* El puntito se ve chico, pero se puede tocar en 24px. */
+.hero-punto {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.hero-punto::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 7px;
+  background: #fffefa80;
+  transition: width 0.25s ease, background 0.25s ease;
+}
+.hero-punto[aria-current]::before {
+  width: 18px;
+  background: #fffefa;
+}
+.hero-flecha:focus-visible,
+.hero-pausa:focus-visible,
+.hero-punto:focus-visible {
+  outline: 3px solid var(--naranja);
+  outline-offset: 2px;
+}
+@media (max-width: 720px) {
+  .hero-enlace {
+    border-radius: 70px 8px 8px 8px;
+  }
+  .hero-leyenda {
+    left: 18px;
+    right: 40%;
+    bottom: 40px;
+  }
+  .hero-leyenda strong {
+    font-size: 21px;
+  }
+  .hero-leyenda small {
+    font-size: 12px;
+  }
+  .hero-flecha {
+    width: 34px;
+    height: 34px;
+  }
+  .hero-flecha.anterior {
+    left: 8px;
+  }
+  .hero-flecha.siguiente {
+    right: 8px;
+  }
+  .hero-carrusel .sello-costero {
+    top: 8px;
+    right: 6px;
+    transform: rotate(10deg) scale(0.75);
+  }
+  .hero-carrusel .hero-nota {
+    bottom: 12px;
+    right: 10px;
+    padding: 6px 10px;
+  }
+  .hero-carrusel .hero-nota > div {
+    font-size: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-diapositiva,
+  .hero-punto::before {
+    transition: none;
+  }
+}
+
 /* "¿Qué se te antoja?": la lista de categorías sugeridas. Usa el mismo panel que el
    selector de localidad, pero en el celular sigue abriéndose abajo del campo (no como hoja),
    porque el teclado está abierto. */

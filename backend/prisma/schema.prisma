@@ -25,6 +25,16 @@ enum EstadoComercial {
   CERRADO
 }
 
+// Dónde aparece un negocio en la portada (lo que contrató), del más visible al más barato:
+// CARRUSEL, la foto grande de arriba; LISTA, "Para poner en tu lista"; SABORES, "Sabores para
+// todos tus planes". NINGUNO: solo en Explorar y en las búsquedas.
+enum PlanPortada {
+  NINGUNO
+  CARRUSEL
+  LISTA
+  SABORES
+}
+
 // Por dónde vale un precio de la carta.
 enum Canal {
   SALON
@@ -119,7 +129,8 @@ model Negocio {
   prestaciones           String[]        @default([]) // "Mesas al aire libre", "Acepta mascotas"...
   precio                 Int? // 1 a 3 ($, $$, $$$)
   foto                   String? // URL de la foto de portada
-  destacado              Boolean         @default(false) // aparece en "Para poner en tu lista" de la portada
+  plan                   PlanPortada     @default(NINGUNO) // en qué parte de la portada aparece
+  destacado              Boolean         @default(false) // sale del plan (CARRUSEL o LISTA): lleva "Destacado" y va primero
   // Qué se verificó y cómo (ej. "Llamé al local el 3/11"). Obligatorio: es lo que respalda la ficha.
   referenciaVerificacion String
 
@@ -201,8 +212,8 @@ model ProductoCarta {
 
 // Una foto fija de la ficha aprobada por el admin (datos, horarios y carta aprobada). Es lo
 // que se publica y lo que queda en el historial; no se modifica nunca.
-// nombre, busqueda, precio, prestaciones, destacado, categoriaId y localidadId se copian aparte para
-// filtrar el listado público.
+// nombre, busqueda, precio, prestaciones, plan, destacado, categoriaId y localidadId se copian
+// aparte para filtrar el listado público.
 model RevisionNegocio {
   id            Int      @id @default(autoincrement())
   negocioId     Int
@@ -213,6 +224,7 @@ model RevisionNegocio {
   busqueda      String // nombre, descripción, localidad y categoría sin tildes ni mayúsculas
   precio        Int?
   prestaciones  String[]
+  plan          PlanPortada @default(NINGUNO)
   destacado     Boolean  @default(false)
   categoriaId   Int
   localidadId   Int
