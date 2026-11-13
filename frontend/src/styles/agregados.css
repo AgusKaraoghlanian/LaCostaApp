@@ -799,28 +799,49 @@
     border-radius: 999px;
     background: #edeee5;
   }
-  .localidad-elegida:has(button) {
+  .localidad-elegida:has(.localidad-elegida-quitar) {
     padding-right: 0;
   }
-  .localidad-elegida-texto {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+  /* El botón de SelectorLocalidad (el mismo de "¿Por dónde?"), con forma de recuadro: el pin
+     naranja, la localidad y la flechita. "Buscando en" queda solo para lectores de pantalla.
+     La lista se abre igual que en la portada: la hoja desde abajo con las localidades. */
+  .localidad-elegida-selector {
     min-width: 0;
+  }
+  .localidad-elegida-selector .selector-boton {
+    gap: 6px;
+    width: auto;
+    min-height: 32px;
+    margin: 0;
+    padding: 0 4px 0 0;
+    border-radius: 999px;
+  }
+  .localidad-elegida-selector .selector-pin {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    color: var(--naranja);
+    stroke-width: 2;
+  }
+  .localidad-elegida-selector .selector-etiqueta {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .localidad-elegida-selector .selector-valor {
     font-size: 13px;
     font-weight: 500;
     color: var(--verde);
   }
-  .localidad-elegida-texto > span {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .localidad-elegida-texto svg {
-    color: var(--naranja);
+  .localidad-elegida-selector .selector-flecha {
+    width: 14px;
+    height: 14px;
     flex-shrink: 0;
   }
-  .localidad-elegida button {
+  .localidad-elegida-quitar {
     display: grid;
     place-items: center;
     flex-shrink: 0;
@@ -832,8 +853,8 @@
     color: var(--gris);
     cursor: pointer;
   }
-  .localidad-elegida button:hover,
-  .localidad-elegida button:focus-visible {
+  .localidad-elegida-quitar:hover,
+  .localidad-elegida-quitar:focus-visible {
     color: var(--verde);
   }
 
@@ -850,14 +871,30 @@
     padding: 0;
     list-style: none;
   }
+  /* Todos los de una fila miden lo mismo, aunque un nombre ocupe dos renglones. */
+  .atajos-categorias li {
+    display: flex;
+  }
   .atajo-categoria {
-    display: grid;
-    place-items: center;
-    height: 40px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    min-height: 40px;
+    padding: 7px 4px 6px;
     border: 1.5px solid transparent;
     border-radius: 12px;
     color: var(--verde);
     transition: transform 0.2s;
+  }
+  /* El nombre chico debajo del ícono: hasta dos renglones ("Bares y cervecerías"). */
+  .atajo-nombre {
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.15;
+    text-align: center;
+    overflow-wrap: anywhere;
   }
   .atajo-categoria:active {
     transform: scale(0.95);

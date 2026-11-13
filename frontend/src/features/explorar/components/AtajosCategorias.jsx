@@ -2,9 +2,9 @@ import { Link } from 'react-router'
 import IconoCategoria from '../../../shared/components/IconoCategoria.jsx'
 import { useCatalogo } from '../../../shared/hooks/useCatalogo.jsx'
 
-// En el celular, las categorías a mano arriba del listado: solo el ícono, en dos filas de
-// cuatro (el nombre queda para lectores de pantalla y como globito). Tocar la elegida la
-// quita. Cambiar de categoría conserva la localidad y los demás filtros.
+// En el celular, las categorías a mano arriba del listado: el ícono y el nombre chico debajo,
+// en dos filas de cuatro. Tocar la elegida la quita. Cambiar de categoría conserva la
+// localidad y los demás filtros.
 const AtajosCategorias = ({ elegida, params }) => {
   const { categorias } = useCatalogo()
 
@@ -28,10 +28,10 @@ const AtajosCategorias = ({ elegida, params }) => {
                 className="atajo-categoria"
                 style={{ background: c.color }}
                 aria-current={esElegida ? 'page' : undefined}
-                aria-label={esElegida ? `${c.nombre} (tocá para ver todas las categorías)` : c.nombre}
-                title={c.nombre}
+                aria-label={esElegida ? `${c.nombre} (tocá para ver todas las categorías)` : undefined}
               >
-                <IconoCategoria icono={c.icono} size={19} strokeWidth={1.6} aria-hidden="true" />
+                <IconoCategoria icono={c.icono} size={18} strokeWidth={1.6} aria-hidden="true" />
+                <span className="atajo-nombre">{c.nombre}</span>
               </Link>
             </li>
           )

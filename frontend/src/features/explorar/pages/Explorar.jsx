@@ -147,7 +147,7 @@ const Explorar = () => {
       {/* Solo en el celular (en la compu esto ya se ve en la columna de filtros): la localidad
           con el botón Filtros a la derecha y, abajo, las categorías. */}
       <div className="explorar-celular">
-        <LocalidadElegida localidadId={filtros.localidad} onQuitar={() => cambiar('localidad', '')} />
+        <LocalidadElegida localidadId={filtros.localidad} onCambiar={(valor) => cambiar('localidad', valor)} />
         <button
           type="button"
           className="filtros-movil boton boton-borde"
