@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 import { FOTO_PORTADA } from '../../../shared/costa.js'
 
 // Cada cuánto pasa sola a la siguiente foto.
-const INTERVALO = 10000
+const INTERVALO = 7000
 
 // El sello "Con gusto a Costa", siempre encima de la foto.
 const Sello = () => (
@@ -19,7 +19,7 @@ const Sello = () => (
 )
 
 // La foto grande de la portada. Con lugares para mostrar (hasta 5 del plan Carrusel, con foto) es un
-// carrusel: pasa solo cada 10 segundos, con flechitas, puntitos y deslizando con el dedo, y se
+// carrusel: pasa solo cada 7 segundos, con flechitas, puntitos y deslizando con el dedo, y se
 // frena mientras se lo usa o con el botón de pausa (no arranca solo si se pidió menos
 // movimiento). Toda la foto lleva a la ficha del lugar y abajo dice cómo se llama y dónde está.
 // Sin lugares, la foto y la nota de siempre.
