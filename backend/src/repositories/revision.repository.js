@@ -22,9 +22,28 @@ const ORDENES = {
     nombre: [{ nombre: "asc" }, { id: "asc" }],
 };
 
-// Las revisiones que están en el sitio, con filtros. busqueda: lo buscado sin tildes (lo arma
-// el service). prestaciones: tiene que tener todas.
+// Lo buscado (ya interpretado por utils/busqueda.js) como condiciones que se tienen que cumplir
+// todas: cada palabra suelta en el texto del negocio (nombre, descripción, localidad y
+// categoría), alguna de las categorías nombradas (o esas palabras en el texto) y alguna de las
+// localidades nombradas.
+const condicionesDeBusqueda = (busqueda) => {
+    if (!busqueda) return [];
+    return [
+        ...busqueda.palabras.map((palabra) => ({ busqueda: { contains: palabra } })),
+        ...(busqueda.categoriaIds.length
+            ? [{ OR: [
+                { categoriaId: { in: busqueda.categoriaIds } },
+                ...busqueda.palabrasDeCategoria.map((palabra) => ({ busqueda: { contains: palabra } })),
+            ] }]
+            : []),
+        ...(busqueda.localidadIds.length ? [{ localidadId: { in: busqueda.localidadIds } }] : []),
+    ];
+}
+
+// Las revisiones que están en el sitio, con filtros. busqueda: lo buscado ya interpretado (lo
+// arma el service). prestaciones: tiene que tener todas.
 export const buscarPublicadas = async ({ categoriaId, localidadId, precio, prestaciones, destacado, busqueda, orden = "recomendados", saltear, cantidad }) => {
+    const condiciones = condicionesDeBusqueda(busqueda);
     const where = {
         publicadaEn: { isNot: null },
         ...(categoriaId ? { categoriaId } : {}),
@@ -32,7 +51,7 @@ export const buscarPublicadas = async ({ categoriaId, localidadId, precio, prest
         ...(precio ? { precio } : {}),
         ...(destacado !== undefined ? { destacado } : {}),
         ...(prestaciones?.length ? { prestaciones: { hasEvery: prestaciones } } : {}),
-        ...(busqueda ? { busqueda: { contains: busqueda } } : {}),
+        ...(condiciones.length ? { AND: condiciones } : {}),
     };
     const [revisiones, total] = await Promise.all([
         prisma.revisionNegocio.findMany({

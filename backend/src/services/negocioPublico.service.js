@@ -1,8 +1,9 @@
 import * as revisionRepository from '../repositories/revision.repository.js';
 import * as categoriaRepository from '../repositories/categoria.repository.js';
+import * as geografiaRepository from '../repositories/geografia.repository.js';
 import { negocioPublicoDto, negocioResumenDto } from '../dtos/negocioDto.js';
 import { NEGOCIOS_POR_PAGINA } from '../config/costa.js';
-import { claveDeTexto } from '../utils/texto.js';
+import { interpretarBusqueda } from '../utils/busqueda.js';
 import { NegocioNoEncontrado } from '../errors/negocio/NegocioNoEncontrado.js';
 
 // Lo que ve cualquier visitante: solo los negocios publicados, tal como se aprobaron.
@@ -10,12 +11,23 @@ import { NegocioNoEncontrado } from '../errors/negocio/NegocioNoEncontrado.js';
 const paginaVacia = (pagina) => ({ negocios: [], total: 0, pagina, porPagina: NEGOCIOS_POR_PAGINA });
 
 // categoria es la clave de la URL ("parrillas"). Si no existe, no hay resultados.
+// texto se entiende palabra por palabra: las comidas llevan a su categoría ("pizza" →
+// pizzerías), los nombres de localidad a esa localidad y el resto se busca en cualquier orden.
 const listarPublicados = async ({ categoria, localidadId, precio, prestacion, destacado, orden, texto, pagina = 1 }) => {
   let categoriaId;
   if (categoria) {
     const encontrada = await categoriaRepository.obtenerCategoriaPorClave(categoria);
     if (!encontrada) return paginaVacia(pagina);
     categoriaId = encontrada.id;
+  }
+
+  let busqueda = null;
+  if (texto) {
+    const [categorias, localidades] = await Promise.all([
+      categoriaRepository.listarCategorias(),
+      geografiaRepository.listarLocalidades(),
+    ]);
+    busqueda = interpretarBusqueda(texto, { categorias, localidades });
   }
 
   const { revisiones, total } = await revisionRepository.buscarPublicadas({
@@ -25,7 +37,7 @@ const listarPublicados = async ({ categoria, localidadId, precio, prestacion, de
     prestaciones: prestacion,
     destacado,
     orden,
-    busqueda: texto ? claveDeTexto(texto) : null,
+    busqueda,
     saltear: (pagina - 1) * NEGOCIOS_POR_PAGINA,
     cantidad: NEGOCIOS_POR_PAGINA,
   });

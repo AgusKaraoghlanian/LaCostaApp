@@ -1,4 +1,4 @@
-import { ChevronDown, Search } from 'lucide-react'
+import { ChevronDown, Search, X } from 'lucide-react'
 import { useEffect, useId, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router'
 import IconoCategoria from '../../../shared/components/IconoCategoria.jsx'
@@ -27,11 +27,18 @@ const Buscador = () => {
   const [activa, setActiva] = useState(-1)
   const campoRef = useRef(null)
 
-  // Las categorías que coinciden con lo escrito (todas si no se escribió nada).
+  // Las categorías que coinciden con lo escrito (todas si no se escribió nada): por su nombre
+  // o por sus palabras ("pizza" → Pizzerías, "birra" → Bares). Alcanza con que una palabra
+  // escrita de 3 letras o más sea el comienzo de una de ellas ("hela" ya sugiere Heladerías).
   const sugerencias = useMemo(() => {
     const buscado = normalizar(texto)
     if (!buscado) return categorias
-    return categorias.filter((c) => normalizar(c.nombre).includes(buscado))
+    const escritas = buscado.split(/\s+/).filter((palabra) => palabra.length >= 3)
+    return categorias.filter(
+      (c) =>
+        normalizar(c.nombre).includes(buscado) ||
+        escritas.some((escrita) => (c.palabras ?? []).some((palabra) => palabra.startsWith(escrita))),
+    )
   }, [categorias, texto])
 
   const mostrarLista = abierto && sugerencias.length > 0
@@ -125,9 +132,26 @@ const Buscador = () => {
         />
 
         <div className="selector-panel antojo-panel" hidden={!mostrarLista}>
-          <p className="selector-grupo" aria-hidden="true">
-            {texto.trim() ? 'Categorías que coinciden' : 'Seguí tu antojo'}
-          </p>
+          <div className="antojo-cabecera">
+            <p className="selector-grupo" aria-hidden="true">
+              {texto.trim() ? 'Categorías que coinciden' : 'Seguí tu antojo'}
+            </p>
+            {/* Solo en el celular: cierra las sugerencias y baja el teclado. pointerdown +
+                preventDefault: el campo no pierde el foco antes del clic (como las opciones). */}
+            <button
+              type="button"
+              className="antojo-cerrar"
+              aria-label="Cerrar las sugerencias"
+              onPointerDown={(e) => e.preventDefault()}
+              onClick={() => {
+                setAbierto(false)
+                setActiva(-1)
+                campoRef.current?.querySelector('input')?.blur()
+              }}
+            >
+              <X size={18} />
+            </button>
+          </div>
           <ul className="selector-lista" id={`${idBase}-sugerencias`} role="listbox" aria-label="Categorías">
             {sugerencias.map((c, i) => (
               <li

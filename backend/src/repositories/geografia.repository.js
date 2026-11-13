@@ -22,6 +22,11 @@ export const obtenerPartidoPorId = async (id) => {
     return await prisma.partido.findUnique({ where: { id } });
 }
 
+// Todas las localidades (solo id y nombre): la búsqueda las usa para entender "pizza en san clemente".
+export const listarLocalidades = async () => {
+    return await prisma.localidad.findMany({ select: { id: true, nombre: true }, orderBy: { id: "asc" } });
+}
+
 // Con su partido y provincia: la ficha los muestra ("Mar de Ajó, Partido de La Costa").
 export const obtenerLocalidadPorId = async (id) => {
     return await prisma.localidad.findUnique({ where: { id }, include: { partido: { include: { provincia: true } } } });

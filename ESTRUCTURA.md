@@ -68,6 +68,7 @@ src/dtos/                   qué datos se devuelven (el público nunca ve la ref
 src/errors/                 errores propios con su código HTTP, por tema (auth, negocio, catalogo)
 src/utils/jwt.js            crear y verificar tokens
 src/utils/texto.js          slugs para las URLs y claves sin tildes para buscar
+src/utils/busqueda.js       qué quiso decir la búsqueda: comidas → categoría, nombres de localidad → localidad, el resto palabra por palabra
 src/utils/enlaces.js        qué links se aceptan en una ficha
 src/utils/comparar.js       si dos objetos tienen los mismos datos (Postgres reordena las claves de los Json)
 tests/                      tests de services, validadores y entorno (vitest, repositories simulados)
@@ -83,7 +84,7 @@ Las rutas de `/v1/admin` piden `Authorization: Bearer <token>` de un administrad
 | `POST /v1/auth/login` | cualquiera | `{ email, password }` → `{ token, usuario }` |
 | `GET /v1/categorias` | **público** | las categorías, en el orden de la portada, cada una con cuántos negocios publicados tiene (`negocios`) |
 | `GET /v1/geografia` | **público** | provincias → partidos → localidades (en el orden en que se cargaron: de norte a sur) |
-| `GET /v1/negocios?categoria&localidadId&precio&prestacion&destacado&orden&texto&pagina` | **público** | los publicados, de a 24. `categoria` es la clave de la URL (`parrillas`); `prestacion` se puede repetir (tienen que tener todas); `texto` busca en nombre, descripción, localidad y categoría sin importar tildes; `orden`: `recomendados` (destacados primero, después en el orden en que se cargaron), `precio` o `nombre` |
+| `GET /v1/negocios?categoria&localidadId&precio&prestacion&destacado&orden&texto&pagina` | **público** | los publicados, de a 24. `categoria` es la clave de la URL (`parrillas`); `prestacion` se puede repetir (tienen que tener todas); `texto` se entiende palabra por palabra y sin importar tildes: las comidas llevan a su categoría ("pizza", "birra"; las listas están en `config/costa.js`), los nombres de localidad a esa localidad ("pizza en san clemente") y el resto se busca en nombre, descripción, localidad y categoría, en cualquier orden; `orden`: `recomendados` (destacados primero, después en el orden en que se cargaron), `precio` o `nombre` |
 | `GET /v1/negocios/:slug` | **público** | la ficha publicada, con horarios y carta aprobada |
 | `GET /v1/admin/negocios?texto&pagina` | admin | todas las fichas (publicadas o no), las editadas últimas primero |
 | `POST /v1/admin/negocios` | admin | crea la ficha como borrador |
