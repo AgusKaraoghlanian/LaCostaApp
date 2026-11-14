@@ -1,4 +1,4 @@
-import { Check, ChevronDown, MapPin, Navigation } from 'lucide-react'
+import { Check, ChevronDown, MapPin, Navigation, X } from 'lucide-react'
 import { useEffect, useId, useMemo, useRef, useState } from 'react'
 
 // El "¿Por dónde?" del buscador: un desplegable propio (no el <select> del navegador) que
@@ -19,6 +19,7 @@ const SelectorLocalidad = ({
   const [abierto, setAbierto] = useState(false)
   const [activa, setActiva] = useState(0)
   const contenedorRef = useRef(null)
+  const botonRef = useRef(null)
   const listaRef = useRef(null)
   const tipeoRef = useRef({ texto: '', timer: null })
 
@@ -50,6 +51,13 @@ const SelectorLocalidad = ({
   const abrir = (indice = indiceElegido) => {
     setActiva(indice)
     setAbierto(true)
+  }
+
+  // Cierra sin elegir (la cruz, el fondo oscuro o la barrita de la hoja en el celular) y
+  // devuelve el foco al botón, para que el teclado no se pierda.
+  const cerrar = () => {
+    setAbierto(false)
+    botonRef.current?.focus()
   }
 
   // Elige una opción, cierra la lista y avisa al buscador.
@@ -178,6 +186,7 @@ const SelectorLocalidad = ({
       <button
         type="button"
         role="combobox"
+        ref={botonRef}
         className="selector-boton"
         aria-haspopup="listbox"
         aria-expanded={abierto}
@@ -199,12 +208,21 @@ const SelectorLocalidad = ({
         <ChevronDown size={16} className="selector-flecha" aria-hidden="true" />
       </button>
 
-      {abierto && <div className="selector-fondo" aria-hidden="true" />}
+      {/* En el celular: tocar el fondo oscuro (arriba de la hoja) cierra. Está dentro del
+          contenedor, así que "tocar afuera" no lo cuenta: se cierra acá. */}
+      {abierto && <div className="selector-fondo" aria-hidden="true" onClick={cerrar} />}
 
       <div className="selector-panel" hidden={!abierto}>
-        <p className="selector-titulo" aria-hidden="true">
-          Elegí una localidad
-        </p>
+        {/* La barrita de arriba de la hoja: también cierra al tocarla. */}
+        <span className="selector-agarradera" aria-hidden="true" onClick={cerrar} />
+        <div className="selector-cabecera">
+          <p className="selector-titulo" aria-hidden="true">
+            Elegí una localidad
+          </p>
+          <button type="button" className="selector-cerrar" onClick={cerrar} aria-label="Cerrar">
+            <X size={20} />
+          </button>
+        </div>
         <ul
           className="selector-lista"
           id={`${idBase}-lista`}

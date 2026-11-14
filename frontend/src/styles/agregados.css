@@ -402,7 +402,9 @@
 .selector-check {
   color: var(--naranja);
 }
-.selector-fondo {
+.selector-fondo,
+.selector-agarradera,
+.selector-cerrar {
   display: none;
 }
 
@@ -453,21 +455,53 @@
     border-bottom: 0;
     animation: selector-subir 0.24s cubic-bezier(0.2, 0.8, 0.3, 1);
   }
-  .selector-panel::before {
-    content: "";
+  /* La barrita de arriba: se ve de 40px, pero se puede tocar en toda una franja para cerrar. */
+  .selector-agarradera {
+    display: block;
     align-self: center;
+    width: 120px;
+    height: 20px;
+    margin: -10px 0 0;
+    cursor: pointer;
+  }
+  .selector-agarradera::before {
+    content: "";
+    display: block;
     width: 40px;
     height: 4px;
-    margin-bottom: 10px;
+    margin: 8px auto 0;
     border-radius: 4px;
     background: #dcd8c8;
   }
+  /* "Elegí una localidad" con la cruz para cerrar a la derecha. */
+  .selector-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 4px 6px 10px;
+  }
   .selector-titulo {
     display: block;
-    margin: 0 10px 8px;
+    margin: 0;
     font-family: var(--serif);
-    font-size: 21px;
+    font-size: 20px;
     color: var(--verde);
+  }
+  .selector-cerrar {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--verde);
+    cursor: pointer;
+  }
+  .selector-cerrar:hover,
+  .selector-cerrar:focus-visible {
+    background: #f1eee4;
   }
   .selector-lista {
     max-height: none;
@@ -480,6 +514,34 @@
   .selector-opcion-icono {
     width: 32px;
     height: 32px;
+  }
+  /* Solo "¿Por dónde?" (el "¿Qué se te antoja?" usa las mismas clases y no cambia): las
+     localidades de a dos por fila ("Todas" ocupa el ancho), así la hoja es más baja. */
+  .selector-localidad .selector-lista {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 6px;
+    align-content: start;
+  }
+  .selector-localidad .selector-lista > [data-indice="0"],
+  .selector-localidad .selector-lista > li[role="presentation"] {
+    grid-column: 1 / -1;
+  }
+  .selector-localidad .selector-lista ul[role="group"] {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 6px;
+  }
+  .selector-localidad .selector-opcion {
+    gap: 8px;
+    padding: 8px;
+    font-size: 16px;
+    line-height: 1.2;
+  }
+  .selector-localidad .selector-opcion-icono {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
   }
 }
 @keyframes selector-subir {
@@ -560,6 +622,15 @@
 .antojo-panel .selector-grupo {
   margin-top: 6px;
 }
+/* "Seguí tu antojo" con la cruz para cerrar a la derecha (la cruz solo en el celular). */
+.antojo-cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.antojo-cerrar {
+  display: none;
+}
 .antojo-icono {
   display: grid;
   place-items: center;
@@ -597,6 +668,24 @@
   }
   .antojo-panel .selector-lista {
     max-height: 300px;
+  }
+  .antojo-cerrar {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    margin: 2px 2px 0 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--verde);
+    cursor: pointer;
+  }
+  .antojo-cerrar:hover,
+  .antojo-cerrar:active {
+    background: #f1eee4;
   }
 }
 
