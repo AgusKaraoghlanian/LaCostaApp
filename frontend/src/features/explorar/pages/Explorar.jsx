@@ -1,6 +1,6 @@
 import { Search, SlidersHorizontal } from 'lucide-react'
-import { useState } from 'react'
-import { useParams, useSearchParams } from 'react-router'
+import { useRef, useState } from 'react'
+import { useNavigate, useParams, useSearchParams } from 'react-router'
 import { buscarNegocios } from '../../../shared/api/negocios.api.js'
 import EstadoCarga from '../../../shared/components/EstadoCarga.jsx'
 import Migas from '../../../shared/components/Migas.jsx'
@@ -11,7 +11,9 @@ import Vacio from '../../../shared/components/Vacio.jsx'
 import { useCargarDatos } from '../../../shared/hooks/useCargarDatos.js'
 import { useCatalogo } from '../../../shared/hooks/useCatalogo.jsx'
 import NoEncontrado from '../../informacion/pages/NoEncontrado.jsx'
+import AtajosCategorias from '../components/AtajosCategorias.jsx'
 import Filtros from '../components/Filtros.jsx'
+import LocalidadElegida from '../components/LocalidadElegida.jsx'
 
 // El buscador de arriba del listado.
 const BuscadorListado = ({ inicial, onBuscar }) => {
@@ -42,8 +44,16 @@ const BuscadorListado = ({ inicial, onBuscar }) => {
 const Explorar = () => {
   const { clave } = useParams()
   const [params, setParams] = useSearchParams()
+  const navigate = useNavigate()
   const { categorias } = useCatalogo()
   const [filtrosAbiertos, setFiltrosAbiertos] = useState(false)
+  const botonFiltrosRef = useRef(null)
+  // Al cerrar los filtros (en el celular) se vuelve al botón Filtros: queda a la vista arriba
+  // de los resultados y el foco del teclado no se pierde.
+  const cerrarFiltros = () => {
+    setFiltrosAbiertos(false)
+    botonFiltrosRef.current?.focus()
+  }
 
   const filtros = {
     q: params.get('q') ?? '',
@@ -94,6 +104,16 @@ const Explorar = () => {
     window.scrollTo({ top: 0, behavior: 'instant' })
   }
   const limpiar = () => setParams({}, { preventScrollReset: true })
+  // La categoría elegida en los filtros. En /categoria/:clave va en la dirección: se pasa a
+  // la otra (o a /explorar con "Todas") conservando los demás filtros y sin subir la pantalla.
+  const elegirCategoria = (nueva) => {
+    if (!clave) return cambiar('categoria', nueva)
+    const resto = new URLSearchParams(params)
+    resto.delete('categoria')
+    resto.delete('pagina')
+    const consulta = resto.toString() ? `?${resto}` : ''
+    navigate(nueva ? `/categoria/${nueva}${consulta}` : `/explorar${consulta}`, { state: { mantenerScroll: true } })
+  }
 
   const categoria = categorias.find((c) => c.clave === clave)
   // Con el catálogo ya cargado, una categoría que no existe es un 404.
@@ -124,28 +144,38 @@ const Explorar = () => {
       </div>
       {/* key: si la búsqueda cambia desde afuera (Limpiar, volver atrás), el input se actualiza. */}
       <BuscadorListado key={filtros.q} inicial={filtros.q} onBuscar={(texto) => cambiar('q', texto)} />
+      {/* Solo en el celular (en la compu esto ya se ve en la columna de filtros): la localidad
+          con el botón Filtros a la derecha y, abajo, las categorías. */}
+      <div className="explorar-celular">
+        <LocalidadElegida localidadId={filtros.localidad} onCambiar={(valor) => cambiar('localidad', valor)} />
+        <button
+          type="button"
+          className="filtros-movil boton boton-borde"
+          ref={botonFiltrosRef}
+          aria-expanded={filtrosAbiertos}
+          onClick={() => setFiltrosAbiertos(!filtrosAbiertos)}
+        >
+          <SlidersHorizontal size={15} />
+          Filtros {cantidadFiltros ? `(${cantidadFiltros})` : ''}
+        </button>
+      </div>
+      <AtajosCategorias elegida={filtros.categoria} params={params} />
       <div className="explorar-disposicion">
         <Filtros
           filtros={filtros}
           cambiar={cambiar}
           alternarPrestacion={alternarPrestacion}
           limpiar={limpiar}
-          conCategoria={Boolean(clave)}
+          elegirCategoria={elegirCategoria}
           visible={filtrosAbiertos}
+          onCerrar={cerrarFiltros}
+          total={total}
         />
         <section className="resultados">
           <div className="barra-resultados">
             <span>
               <strong>{total}</strong> {total === 1 ? 'lugar para descubrir' : 'lugares para descubrir'}
             </span>
-            <button
-              type="button"
-              className="filtros-movil boton boton-borde"
-              onClick={() => setFiltrosAbiertos(!filtrosAbiertos)}
-            >
-              <SlidersHorizontal size={15} />
-              Filtros {cantidadFiltros ? `(${cantidadFiltros})` : ''}
-            </button>
             <label>
               Ordenar por{' '}
               <select aria-label="Ordenar resultados" value={filtros.orden} onChange={(e) => cambiar('orden', e.target.value)}>

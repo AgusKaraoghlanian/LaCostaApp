@@ -10,6 +10,144 @@
   object-fit: cover;
 }
 
+/* Las fotos de la ficha (GaleriaFotos): una pista que se desliza de a una foto. Con varias,
+   flechitas a los costados y puntitos abajo; las flechas se ocultan en la primera y la última. */
+.galeria-pista {
+  display: flex;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.galeria-pista::-webkit-scrollbar {
+  display: none;
+}
+.galeria-pista > li {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
+.galeria-carrusel {
+  position: relative;
+}
+.galeria .galeria-flecha {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid #ffffff80;
+  border-radius: 50%;
+  background: #fffefad9;
+  color: var(--verde);
+  box-shadow: 0 4px 14px #2233211f;
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: opacity 0.2s, background 0.2s;
+}
+.galeria .galeria-flecha:hover {
+  background: #fffefa;
+}
+.galeria .galeria-flecha:focus-visible {
+  outline: 3px solid var(--naranja);
+  outline-offset: 2px;
+}
+.galeria .galeria-flecha:disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+.galeria-flecha.anterior {
+  left: 14px;
+}
+.galeria-flecha.siguiente {
+  right: 14px;
+}
+.galeria-puntos {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  z-index: 1;
+  display: flex;
+  transform: translateX(-50%);
+}
+/* El puntito se ve de 8px, pero se puede tocar en 24px. */
+.galeria .galeria-puntos button {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  cursor: pointer;
+}
+.galeria-puntos button::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fffefa99;
+  box-shadow: 0 1px 3px #0003;
+  transition: background 0.2s, transform 0.2s;
+}
+.galeria-puntos button[aria-current]::before {
+  background: #fffefa;
+  transform: scale(1.25);
+}
+@media (max-width: 720px) {
+  .galeria .galeria-flecha {
+    width: 36px;
+    height: 36px;
+  }
+  .galeria-flecha.anterior {
+    left: 10px;
+  }
+  .galeria-flecha.siguiente {
+    right: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .galeria .galeria-flecha,
+  .galeria-puntos button::before {
+    transition: none;
+  }
+}
+
+/* "Volver" de la ficha en el celular: chiquito, a la altura de la localidad y contra el borde
+   derecho (donde termina la foto, debajo del corazón). En la compu no se muestra: ahí están
+   las migas. */
+.detalle-localidad .volver {
+  display: none;
+}
+@media (max-width: 720px) {
+  .detalle-encabezado {
+    position: relative;
+  }
+  .detalle-localidad .volver {
+    position: absolute;
+    right: 0;
+    bottom: -5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    min-height: 28px;
+    padding: 0 11px 0 8px;
+    border: 1px solid var(--borde);
+    border-radius: 999px;
+    background: var(--blanco);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--verde);
+  }
+  .detalle-localidad .volver:hover {
+    text-decoration: none;
+    background: #edeee6;
+  }
+}
+
 /* Mientras cargan los datos. */
 .estado-cargando {
   display: flex;
@@ -56,6 +194,32 @@
 /* El error de un campo de formulario. */
 .formulario small.error-campo {
   color: #a5432e;
+}
+
+/* Celular: el pie más compacto, con la misma información. Menos aire arriba, entre el logo y
+   las columnas y antes de la línea de abajo, y sin "Hecho con amor por lo local" (decorativo).
+   El espacio entre los links no cambia: así se siguen tocando fácil con el dedo. */
+@media (max-width: 720px) {
+  .pie {
+    padding: 24px 0 14px;
+  }
+  .pie-arriba {
+    gap: 20px 15px;
+    padding-bottom: 18px;
+  }
+  .pie-arriba p {
+    margin: 8px 0 0;
+  }
+  .pie .hecho {
+    display: none;
+  }
+  .pie-arriba strong {
+    margin-bottom: 2px;
+  }
+  .pie-abajo {
+    padding-top: 12px;
+    gap: 4px;
+  }
 }
 
 /* El nombre del administrador y el botón de salir, arriba a la derecha del panel. */
@@ -264,7 +428,9 @@
 .selector-check {
   color: var(--naranja);
 }
-.selector-fondo {
+.selector-fondo,
+.selector-agarradera,
+.selector-cerrar {
   display: none;
 }
 
@@ -315,21 +481,53 @@
     border-bottom: 0;
     animation: selector-subir 0.24s cubic-bezier(0.2, 0.8, 0.3, 1);
   }
-  .selector-panel::before {
-    content: "";
+  /* La barrita de arriba: se ve de 40px, pero se puede tocar en toda una franja para cerrar. */
+  .selector-agarradera {
+    display: block;
     align-self: center;
+    width: 120px;
+    height: 20px;
+    margin: -10px 0 0;
+    cursor: pointer;
+  }
+  .selector-agarradera::before {
+    content: "";
+    display: block;
     width: 40px;
     height: 4px;
-    margin-bottom: 10px;
+    margin: 8px auto 0;
     border-radius: 4px;
     background: #dcd8c8;
   }
+  /* "Elegí una localidad" con la cruz para cerrar a la derecha. */
+  .selector-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 4px 6px 10px;
+  }
   .selector-titulo {
     display: block;
-    margin: 0 10px 8px;
+    margin: 0;
     font-family: var(--serif);
-    font-size: 21px;
+    font-size: 20px;
     color: var(--verde);
+  }
+  .selector-cerrar {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--verde);
+    cursor: pointer;
+  }
+  .selector-cerrar:hover,
+  .selector-cerrar:focus-visible {
+    background: #f1eee4;
   }
   .selector-lista {
     max-height: none;
@@ -342,6 +540,34 @@
   .selector-opcion-icono {
     width: 32px;
     height: 32px;
+  }
+  /* Solo "¿Por dónde?" (el "¿Qué se te antoja?" usa las mismas clases y no cambia): las
+     localidades de a dos por fila ("Todas" ocupa el ancho), así la hoja es más baja. */
+  .selector-localidad .selector-lista {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 6px;
+    align-content: start;
+  }
+  .selector-localidad .selector-lista > [data-indice="0"],
+  .selector-localidad .selector-lista > li[role="presentation"] {
+    grid-column: 1 / -1;
+  }
+  .selector-localidad .selector-lista ul[role="group"] {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 6px;
+  }
+  .selector-localidad .selector-opcion {
+    gap: 8px;
+    padding: 8px;
+    font-size: 16px;
+    line-height: 1.2;
+  }
+  .selector-localidad .selector-opcion-icono {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
   }
 }
 @keyframes selector-subir {
@@ -422,6 +648,15 @@
 .antojo-panel .selector-grupo {
   margin-top: 6px;
 }
+/* "Seguí tu antojo" con la cruz para cerrar a la derecha (la cruz solo en el celular). */
+.antojo-cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.antojo-cerrar {
+  display: none;
+}
 .antojo-icono {
   display: grid;
   place-items: center;
@@ -459,6 +694,24 @@
   }
   .antojo-panel .selector-lista {
     max-height: 300px;
+  }
+  .antojo-cerrar {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    margin: 2px 2px 0 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--verde);
+    cursor: pointer;
+  }
+  .antojo-cerrar:hover,
+  .antojo-cerrar:active {
+    background: #f1eee4;
   }
 }
 
@@ -792,6 +1045,267 @@
   }
 }
 
+/* Explorar en el celular: arriba del listado, la localidad elegida (LocalidadElegida) con el
+   botón Filtros a la derecha y, abajo, las categorías como íconos chicos (AtajosCategorias),
+   porque los filtros quedan escondidos. En la compu no se muestran: ahí ya está la columna
+   de filtros. */
+.explorar-celular,
+.atajos-categorias {
+  display: none;
+}
+@media (max-width: 720px) {
+  .explorar-celular {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: -9px 0 12px;
+  }
+  .explorar-celular .filtros-movil {
+    flex-shrink: 0;
+  }
+  .localidad-elegida {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+    min-height: 34px;
+    margin: 0;
+    padding: 0 12px;
+    border: 1px solid var(--borde);
+    border-radius: 999px;
+    background: #edeee5;
+  }
+  .localidad-elegida:has(.localidad-elegida-quitar) {
+    padding-right: 0;
+  }
+  /* El botón de SelectorLocalidad (el mismo de "¿Por dónde?"), con forma de recuadro: el pin
+     naranja, la localidad y la flechita. "Buscando en" queda solo para lectores de pantalla.
+     La lista se abre igual que en la portada: la hoja desde abajo con las localidades. */
+  .localidad-elegida-selector {
+    min-width: 0;
+  }
+  .localidad-elegida-selector .selector-boton {
+    gap: 6px;
+    width: auto;
+    min-height: 32px;
+    margin: 0;
+    padding: 0 4px 0 0;
+    border-radius: 999px;
+  }
+  .localidad-elegida-selector .selector-pin {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    color: var(--naranja);
+    stroke-width: 2;
+  }
+  .localidad-elegida-selector .selector-etiqueta {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .localidad-elegida-selector .selector-valor {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--verde);
+  }
+  .localidad-elegida-selector .selector-flecha {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+  .localidad-elegida-quitar {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 34px;
+    min-height: 32px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--gris);
+    cursor: pointer;
+  }
+  .localidad-elegida-quitar:hover,
+  .localidad-elegida-quitar:focus-visible {
+    color: var(--verde);
+  }
+
+  /* Dos filas de cuatro íconos, con el color de cada categoría (como en la portada). */
+  .atajos-categorias {
+    display: block;
+    margin-bottom: 18px;
+  }
+  .atajos-categorias ul {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  /* Todos los de una fila miden lo mismo, aunque un nombre ocupe dos renglones. */
+  .atajos-categorias li {
+    display: flex;
+  }
+  .atajo-categoria {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    min-height: 40px;
+    padding: 7px 4px 6px;
+    border: 1.5px solid transparent;
+    border-radius: 12px;
+    color: var(--verde);
+    transition: transform 0.2s;
+  }
+  /* El nombre chico debajo del ícono: hasta dos renglones ("Bares y cervecerías"). */
+  .atajo-nombre {
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.15;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+  .atajo-categoria:active {
+    transform: scale(0.95);
+  }
+  .atajo-categoria[aria-current] {
+    border-color: var(--verde);
+  }
+}
+
+/* El panel de filtros en el celular se cierra con la cruz de arriba o con "Ver lugares"
+   abajo (Filtros). En la compu la columna está siempre a la vista: no llevan ninguno. */
+.filtros-titulo-acciones {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.filtros-cerrar,
+.filtros-ver {
+  display: none;
+}
+@media (max-width: 720px) {
+  .filtros-cerrar {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    margin: -8px -8px -8px 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--verde);
+    cursor: pointer;
+  }
+  .filtros-cerrar:hover {
+    background: #e7e8dd;
+  }
+  .filtros-ver {
+    display: flex;
+    width: 100%;
+    margin: 4px 0 22px;
+  }
+  /* Sin el título "Filtrá tu búsqueda" (ya se sabe que son filtros): "Limpiar" y la cruz
+     quedan en la esquina, a la altura de "Localidad", sin ocupar una fila propia. */
+  .filtros {
+    position: relative;
+  }
+  .filtros-titulo {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  .filtros-titulo h2 {
+    display: none;
+  }
+}
+
+/* El listado de Explorar en el celular: la misma tarjeta en chiquito, de a cuatro por fila,
+   para recorrer muchos lugares sin bajar tanto. Queda la foto, el nombre y la localidad
+   ("Destacado" queda solo con su ícono); la categoría, el precio, la descripción y los
+   servicios se ven al entrar a la ficha. La portada y la compu no cambian. */
+@media (max-width: 720px) {
+  .grilla-tarjetas.dos-columnas {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .dos-columnas .tarjeta {
+    border-radius: 8px;
+  }
+  .dos-columnas .tarjeta-foto {
+    height: auto;
+    aspect-ratio: 1;
+  }
+  .dos-columnas .tarjeta-cuerpo {
+    padding: 6px 6px 8px;
+  }
+  .dos-columnas .tarjeta-meta,
+  .dos-columnas .tarjeta-descripcion,
+  .dos-columnas .tarjeta-pie {
+    display: none;
+  }
+  /* 12px y hasta tres líneas: los nombres entran enteros (los cortos ocupan una o dos) y,
+     con balance, las líneas quedan parejas en vez de dejar una palabra sola abajo. */
+  .dos-columnas .tarjeta-titulo h3 {
+    font-size: 12px;
+    line-height: 1.18;
+    text-wrap: balance;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  /* En bloque (no flex) para que el nombre largo termine en "…". */
+  .dos-columnas .ubicacion {
+    display: block;
+    margin: 3px 0 0;
+    font-size: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .dos-columnas .ubicacion svg {
+    width: 10px;
+    height: 10px;
+    margin-right: 3px;
+    vertical-align: -1px;
+  }
+  /* Solo el ícono: el texto "Destacado" sigue ahí para los lectores de pantalla. */
+  .dos-columnas .distintivo {
+    top: 5px;
+    left: 5px;
+    gap: 0;
+    padding: 4px;
+    font-size: 0;
+  }
+  .dos-columnas .favorito {
+    top: 4px;
+    right: 4px;
+    width: 26px;
+    height: 26px;
+  }
+  .dos-columnas .favorito svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .atajo-categoria {
+    transition: none;
+  }
+}
+
 /* La flechita de "¿Qué se te antoja?" (igual a la de "¿Por dónde?"): se puede tocar y gira
    cuando las sugerencias están abiertas. */
 .antojo-flecha {
@@ -827,6 +1341,18 @@
   /* Alineada con la flechita de "¿Por dónde?". */
   .antojo-flecha {
     margin-right: 6px;
+  }
+}
+
+/* "¿Tu negocio tiene sabor a Costa?": cuando todavía no hay "Sabores para todos tus planes"
+   (sin negocios publicados), queda pegado a las localidades. Ahí lleva el mismo aire arriba
+   que abajo, para que quede centrado entre la franja y el pie. Con negocios no cambia nada. */
+.franja-localidades + .contenedor > .banner-negocio {
+  margin-top: 64px;
+}
+@media (max-width: 720px) {
+  .franja-localidades + .contenedor > .banner-negocio {
+    margin-top: 40px;
   }
 }
 

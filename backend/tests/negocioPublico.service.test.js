@@ -4,10 +4,15 @@ vi.mock('../src/repositories/revision.repository.js', () => ({
   buscarPublicadas: vi.fn(),
   obtenerPublicadaPorSlug: vi.fn(),
 }));
-vi.mock('../src/repositories/categoria.repository.js', () => ({ obtenerCategoriaPorClave: vi.fn() }));
+vi.mock('../src/repositories/categoria.repository.js', () => ({
+  obtenerCategoriaPorClave: vi.fn(),
+  listarCategorias: vi.fn(),
+}));
+vi.mock('../src/repositories/geografia.repository.js', () => ({ listarLocalidades: vi.fn() }));
 
 import * as revisionRepository from '../src/repositories/revision.repository.js';
 import * as categoriaRepository from '../src/repositories/categoria.repository.js';
+import * as geografiaRepository from '../src/repositories/geografia.repository.js';
 import * as negocioPublicoService from '../src/services/negocioPublico.service.js';
 import { NegocioNoEncontrado } from '../src/errors/negocio/NegocioNoEncontrado.js';
 
@@ -32,15 +37,41 @@ const revision = {
 beforeEach(() => {
   vi.clearAllMocks();
   revisionRepository.buscarPublicadas.mockResolvedValue({ revisiones: [revision], total: 1 });
+  categoriaRepository.listarCategorias.mockResolvedValue([
+    { id: 2, clave: 'cafeterias', nombre: 'Cafeterías' },
+    { id: 4, clave: 'pizzerias', nombre: 'Pizzerías' },
+  ]);
+  geografiaRepository.listarLocalidades.mockResolvedValue([{ id: 10, nombre: 'San Bernardo' }]);
 });
 
 describe('listarPublicados', () => {
   it('busca sin tildes ni mayúsculas y pagina de a 24', async () => {
-    await negocioPublicoService.listarPublicados({ texto: '  Café ', pagina: 2 });
+    await negocioPublicoService.listarPublicados({ texto: '  Orillá ', pagina: 2 });
 
     expect(revisionRepository.buscarPublicadas).toHaveBeenCalledWith(
-      expect.objectContaining({ busqueda: 'cafe', saltear: 24, cantidad: 24 }),
+      expect.objectContaining({
+        busqueda: { palabras: ['orilla'], categoriaIds: [], palabrasDeCategoria: [], localidadIds: [] },
+        saltear: 24,
+        cantidad: 24,
+      }),
     );
+  });
+
+  it('entiende comidas y localidades en lo que se escribe', async () => {
+    await negocioPublicoService.listarPublicados({ texto: 'Pizza en San Bernardo' });
+
+    expect(revisionRepository.buscarPublicadas).toHaveBeenCalledWith(
+      expect.objectContaining({
+        busqueda: { palabras: [], categoriaIds: [4], palabrasDeCategoria: ['pizza'], localidadIds: [10] },
+      }),
+    );
+  });
+
+  it('sin texto no busca categorías ni localidades', async () => {
+    await negocioPublicoService.listarPublicados({});
+
+    expect(categoriaRepository.listarCategorias).not.toHaveBeenCalled();
+    expect(revisionRepository.buscarPublicadas).toHaveBeenCalledWith(expect.objectContaining({ busqueda: null }));
   });
 
   it('filtra por la categoría de la URL', async () => {

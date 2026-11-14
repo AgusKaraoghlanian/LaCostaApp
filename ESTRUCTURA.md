@@ -15,7 +15,7 @@ La app se está pasando al mismo stack y la misma forma de trabajar que VPUG. Mi
 - Frontend: `npm run dev --prefix frontend` → http://localhost:5173 (necesita `frontend/.env` con `VITE_API_BASE_URL`, ver `frontend/.env.example`). Abrirlo como `localhost`, no `127.0.0.1`: CORS solo acepta el origen exacto. `npm run lint` corre oxlint.
 - Backend: `npm run dev --prefix backend` → http://localhost:3001 (se reinicia solo al guardar, con `node --watch`; necesita `backend/.env`, ver `backend/.env.example`).
 - Base de datos: PostgreSQL (Supabase en producción; en local sirve cualquier Postgres). Las tablas se crean con `npx prisma migrate deploy --config prisma7.config.ts` desde `backend/`. **Después de cada migración** hay que correr `npx prisma generate --config prisma7.config.ts` y reiniciar el backend: en Prisma 7 el cliente no se regenera solo.
-- Datos iniciales: `npm run seed` desde `backend/`. Crea Buenos Aires → Partido de La Costa → sus 10 localidades, las 8 categorías de la portada y el primer administrador con `ADMIN_EMAIL`, `ADMIN_PASSWORD` y `ADMIN_NOMBRE` del `.env` (si no están, saltea ese paso). Se puede correr varias veces: lo que ya existe no se cambia.
+- Datos iniciales: `npm run seed` desde `backend/`. Crea Buenos Aires → Partido de La Costa → sus 14 localidades (de norte a sur), las 8 categorías de la portada y el primer administrador con `ADMIN_EMAIL`, `ADMIN_PASSWORD` y `ADMIN_NOMBRE` del `.env` (si no están, saltea ese paso). Se puede correr varias veces: lo que ya existe no se cambia.
 - **Datos de prueba (demo)**: `npm run demo` desde `backend/` (`prisma/demo.js`) carga los 20 negocios ficticios de la demo (`prisma/datos-demo.js`), ya publicados, pasando por el mismo camino que una ficha real (crear → aprobar → publicar). Se reconocen porque su referencia de verificación empieza con "DEMO: negocio ficticio". **Antes de abrir la guía al público: `npm run demo:borrar`**.
 - Tests: `npm test` desde `backend/` (vitest, sin base: los repositories van simulados).
 
@@ -68,6 +68,7 @@ src/dtos/                   qué datos se devuelven (el público nunca ve la ref
 src/errors/                 errores propios con su código HTTP, por tema (auth, negocio, catalogo)
 src/utils/jwt.js            crear y verificar tokens
 src/utils/texto.js          slugs para las URLs y claves sin tildes para buscar
+src/utils/busqueda.js       qué quiso decir la búsqueda: comidas → categoría, nombres de localidad → localidad, el resto palabra por palabra
 src/utils/enlaces.js        qué links se aceptan en una ficha
 src/utils/comparar.js       si dos objetos tienen los mismos datos (Postgres reordena las claves de los Json)
 tests/                      tests de services, validadores y entorno (vitest, repositories simulados)
@@ -83,7 +84,7 @@ Las rutas de `/v1/admin` piden `Authorization: Bearer <token>` de un administrad
 | `POST /v1/auth/login` | cualquiera | `{ email, password }` → `{ token, usuario }` |
 | `GET /v1/categorias` | **público** | las categorías, en el orden de la portada, cada una con cuántos negocios publicados tiene (`negocios`) |
 | `GET /v1/geografia` | **público** | provincias → partidos → localidades (en el orden en que se cargaron: de norte a sur) |
-| `GET /v1/negocios?categoria&localidadId&precio&prestacion&destacado&orden&texto&pagina` | **público** | los publicados, de a 24. `categoria` es la clave de la URL (`parrillas`); `prestacion` se puede repetir (tienen que tener todas); `texto` busca en nombre, descripción, localidad y categoría sin importar tildes; `orden`: `recomendados` (destacados primero, después en el orden en que se cargaron), `precio` o `nombre` |
+| `GET /v1/negocios?categoria&localidadId&precio&prestacion&destacado&orden&texto&pagina` | **público** | los publicados, de a 24. `categoria` es la clave de la URL (`parrillas`); `prestacion` se puede repetir (tienen que tener todas); `texto` se entiende palabra por palabra y sin importar tildes: las comidas llevan a su categoría ("pizza", "birra"; las listas están en `config/costa.js`), los nombres de localidad a esa localidad ("pizza en san clemente") y el resto se busca en nombre, descripción, localidad y categoría, en cualquier orden; `orden`: `recomendados` (destacados primero, después en el orden en que se cargaron), `precio` o `nombre` |
 | `GET /v1/negocios/:slug` | **público** | la ficha publicada, con horarios y carta aprobada |
 | `GET /v1/admin/negocios?texto&pagina` | admin | todas las fichas (publicadas o no), las editadas últimas primero |
 | `POST /v1/admin/negocios` | admin | crea la ficha como borrador |
@@ -123,7 +124,7 @@ src/features/admin/               el panel: inicio con números, lista de negoci
                                   restaurar) y configuración (categorías y geografía)
 ```
 
-Comparado con la demo, a propósito no están las valoraciones, las reseñas ni el formulario de consulta (no hay datos reales de eso todavía; la versión anterior también los ocultaba en modo real). "Sumá tu lugar" y "Reclamar mi negocio" muestran que se habilitan más adelante. La ficha tiene una sola foto en vez de galería (el backend guarda una).
+Comparado con la demo, a propósito no están las valoraciones, las reseñas ni el formulario de consulta (no hay datos reales de eso todavía; la versión anterior también los ocultaba en modo real). "Sumá tu lugar" y "Reclamar mi negocio" muestran que se habilitan más adelante. La ficha tiene una sola foto en vez de galería (el backend guarda una; la ficha ya pasa las fotos como carrusel si algún día llegan varias en `fotos`), y su recuadro de la derecha no lleva el "Armá tu próximo plan" ni el "¿Este es tu negocio?": muestra dónde está, horarios, contacto y precio.
 
 **Por qué todavía sin Tailwind** (VPUG lo usa):
 
