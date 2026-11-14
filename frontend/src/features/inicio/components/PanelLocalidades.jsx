@@ -107,7 +107,9 @@ const PanelLocalidades = ({ localidades }) => {
                   {l.nombre}
                 </span>
                 <span className="localidad-texto">
-                  <small>{l.partido ? `Partido de ${l.partido}` : 'La Costa'}</small>
+                  {/* El partido ya se llama "Partido de La Costa": sin sacarle el comienzo decía
+                      "Partido de Partido de La Costa" (como en Contacto de la ficha). */}
+                  <small>{l.partido ? `Partido de ${l.partido.replace(/^Partido de /, '')}` : 'La Costa'}</small>
                   <strong>{l.nombre}</strong>
                   <span className="localidad-ver">
                     Ver lugares <ArrowRight size={15} />
