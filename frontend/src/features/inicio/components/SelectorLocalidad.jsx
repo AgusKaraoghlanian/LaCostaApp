@@ -5,7 +5,16 @@ import { useEffect, useId, useMemo, useRef, useState } from 'react'
 // sigue el patrón de combobox de solo selección de WAI-ARIA. El foco queda siempre en el
 // botón y la opción activa se anuncia con aria-activedescendant.
 // En el celular la lista se abre como una hoja desde abajo, más cómoda para el pulgar.
-const SelectorLocalidad = ({ localidades, valor, onCambiar }) => {
+// También lo usa Explorar en el recuadro de la localidad: clase cambia el estilo de afuera,
+// etiqueta es el título del campo y textoTodas, cómo se llama la opción de todas.
+const SelectorLocalidad = ({
+  localidades,
+  valor,
+  onCambiar,
+  clase = 'campo-localidad',
+  etiqueta = '¿Por dónde?',
+  textoTodas = 'Todas las localidades',
+}) => {
   const idBase = useId()
   const [abierto, setAbierto] = useState(false)
   const [activa, setActiva] = useState(0)
@@ -16,8 +25,8 @@ const SelectorLocalidad = ({ localidades, valor, onCambiar }) => {
 
   // La lista plana de opciones: primero "Todas", después cada localidad.
   const opciones = useMemo(
-    () => [{ id: '', nombre: 'Todas las localidades' }, ...localidades],
-    [localidades],
+    () => [{ id: '', nombre: textoTodas }, ...localidades],
+    [localidades, textoTodas],
   )
 
   // Las localidades agrupadas por partido (solo se muestran los títulos si hay más de uno).
@@ -171,7 +180,7 @@ const SelectorLocalidad = ({ localidades, valor, onCambiar }) => {
 
   return (
     <div
-      className={`campo-localidad selector-localidad${abierto ? ' abierto' : ''}`}
+      className={`${clase} selector-localidad${abierto ? ' abierto' : ''}`}
       ref={contenedorRef}
     >
       <button
@@ -190,7 +199,7 @@ const SelectorLocalidad = ({ localidades, valor, onCambiar }) => {
         <MapPin size={21} className="selector-pin" aria-hidden="true" />
         <span className="selector-textos">
           <span className="selector-etiqueta" id={`${idBase}-etiqueta`}>
-            ¿Por dónde?
+            {etiqueta}
           </span>
           <span className="selector-valor" id={`${idBase}-valor`}>
             {elegida.nombre}
