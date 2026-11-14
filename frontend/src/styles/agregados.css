@@ -196,6 +196,32 @@
   color: #a5432e;
 }
 
+/* Celular: el pie más compacto, con la misma información. Menos aire arriba, entre el logo y
+   las columnas y antes de la línea de abajo, y sin "Hecho con amor por lo local" (decorativo).
+   El espacio entre los links no cambia: así se siguen tocando fácil con el dedo. */
+@media (max-width: 720px) {
+  .pie {
+    padding: 24px 0 14px;
+  }
+  .pie-arriba {
+    gap: 20px 15px;
+    padding-bottom: 18px;
+  }
+  .pie-arriba p {
+    margin: 8px 0 0;
+  }
+  .pie .hecho {
+    display: none;
+  }
+  .pie-arriba strong {
+    margin-bottom: 2px;
+  }
+  .pie-abajo {
+    padding-top: 12px;
+    gap: 4px;
+  }
+}
+
 /* El nombre del administrador y el botón de salir, arriba a la derecha del panel. */
 .motor-status .boton-texto {
   display: flex;
