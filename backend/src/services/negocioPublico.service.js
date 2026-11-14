@@ -13,7 +13,8 @@ const paginaVacia = (pagina) => ({ negocios: [], total: 0, pagina, porPagina: NE
 // categoria es la clave de la URL ("parrillas"). Si no existe, no hay resultados.
 // texto se entiende palabra por palabra: las comidas llevan a su categoría ("pizza" →
 // pizzerías), los nombres de localidad a esa localidad y el resto se busca en cualquier orden.
-const listarPublicados = async ({ categoria, localidadId, precio, prestacion, destacado, orden, texto, pagina = 1 }) => {
+// plan: solo los de esa parte de la portada (CARRUSEL, LISTA o SABORES).
+const listarPublicados = async ({ categoria, localidadId, precio, prestacion, destacado, plan, orden, texto, pagina = 1 }) => {
   let categoriaId;
   if (categoria) {
     const encontrada = await categoriaRepository.obtenerCategoriaPorClave(categoria);
@@ -36,6 +37,7 @@ const listarPublicados = async ({ categoria, localidadId, precio, prestacion, de
     precio,
     prestaciones: prestacion,
     destacado,
+    plan,
     orden,
     busqueda,
     saltear: (pagina - 1) * NEGOCIOS_POR_PAGINA,

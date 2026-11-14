@@ -12,6 +12,15 @@ describe('crearNegocioSchema', () => {
     expect(value).toMatchObject({ estadoComercial: 'SIN_CONFIRMAR', descripcion: '', prestaciones: [], precio: null, foto: null, productos: [] });
   });
 
+  it('el plan de portada es NINGUNO si no se elige, y "destacado" ya no se toma del body', () => {
+    expect(validar({}).value.plan).toBe('NINGUNO');
+    const { error, value } = validar({ plan: 'CARRUSEL', destacado: true });
+    expect(error).toBeUndefined();
+    expect(value.plan).toBe('CARRUSEL');
+    expect(value).not.toHaveProperty('destacado');
+    expect(validar({ plan: 'ORO' }).error.message).toBe('Elegí dónde aparece en la portada.');
+  });
+
   it('acepta la foto subida en desarrollo (con puerto) pero no un puerto en otros links', () => {
     expect(validar({ foto: 'http://localhost:3001/uploads/negocios/a.jpg' }).error).toBeUndefined();
     expect(validar({ foto: 'https://x.supabase.co/storage/v1/object/public/fotos/negocios/a.jpg' }).error).toBeUndefined();
@@ -62,6 +71,11 @@ describe('listarNegociosSchema', () => {
   it('acepta una sola prestación o varias', () => {
     expect(listarNegociosSchema.validate({ prestacion: 'Reservas' }).value.prestacion).toEqual(['Reservas']);
     expect(listarNegociosSchema.validate({ prestacion: ['Reservas', 'Accesible'] }).value.prestacion).toHaveLength(2);
+  });
+
+  it('filtra por un plan de portada válido', () => {
+    expect(listarNegociosSchema.validate({ plan: 'SABORES' }).error).toBeUndefined();
+    expect(listarNegociosSchema.validate({ plan: 'cualquiera' }).error).toBeDefined();
   });
 
   it('convierte los números del query', () => {

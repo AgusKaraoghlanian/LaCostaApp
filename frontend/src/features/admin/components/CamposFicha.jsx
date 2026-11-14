@@ -1,5 +1,5 @@
 import { CircleHelp } from 'lucide-react'
-import { ESTADOS_COMERCIALES, PRESTACIONES } from '../../../shared/costa.js'
+import { ESTADOS_COMERCIALES, PLANES_PORTADA, PRESTACIONES } from '../../../shared/costa.js'
 import { NOMBRES_DE_PRECIO } from '../../../shared/formato.js'
 import { useCatalogo } from '../../../shared/hooks/useCatalogo.jsx'
 import CampoFoto from './CampoFoto.jsx'
@@ -138,10 +138,18 @@ const CamposFicha = ({ register, control }) => {
           <input maxLength={500} {...register('otrasPrestaciones')} />
         </label>
       </fieldset>
-      <label className="checkbox">
-        <input type="checkbox" {...register('destacado')} />
-        Destacado: aparece primero y en “Para poner en tu lista” de la portada
-      </label>
+      <div className="motor-field">
+        <label>
+          Lugar en la portada
+          <select {...register('plan')}>
+            {Object.entries(PLANES_PORTADA).map(([valor, texto]) => (
+              <option key={valor} value={valor}>
+                {texto}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
     </>
   )
 }

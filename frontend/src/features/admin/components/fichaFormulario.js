@@ -59,7 +59,7 @@ export const FICHA_VACIA = {
   otrasPrestaciones: '',
   precio: '',
   foto: '',
-  destacado: false,
+  plan: 'NINGUNO',
   referenciaVerificacion: '',
   horarios: [],
   horariosEspeciales: [],

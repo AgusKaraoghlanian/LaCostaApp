@@ -29,6 +29,8 @@ La app se está pasando al mismo stack y la misma forma de trabajar que VPUG. Mi
 
 El público solo ve la revisión publicada, sin la referencia de verificación (es interna) y con la carta aprobada (los productos `PROPUESTO` o `DESCARTADO` no salen). Un producto con precio no se puede aprobar sin moneda: el `$` solo no dice si son pesos o dólares.
 
+**Plan de portada** (`Negocio.plan`, se elige en el admin como "Lugar en la portada"): dónde aparece el negocio en la portada, del más visible al más barato. `CARRUSEL`, la foto grande de arriba (hasta 5); `LISTA`, "Para poner en tu lista" (hasta 3); `SABORES`, "Sabores para todos tus planes" (hasta 3); `NINGUNO`, solo en Explorar y en las búsquedas. `destacado` ya no se elige: sale del plan (`CARRUSEL` y `LISTA`) y da el distintivo "Destacado" y el primer lugar en los listados. Como el resto de la ficha, se ve al aprobar y publicar. Si nadie tiene `SABORES`, esa sección muestra 3 cualquiera.
+
 ## Seguridad
 
 - **Variables de entorno** (`config/entorno.js`): el servidor no arranca si falta `DATABASE_URL` o `JWT_SECRET`. En producción (`NODE_ENV=production`) además exige `JWT_SECRET` de 32 caracteres o más y `CORS_ORIGENES`; en desarrollo solo avisa.
@@ -84,7 +86,7 @@ Las rutas de `/v1/admin` piden `Authorization: Bearer <token>` de un administrad
 | `POST /v1/auth/login` | cualquiera | `{ email, password }` → `{ token, usuario }` |
 | `GET /v1/categorias` | **público** | las categorías, en el orden de la portada, cada una con cuántos negocios publicados tiene (`negocios`) |
 | `GET /v1/geografia` | **público** | provincias → partidos → localidades (en el orden en que se cargaron: de norte a sur) |
-| `GET /v1/negocios?categoria&localidadId&precio&prestacion&destacado&orden&texto&pagina` | **público** | los publicados, de a 24. `categoria` es la clave de la URL (`parrillas`); `prestacion` se puede repetir (tienen que tener todas); `texto` se entiende palabra por palabra y sin importar tildes: las comidas llevan a su categoría ("pizza", "birra"; las listas están en `config/costa.js`), los nombres de localidad a esa localidad ("pizza en san clemente") y el resto se busca en nombre, descripción, localidad y categoría, en cualquier orden; `orden`: `recomendados` (destacados primero, después en el orden en que se cargaron), `precio` o `nombre` |
+| `GET /v1/negocios?categoria&localidadId&precio&prestacion&destacado&plan&orden&texto&pagina` | **público** | los publicados, de a 24. `categoria` es la clave de la URL (`parrillas`); `prestacion` se puede repetir (tienen que tener todas); `plan`: los de una parte de la portada (`CARRUSEL`, `LISTA` o `SABORES`); `texto` se entiende palabra por palabra y sin importar tildes: las comidas llevan a su categoría ("pizza", "birra"; las listas están en `config/costa.js`), los nombres de localidad a esa localidad ("pizza en san clemente") y el resto se busca en nombre, descripción, localidad y categoría, en cualquier orden; `orden`: `recomendados` (destacados primero, después en el orden en que se cargaron), `precio` o `nombre` |
 | `GET /v1/negocios/:slug` | **público** | la ficha publicada, con horarios y carta aprobada |
 | `GET /v1/admin/negocios?texto&pagina` | admin | todas las fichas (publicadas o no), las editadas últimas primero |
 | `POST /v1/admin/negocios` | admin | crea la ficha como borrador |
