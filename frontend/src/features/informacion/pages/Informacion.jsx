@@ -53,7 +53,7 @@ const Informacion = ({ tipo }) => {
             <img className="foto-editorial" src={FOTO_PORTADA} alt="Un espacio gastronómico cálido y luminoso" />
             <h2>Mucho más que una escapada</h2>
             <p>
-              Desde San Clemente del Tuyú hasta Nueva Atlantis, La Costa tiene cafés para una tarde de lluvia,
+              Desde San Clemente del Tuyú hasta Costa Esmeralda, La Costa tiene cafés para una tarde de lluvia,
               mesas para una celebración, parrillas de barrio y helados para caminar frente al mar. Queremos que
               encontrarlos sea parte del disfrute.
             </p>
