@@ -1,22 +1,33 @@
-import { SlidersHorizontal, Waves } from 'lucide-react'
+import { SlidersHorizontal, Waves, X } from 'lucide-react'
 import { PRESTACIONES } from '../../../shared/costa.js'
 import { useCatalogo } from '../../../shared/hooks/useCatalogo.jsx'
 
-// La columna de filtros. filtros sale de la URL; cambiar(clave, valor) la actualiza.
-// En la página de una categoría no se ofrece elegir otra.
-const Filtros = ({ filtros, cambiar, alternarPrestacion, limpiar, conCategoria, visible }) => {
+// La columna de filtros. filtros sale de la URL; cambiar(clave, valor) la actualiza y
+// elegirCategoria también pasa de una categoría a otra (en /categoria/:clave va en la dirección).
+// En el celular se abre con el botón Filtros y se cierra con la cruz, con "Ver lugares" o con
+// Esc (onCerrar).
+const Filtros = ({ filtros, cambiar, elegirCategoria, alternarPrestacion, limpiar, visible, onCerrar, total }) => {
   const { categorias, localidades } = useCatalogo()
 
   return (
-    <aside className={`filtros ${visible ? 'visible' : ''}`}>
+    <aside
+      className={`filtros ${visible ? 'visible' : ''}`}
+      aria-label="Filtros"
+      onKeyDown={(e) => visible && e.key === 'Escape' && onCerrar()}
+    >
       <div className="filtros-titulo">
         <h2>
           <SlidersHorizontal size={17} />
           Filtrá tu búsqueda
         </h2>
-        <button type="button" className="boton-texto" onClick={limpiar}>
-          Limpiar
-        </button>
+        <span className="filtros-titulo-acciones">
+          <button type="button" className="boton-texto" onClick={limpiar}>
+            Limpiar
+          </button>
+          <button type="button" className="filtros-cerrar" onClick={onCerrar} aria-label="Cerrar los filtros">
+            <X size={18} />
+          </button>
+        </span>
       </div>
       <label className="etiqueta-campo">
         Localidad
@@ -29,19 +40,17 @@ const Filtros = ({ filtros, cambiar, alternarPrestacion, limpiar, conCategoria, 
           ))}
         </select>
       </label>
-      {!conCategoria && (
-        <label className="etiqueta-campo">
-          Categoría
-          <select value={filtros.categoria} onChange={(e) => cambiar('categoria', e.target.value)}>
-            <option value="">Todas las categorías</option>
-            {categorias.map((c) => (
-              <option key={c.id} value={c.clave}>
-                {c.nombre}
-              </option>
-            ))}
-          </select>
-        </label>
-      )}
+      <label className="etiqueta-campo">
+        Categoría
+        <select value={filtros.categoria} onChange={(e) => elegirCategoria(e.target.value)}>
+          <option value="">Todas las categorías</option>
+          {categorias.map((c) => (
+            <option key={c.id} value={c.clave}>
+              {c.nombre}
+            </option>
+          ))}
+        </select>
+      </label>
       <fieldset>
         <legend>Precio por persona</legend>
         <div className="precios">
@@ -68,6 +77,9 @@ const Filtros = ({ filtros, cambiar, alternarPrestacion, limpiar, conCategoria, 
           </label>
         ))}
       </fieldset>
+      <button type="button" className="filtros-ver boton boton-naranja" onClick={onCerrar}>
+        {total ? `Ver ${total} ${total === 1 ? 'lugar' : 'lugares'}` : 'Ver resultados'}
+      </button>
       <div className="nota-filtros">
         <Waves size={23} />
         <p>
