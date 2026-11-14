@@ -1,6 +1,6 @@
 import { ArrowRight, CircleHelp } from 'lucide-react'
 import { Link } from 'react-router'
-import { FOTO_PORTADA } from '../../../shared/costa.js'
+import { FOTO_PORTADA, FOTOS_LOCALIDADES } from '../../../shared/costa.js'
 import Migas from '../../../shared/components/Migas.jsx'
 import TituloDePagina from '../../../shared/components/TituloDePagina.jsx'
 
@@ -62,6 +62,23 @@ const Informacion = ({ tipo }) => {
               Cada ficha se revisa antes de publicarse y se mantiene al día. Quienes visitan el directorio pueden
               explorar por localidad, comparar opciones y guardar sus lugares favoritos.
             </p>
+            {/* Las licencias de las fotos de Wikimedia Commons (CC BY y CC BY-SA) piden nombrar al
+                autor en algún lugar del sitio: va acá, al final, y no sobre las fotos. Las fotos
+                propias (sin autor cargado) no van en la lista. */}
+            <h2>Las fotos de las localidades</h2>
+            <p>Varias son fotos de Wikimedia Commons. Gracias a quienes las compartieron:</p>
+            <ul className="creditos-fotos">
+              {Object.entries(FOTOS_LOCALIDADES)
+                .filter(([, f]) => f.autor)
+                .map(([localidad, f]) => (
+                  <li key={localidad}>
+                    <strong>{localidad}:</strong> {f.lugar}. Foto de {f.autor} ({f.licencia}).{' '}
+                    <a href={f.fuente} target="_blank" rel="noreferrer">
+                      Ver original
+                    </a>
+                  </li>
+                ))}
+            </ul>
           </>
         ) : (
           <div className="pasos">
