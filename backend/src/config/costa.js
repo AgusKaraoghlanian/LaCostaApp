@@ -15,6 +15,15 @@ export const PRESTACIONES_MAXIMAS = 30;
 // Todas las horas de la guía son de Argentina.
 export const ZONA_HORARIA = 'America/Argentina/Buenos_Aires';
 
+// Dónde aparece un negocio en la portada (Negocio.plan): CARRUSEL, la foto grande de arriba (el
+// más visible); LISTA, "Para poner en tu lista"; SABORES, "Sabores para todos tus planes" (el más
+// barato); NINGUNO, solo en Explorar y en las búsquedas.
+export const PLANES = ['NINGUNO', 'CARRUSEL', 'LISTA', 'SABORES'];
+
+// Los planes que llevan el distintivo "Destacado" y van primero en los listados (Negocio.destacado
+// sale de acá: no se elige aparte).
+export const PLANES_DESTACADOS = ['CARRUSEL', 'LISTA'];
+
 // Búsqueda del sitio (utils/busqueda.js). Todo va sin tildes y en minúsculas, como se compara.
 
 // Las palabras que llevan a cada categoría (por su clave), en singular, en plural y como se

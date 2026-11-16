@@ -17,6 +17,16 @@ export const FOTO_PORTADA =
 // Domingo es 0, como en el backend.
 export const DIAS = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
 
+// Dónde aparece un negocio en la portada (lo que contrató), del más visible al más barato.
+// Carrusel y Para poner en tu lista llevan además el distintivo "Destacado" y van primero en
+// Explorar (el backend lo calcula del plan).
+export const PLANES_PORTADA = {
+  NINGUNO: 'No aparece en la portada (solo en Explorar y en las búsquedas)',
+  CARRUSEL: 'Carrusel de la foto principal (el más visible, hasta 5) · Destacado',
+  LISTA: 'Para poner en tu lista (intermedio, hasta 3) · Destacado',
+  SABORES: 'Sabores para todos tus planes (el más barato, hasta 3)',
+}
+
 export const ESTADOS_COMERCIALES = {
   SIN_CONFIRMAR: 'Actividad actual sin confirmar',
   ACTIVO: 'Activo, con evidencia revisada',

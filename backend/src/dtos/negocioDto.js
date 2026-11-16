@@ -5,7 +5,7 @@
 const CAMPOS_FICHA = [
   'nombre', 'localidadId', 'categoriaId', 'estadoComercial', 'descripcion', 'direccion',
   'zonaAtencion', 'telefono', 'whatsapp', 'web', 'instagram', 'facebook', 'horariosTexto',
-  'prestaciones', 'precio', 'foto', 'destacado', 'referenciaVerificacion',
+  'prestaciones', 'precio', 'foto', 'plan', 'destacado', 'referenciaVerificacion',
 ];
 
 const elegir = (objeto, campos) => Object.fromEntries(campos.map((campo) => [campo, objeto[campo]]));
@@ -52,6 +52,8 @@ const negocioResumenDto = (revision) => {
     precio: ficha.precio,
     prestaciones: ficha.prestaciones,
     destacado: ficha.destacado ?? false,
+    // Las revisiones de antes de los planes no lo traen: las destacadas estaban en "Para poner en tu lista".
+    plan: ficha.plan ?? (ficha.destacado ? 'LISTA' : 'NINGUNO'),
     estadoComercial: ficha.estadoComercial,
     localidad,
     categoria,

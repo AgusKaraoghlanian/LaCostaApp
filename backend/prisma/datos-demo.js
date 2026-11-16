@@ -1,4 +1,5 @@
-// Los 20 negocios ficticios de la demo original (npm run demo). Las fotos son ilustrativas
+// Los 20 negocios ficticios de la demo original (npm run demo), con distintos planes de portada
+// para ver todas las secciones. Las fotos son ilustrativas
 // (Unsplash). No son negocios reales: borrarlos con npm run demo:borrar antes de abrir la guía.
 
 const foto = (id) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1100&q=85`;
@@ -6,7 +7,7 @@ const foto = (id) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1
 export const NEGOCIOS_DEMO = [
   {
     nombre: 'La Orilla',
-    destacado: true,
+    plan: 'CARRUSEL',
     categoria: 'restaurantes',
     localidad: 'Costa del Este',
     descripcion: 'Cocina de estación, sobremesas largas y el mar como inspiración.',
@@ -17,7 +18,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Casa Marea',
-    destacado: true,
+    plan: 'LISTA',
     categoria: 'cafeterias',
     localidad: 'San Bernardo',
     descripcion: 'Café de especialidad y pastelería artesanal, a pasitos de la playa.',
@@ -28,7 +29,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Fuego Sur',
-    destacado: true,
+    plan: 'CARRUSEL',
     categoria: 'parrillas',
     localidad: 'Mar de Ajó',
     descripcion: 'Cortes a las brasas, vegetales al rescoldo y sabor bien argentino.',
@@ -39,7 +40,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Puerto & Sal',
-    destacado: false,
+    plan: 'LISTA',
     categoria: 'mariscos',
     localidad: 'San Clemente del Tuyú',
     descripcion: 'Pesca del día y recetas marineras para compartir en familia.',
@@ -50,7 +51,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'La Redonda',
-    destacado: true,
+    plan: 'CARRUSEL',
     categoria: 'pizzerias',
     localidad: 'Santa Teresita',
     descripcion: 'Masa madre, horno de piedra y clásicos que nunca fallan.',
@@ -61,7 +62,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Bosque Cervecero',
-    destacado: false,
+    plan: 'LISTA',
     categoria: 'bares',
     localidad: 'Costa del Este',
     descripcion: 'Cervezas artesanales y platos para picar bajo los pinos.',
@@ -72,7 +73,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Duna Helados',
-    destacado: false,
+    plan: 'SABORES',
     categoria: 'heladerias',
     localidad: 'San Bernardo',
     descripcion: 'Helados hechos en pequeños lotes, con fruta de verdad.',
@@ -83,7 +84,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Harina de Mar',
-    destacado: false,
+    plan: 'SABORES',
     categoria: 'panaderias',
     localidad: 'La Lucila del Mar',
     descripcion: 'Panes de fermentación lenta y medialunas recién salidas del horno.',
@@ -94,7 +95,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'El Refugio del Tuyú',
-    destacado: false,
+    plan: 'SABORES',
     categoria: 'restaurantes',
     localidad: 'Mar del Tuyú',
     descripcion: 'Pastas caseras y recetas de abuela con una mirada costera.',
@@ -105,7 +106,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Café del Muelle',
-    destacado: false,
+    plan: 'NINGUNO',
     categoria: 'cafeterias',
     localidad: 'Santa Teresita',
     descripcion: 'Desayunos sin apuro, tostados y café mirando al horizonte.',
@@ -116,7 +117,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Las Brasas de Clemente',
-    destacado: false,
+    plan: 'NINGUNO',
     categoria: 'parrillas',
     localidad: 'San Clemente del Tuyú',
     descripcion: 'Parrillada generosa y cocina criolla para toda la familia.',
@@ -127,7 +128,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Nonna Costa',
-    destacado: false,
+    plan: 'NINGUNO',
     categoria: 'pizzerias',
     localidad: 'Mar de Ajó',
     descripcion: 'Pizzas de barrio, empanadas y el secreto de la salsa de Nonna.',
@@ -138,7 +139,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Atlántico Bar',
-    destacado: false,
+    plan: 'NINGUNO',
     categoria: 'bares',
     localidad: 'Las Toninas',
     descripcion: 'Tragos de autor y música suave para cerrar un día de playa.',
@@ -149,7 +150,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Bruma Cocina',
-    destacado: false,
+    plan: 'NINGUNO',
     categoria: 'restaurantes',
     localidad: 'Aguas Verdes',
     descripcion: 'Productos de estación, platos simples y un jardín escondido.',
@@ -160,7 +161,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Salitre Pescadería & Cocina',
-    destacado: false,
+    plan: 'NINGUNO',
     categoria: 'mariscos',
     localidad: 'Mar de Ajó',
     descripcion: 'Rabas, pesca fresca y sabores del mar preparados en el momento.',
@@ -171,7 +172,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Entre Pinos Café',
-    destacado: false,
+    plan: 'NINGUNO',
     categoria: 'cafeterias',
     localidad: 'Costa del Este',
     descripcion: 'Café de origen y tortas caseras en el corazón del bosque.',
@@ -182,7 +183,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Dulce Marea',
-    destacado: false,
+    plan: 'NINGUNO',
     categoria: 'heladerias',
     localidad: 'Santa Teresita',
     descripcion: 'Sabores clásicos y combinaciones de estación, hechos cada día.',
@@ -193,7 +194,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Pan del Bosque',
-    destacado: false,
+    plan: 'NINGUNO',
     categoria: 'panaderias',
     localidad: 'Nueva Atlantis',
     descripcion: 'Pan de campo, bizcochos y cosas ricas para el mate.',
@@ -204,7 +205,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'El Patio de las Toninas',
-    destacado: false,
+    plan: 'NINGUNO',
     categoria: 'restaurantes',
     localidad: 'Las Toninas',
     descripcion: 'Hamburguesas caseras, ensaladas y un patio para reencontrarse.',
@@ -215,7 +216,7 @@ export const NEGOCIOS_DEMO = [
   },
   {
     nombre: 'Sur Sustento',
-    destacado: false,
+    plan: 'NINGUNO',
     categoria: 'restaurantes',
     localidad: 'La Lucila del Mar',
     descripcion: 'Cocina vegetal, bowls de estación y opciones para todos.',

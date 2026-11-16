@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import { esEnlacePermitido } from '../utils/enlaces.js';
-import { HORARIOS_MAXIMOS, PRESTACIONES_MAXIMAS, PRODUCTOS_MAXIMOS } from '../config/costa.js';
+import { HORARIOS_MAXIMOS, PLANES, PRESTACIONES_MAXIMAS, PRODUCTOS_MAXIMOS } from '../config/costa.js';
 
 // Un id numérico (de la URL, del query o del body). "5" se convierte en 5.
 const id = (nombre) => Joi.number().integer().positive().messages({
@@ -142,7 +142,12 @@ const datosNegocio = {
     'number.max': 'El rango de precio va de 1 a 3.',
   }),
   foto: enlace('La foto', 'foto', 1000).empty('').allow(null).default(null),
-  destacado: Joi.boolean().default(false).messages({ 'boolean.base': 'Destacado tiene que ser sí o no.' }),
+  // En qué parte de la portada aparece. "destacado" ya no se manda: sale del plan.
+  plan: Joi.string().valid(...PLANES).default('NINGUNO').messages({
+    'any.only': 'Elegí dónde aparece en la portada.',
+    'string.base': 'Elegí dónde aparece en la portada.',
+  }),
+  destacado: Joi.any().strip(),
   referenciaVerificacion: Joi.string().trim().min(3).max(1500).required().messages({
     'string.empty': 'Contá qué verificaste del negocio y cómo.',
     'string.min': 'Contá qué verificaste del negocio y cómo.',
@@ -199,6 +204,10 @@ const listarNegociosSchema = Joi.object({
     'array.max': 'Se puede filtrar por hasta 10 prestaciones.',
   }),
   destacado: Joi.boolean().messages({ 'boolean.base': 'Destacado tiene que ser true o false.' }),
+  // Los de una parte de la portada (CARRUSEL, LISTA o SABORES).
+  plan: Joi.string().valid(...PLANES).messages({
+    'any.only': 'El plan tiene que ser NINGUNO, CARRUSEL, LISTA o SABORES.',
+  }),
   // recomendados: los destacados primero; precio: de menor a mayor; nombre: alfabético.
   orden: Joi.string().valid('recomendados', 'precio', 'nombre').default('recomendados').messages({
     'any.only': 'El orden tiene que ser recomendados, precio o nombre.',

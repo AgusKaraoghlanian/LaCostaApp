@@ -1,7 +1,6 @@
-import { ArrowRight, ArrowUpRight, Sun, Utensils, Waves } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Utensils } from 'lucide-react'
 import { Link } from 'react-router'
 import { buscarNegocios } from '../../../shared/api/negocios.api.js'
-import { FOTO_PORTADA } from '../../../shared/costa.js'
 import IconoCategoria from '../../../shared/components/IconoCategoria.jsx'
 import Tarjeta from '../../../shared/components/Tarjeta.jsx'
 import TituloDePagina from '../../../shared/components/TituloDePagina.jsx'
@@ -9,14 +8,24 @@ import { useCargarDatos } from '../../../shared/hooks/useCargarDatos.js'
 import { useCatalogo } from '../../../shared/hooks/useCatalogo.jsx'
 import Buscador from '../components/Buscador.jsx'
 import PanelLocalidades from '../components/PanelLocalidades.jsx'
+import CarruselPortada from '../components/CarruselPortada.jsx'
 
-// Tres destacados y tres que no lo son, para las dos grillas de la portada.
+// Cada parte de la portada con los negocios de su plan (lo que se elige en el admin): hasta 5 con
+// foto en el carrusel de arriba, 3 en "Para poner en tu lista" y 3 en "Sabores para todos tus
+// planes". Si nadie tiene el plan de "Sabores", esa sección muestra 3 cualquiera (como antes),
+// para que la portada no quede vacía.
 const cargarPortada = async () => {
-  const [destacados, otros] = await Promise.all([
-    buscarNegocios({ destacado: true }),
-    buscarNegocios({ destacado: false }),
+  const [carrusel, lista, sabores] = await Promise.all([
+    buscarNegocios({ plan: 'CARRUSEL' }),
+    buscarNegocios({ plan: 'LISTA' }),
+    buscarNegocios({ plan: 'SABORES' }),
   ])
-  return { destacados: destacados.negocios.slice(0, 3), otros: otros.negocios.slice(0, 3) }
+  const otros = sabores.negocios.length ? sabores : await buscarNegocios({ destacado: false })
+  return {
+    carrusel: carrusel.negocios.filter((n) => n.foto).slice(0, 5),
+    destacados: lista.negocios.slice(0, 3),
+    otros: otros.negocios.slice(0, 3),
+  }
 }
 
 // Un título de sección con su link a la derecha.
@@ -68,31 +77,7 @@ const Inicio = () => {
               </span>
             </div>
           </div>
-          <div className="hero-visual">
-            <img
-              className="hero-imagen"
-              src={FOTO_PORTADA}
-              alt="Un restaurante cálido, lleno de plantas y luz natural"
-              fetchPriority="high"
-            />
-            <span className="sello-costero">
-              <Waves size={22} />
-              <span>
-                CON GUSTO
-                <br />A COSTA
-              </span>
-              <small>36° S · 56° O</small>
-            </span>
-            <div className="hero-nota">
-              <span>
-                <Sun size={24} />
-              </span>
-              <div>
-                El mejor plan<small>está a la vuelta de la esquina.</small>
-              </div>
-              <ArrowUpRight size={19} />
-            </div>
-          </div>
+          <CarruselPortada locales={datos?.carrusel ?? []} />
           <div className="hero-buscador">
             <Buscador />
           </div>
@@ -118,7 +103,7 @@ const Inicio = () => {
         </div>
       </section>
 
-      {/* Sin destacados elegidos, la sección no aparece. */}
+      {/* Sin negocios en "Para poner en tu lista" (plan LISTA), la sección no aparece. */}
       {datos?.destacados.length > 0 && (
         <section className="seccion destacados contenedor">
           <TituloSeccion

@@ -4,7 +4,7 @@ import * as categoriaRepository from '../repositories/categoria.repository.js';
 import * as geografiaRepository from '../repositories/geografia.repository.js';
 import { enTransaccion } from '../repositories/transaccion.repository.js';
 import { instantaneaDeNegocio, negocioAdminDto, negocioAdminResumenDto } from '../dtos/negocioDto.js';
-import { NEGOCIOS_POR_PAGINA } from '../config/costa.js';
+import { NEGOCIOS_POR_PAGINA, PLANES_DESTACADOS } from '../config/costa.js';
 import { armarSlug, claveDeTexto } from '../utils/texto.js';
 import { mismosDatos } from '../utils/comparar.js';
 import { NegocioNoEncontrado } from '../errors/negocio/NegocioNoEncontrado.js';
@@ -43,10 +43,17 @@ const slugLibre = async (nombre) => {
 };
 
 // Separa lo que va en la tabla Negocio de los horarios y la carta (van en sus tablas).
-const separarDatos = ({ horarios, horariosEspeciales, productos, revisionEsperada, ...ficha }) => ({
-  ficha: { ...ficha, nombreClave: claveDeTexto(ficha.nombre) },
-  horariosYCarta: { horarios, horariosEspeciales, productos },
-});
+// El plan de portada decide si es destacado (no se elige aparte). Una revisión de antes de los
+// planes trae solo "destacado": esos aparecían en "Para poner en tu lista".
+const planDe = (ficha) => ficha.plan ?? (ficha.destacado ? 'LISTA' : 'NINGUNO');
+
+const separarDatos = ({ horarios, horariosEspeciales, productos, revisionEsperada, ...datos }) => {
+  const plan = planDe(datos);
+  return {
+    ficha: { ...datos, plan, destacado: PLANES_DESTACADOS.includes(plan), nombreClave: claveDeTexto(datos.nombre) },
+    horariosYCarta: { horarios, horariosEspeciales, productos },
+  };
+};
 
 // Lo que encuentra el buscador del sitio: nombre, descripción, localidad y categoría.
 const textoDeBusqueda = (negocio) =>
@@ -118,6 +125,7 @@ const aprobarRevision = async (usuarioId, id, revisionEsperada) => {
       busqueda: textoDeBusqueda(negocio),
       precio: negocio.precio,
       prestaciones: negocio.prestaciones,
+      plan: negocio.plan,
       destacado: negocio.destacado,
       categoriaId: negocio.categoriaId,
       localidadId: negocio.localidadId,

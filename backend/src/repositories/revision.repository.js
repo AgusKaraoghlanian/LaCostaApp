@@ -42,7 +42,7 @@ const condicionesDeBusqueda = (busqueda) => {
 
 // Las revisiones que están en el sitio, con filtros. busqueda: lo buscado ya interpretado (lo
 // arma el service). prestaciones: tiene que tener todas.
-export const buscarPublicadas = async ({ categoriaId, localidadId, precio, prestaciones, destacado, busqueda, orden = "recomendados", saltear, cantidad }) => {
+export const buscarPublicadas = async ({ categoriaId, localidadId, precio, prestaciones, destacado, plan, busqueda, orden = "recomendados", saltear, cantidad }) => {
     const condiciones = condicionesDeBusqueda(busqueda);
     const where = {
         publicadaEn: { isNot: null },
@@ -50,6 +50,7 @@ export const buscarPublicadas = async ({ categoriaId, localidadId, precio, prest
         ...(localidadId ? { localidadId } : {}),
         ...(precio ? { precio } : {}),
         ...(destacado !== undefined ? { destacado } : {}),
+        ...(plan ? { plan } : {}),
         ...(prestaciones?.length ? { prestaciones: { hasEvery: prestaciones } } : {}),
         ...(condiciones.length ? { AND: condiciones } : {}),
     };
