@@ -119,7 +119,7 @@ const FichaNegocio = () => {
             </p>
           </section>
           {n.prestaciones.length > 0 && <Prestaciones prestaciones={n.prestaciones} />}
-          {n.carta.length > 0 && <Carta carta={n.carta} revisadaEl={n.actualizadoEn} />}
+          {n.carta.length > 0 && <Carta carta={n.carta} revisadaEl={n.actualizadoEn} nombreNegocio={n.nombre} />}
         </div>
         <Contacto negocio={n} />
       </div>

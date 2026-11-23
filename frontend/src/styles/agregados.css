@@ -1702,3 +1702,492 @@
     transition: none;
   }
 }
+
+/* La carta como libro (Carta y LibroCarta). En la ficha se ve la tapa; al tocarla se abre una
+   ventana con el libro: dos páginas enfrentadas en la compu, una en el celular. */
+.carta-tapa-zona {
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+}
+.carta-tapa {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  min-height: 150px;
+  padding: 24px 26px 24px 46px;
+  border: 0;
+  border-radius: 6px 12px 12px 6px;
+  background:
+    linear-gradient(115deg, #ffffff14, transparent 45%),
+    var(--verde);
+  color: #f7f1e3;
+  text-align: left;
+  box-shadow:
+    0 1px 0 #ffffff22 inset,
+    6px 8px 0 -3px #e8e2d0,
+    6px 8px 0 -2px #d6cfba,
+    0 14px 28px #1d2b2340;
+  transition: transform 0.2s;
+}
+.carta-tapa:hover {
+  transform: translateY(-2px) rotate(-0.4deg);
+}
+.carta-tapa:focus-visible {
+  outline: 3px solid var(--naranja);
+  outline-offset: 3px;
+}
+.carta-tapa-lomo {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 22px;
+  border-radius: 6px 0 0 6px;
+  background: linear-gradient(90deg, #00000045, #00000010 70%, #ffffff18);
+}
+.carta-tapa-texto {
+  display: grid;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+  padding: 10px 0;
+  border-block: 1px solid #c7aa8170;
+}
+.carta-tapa-texto small {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: #c7aa81;
+}
+.carta-tapa-texto strong {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.1;
+}
+.carta-tapa-cuenta {
+  font-size: 14px;
+  color: #d9d3c2;
+}
+.carta-tapa-abrir {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  padding: 12px 18px;
+  border-radius: 7px;
+  background: var(--naranja);
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+}
+.carta-atajos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.carta-atajos button {
+  border: 1px solid var(--borde);
+  border-radius: 99px;
+  background: var(--blanco);
+  padding: 8px 14px;
+  font-size: 14px;
+  color: var(--verde);
+}
+.carta-atajos button:hover {
+  background: #edeee6;
+}
+.carta-atajos .mas {
+  border-style: dashed;
+  color: var(--gris);
+}
+
+/* La ventana: ocupa toda la pantalla, con el fondo oscuro; el libro va centrado. */
+.libro-dialogo {
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: hidden;
+}
+.libro-dialogo::backdrop {
+  background: #14201af2;
+  backdrop-filter: blur(3px);
+}
+.libro-dialogo[open] {
+  display: grid;
+  place-items: center;
+  animation: libro-aparece 0.25s ease-out;
+}
+@keyframes libro-aparece {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+  }
+}
+.libro-marco {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  width: min(1120px, 96vw);
+  height: min(800px, calc(100dvh - 64px));
+  gap: 10px;
+}
+.libro-barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #f7f1e3;
+}
+.libro-barra-titulo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  font-family: var(--serif);
+  font-size: 22px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.libro-cerrar {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid #ffffff40;
+  border-radius: 50%;
+  background: #ffffff14;
+  color: white;
+}
+.libro-cerrar:hover {
+  background: #ffffff30;
+}
+.libro-escena {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  min-height: 0;
+}
+.libro-flecha {
+  align-self: center;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 50%;
+  background: #fffefae6;
+  color: var(--verde);
+  box-shadow: 0 4px 14px #0000004d;
+}
+.libro-flecha:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+.libro {
+  flex: 1;
+  min-width: 0;
+  perspective: 1800px;
+  touch-action: pan-y;
+}
+.libro-paginas {
+  display: grid;
+  height: 100%;
+  border-radius: 4px 10px 10px 4px;
+  background: #fbf7ec;
+  box-shadow:
+    0 0 0 1px #d6cfba,
+    4px 4px 0 -1px #efe9d8,
+    8px 8px 0 -2px #e2dbc6,
+    0 24px 50px #00000059;
+  transform-style: preserve-3d;
+}
+.libro.doble .libro-paginas {
+  grid-template-columns: 1fr 1fr;
+  border-radius: 6px;
+}
+.libro-hoja {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  padding: 30px 34px 44px;
+}
+.libro.doble .libro-hoja.izquierda {
+  background: linear-gradient(270deg, #0000001f, #00000008 6%, transparent 14%);
+  border-right: 1px solid #d9d1bb;
+}
+.libro.doble .libro-hoja.derecha {
+  background: linear-gradient(90deg, #00000014, transparent 12%);
+}
+.libro-hoja-contenido {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+/* Lo que se mide para armar las páginas: con el ancho de la hoja (menos su relleno) y sin verse. */
+.libro-medidor {
+  position: absolute;
+  top: 0;
+  left: 34px;
+  right: 34px;
+  visibility: hidden;
+  pointer-events: none;
+}
+.libro-numero {
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 13px;
+  color: #9a9480;
+}
+.libro-portadilla {
+  text-align: center;
+  padding: 6px 0 22px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid #c7aa8180;
+}
+.libro-portadilla .sobretitulo {
+  font-size: 12px;
+}
+.libro-portadilla h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 1.1;
+  margin: 8px 0 0;
+  color: var(--verde);
+}
+.libro-titulo-seccion {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 25px;
+  color: var(--verde);
+  margin: 0 0 12px;
+}
+.libro-titulo-seccion small {
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  color: var(--gris);
+}
+.libro-titulo-seccion .libro-carta {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--naranja);
+}
+.libro-bloque + .libro-bloque {
+  margin-top: 22px;
+}
+.libro-bloque ul,
+.libro-indice {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.libro-producto {
+  padding: 8px 0;
+}
+.libro-producto + .libro-producto {
+  border-top: 1px dashed #e2dbc6;
+}
+.libro-producto-linea,
+.libro-indice button {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.libro-producto-nombre {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: #28392f;
+}
+.libro-producto-nombre em {
+  font-style: normal;
+  color: var(--gris);
+}
+.libro-puntos {
+  flex: 1;
+  min-width: 14px;
+  border-bottom: 2px dotted #cfc6ad;
+  transform: translateY(-4px);
+}
+.libro-producto strong {
+  flex-shrink: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--verde);
+  white-space: nowrap;
+}
+.libro-producto p {
+  margin: 3px 0 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: #7d8571;
+}
+.libro-producto small {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--naranja);
+}
+.libro-indice li + li {
+  margin-top: 2px;
+}
+.libro-indice button {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 8px 0;
+  font-size: 16px;
+  text-align: left;
+  color: #28392f;
+}
+.libro-indice button:hover > span:first-child {
+  color: var(--naranja);
+}
+.libro-indice-carta {
+  padding: 14px 0 2px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--naranja);
+}
+.libro-indice-pagina {
+  font-weight: 600;
+  color: var(--verde);
+}
+.libro-pie {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.libro-boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid #ffffff40;
+  border-radius: 99px;
+  background: #ffffff14;
+  color: white;
+  font-size: 15px;
+}
+.libro-boton:hover:not(:disabled) {
+  background: #ffffff30;
+}
+.libro-boton:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.libro-boton.indice:disabled {
+  opacity: 1;
+}
+
+/* Pasar de página: la hoja nueva gira desde el lomo, como cuando se da vuelta una página. */
+.libro-paginas.pasar-adelante {
+  animation: pasar-adelante 0.42s cubic-bezier(0.2, 0.7, 0.3, 1);
+  transform-origin: left center;
+}
+.libro-paginas.pasar-atras {
+  animation: pasar-atras 0.42s cubic-bezier(0.2, 0.7, 0.3, 1);
+  transform-origin: right center;
+}
+@keyframes pasar-adelante {
+  from {
+    transform: rotateY(-28deg) translateX(24px);
+    opacity: 0.35;
+  }
+}
+@keyframes pasar-atras {
+  from {
+    transform: rotateY(28deg) translateX(-24px);
+    opacity: 0.35;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .libro-dialogo[open],
+  .libro-paginas.pasar-adelante,
+  .libro-paginas.pasar-atras {
+    animation: none;
+  }
+}
+
+/* El celular: el libro ocupa toda la pantalla y se pasa deslizando; las flechas grandes de los
+   costados se ocultan (quedan las de abajo). */
+@media (max-width: 720px) {
+  .carta-tapa {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    padding: 22px 20px 20px 38px;
+  }
+  .carta-tapa-texto strong {
+    font-size: 26px;
+  }
+  .carta-tapa-abrir {
+    justify-content: center;
+  }
+  .carta-atajos button {
+    font-size: 13px;
+    padding: 7px 12px;
+  }
+  .libro-marco {
+    width: 100vw;
+    height: 100dvh;
+    padding: 10px 10px calc(10px + env(safe-area-inset-bottom));
+    gap: 8px;
+  }
+  .libro-barra {
+    padding: 0 4px;
+  }
+  .libro-barra-titulo {
+    font-size: 19px;
+  }
+  .libro-flecha {
+    display: none;
+  }
+  .libro-hoja {
+    padding: 22px 20px 40px;
+  }
+  .libro-medidor {
+    left: 20px;
+    right: 20px;
+  }
+  .libro-portadilla h3 {
+    font-size: 28px;
+  }
+  .libro-titulo-seccion {
+    font-size: 23px;
+  }
+  .libro-pie {
+    gap: 6px;
+  }
+  .libro-boton {
+    padding: 0 12px;
+    font-size: 14px;
+  }
+}
+@media (max-width: 480px) {
+  .libro-boton-palabra {
+    display: none;
+  }
+}
+@media (max-width: 380px) {
+  .libro-boton:not(.indice) span {
+    display: none;
+  }
+}
