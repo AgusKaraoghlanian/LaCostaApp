@@ -1892,7 +1892,7 @@
 .libro {
   flex: 1;
   min-width: 0;
-  perspective: 1800px;
+  perspective: 2400px;
   touch-action: pan-y;
 }
 .libro-paginas {
@@ -2097,31 +2097,139 @@
   opacity: 1;
 }
 
-/* Pasar de página: la hoja nueva gira desde el lomo, como cuando se da vuelta una página. */
-.libro-paginas.pasar-adelante {
-  animation: pasar-adelante 0.42s cubic-bezier(0.2, 0.7, 0.3, 1);
+/* Pasar de página: una hoja que gira de verdad (LibroCarta). Encima de las páginas de abajo va
+   la hoja que se da vuelta, con su frente y su dorso; mientras gira se oscurece un poco, como
+   el papel cuando le deja de dar la luz, y proyecta sombra sobre la página de abajo. */
+.libro-paginas {
+  position: relative;
+}
+.libro-giro {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+  transform-style: preserve-3d;
+  --duracion: 0.75s;
+  animation-duration: var(--duracion);
+  animation-timing-function: cubic-bezier(0.45, 0.05, 0.3, 1);
+  animation-fill-mode: both;
+}
+.libro-giro.doble {
+  width: 50%;
+}
+.libro-giro.doble.adelante {
+  left: 50%;
   transform-origin: left center;
+  animation-name: hoja-adelante;
 }
-.libro-paginas.pasar-atras {
-  animation: pasar-atras 0.42s cubic-bezier(0.2, 0.7, 0.3, 1);
+.libro-giro.doble.atras {
+  left: 0;
   transform-origin: right center;
+  animation-name: hoja-atras;
 }
-@keyframes pasar-adelante {
+.libro-giro.simple {
+  left: 0;
+  width: 100%;
+  transform-origin: left center;
+  --duracion: 0.65s;
+  animation-timing-function: cubic-bezier(0.5, 0.1, 0.6, 1);
+}
+.libro:not(.doble) {
+  /* Una sola hoja angosta: con menos perspectiva se ve que se levanta hacia uno. */
+  perspective: 1000px;
+  perspective-origin: 0 50%;
+}
+.libro-giro.simple.adelante {
+  animation-name: hoja-se-levanta;
+}
+.libro-giro.simple.atras {
+  animation-name: hoja-vuelve;
+}
+.libro-cara {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  background: #fbf7ec;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.libro-cara > .libro-hoja {
+  flex: 1;
+}
+.libro-cara.dorso {
+  transform: rotateY(180deg);
+}
+.libro-cara::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  animation: hoja-sombra var(--duracion) ease-in-out both;
+}
+.libro-giro.doble.adelante .frente::after,
+.libro-giro.doble.atras .dorso::after,
+.libro-giro.simple .frente::after {
+  background: linear-gradient(90deg, #00000030, #00000008 30%, #ffffff00 60%, #00000014);
+}
+.libro-giro.doble.atras .frente::after,
+.libro-giro.doble.adelante .dorso::after {
+  background: linear-gradient(270deg, #00000030, #00000008 30%, #ffffff00 60%, #00000014);
+}
+@keyframes hoja-adelante {
   from {
-    transform: rotateY(-28deg) translateX(24px);
-    opacity: 0.35;
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(-90deg);
+  }
+  to {
+    transform: rotateY(-180deg);
   }
 }
-@keyframes pasar-atras {
+@keyframes hoja-atras {
   from {
-    transform: rotateY(28deg) translateX(-24px);
-    opacity: 0.35;
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(90deg);
+  }
+  to {
+    transform: rotateY(180deg);
+  }
+}
+@keyframes hoja-se-levanta {
+  from {
+    transform: rotateY(0deg);
+    box-shadow: 0 0 0 #0000;
+  }
+  to {
+    transform: rotateY(-96deg);
+    box-shadow: 30px 0 40px #00000055;
+  }
+}
+@keyframes hoja-vuelve {
+  from {
+    transform: rotateY(-96deg);
+    box-shadow: 30px 0 40px #00000055;
+  }
+  to {
+    transform: rotateY(0deg);
+    box-shadow: 0 0 0 #0000;
+  }
+}
+@keyframes hoja-sombra {
+  from {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .libro-dialogo[open],
-  .libro-paginas.pasar-adelante,
-  .libro-paginas.pasar-atras {
+  .libro-dialogo[open] {
     animation: none;
   }
 }
