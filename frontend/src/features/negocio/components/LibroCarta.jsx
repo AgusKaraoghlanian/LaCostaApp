@@ -180,14 +180,16 @@ const LibroCarta = ({ secciones, nombreNegocio, seccionInicial, onCerrar }) => {
   }
   // null hasta que se arma el libro: entonces se abre en la sección elegida (o en el índice).
   const [pagina, setPagina] = useState(null)
-  const [sentido, setSentido] = useState('adelante')
+  // La hoja que se está dando vuelta: { desde, hacia } (páginas), o null.
+  const [giro, setGiro] = useState(null)
   // Si cambia el tamaño de la ventana cambian las páginas: la actual se acomoda al nuevo armado.
   const vigente = ajustar(pagina ?? inicioDeSeccion[seccionInicial] ?? 0)
 
   const irA = (n) => {
     const destino = ajustar(n)
     if (destino === vigente) return
-    setSentido(destino > vigente ? 'adelante' : 'atras')
+    const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    setGiro(sinMovimiento ? null : { desde: vigente, hacia: destino })
     setPagina(destino)
   }
   const hayAnterior = vigente > 0
@@ -223,6 +225,31 @@ const LibroCarta = ({ secciones, nombreNegocio, seccionInicial, onCerrar }) => {
   }
 
   const total = paginas.length
+
+  // Qué se ve mientras se da vuelta una hoja. En la compu, la hoja gira sobre el lomo: hacia
+  // adelante se levanta la de la derecha (por el dorso trae la nueva de la izquierda) y abajo ya
+  // están la izquierda vieja y la derecha nueva; hacia atrás, al revés. En el celular la hoja
+  // actual se levanta desde el borde izquierdo y deja ver la siguiente (o vuelve la anterior).
+  const hoja = (n, lado) => ({ pagina: paginas[n], numero: n, lado })
+  let base = { izquierda: vigente, derecha: vigente + 1 }
+  let hojaQueGira = null
+  if (giro) {
+    const { desde, hacia } = giro
+    const adelante = hacia > desde
+    if (doble && adelante) {
+      base = { izquierda: desde, derecha: hacia + 1 }
+      hojaQueGira = { clase: 'doble adelante', frente: hoja(desde + 1, 'derecha'), dorso: hoja(hacia, 'izquierda') }
+    } else if (doble) {
+      base = { izquierda: hacia, derecha: desde + 1 }
+      hojaQueGira = { clase: 'doble atras', frente: hoja(desde, 'izquierda'), dorso: hoja(hacia + 1, 'derecha') }
+    } else if (adelante) {
+      base = { izquierda: hacia }
+      hojaQueGira = { clase: 'simple adelante', frente: hoja(desde, 'izquierda') }
+    } else {
+      base = { izquierda: desde }
+      hojaQueGira = { clase: 'simple atras', frente: hoja(hacia, 'izquierda') }
+    }
+  }
   const hojaProps = { total, nombreNegocio, variasCartas, inicioDeSeccion, irA }
   const textoPagina = doble && vigente + 1 < total ? `${vigente + 1}–${vigente + 2}` : `${vigente + 1}`
 
@@ -271,11 +298,32 @@ const LibroCarta = ({ secciones, nombreNegocio, seccionInicial, onCerrar }) => {
             onTouchEnd={alSoltar}
             aria-live="polite"
           >
-            <div key={vigente} className={`libro-paginas${pagina === null ? '' : ` pasar-${sentido}`}`}>
-              <Hoja {...hojaProps} pagina={paginas[vigente]} numero={vigente} lado="izquierda">
+            <div className="libro-paginas">
+              <Hoja {...hojaProps} pagina={paginas[base.izquierda]} numero={base.izquierda} lado="izquierda">
                 <Medidor secciones={secciones} nombreNegocio={nombreNegocio} medidorRef={medidorRef} />
               </Hoja>
-              {doble && <Hoja {...hojaProps} pagina={paginas[vigente + 1]} numero={vigente + 1} lado="derecha" />}
+              {doble && (
+                <Hoja {...hojaProps} pagina={paginas[base.derecha]} numero={base.derecha} lado="derecha" />
+              )}
+              {hojaQueGira && (
+                <div
+                  key={`${giro.desde}-${giro.hacia}`}
+                  className={`libro-giro ${hojaQueGira.clase}`}
+                  aria-hidden="true"
+                  onAnimationEnd={(e) => {
+                    if (e.target === e.currentTarget) setGiro(null)
+                  }}
+                >
+                  <div className="libro-cara frente">
+                    <Hoja {...hojaProps} {...hojaQueGira.frente} />
+                  </div>
+                  {hojaQueGira.dorso && (
+                    <div className="libro-cara dorso">
+                      <Hoja {...hojaProps} {...hojaQueGira.dorso} />
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
           <button
