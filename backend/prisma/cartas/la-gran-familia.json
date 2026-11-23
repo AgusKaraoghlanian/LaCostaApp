@@ -1,0 +1,1872 @@
+{
+ "negocio": "La Gran Familia",
+ "localidad": "San Bernardo",
+ "fuente": "Fotos de la carta en Google Maps (pestaña Menú), subidas por clientes en dic 2025 y ene 2026",
+ "relevado": "2026-11-23",
+ "productos": [
+  {
+   "carta": "Carta",
+   "seccion": "Minutas",
+   "nombre": "Milanesa sola",
+   "descripcion": "",
+   "precio": 18000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Minutas",
+   "nombre": "Milanesa de ternera con fritas o puré de papas",
+   "descripcion": "",
+   "precio": 22000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Minutas",
+   "nombre": "Milanesa de ternera completa",
+   "descripcion": "Con 2 huevos fritos y papas fritas",
+   "precio": 24000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Minutas",
+   "nombre": "Milanesa de ternera napolitana",
+   "descripcion": "Con fritas o puré de papas",
+   "precio": 26500,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Minutas",
+   "nombre": "Milanesa de ternera napolitana completa",
+   "descripcion": "Con 2 huevos fritos y fritas",
+   "precio": 28500,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Minutas",
+   "nombre": "Milanesa de ternera La Gran Familia",
+   "descripcion": "Queso cheddar, bacon, cebolla de verdeo, con fritas o puré de papa",
+   "precio": 30000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Minutas",
+   "nombre": "Suprema sola",
+   "descripcion": "",
+   "precio": 18000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Minutas",
+   "nombre": "Suprema con fritas o puré",
+   "descripcion": "",
+   "precio": 22000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Minutas",
+   "nombre": "Suprema completa",
+   "descripcion": "Con 2 huevos fritos y fritas",
+   "precio": 24000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Minutas",
+   "nombre": "Suprema napolitana",
+   "descripcion": "Con fritas o puré de papas",
+   "precio": 26500,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Minutas",
+   "nombre": "Suprema napolitana completa",
+   "descripcion": "Con 2 huevos fritos y fritas",
+   "precio": 28500,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Minutas",
+   "nombre": "Suprema La Gran Familia",
+   "descripcion": "Queso cheddar, bacon, cebolla de verdeo, con fritas o puré de papa",
+   "precio": 30000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Parrilla",
+   "nombre": "Asado",
+   "descripcion": "",
+   "precio": 27000,
+   "foto": "ene 2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Parrilla",
+   "nombre": "Vacío",
+   "descripcion": "",
+   "precio": 28000,
+   "foto": "ene 2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Parrilla",
+   "nombre": "Entraña",
+   "descripcion": "",
+   "precio": 32000,
+   "foto": "ene 2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Parrilla",
+   "nombre": "Bife de chorizo con fritas",
+   "descripcion": "",
+   "precio": 28000,
+   "foto": "ene 2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Parrilla",
+   "nombre": "Picaña con papas rústicas",
+   "descripcion": "",
+   "precio": 28000,
+   "foto": "ene 2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Parrilla",
+   "nombre": "1/2 bife de chorizo con fritas",
+   "descripcion": "",
+   "precio": 24000,
+   "foto": "ene 2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Parrilla",
+   "nombre": "Lomo grillado con fritas",
+   "descripcion": "",
+   "precio": 30000,
+   "foto": "ene 2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Parrilla",
+   "nombre": "Matambre de ternera a la pizza",
+   "descripcion": "Con papas fritas",
+   "precio": 27000,
+   "foto": "ene 2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Parrilla",
+   "nombre": "Chorizo",
+   "descripcion": "",
+   "precio": 4500,
+   "foto": "ene 2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Parrilla",
+   "nombre": "Morcilla",
+   "descripcion": "",
+   "precio": 4500,
+   "foto": "ene 2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Parrilla",
+   "nombre": "Chinchulines (porción)",
+   "descripcion": "",
+   "precio": 15000,
+   "foto": "ene 2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Parrilla",
+   "nombre": "Riñón a la provenzal (porción)",
+   "descripcion": "",
+   "precio": 16000,
+   "foto": "ene 2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Parrilla",
+   "nombre": "1/4 de pollo a la plancha",
+   "descripcion": "Con papas fritas",
+   "precio": 19500,
+   "foto": "ene 2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Parrilla",
+   "nombre": "Mollejas (porción)",
+   "descripcion": "",
+   "precio": 26000,
+   "foto": "ene 2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Parrilla",
+   "nombre": "Parrillada para 2",
+   "descripcion": "Asado, vacío, 1 chorizo, 1 morcilla, cerdo, riñón y chinchulines",
+   "precio": 70000,
+   "foto": "ene 2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Hamburguesas caseras",
+   "nombre": "Hamburguesa sola o con queso y papas fritas",
+   "descripcion": "",
+   "precio": 15000,
+   "foto": "ene 2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Hamburguesas caseras",
+   "nombre": "Hamburguesa completa",
+   "descripcion": "Jamón cocido, queso, lechuga, tomate, huevo y papas fritas",
+   "precio": 17000,
+   "foto": "ene 2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Hamburguesas caseras",
+   "nombre": "Hamburguesa Bacon",
+   "descripcion": "Queso cheddar, bacon, cebolla caramelizada y papas fritas",
+   "precio": 18500,
+   "foto": "ene 2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Hamburguesas caseras",
+   "nombre": "Hamburguesa Familia",
+   "descripcion": "Queso, champiñón, cebolla caramelizada, tomates asados y rúcula",
+   "precio": 18500,
+   "foto": "ene 2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Hamburguesas caseras",
+   "nombre": "Adicional hamburguesa doble",
+   "descripcion": "",
+   "precio": 7000,
+   "foto": "ene 2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pescados y mariscos",
+   "nombre": "Paella para 1",
+   "descripcion": "",
+   "precio": 38000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pescados y mariscos",
+   "nombre": "Paella para 2",
+   "descripcion": "",
+   "precio": 68000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pescados y mariscos",
+   "nombre": "Cazuela de mariscos para 1",
+   "descripcion": "",
+   "precio": 42000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pescados y mariscos",
+   "nombre": "Cazuela de mariscos para 2",
+   "descripcion": "",
+   "precio": 75000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pescados y mariscos",
+   "nombre": "Filet de merluza a la romana con puré de papas",
+   "descripcion": "",
+   "precio": 24000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pescados y mariscos",
+   "nombre": "Filet de merluza a la plancha con puré de papas",
+   "descripcion": "",
+   "precio": 24000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pescados y mariscos",
+   "nombre": "Filet de merluza al roquefort con puré",
+   "descripcion": "",
+   "precio": 30000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pescados y mariscos",
+   "nombre": "Corvina con salsa criolla y papas fritas",
+   "descripcion": "",
+   "precio": 25000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pescados y mariscos",
+   "nombre": "Lenguado a la plancha con puré de papas",
+   "descripcion": "",
+   "precio": 30000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pescados y mariscos",
+   "nombre": "Lenguado al roquefort con puré de papas",
+   "descripcion": "",
+   "precio": 35000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pescados y mariscos",
+   "nombre": "Salmón rosado con timbal de arroz y vegetales",
+   "descripcion": "",
+   "precio": 40000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pescados y mariscos",
+   "nombre": "Tabla de pescados y mariscos",
+   "descripcion": "Rabas, cornalitos, merluza, gambas rebozadas, mejillones provenzal, almeja en escabeche y calamar con criolla",
+   "precio": 80000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pastas",
+   "nombre": "Tagliatelle",
+   "descripcion": "Incluye tuco, salsa blanca, mixta, manteca o fileto",
+   "precio": 16000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pastas",
+   "nombre": "Spaguetti",
+   "descripcion": "Incluye tuco, salsa blanca, mixta, manteca o fileto",
+   "precio": 16000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pastas",
+   "nombre": "Ñoquis de papa",
+   "descripcion": "Incluye tuco, salsa blanca, mixta, manteca o fileto",
+   "precio": 17000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pastas",
+   "nombre": "Ravioles de verdura",
+   "descripcion": "Incluye tuco, salsa blanca, mixta, manteca o fileto",
+   "precio": 18500,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pastas",
+   "nombre": "Ravioles de ricota",
+   "descripcion": "Incluye tuco, salsa blanca, mixta, manteca o fileto",
+   "precio": 18500,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pastas",
+   "nombre": "Sorrentinos de ricota y jamón",
+   "descripcion": "Incluye tuco, salsa blanca, mixta, manteca o fileto",
+   "precio": 21000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pastas",
+   "nombre": "Agnolottis de jamón y queso",
+   "descripcion": "Incluye tuco, salsa blanca, mixta, manteca o fileto",
+   "precio": 21000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pastas",
+   "nombre": "Lasaña a la bolognesa",
+   "descripcion": "Con verdura, ricota, jamón y queso. Incluye tuco, salsa blanca, mixta, manteca o fileto",
+   "precio": 25000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Salsas",
+   "nombre": "Crema",
+   "descripcion": "",
+   "precio": 3800,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Salsas",
+   "nombre": "Salsa rosa",
+   "descripcion": "Tuco y crema",
+   "precio": 3800,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Salsas",
+   "nombre": "Aurora",
+   "descripcion": "Salsa fileto y crema",
+   "precio": 3800,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Salsas",
+   "nombre": "Pesto",
+   "descripcion": "Salsa de albahaca, nuez, ajo y aceite de oliva",
+   "precio": 3800,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Salsas",
+   "nombre": "Bolognesa",
+   "descripcion": "Salsa de tomate y carne picada",
+   "precio": 5000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Salsas",
+   "nombre": "Cuatro quesos",
+   "descripcion": "Salsa crema y quesos seleccionados",
+   "precio": 6000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Salsas",
+   "nombre": "Espinaca a la crema",
+   "descripcion": "Salsa a base de crema con espinacas",
+   "precio": 6000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Salsas",
+   "nombre": "Scarparo",
+   "descripcion": "Salsa crema, con jamón cocido, salsa de tomate y cebolla de verdeo",
+   "precio": 6000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Salsas",
+   "nombre": "Parissien",
+   "descripcion": "Salsa blanca, pollo, jamón y champiñón",
+   "precio": 6000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Salsas",
+   "nombre": "Salsa de mariscos",
+   "descripcion": "",
+   "precio": 16500,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Salsas",
+   "nombre": "Estofado de carne guarnición",
+   "descripcion": "",
+   "precio": 13000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Salsas",
+   "nombre": "Gratinado de queso",
+   "descripcion": "",
+   "precio": 2200,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Sin TACC",
+   "nombre": "Sorrentinos de jamón y queso",
+   "descripcion": "Elaborados con harina Padoan. Incluyen tuco, salsa blanca o mixta",
+   "precio": 26000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Sin TACC",
+   "nombre": "Raviolones de verdura",
+   "descripcion": "Elaborados con harina Padoan. Incluyen tuco, salsa blanca o mixta",
+   "precio": 26000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Sin TACC",
+   "nombre": "Lomo a la plancha",
+   "descripcion": "",
+   "precio": 30000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Sin TACC",
+   "nombre": "Medio bife de chorizo",
+   "descripcion": "",
+   "precio": 24000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Sin TACC",
+   "nombre": "Bife de chorizo",
+   "descripcion": "",
+   "precio": 28000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Sin TACC",
+   "nombre": "Filet de merluza a la plancha con fritas o puré de papas",
+   "descripcion": "",
+   "precio": 24000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Sin TACC",
+   "nombre": "Filet de lenguado a la plancha con fritas o puré de papas",
+   "descripcion": "",
+   "precio": 30000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Sin TACC",
+   "nombre": "Salmón rosado con timbal de arroz y vegetales",
+   "descripcion": "",
+   "precio": 40000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Sin TACC",
+   "nombre": "Corvina al grille con fritas o puré de papas",
+   "descripcion": "",
+   "precio": 25000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Sin TACC",
+   "nombre": "Papas fritas",
+   "descripcion": "",
+   "precio": 9000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Sin TACC",
+   "nombre": "Puré de papas",
+   "descripcion": "",
+   "precio": 9000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Sin TACC",
+   "nombre": "Puré de calabaza",
+   "descripcion": "",
+   "precio": 10000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Sin TACC",
+   "nombre": "Puré mixto",
+   "descripcion": "",
+   "precio": 10000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Vegetarianos",
+   "nombre": "Milanesa de berenjena a la napolitana con ensalada mixta o fritas",
+   "descripcion": "",
+   "precio": 24000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Vegetarianos",
+   "nombre": "Milanesa de calabaza napolitana con ensalada mixta o fritas",
+   "descripcion": "",
+   "precio": 24000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Vegetarianos",
+   "nombre": "Omelette de vegetales con papas rejilla",
+   "descripcion": "Brócoli, tomate, arvejas, cebolla y chaucha",
+   "precio": 20000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Veganos",
+   "nombre": "Wok de arroz con vegetales",
+   "descripcion": "",
+   "precio": 24000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Veganos",
+   "nombre": "Tallarines con vegetales",
+   "descripcion": "",
+   "precio": 20000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Veganos",
+   "nombre": "Guiso de lentejas veggie",
+   "descripcion": "",
+   "precio": 22000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Veganos",
+   "nombre": "Hamburguesa vegana",
+   "descripcion": "Garbanzos, semillas, rúcula y tomate",
+   "precio": 17500,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Menú infantil",
+   "nombre": "Formitas de pollo con puré de papa o fritas",
+   "descripcion": "",
+   "precio": 14000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Menú infantil",
+   "nombre": "Milanesa con puré de papas o fritas",
+   "descripcion": "",
+   "precio": 14000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Menú infantil",
+   "nombre": "Ñoquis",
+   "descripcion": "Incluye tuco, salsa blanca, mixta, manteca o fileto",
+   "precio": 13000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Menú infantil",
+   "nombre": "Tallarines",
+   "descripcion": "Incluye tuco, salsa blanca, mixta, manteca o fileto",
+   "precio": 13000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Menú infantil",
+   "nombre": "Ravioles de verdura o ricota",
+   "descripcion": "Incluye tuco, salsa blanca, mixta, manteca o fileto",
+   "precio": 14000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Guarniciones (cambio)",
+   "nombre": "Fritas provenzal",
+   "descripcion": "Para cambiar la guarnición de los platos que la incluyen",
+   "precio": 4000,
+   "foto": "ene 2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Guarniciones (cambio)",
+   "nombre": "Fritas a caballo (con 1 huevo frito)",
+   "descripcion": "Para cambiar la guarnición de los platos que la incluyen",
+   "precio": 5000,
+   "foto": "ene 2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Guarniciones (cambio)",
+   "nombre": "Papas rejilla",
+   "descripcion": "Para cambiar la guarnición de los platos que la incluyen",
+   "precio": 4000,
+   "foto": "ene 2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Guarniciones (cambio)",
+   "nombre": "Papas a la crema",
+   "descripcion": "Para cambiar la guarnición de los platos que la incluyen",
+   "precio": 6000,
+   "foto": "ene 2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Guarniciones (cambio)",
+   "nombre": "Puré de calabaza",
+   "descripcion": "Para cambiar la guarnición de los platos que la incluyen",
+   "precio": 4500,
+   "foto": "ene 2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Guarniciones (cambio)",
+   "nombre": "Puré mixto",
+   "descripcion": "Para cambiar la guarnición de los platos que la incluyen",
+   "precio": 5000,
+   "foto": "ene 2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Flan casero",
+   "descripcion": "",
+   "precio": 6000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Flan casero con dulce o crema",
+   "descripcion": "",
+   "precio": 7000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Flan mixto",
+   "descripcion": "",
+   "precio": 8000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Budín de pan",
+   "descripcion": "",
+   "precio": 6000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Budín de pan con dulce o crema",
+   "descripcion": "",
+   "precio": 7000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Budín mixto",
+   "descripcion": "",
+   "precio": 8000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Chocotorta",
+   "descripcion": "",
+   "precio": 9000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Brownie de chocolate con helado",
+   "descripcion": "",
+   "precio": 12000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Frutillas",
+   "descripcion": "",
+   "precio": 8000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Frutillas con crema",
+   "descripcion": "",
+   "precio": 9000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Frutillas con helado",
+   "descripcion": "",
+   "precio": 9000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Ensalada de frutas",
+   "descripcion": "",
+   "precio": 6500,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Ensalada de frutas con crema",
+   "descripcion": "",
+   "precio": 7500,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Ensalada de frutas con helado",
+   "descripcion": "",
+   "precio": 7500,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Tiramisú",
+   "descripcion": "",
+   "precio": 9000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Helado de 1 bocha",
+   "descripcion": "",
+   "precio": 4500,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Helado de 2 bochas",
+   "descripcion": "",
+   "precio": 7500,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Copa mixta",
+   "descripcion": "Gustos: americana, frutilla, vainilla, dulce de leche, chocolate y limón",
+   "precio": 9500,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Creme brulee",
+   "descripcion": "",
+   "precio": 9000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Creme brulee con helado",
+   "descripcion": "",
+   "precio": 12000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Mousse de chocolate",
+   "descripcion": "",
+   "precio": 7500,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Mousse de chocolate con crema",
+   "descripcion": "",
+   "precio": 8500,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Volcán de chocolate",
+   "descripcion": "",
+   "precio": 15000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Copa Don Pedro",
+   "descripcion": "",
+   "precio": 9000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Postre Balcarce",
+   "descripcion": "",
+   "precio": 9000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Apple crumble",
+   "descripcion": "",
+   "precio": 12000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Cafetería",
+   "nombre": "Café chico",
+   "descripcion": "",
+   "precio": 4000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Cafetería",
+   "nombre": "Café cortado",
+   "descripcion": "",
+   "precio": 4000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Cafetería",
+   "nombre": "Café con crema",
+   "descripcion": "",
+   "precio": 4600,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Cafetería",
+   "nombre": "Té (varios)",
+   "descripcion": "",
+   "precio": 4500,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Cafetería",
+   "nombre": "Café americano",
+   "descripcion": "",
+   "precio": 4300,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Cafetería",
+   "nombre": "Café americano cortado",
+   "descripcion": "",
+   "precio": 4300,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Cafetería",
+   "nombre": "Café americano con crema",
+   "descripcion": "",
+   "precio": 5200,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Tragos",
+   "nombre": "Ramazzotti Spritz",
+   "descripcion": "Ramazzotti, vino espumante y agua con gas",
+   "precio": 10000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Tragos",
+   "nombre": "Ramazzotti Tonic",
+   "descripcion": "Ramazzotti, agua tónica y lima",
+   "precio": 10000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Tragos",
+   "nombre": "Gin tonic",
+   "descripcion": "Gin, agua tónica y limón",
+   "precio": 12000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Tragos",
+   "nombre": "Mojito",
+   "descripcion": "Ron, jugo de lima, menta, azúcar y agua con gas",
+   "precio": 10000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Tragos",
+   "nombre": "Cinzano",
+   "descripcion": "Cinzano, agua con gas y limón",
+   "precio": 8000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Tragos",
+   "nombre": "Aperol Spritz",
+   "descripcion": "Aperol, vino espumante y agua con gas",
+   "precio": 10000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Tragos",
+   "nombre": "Fernet",
+   "descripcion": "Fernet Branca y Coca-Cola",
+   "precio": 10000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Tragos",
+   "nombre": "Daiquiri de frutilla",
+   "descripcion": "Jugo de lima, frutilla y ron",
+   "precio": 10000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Tragos",
+   "nombre": "Garibaldi",
+   "descripcion": "Campari y jugo de naranja",
+   "precio": 10000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Finca La Linda Malbec",
+   "descripcion": "Bodega Luigi Bosca · 750 cc",
+   "precio": 18000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Finca La Linda Cabernet Sauvignon",
+   "descripcion": "Bodega Luigi Bosca · 750 cc",
+   "precio": 18000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Finca La Linda Chardonnay",
+   "descripcion": "Bodega Luigi Bosca · 750 cc",
+   "precio": 18000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Luigi Bosca Malbec",
+   "descripcion": "Bodega Luigi Bosca · 750 cc",
+   "precio": 26000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Luigi Bosca Cabernet Sauvignon",
+   "descripcion": "Bodega Luigi Bosca · 750 cc",
+   "precio": 26000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Luigi Bosca Chardonnay",
+   "descripcion": "Bodega Luigi Bosca · 750 cc",
+   "precio": 26000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Luigi Bosca De Sangre Malbec Valle de Uco",
+   "descripcion": "Bodega Luigi Bosca · 750 cc",
+   "precio": 30000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Norton Elegido Malbec",
+   "descripcion": "Bodega Norton · 750 cc",
+   "precio": 11000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Norton Elegido Chardonnay",
+   "descripcion": "Bodega Norton · 750 cc",
+   "precio": 11000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Norton Reserva Malbec",
+   "descripcion": "Bodega Norton · 750 cc",
+   "precio": 22000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Norton Reserva Chardonnay",
+   "descripcion": "Bodega Norton · 750 cc",
+   "precio": 22000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Altura Malbec",
+   "descripcion": "Bodega Norton · 750 cc",
+   "precio": 30000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Norton Cosecha Tardía",
+   "descripcion": "Bodega Norton · 750 cc",
+   "precio": 12000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Nieto Senetiner Malbec",
+   "descripcion": "Bodega Nieto Senetiner · 750 cc",
+   "precio": 20000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Nieto Senetiner Cabernet Sauvignon",
+   "descripcion": "Bodega Nieto Senetiner · 750 cc",
+   "precio": 20000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Nieto Senetiner Chardonnay",
+   "descripcion": "Bodega Nieto Senetiner · 750 cc",
+   "precio": 20000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Fond de Cave Malbec",
+   "descripcion": "Trapiche · 750 cc",
+   "precio": 17000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Fond de Cave Cabernet",
+   "descripcion": "Trapiche · 750 cc",
+   "precio": 17000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Fond de Cave Reserva Malbec",
+   "descripcion": "Trapiche · 750 cc",
+   "precio": 25000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Trapiche Reserva Malbec",
+   "descripcion": "Trapiche · 750 cc",
+   "precio": 19000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Etchart Privado",
+   "descripcion": "Etchart · 750 cc",
+   "precio": 11000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Cafayate Reserva Torrontés",
+   "descripcion": "Etchart · 750 cc",
+   "precio": 17000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Cafayate Reserva Malbec",
+   "descripcion": "Etchart · 750 cc",
+   "precio": 17000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "San Felipe Tinto",
+   "descripcion": "Bodega La Rural · 750 cc",
+   "precio": 12000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "San Felipe Blanco",
+   "descripcion": "Bodega La Rural · 750 cc",
+   "precio": 12000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "San Felipe 12 Uvas",
+   "descripcion": "Bodega La Rural · 750 cc",
+   "precio": 12000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "San Felipe Roble Malbec",
+   "descripcion": "Bodega La Rural · 750 cc",
+   "precio": 14000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "San Felipe Roble Cabernet Sauvignon",
+   "descripcion": "Bodega La Rural · 750 cc",
+   "precio": 14000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "San Felipe Roble Chardonnay",
+   "descripcion": "Bodega La Rural · 750 cc",
+   "precio": 14000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "San Felipe Roble Dulce",
+   "descripcion": "Bodega La Rural · 750 cc",
+   "precio": 14000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Trumpeter Malbec",
+   "descripcion": "Rutini Wines · 750 cc",
+   "precio": 18000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Trumpeter Cabernet Sauvignon",
+   "descripcion": "Rutini Wines · 750 cc",
+   "precio": 18000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Trumpeter Chardonnay",
+   "descripcion": "Rutini Wines · 750 cc",
+   "precio": 18000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Rutini Cabernet Malbec",
+   "descripcion": "Rutini Wines · 750 cc",
+   "precio": 30000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Rutini Chardonnay",
+   "descripcion": "Rutini Wines · 750 cc",
+   "precio": 42000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Rutini Malbec",
+   "descripcion": "Rutini Wines · 750 cc",
+   "precio": 55000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Alma Mora Malbec",
+   "descripcion": "Finca Las Moras · 750 cc",
+   "precio": 13000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Alma Mora Cabernet",
+   "descripcion": "Finca Las Moras · 750 cc",
+   "precio": 13000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Alma Mora Chardonnay",
+   "descripcion": "Finca Las Moras · 750 cc",
+   "precio": 13000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Lola Montes Red Blend",
+   "descripcion": "Escorihuela Gascón · 750 cc",
+   "precio": 11000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Lola Rosé",
+   "descripcion": "Escorihuela Gascón · 750 cc",
+   "precio": 11000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Escorihuela Gascón Malbec",
+   "descripcion": "Escorihuela Gascón · 750 cc",
+   "precio": 20000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Familia Gascón Malbec",
+   "descripcion": "Escorihuela Gascón · 750 cc",
+   "precio": 16000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Familia Gascón Cabernet Sauvignon",
+   "descripcion": "Escorihuela Gascón · 750 cc",
+   "precio": 16000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Conejo Verde Malbec",
+   "descripcion": "Falasco Wines · 750 cc",
+   "precio": 14000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Conejo Verde Blanc de Blancs",
+   "descripcion": "Falasco Wines · 750 cc",
+   "precio": 14000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Conejo Verde Chenin Dulce",
+   "descripcion": "Falasco Wines · 750 cc",
+   "precio": 16000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Conejo Verde Rosé",
+   "descripcion": "Falasco Wines · 750 cc",
+   "precio": 16000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Hermandad Malbec",
+   "descripcion": "Falasco Wines · 750 cc",
+   "precio": 30000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Hermandad Blend",
+   "descripcion": "Falasco Wines · 750 cc",
+   "precio": 30000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "López Malbec",
+   "descripcion": "Bodegas López · 750 cc",
+   "precio": 11000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "López Cabernet Sauvignon",
+   "descripcion": "Bodegas López · 750 cc",
+   "precio": 11000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "López Semillón",
+   "descripcion": "Bodegas López · 750 cc",
+   "precio": 11000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Rincón Famoso Rosado",
+   "descripcion": "Bodegas López · 750 cc",
+   "precio": 15000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Chateau Vieux Tinto",
+   "descripcion": "Bodegas López · 750 cc",
+   "precio": 25000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Nicasia Red Malbec",
+   "descripcion": "Bodega Catena Zapata · 750 cc",
+   "precio": 20000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Nicasia Blanc de Blancs",
+   "descripcion": "Bodega Catena Zapata · 750 cc",
+   "precio": 20000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "DV Catena Cabernet Malbec",
+   "descripcion": "Bodega Catena Zapata · 750 cc",
+   "precio": 28000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "DV Catena Malbec",
+   "descripcion": "Bodega Catena Zapata · 750 cc",
+   "precio": 45000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "DV Catena Chardonnay",
+   "descripcion": "Bodega Catena Zapata · 750 cc",
+   "precio": 40000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Catena Zapata Malbec Argentino",
+   "descripcion": "Bodega Catena Zapata · 750 cc",
+   "precio": 120000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Alamos Malbec",
+   "descripcion": "Bodega Catena Zapata · 750 cc",
+   "precio": 16000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Alamos Chardonnay",
+   "descripcion": "Bodega Catena Zapata · 750 cc",
+   "precio": 16000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "El Enemigo Bonarda",
+   "descripcion": "Aleanna · 750 cc",
+   "precio": 45000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "El Enemigo Chardonnay",
+   "descripcion": "Aleanna · 750 cc",
+   "precio": 45000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Gran Enemigo Agrelo Cabernet Franc",
+   "descripcion": "Aleanna · 750 cc",
+   "precio": 90000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Cordero con Piel de Lobo Malbec",
+   "descripcion": "Mosquita Muerta Wines · 750 cc",
+   "precio": 12000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Cordero con Piel de Lobo Dulce Natural",
+   "descripcion": "Mosquita Muerta Wines · 750 cc",
+   "precio": 12000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Perro Callejero Malbec",
+   "descripcion": "Mosquita Muerta Wines · 750 cc",
+   "precio": 16000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Perro Callejero Cabernet Sauvignon",
+   "descripcion": "Mosquita Muerta Wines · 750 cc",
+   "precio": 16000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Perro Callejero Pinot Noir",
+   "descripcion": "Mosquita Muerta Wines · 750 cc",
+   "precio": 16000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Mosquita Muerta Black Malbec",
+   "descripcion": "Mosquita Muerta Wines · 750 cc",
+   "precio": 35000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Mosquita Muerta Blend de Blancas",
+   "descripcion": "Mosquita Muerta Wines · 750 cc",
+   "precio": 22000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Fuego Negro Malbec",
+   "descripcion": "Casa Montes · 750 cc",
+   "precio": 12000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Fuego Negro Chardonnay",
+   "descripcion": "Casa Montes · 750 cc",
+   "precio": 12000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Fuego Negro Viognier Dulce Natural",
+   "descripcion": "Casa Montes · 750 cc",
+   "precio": 15000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Chacabuco Chenin",
+   "descripcion": "Los Haroldos · 750 cc",
+   "precio": 11000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Chacabuco Malbec",
+   "descripcion": "Los Haroldos · 750 cc",
+   "precio": 11000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Chacabuco Cabernet",
+   "descripcion": "Los Haroldos · 750 cc",
+   "precio": 11000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Chacabuco Rosé",
+   "descripcion": "Los Haroldos · 750 cc",
+   "precio": 11000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Chacabuco Sauvignon Blanc",
+   "descripcion": "Los Haroldos · 750 cc",
+   "precio": 11000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Piattelli Reserva Malbec",
+   "descripcion": "Piattelli · 750 cc",
+   "precio": 19000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Piattelli Reserva Torrontés",
+   "descripcion": "Piattelli · 750 cc",
+   "precio": 19000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Salentein Reserva Malbec",
+   "descripcion": "Salentein · 750 cc",
+   "precio": 21000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Salentein Reserva Merlot",
+   "descripcion": "Salentein · 750 cc",
+   "precio": 21000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Salentein Reserva Sauvignon Blanc",
+   "descripcion": "Salentein · 750 cc",
+   "precio": 21000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Salentein Reserva Pinot Noir",
+   "descripcion": "Salentein · 750 cc",
+   "precio": 21000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Santa Julia Malbec",
+   "descripcion": "Bodega Santa Julia · 750 cc",
+   "precio": 18000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos",
+   "nombre": "Santa Julia Chenin Dulce",
+   "descripcion": "Bodega Santa Julia · 750 cc",
+   "precio": 12000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Espumantes",
+   "nombre": "Mumm Extra Brut",
+   "descripcion": "",
+   "precio": 20000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Espumantes",
+   "nombre": "Mumm Demi Sec",
+   "descripcion": "",
+   "precio": 20000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Espumantes",
+   "nombre": "Chandon Extra Brut",
+   "descripcion": "",
+   "precio": 30000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Espumantes",
+   "nombre": "Chandon Demi Sec",
+   "descripcion": "",
+   "precio": 30000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Espumantes",
+   "nombre": "Baron B",
+   "descripcion": "",
+   "precio": 60000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Espumantes",
+   "nombre": "San Felipe Extra Brut",
+   "descripcion": "",
+   "precio": 18000,
+   "foto": "dic 2025"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Espumantes",
+   "nombre": "Mont Reims Brut",
+   "descripcion": "",
+   "precio": 14000,
+   "foto": "dic 2025"
+  }
+ ]
+}
