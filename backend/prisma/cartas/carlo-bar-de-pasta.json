@@ -1,0 +1,968 @@
+{
+ "negocio": "Carlo Bar de Pasta",
+ "localidad": "Santa Teresita",
+ "fuente": "Fotos de la carta en Google Maps (pestaña Menú), subidas en may 2026; la carta impresa dice 21/5/2026. Cubierto $1.500, 10% de descuento pagando en efectivo",
+ "relevado": "2026-11-23",
+ "productos": [
+  {
+   "carta": "Carta",
+   "seccion": "Entradas",
+   "nombre": "Crocante de muzzarella",
+   "precio": 16000,
+   "descripcion": "Muzzarella empanada con salsa de tomate",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Entradas",
+   "nombre": "Gambas",
+   "precio": 34000,
+   "descripcion": "Langostinos empanados con salsa tártara",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Entradas",
+   "nombre": "Provoleta",
+   "precio": 19000,
+   "descripcion": "Con un toque especial",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Entradas",
+   "nombre": "Rabas",
+   "precio": 29000,
+   "descripcion": "Con dip de alioli",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Entradas",
+   "nombre": "Gambas al ajillo",
+   "precio": 36000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Entradas",
+   "nombre": "Empanada de carne",
+   "precio": 4000,
+   "descripcion": "Con dip de chimichurri",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Entradas",
+   "nombre": "Empanada de langostino",
+   "precio": 5500,
+   "descripcion": "Con dip de chimichurri",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Entradas",
+   "nombre": "Bocaditos de acelga",
+   "precio": 15000,
+   "descripcion": "Con dip de alioli",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Entradas",
+   "nombre": "Papas con cheddar, panceta y verdeo",
+   "precio": 13000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Entradas",
+   "nombre": "Papas fritas",
+   "precio": 9500,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Armalo como te guste",
+   "nombre": "Pasta con manteca",
+   "precio": 18000,
+   "descripcion": "Elegí tu pasta artesanal al huevo: fusillone, reginette, spaghetti (finito), macceroni, tagliatelle (anchito) o ñoqui",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Armalo como te guste",
+   "nombre": "Pasta con pomodoro",
+   "precio": 18000,
+   "descripcion": "Elegí tu pasta artesanal al huevo: fusillone, reginette, spaghetti (finito), macceroni, tagliatelle (anchito) o ñoqui",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Armalo como te guste",
+   "nombre": "Pasta con fileto",
+   "precio": 18000,
+   "descripcion": "Elegí tu pasta artesanal al huevo: fusillone, reginette, spaghetti (finito), macceroni, tagliatelle (anchito) o ñoqui",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Armalo como te guste",
+   "nombre": "Pasta con salsa rosa",
+   "precio": 18000,
+   "descripcion": "Elegí tu pasta artesanal al huevo: fusillone, reginette, spaghetti (finito), macceroni, tagliatelle (anchito) o ñoqui",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Armalo como te guste",
+   "nombre": "Pasta con manteca y salvia",
+   "precio": 18000,
+   "descripcion": "Elegí tu pasta artesanal al huevo: fusillone, reginette, spaghetti (finito), macceroni, tagliatelle (anchito) o ñoqui",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Armalo como te guste",
+   "nombre": "Pasta con crema",
+   "precio": 20000,
+   "descripcion": "Elegí tu pasta artesanal al huevo: fusillone, reginette, spaghetti (finito), macceroni, tagliatelle (anchito) o ñoqui",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Armalo como te guste",
+   "nombre": "Pasta con pesto de albahaca",
+   "precio": 20000,
+   "descripcion": "Elegí tu pasta artesanal al huevo: fusillone, reginette, spaghetti (finito), macceroni, tagliatelle (anchito) o ñoqui",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Armalo como te guste",
+   "nombre": "Pasta con albóndigas con pomodoro",
+   "precio": 22000,
+   "descripcion": "Elegí tu pasta artesanal al huevo: fusillone, reginette, spaghetti (finito), macceroni, tagliatelle (anchito) o ñoqui",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Armalo como te guste",
+   "nombre": "Pasta con bolognesa",
+   "precio": 22000,
+   "descripcion": "Elegí tu pasta artesanal al huevo: fusillone, reginette, spaghetti (finito), macceroni, tagliatelle (anchito) o ñoqui",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Armalo como te guste",
+   "nombre": "Pasta con escarparo",
+   "precio": 22000,
+   "descripcion": "Elegí tu pasta artesanal al huevo: fusillone, reginette, spaghetti (finito), macceroni, tagliatelle (anchito) o ñoqui",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Armalo como te guste",
+   "nombre": "Pasta con carbonara",
+   "precio": 22000,
+   "descripcion": "Elegí tu pasta artesanal al huevo: fusillone, reginette, spaghetti (finito), macceroni, tagliatelle (anchito) o ñoqui",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Armalo como te guste",
+   "nombre": "Pasta con parisienne",
+   "precio": 22000,
+   "descripcion": "Elegí tu pasta artesanal al huevo: fusillone, reginette, spaghetti (finito), macceroni, tagliatelle (anchito) o ñoqui",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Armalo como te guste",
+   "nombre": "Pasta con crema gratinada",
+   "precio": 22000,
+   "descripcion": "Elegí tu pasta artesanal al huevo: fusillone, reginette, spaghetti (finito), macceroni, tagliatelle (anchito) o ñoqui",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Armalo como te guste",
+   "nombre": "Pasta con crema de hongos",
+   "precio": 22000,
+   "descripcion": "Elegí tu pasta artesanal al huevo: fusillone, reginette, spaghetti (finito), macceroni, tagliatelle (anchito) o ñoqui",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Armalo como te guste",
+   "nombre": "Pasta con crema de quesos",
+   "precio": 22000,
+   "descripcion": "Elegí tu pasta artesanal al huevo: fusillone, reginette, spaghetti (finito), macceroni, tagliatelle (anchito) o ñoqui. Quesos: muzzarella, azul, gouda y parmesano",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Armalo como te guste",
+   "nombre": "Adicional salsa",
+   "precio": 5000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pastas especiales",
+   "nombre": "Malfatti",
+   "precio": 21000,
+   "descripcion": "Con pomodoro",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pastas especiales",
+   "nombre": "Malfatti \"Carlo\"",
+   "precio": 26000,
+   "descripcion": "Con cherrys, alcaparras y salsa blanca",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pastas especiales",
+   "nombre": "Raviolones de espinaca, ricota y queso",
+   "precio": 26000,
+   "descripcion": "En masa verde con crema de puerro y hongos",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pastas especiales",
+   "nombre": "Raviolones de pollo y panceta",
+   "precio": 28000,
+   "descripcion": "Con crema, pomodoro y yema de huevo al gratén",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pastas especiales",
+   "nombre": "Raviolones de carne braseada",
+   "precio": 28000,
+   "descripcion": "Con salsa de demi-glacé, crema y panceta",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pastas especiales",
+   "nombre": "Sorrentinos de jamón y queso",
+   "precio": 26000,
+   "descripcion": "Con bolognesa",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pastas especiales",
+   "nombre": "Sorrentinos de langostinos",
+   "precio": 32000,
+   "descripcion": "Con crema de morrones asados",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pastas especiales",
+   "nombre": "Spaghetti con salsa de albóndigas",
+   "precio": 26000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pastas especiales",
+   "nombre": "Canelones de espinaca, ricota y queso",
+   "precio": 26000,
+   "descripcion": "Con pomodoro y crema, gratinados",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pastas especiales",
+   "nombre": "Reginette gratinado",
+   "precio": 28000,
+   "descripcion": "Con crema, setas, espinaca y pimientos",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pastas especiales",
+   "nombre": "Tortelloni de tres quesos y albahaca",
+   "precio": 26000,
+   "descripcion": "Con pomodoro, olivas negras y pesto",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pastas especiales",
+   "nombre": "Spaghetti con crema de puerros y pollo",
+   "precio": 26000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pastas especiales",
+   "nombre": "Mac and cheese",
+   "precio": 17000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pastas especiales",
+   "nombre": "Reginette Carlo",
+   "precio": 32000,
+   "descripcion": "Tuco, panceta, hongos, gambas y toque de oliva",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pastas especiales",
+   "nombre": "Lasagna",
+   "precio": 26000,
+   "descripcion": "De espinaca, calabaza, ricota, muzzarella, fileto y crema",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pastas especiales",
+   "nombre": "Lasagna con salsa de albóndigas y bolognesa",
+   "precio": 30000,
+   "descripcion": "De espinaca, calabaza, ricota y muzzarella",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pastas especiales",
+   "nombre": "Tagliatelle anchito",
+   "precio": 34000,
+   "descripcion": "Con crema de camarones",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Pastas especiales",
+   "nombre": "Macceroni",
+   "precio": 22000,
+   "descripcion": "Con verduras salteadas y queso fundido",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Para acompañar",
+   "nombre": "Albóndigas (3)",
+   "precio": 8000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Para acompañar",
+   "nombre": "Estofado",
+   "precio": 11000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Para acompañar",
+   "nombre": "Cambio de salsa",
+   "precio": 6000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Platos",
+   "nombre": "Carne braseada",
+   "precio": 30000,
+   "descripcion": "Con papa al horno",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Platos",
+   "nombre": "Osobuco braseado",
+   "precio": 30000,
+   "descripcion": "Con puré de boniato",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Platos",
+   "nombre": "Risotto de hongos",
+   "precio": 28000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Platos",
+   "nombre": "Milanesa de ternera o suprema",
+   "precio": 26000,
+   "descripcion": "Con spaghetti gratinado",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Platos",
+   "nombre": "Milanesa de ternera o suprema napolitana",
+   "precio": 34000,
+   "descripcion": "Con guarnición",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Platos",
+   "nombre": "Milanesa de ternera o suprema",
+   "precio": 25000,
+   "descripcion": "Con guarnición",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Platos",
+   "nombre": "Pechuga cremosa",
+   "precio": 24000,
+   "descripcion": "Con espinacas gratinadas",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Platos",
+   "nombre": "Lomo al champignon, al verdeo o a la mostaza",
+   "precio": 45000,
+   "descripcion": "Con guarnición de papas noisette",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Platos",
+   "nombre": "Pollo al champignon, al verdeo o a la mostaza",
+   "precio": 26000,
+   "descripcion": "Con guarnición de papas noisette",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Helado 1 bocha",
+   "precio": 5000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Helado 2 bochas",
+   "precio": 8000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Don Pedro",
+   "precio": 14000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Budín de pan",
+   "precio": 7000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Flan casero",
+   "precio": 7000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Torta Matilda",
+   "precio": null,
+   "descripcion": "Bizcochuelo de chocolate relleno de mousse y cubierto de chocolate",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Almendrado",
+   "precio": 8000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Cheesecake",
+   "precio": null,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Balcarce",
+   "precio": null,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Brownie con helado",
+   "precio": 9000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Volcán de chocolate",
+   "precio": 14000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Tarta de manzana con helado",
+   "precio": 9000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Sundae \"Carlo\"",
+   "precio": 11000,
+   "descripcion": "Helado con salsa de chocolate tibia, crema batida y crocante de nueces",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Tiramisú",
+   "precio": 11000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Panqueque con dulce de leche",
+   "precio": 8000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Postres",
+   "nombre": "Adicional crema o dulce de leche",
+   "precio": 4000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Menú infantil",
+   "nombre": "Milanesitas de peceto",
+   "precio": 16000,
+   "descripcion": "Con guarnición + bebida + postre",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Menú infantil",
+   "nombre": "Tallarines con tuco",
+   "precio": 16000,
+   "descripcion": "Bebida + postre",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Carta",
+   "seccion": "Menú infantil",
+   "nombre": "Bocaditos de pollo",
+   "precio": 16000,
+   "descripcion": "Con guarnición + bebida + postre",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Cervezas",
+   "nombre": "Stella Artois 1 litro",
+   "precio": 12000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Cervezas",
+   "nombre": "Stella Artois Negra lata 473 cc",
+   "precio": 7000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Cervezas",
+   "nombre": "Stella Artois 710 cc",
+   "precio": 9000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Cervezas",
+   "nombre": "Corona porrón",
+   "precio": 8000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Cervezas",
+   "nombre": "Corona 710 cc",
+   "precio": 12000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Tragos",
+   "nombre": "Gin tonic",
+   "precio": 9000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Tragos",
+   "nombre": "Bombai tonic",
+   "precio": 10000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Tragos",
+   "nombre": "Campari con naranja",
+   "precio": 8000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Tragos",
+   "nombre": "Campari con tónica",
+   "precio": 8000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Tragos",
+   "nombre": "Cynar pomelo",
+   "precio": 8000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Tragos",
+   "nombre": "Fernet con Coca-Cola",
+   "precio": 8000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Tragos",
+   "nombre": "Aperol Spritz",
+   "precio": 8000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Tragos",
+   "nombre": "Vermú del abuelo",
+   "precio": 8000,
+   "descripcion": "Cinzano y soda",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Tragos",
+   "nombre": "Gancia",
+   "precio": 8000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Tragos",
+   "nombre": "Johnnie Walker Black Label",
+   "precio": 14000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Tragos",
+   "nombre": "Messi",
+   "precio": 8000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos tintos",
+   "nombre": "Copa de vino tinto 250 cm3",
+   "precio": 4000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos tintos",
+   "nombre": "Familia Gascón Malbec",
+   "precio": 11000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos tintos",
+   "nombre": "Trumpeter Malbec",
+   "precio": 18000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos tintos",
+   "nombre": "Luigi Bosca Malbec",
+   "precio": 24000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos tintos",
+   "nombre": "Luigi Bosca De Sangre",
+   "precio": 36000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos tintos",
+   "nombre": "DV Catena Malbec Cabernet",
+   "precio": 26000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos tintos",
+   "nombre": "Salentein Reserva Malbec",
+   "precio": 22000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos tintos",
+   "nombre": "Álamos Malbec",
+   "precio": 14000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos tintos",
+   "nombre": "Álamos Malbec Reserva",
+   "precio": 18000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos tintos",
+   "nombre": "Los Haroldos Malbec",
+   "precio": 12000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos tintos",
+   "nombre": "Los Haroldos Cabernet",
+   "precio": 12000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos tintos",
+   "nombre": "San Felicien Malbec",
+   "precio": 22000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos tintos",
+   "nombre": "Nicasia Malbec",
+   "precio": 17000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos tintos",
+   "nombre": "Catena Zapata Cabernet Malbec",
+   "precio": 20000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos tintos",
+   "nombre": "Catena Zapata Malbec-Malbec",
+   "precio": 32000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos blancos y rosados",
+   "nombre": "Copa de vino blanco 250 cm3",
+   "precio": 4000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos blancos y rosados",
+   "nombre": "DV Catena Chardonnay",
+   "precio": 26000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos blancos y rosados",
+   "nombre": "Los Haroldos Sauvignon Blanc",
+   "precio": 12000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos blancos y rosados",
+   "nombre": "Trumpeter Chardonnay",
+   "precio": 22000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos blancos y rosados",
+   "nombre": "Santa Julia Chenin Dulce",
+   "precio": 15000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Vinos blancos y rosados",
+   "nombre": "Luigi Bosca Chardonnay",
+   "precio": 24000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Champagnes",
+   "nombre": "Barón B",
+   "precio": 80000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Champagnes",
+   "nombre": "Chandon Extra Brut",
+   "precio": 45000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Champagnes",
+   "nombre": "Federico de Alvear",
+   "precio": 15000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Bebidas sin alcohol",
+   "nombre": "Gaseosa línea Coca-Cola 350 ml",
+   "precio": 4200,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Bebidas sin alcohol",
+   "nombre": "Agua con o sin gas 500 ml",
+   "precio": 4200,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Bebidas sin alcohol",
+   "nombre": "Aquarius 500 ml",
+   "precio": 4200,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Café y té",
+   "nombre": "Café expresso o cortado",
+   "precio": 4000,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  },
+  {
+   "carta": "Bebidas",
+   "seccion": "Café y té",
+   "nombre": "Té",
+   "precio": 3500,
+   "descripcion": "",
+   "foto": "21/5/2026"
+  }
+ ]
+}
