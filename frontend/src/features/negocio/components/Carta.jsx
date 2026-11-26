@@ -20,9 +20,7 @@ const Carta = ({ carta, revisadaEl, nombreNegocio }) => {
     <section className="detalle-seccion">
       <span className="sobretitulo">SU PROPUESTA GASTRONÓMICA</span>
       <h2>La carta</h2>
-      <p className="real-date">
-        Precios revisados el {fechaCorta(revisadaEl)}. La fuente puede no informar vigencia.
-      </p>
+      <p className="real-date">Carta revisada el {fechaCorta(revisadaEl)}. Consultá precios con el negocio.</p>
 
       <div className="carta-tapa-zona">
         <button type="button" className="carta-tapa" onClick={() => setAbierta('')}>

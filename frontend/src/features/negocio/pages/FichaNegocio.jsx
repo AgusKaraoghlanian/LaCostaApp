@@ -8,6 +8,7 @@ import Tarjeta from '../../../shared/components/Tarjeta.jsx'
 import TituloDePagina from '../../../shared/components/TituloDePagina.jsx'
 import { fechaCorta, signosDePrecio } from '../../../shared/formato.js'
 import { useCargarDatos } from '../../../shared/hooks/useCargarDatos.js'
+import { useSesion } from '../../../shared/hooks/useSesion.js'
 import NoEncontrado from '../../informacion/pages/NoEncontrado.jsx'
 import Carta from '../components/Carta.jsx'
 import Contacto from '../components/Contacto.jsx'
@@ -39,6 +40,8 @@ const FichaNegocio = () => {
   // Si se llegó desde otra página del sitio (key distinta de 'default'), "Volver" va atrás y
   // deja la lista como estaba (localidad, filtros y lugar); si se entró directo, va a la categoría.
   const vieneDelSitio = useLocation().key !== 'default'
+  // El aviso de estado (cerrado, sin confirmar) es para el admin: al público no se le muestra.
+  const esAdmin = useSesion().sesion?.rol === 'ADMINISTRADOR'
   const { datos, error, recargar } = useCargarDatos(() => cargarFicha(slug), [slug])
 
   // Mientras llega otra ficha (al tocar un "También te pueden gustar") no se muestra la anterior.
@@ -104,10 +107,12 @@ const FichaNegocio = () => {
 
       <div className="detalle-disposicion">
         <div>
-          {AVISOS_DE_ESTADO[n.estadoComercial] && (
+          {esAdmin && AVISOS_DE_ESTADO[n.estadoComercial] && (
             <div className="motor-notice">
               <CircleHelp size={20} />
-              <p>{AVISOS_DE_ESTADO[n.estadoComercial]}</p>
+              <p>
+                {AVISOS_DE_ESTADO[n.estadoComercial]} <em>(Solo lo ves vos, como administrador.)</em>
+              </p>
             </div>
           )}
           <section className="detalle-seccion">

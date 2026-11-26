@@ -1,7 +1,6 @@
 import { BookOpen, ChevronLeft, ChevronRight, List, X } from 'lucide-react'
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { CANALES } from '../../../shared/costa.js'
-import { precioDeProducto } from '../../../shared/formato.js'
 import { armarPaginas } from '../utils/paginasDeCarta.js'
 
 // A partir de este ancho el libro se ve abierto, con dos páginas enfrentadas.
@@ -15,6 +14,7 @@ const altoCompleto = (el) => {
   return el.offsetHeight + parseFloat(estilo.marginTop) + parseFloat(estilo.marginBottom)
 }
 
+// Sin precios: al público se le muestra qué ofrece el negocio, no cuánto sale.
 const Producto = ({ p }) => (
   <li className="libro-producto" data-id={p.id}>
     <div className="libro-producto-linea">
@@ -22,8 +22,6 @@ const Producto = ({ p }) => (
         {p.nombre}
         {p.variante && p.variante !== 'Base' && <em> · {p.variante}</em>}
       </span>
-      <span className="libro-puntos" aria-hidden="true" />
-      <strong>{precioDeProducto(p)}</strong>
     </div>
     {p.descripcion && <p>{p.descripcion}</p>}
     {p.canal && p.canal !== 'SIN_ESPECIFICAR' && <small>{CANALES[p.canal]}</small>}
