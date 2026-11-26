@@ -551,28 +551,28 @@
   /* Solo "¿Por dónde?" (el "¿Qué se te antoja?" usa el mismo selector, pero de a una por
      fila, con la cantidad de lugares): las localidades de a dos por fila ("Todas" ocupa el
      ancho), así la hoja es más baja. */
-  .selector-localidad:not(.selector-antojo) .selector-lista {
+  .selector-localidad:not(.selector-antojo):not(.selector-orden) .selector-lista {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2px 6px;
     align-content: start;
   }
-  .selector-localidad:not(.selector-antojo) .selector-lista > [data-indice="0"],
-  .selector-localidad:not(.selector-antojo) .selector-lista > li[role="presentation"] {
+  .selector-localidad:not(.selector-antojo):not(.selector-orden) .selector-lista > [data-indice="0"],
+  .selector-localidad:not(.selector-antojo):not(.selector-orden) .selector-lista > li[role="presentation"] {
     grid-column: 1 / -1;
   }
-  .selector-localidad:not(.selector-antojo) .selector-lista ul[role="group"] {
+  .selector-localidad:not(.selector-antojo):not(.selector-orden) .selector-lista ul[role="group"] {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2px 6px;
   }
-  .selector-localidad:not(.selector-antojo) .selector-opcion {
+  .selector-localidad:not(.selector-antojo):not(.selector-orden) .selector-opcion {
     gap: 8px;
     padding: 8px;
     font-size: 16px;
     line-height: 1.2;
   }
-  .selector-localidad:not(.selector-antojo) .selector-opcion-icono {
+  .selector-localidad:not(.selector-antojo):not(.selector-orden) .selector-opcion-icono {
     flex-shrink: 0;
     width: 26px;
     height: 26px;
@@ -2326,5 +2326,65 @@
     order: 3;
     width: 100%;
     margin-top: 22px;
+  }
+}
+
+/* Explorar: "Ordenar por" con el mismo desplegable que "¿Por dónde?", pero compacto y sin
+   recuadro: "Ordenar por  Nombre (A-Z) ⌄" en una línea, a la derecha de la cantidad. */
+.selector-orden {
+  position: relative;
+  margin-left: auto;
+}
+.selector-orden .selector-boton {
+  gap: 8px;
+  width: auto;
+  padding: 6px 10px;
+  margin: 0;
+  border-radius: 999px;
+}
+.selector-orden .selector-pin {
+  width: 16px;
+  height: 16px;
+}
+.selector-orden .selector-textos {
+  flex-direction: row;
+  align-items: baseline;
+  gap: 6px;
+  flex: none;
+}
+.selector-orden .selector-etiqueta {
+  font-size: 14px;
+  font-weight: 400;
+  color: #849078;
+}
+.selector-orden .selector-valor {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--verde);
+}
+.selector-orden .selector-flecha {
+  width: 14px;
+  height: 14px;
+}
+.selector-orden .selector-panel {
+  left: auto;
+  right: 0;
+  top: calc(100% + 8px);
+  width: 260px;
+}
+.selector-orden .selector-opcion {
+  font-size: 16px;
+}
+@media (max-width: 720px) {
+  .selector-orden .selector-etiqueta,
+  .selector-orden .selector-valor {
+    font-size: 14px;
+  }
+  .selector-orden .selector-panel {
+    width: 100%;
+    top: auto;
+  }
+  .selector-orden .selector-opcion {
+    font-size: 19px;
   }
 }

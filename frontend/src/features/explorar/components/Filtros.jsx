@@ -52,23 +52,6 @@ const Filtros = ({ filtros, cambiar, elegirCategoria, alternarPrestacion, limpia
         </select>
       </label>
       <fieldset>
-        <legend>Precio por persona</legend>
-        <div className="precios">
-          {['1', '2', '3'].map((n) => (
-            <button
-              type="button"
-              key={n}
-              className={filtros.precio === n ? 'activo' : ''}
-              aria-pressed={filtros.precio === n}
-              onClick={() => cambiar('precio', filtros.precio === n ? '' : n)}
-            >
-              {'$'.repeat(n)}
-            </button>
-          ))}
-        </div>
-        <small>$ Económico · $$$ Una ocasión especial</small>
-      </fieldset>
-      <fieldset>
         <legend>Para tu plan</legend>
         {PRESTACIONES.map((p) => (
           <label className="checkbox" key={p}>

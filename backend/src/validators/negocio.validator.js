@@ -208,9 +208,15 @@ const listarNegociosSchema = Joi.object({
   plan: Joi.string().valid(...PLANES).messages({
     'any.only': 'El plan tiene que ser NINGUNO, CARRUSEL, LISTA o SABORES.',
   }),
-  // recomendados: los destacados primero; precio: de menor a mayor; nombre: alfabético.
-  orden: Joi.string().valid('recomendados', 'precio', 'nombre').default('recomendados').messages({
-    'any.only': 'El orden tiene que ser recomendados, precio o nombre.',
+  // recomendados: los destacados primero; precio: de menor a mayor; nombre: alfabético;
+  // favoritos: primero los de ?favorito= (los guardados del visitante) y después el resto,
+  // cada grupo por nombre.
+  orden: Joi.string().valid('recomendados', 'precio', 'nombre', 'favoritos').default('recomendados').messages({
+    'any.only': 'El orden tiene que ser recomendados, precio, nombre o favoritos.',
+  }),
+  // ?favorito=la-orilla&favorito=el-faro: los slugs guardados en el navegador (para orden=favoritos).
+  favorito: Joi.array().items(Joi.string().trim().max(200)).single().max(200).messages({
+    'array.max': 'Se pueden mandar hasta 200 favoritos.',
   }),
   texto: Joi.string().trim().max(100).allow('').messages({
     'string.max': 'La búsqueda puede tener hasta 100 caracteres.',
