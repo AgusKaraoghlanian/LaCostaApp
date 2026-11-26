@@ -7,6 +7,9 @@ import { useEffect, useId, useMemo, useRef, useState } from 'react'
 // En el celular la lista se abre como una hoja desde abajo, más cómoda para el pulgar.
 // También lo usa Explorar en el recuadro de la localidad: clase cambia el estilo de afuera,
 // etiqueta es el título del campo y textoTodas, cómo se llama la opción de todas.
+// Y el "¿Qué se te antoja?" de la portada, con las categorías en vez de las localidades:
+// Icono (el del campo), titulo (el de la hoja), textoVacio (lo que se ve sin nada elegido),
+// iconoDeOpcion y detalleDeOpcion (cómo se dibuja cada opción).
 const SelectorLocalidad = ({
   localidades,
   valor,
@@ -14,6 +17,11 @@ const SelectorLocalidad = ({
   clase = 'campo-localidad',
   etiqueta = '¿Por dónde?',
   textoTodas = 'Todas las localidades',
+  Icono = MapPin,
+  titulo = 'Elegí una localidad',
+  textoVacio,
+  iconoDeOpcion,
+  detalleDeOpcion,
 }) => {
   const idBase = useId()
   const [abierto, setAbierto] = useState(false)
@@ -167,10 +175,13 @@ const SelectorLocalidad = ({
         onPointerMove={() => indice !== activa && setActiva(indice)}
         onClick={() => elegir(indice)}
       >
-        <span className="selector-opcion-icono" aria-hidden="true">
-          {icono}
-        </span>
+        {iconoDeOpcion?.(opcion, indice) ?? (
+          <span className="selector-opcion-icono" aria-hidden="true">
+            {icono}
+          </span>
+        )}
         <span className="selector-opcion-nombre">{opcion.nombre}</span>
+        {detalleDeOpcion?.(opcion)}
         {esElegida && <Check size={15} strokeWidth={2.4} className="selector-check" aria-hidden="true" />}
       </li>
     )
@@ -196,13 +207,16 @@ const SelectorLocalidad = ({
         onClick={() => (abierto ? setAbierto(false) : abrir())}
         onKeyDown={alPresionarTecla}
       >
-        <MapPin size={21} className="selector-pin" aria-hidden="true" />
+        <Icono size={21} className="selector-pin" aria-hidden="true" />
         <span className="selector-textos">
           <span className="selector-etiqueta" id={`${idBase}-etiqueta`}>
             {etiqueta}
           </span>
-          <span className="selector-valor" id={`${idBase}-valor`}>
-            {elegida.nombre}
+          <span
+            className={`selector-valor${textoVacio && indiceElegido === 0 ? ' vacio' : ''}`}
+            id={`${idBase}-valor`}
+          >
+            {textoVacio && indiceElegido === 0 ? textoVacio : elegida.nombre}
           </span>
         </span>
         <ChevronDown size={16} className="selector-flecha" aria-hidden="true" />
@@ -217,7 +231,7 @@ const SelectorLocalidad = ({
         <span className="selector-agarradera" aria-hidden="true" onClick={cerrar} />
         <div className="selector-cabecera">
           <p className="selector-titulo" aria-hidden="true">
-            Elegí una localidad
+            {titulo}
           </p>
           <button type="button" className="selector-cerrar" onClick={cerrar} aria-label="Cerrar">
             <X size={20} />

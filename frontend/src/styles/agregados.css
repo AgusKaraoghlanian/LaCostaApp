@@ -548,30 +548,31 @@
     width: 32px;
     height: 32px;
   }
-  /* Solo "¿Por dónde?" (el "¿Qué se te antoja?" usa las mismas clases y no cambia): las
-     localidades de a dos por fila ("Todas" ocupa el ancho), así la hoja es más baja. */
-  .selector-localidad .selector-lista {
+  /* Solo "¿Por dónde?" (el "¿Qué se te antoja?" usa el mismo selector, pero de a una por
+     fila, con la cantidad de lugares): las localidades de a dos por fila ("Todas" ocupa el
+     ancho), así la hoja es más baja. */
+  .selector-localidad:not(.selector-antojo) .selector-lista {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2px 6px;
     align-content: start;
   }
-  .selector-localidad .selector-lista > [data-indice="0"],
-  .selector-localidad .selector-lista > li[role="presentation"] {
+  .selector-localidad:not(.selector-antojo) .selector-lista > [data-indice="0"],
+  .selector-localidad:not(.selector-antojo) .selector-lista > li[role="presentation"] {
     grid-column: 1 / -1;
   }
-  .selector-localidad .selector-lista ul[role="group"] {
+  .selector-localidad:not(.selector-antojo) .selector-lista ul[role="group"] {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2px 6px;
   }
-  .selector-localidad .selector-opcion {
+  .selector-localidad:not(.selector-antojo) .selector-opcion {
     gap: 8px;
     padding: 8px;
     font-size: 16px;
     line-height: 1.2;
   }
-  .selector-localidad .selector-opcion-icono {
+  .selector-localidad:not(.selector-antojo) .selector-opcion-icono {
     flex-shrink: 0;
     width: 26px;
     height: 26px;
@@ -633,8 +634,7 @@
 
 /* El hero recorta lo que sobresale (overflow: hidden); mientras la lista está abierta
    la dejamos salir para que no quede cortada por la sección de abajo. */
-.hero:has(.selector-localidad.abierto),
-.hero:has(.campo-buscar.abierto) {
+.hero:has(.selector-localidad.abierto) {
   overflow: visible;
   position: relative;
   z-index: 5;
@@ -918,39 +918,18 @@
   }
 }
 
-/* "¿Qué se te antoja?": la lista de categorías sugeridas. Usa el mismo panel que el
-   selector de localidad, pero en el celular sigue abriéndose abajo del campo (no como hoja),
-   porque el teclado está abierto. */
+/* "¿Qué se te antoja?": el mismo selector que "¿Por dónde?" (SelectorLocalidad), con las
+   categorías. Sin nada elegido muestra el ejemplo en gris. */
 .campo-buscar {
   position: relative;
 }
-.campo-buscar.abierto > svg,
-.campo-buscar:focus-within > svg {
-  color: var(--naranja);
-}
-/* El foco se ve en la lupa naranja y en la lista abierta, sin el recuadro gris. */
-.buscador .campo-buscar input:focus {
-  outline: none;
-}
-.antojo-panel {
-  left: 0;
-  width: max(100%, 320px);
-}
-.antojo-panel .selector-grupo {
-  margin-top: 6px;
-}
-/* "Seguí tu antojo" con la cruz para cerrar a la derecha (la cruz solo en el celular). */
-.antojo-cabecera {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.antojo-cerrar {
-  display: none;
+.selector-valor.vacio {
+  color: #8d947f;
 }
 .antojo-icono {
   display: grid;
   place-items: center;
+  flex-shrink: 0;
   width: 34px;
   height: 34px;
   border-radius: 11px;
@@ -961,49 +940,9 @@
   transform: rotate(-4deg) scale(1.05);
 }
 .antojo-cantidad {
+  margin-left: auto;
   font-size: 13px;
   color: #8a907f;
-}
-@media (max-width: 720px) {
-  .antojo-panel {
-    position: absolute;
-    z-index: 20;
-    top: calc(100% + 6px);
-    bottom: auto;
-    left: -14px;
-    right: -14px;
-    width: auto;
-    max-height: none;
-    display: block;
-    padding: 8px;
-    border: 1px solid #e7e6da;
-    border-radius: 14px;
-    animation: selector-entrar 0.16s ease-out;
-  }
-  .antojo-panel::before {
-    display: none;
-  }
-  .antojo-panel .selector-lista {
-    max-height: 300px;
-  }
-  .antojo-cerrar {
-    display: grid;
-    place-items: center;
-    flex-shrink: 0;
-    width: 34px;
-    height: 34px;
-    margin: 2px 2px 0 0;
-    padding: 0;
-    border: 0;
-    border-radius: 50%;
-    background: transparent;
-    color: var(--verde);
-    cursor: pointer;
-  }
-  .antojo-cerrar:hover,
-  .antojo-cerrar:active {
-    background: #f1eee4;
-  }
 }
 
 /* "Tu próximo plan, en La Costa": todas las localidades a la vista (PanelLocalidades).
@@ -1628,15 +1567,6 @@
   }
 }
 
-/* La flechita de "¿Qué se te antoja?" (igual a la de "¿Por dónde?"): se puede tocar y gira
-   cuando las sugerencias están abiertas. */
-.antojo-flecha {
-  flex-shrink: 0;
-  cursor: pointer;
-}
-.campo-buscar.abierto > .antojo-flecha {
-  transform: rotate(180deg);
-}
 
 /* Celular: la primera parte de la portada (texto, foto y buscador), compacta para que no haya
    que bajar tanto: menos aire entre los textos, el carrusel más bajo y sin el renglón "Hecho
@@ -1673,10 +1603,6 @@
   .campo-localidad {
     padding-top: 9px;
     padding-bottom: 10px;
-  }
-  /* Alineada con la flechita de "¿Por dónde?". */
-  .antojo-flecha {
-    margin-right: 6px;
   }
 }
 
