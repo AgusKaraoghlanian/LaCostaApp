@@ -27,10 +27,24 @@ const CanalIcono = ({ href, nombre, Icono, clase = '' }) => (
   </a>
 )
 
+// WhatsApp del negocio: el que cargó o, si no, su teléfono (wa.me con el número argentino:
+// sin el 0 de la característica y con 549 adelante).
+const enlaceWhatsApp = (n) => {
+  if (n.whatsapp) return n.whatsapp
+  let numero = (n.telefono ?? '').replace(/\D/g, '')
+  if (!numero) return null
+  if (!numero.startsWith('54')) numero = `549${numero.replace(/^0/, '')}`
+  return `https://wa.me/${numero}`
+}
+
+// Facebook del negocio: el que cargó o, si no, la búsqueda de su nombre en Facebook.
+const enlaceFacebook = (n) =>
+  n.facebook || `https://www.facebook.com/search/top?q=${encodeURIComponent(`${n.nombre} ${n.localidad.nombre}`)}`
+
 // La columna de la derecha de la ficha: dónde está, horarios, contacto y precio. Sin el
 // "Armá tu próximo plan" ni el "¿Este es tu negocio?" de la demo: la ficha informa, no invita
-// a reservar ni a reclamarla. Los botones (llamar, WhatsApp, redes) aparecen solo si el
-// negocio publicó esos canales.
+// a reservar ni a reclamarla. Llamar, web e Instagram aparecen si el negocio los publicó;
+// WhatsApp (con su teléfono) y Facebook (con una búsqueda) van siempre que se pueda.
 const Contacto = ({ negocio: n }) => {
   const horarios = resumenDeHorarios(n.horarios, n.horariosEspeciales)
   const partido = n.localidad.partido?.replace(/^Partido de /, '') ?? 'La Costa'
@@ -39,28 +53,24 @@ const Contacto = ({ negocio: n }) => {
     .filter(Boolean)
     .join(', ')
   const enlaceMapa = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(lugarEnMapa)}`
-  const hayCanales = n.telefono || n.whatsapp || n.web || n.instagram || n.facebook
+  const whatsapp = enlaceWhatsApp(n)
 
   return (
     <aside>
       <div className="contacto-tarjeta">
-        {hayCanales && (
-          <div className="canales-contacto">
-            {n.telefono && (
-              <a className="boton boton-naranja canal-llamar" href={`tel:${n.telefono}`}>
-                <Phone size={16} aria-hidden="true" />
-                Llamar
-              </a>
-            )}
-            {n.whatsapp && (
-              <CanalIcono href={n.whatsapp} nombre="WhatsApp" Icono={MessageCircle} clase="canal-whatsapp" />
-            )}
-            {n.web && <CanalIcono href={n.web} nombre="Sitio oficial" Icono={Globe} />}
-            {n.instagram && <CanalIcono href={n.instagram} nombre="Instagram" Icono={Instagram} />}
-            {n.facebook && <CanalIcono href={n.facebook} nombre="Facebook" Icono={Facebook} />}
-          </div>
-        )}
-        {hayCanales && <hr />}
+        <div className="canales-contacto">
+          {n.telefono && (
+            <a className="boton boton-naranja canal-llamar" href={`tel:${n.telefono}`}>
+              <Phone size={16} aria-hidden="true" />
+              Llamar
+            </a>
+          )}
+          {whatsapp && <CanalIcono href={whatsapp} nombre="WhatsApp" Icono={MessageCircle} clase="canal-whatsapp" />}
+          {n.web && <CanalIcono href={n.web} nombre="Sitio oficial" Icono={Globe} />}
+          {n.instagram && <CanalIcono href={n.instagram} nombre="Instagram" Icono={Instagram} />}
+          <CanalIcono href={enlaceFacebook(n)} nombre="Facebook" Icono={Facebook} />
+        </div>
+        <hr />
         {/* El ícono, el título y la dirección abren la dirección en Google Maps. */}
         <div className="dato-contacto">
           <a
@@ -105,11 +115,7 @@ const Contacto = ({ negocio: n }) => {
           <Mail size={22} />
           <div>
             <strong>Contacto</strong>
-            <span>
-              {hayCanales
-                ? 'Usá los canales publicados por el negocio.'
-                : 'El negocio todavía no publicó un canal de contacto.'}
-            </span>
+            <span>Usá los canales publicados por el negocio.</span>
           </div>
         </div>
         {n.precio && (

@@ -1,6 +1,5 @@
 import { BookOpen } from 'lucide-react'
 import { useMemo, useState } from 'react'
-import { fechaCorta } from '../../../shared/formato.js'
 import { seccionesDeCarta } from '../utils/paginasDeCarta.js'
 import LibroCarta from './LibroCarta.jsx'
 
@@ -10,7 +9,7 @@ const ATAJOS = 8
 // La carta publicada: solo los productos aprobados (el backend ya filtra los demás). En la ficha
 // se ve la tapa; al tocarla se abre como un libro (LibroCarta). Las secciones de abajo abren el
 // libro directo en esa sección.
-const Carta = ({ carta, revisadaEl, nombreNegocio }) => {
+const Carta = ({ carta, nombreNegocio }) => {
   const secciones = useMemo(() => seccionesDeCarta(carta), [carta])
   // null: cerrada; '' abre en el índice; una clave abre en esa sección.
   const [abierta, setAbierta] = useState(null)
@@ -20,7 +19,6 @@ const Carta = ({ carta, revisadaEl, nombreNegocio }) => {
     <section className="detalle-seccion">
       <span className="sobretitulo">SU PROPUESTA GASTRONÓMICA</span>
       <h2>La carta</h2>
-      <p className="real-date">Carta revisada el {fechaCorta(revisadaEl)}. Consultá precios con el negocio.</p>
 
       <div className="carta-tapa-zona">
         <button type="button" className="carta-tapa" onClick={() => setAbierta('')}>
@@ -28,10 +26,6 @@ const Carta = ({ carta, revisadaEl, nombreNegocio }) => {
           <span className="carta-tapa-texto">
             <small>LA CARTA DE</small>
             <strong>{nombreNegocio}</strong>
-            <span className="carta-tapa-cuenta">
-              {carta.length} {carta.length === 1 ? 'producto' : 'productos'} · {secciones.length}{' '}
-              {secciones.length === 1 ? 'sección' : 'secciones'}
-            </span>
           </span>
           <span className="carta-tapa-abrir">
             <BookOpen size={18} />

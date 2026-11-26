@@ -2407,3 +2407,28 @@
     padding: 10px;
   }
 }
+
+/* Ficha: con WhatsApp y Facebook siempre, la fila lleva hasta 5 botones; un poco más
+   angostos para que entren en una línea también en el celular. */
+.canales-contacto {
+  flex-wrap: nowrap;
+  gap: 6px;
+}
+.canales-contacto .canal-llamar {
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.canal-icono {
+  width: 44px;
+  height: 44px;
+}
+/* Menos blanco abajo de la tarjeta de contacto: el último dato sin margen y menos relleno. */
+.contacto-tarjeta .dato-contacto:last-child {
+  margin-bottom: 0;
+}
+.contacto-tarjeta {
+  padding-bottom: 18px;
+}
