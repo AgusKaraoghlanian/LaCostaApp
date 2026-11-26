@@ -5,7 +5,7 @@ import BotonFavorito from '../../../shared/components/BotonFavorito.jsx'
 import EstadoCarga from '../../../shared/components/EstadoCarga.jsx'
 import Migas from '../../../shared/components/Migas.jsx'
 import TituloDePagina from '../../../shared/components/TituloDePagina.jsx'
-import { fechaCorta, signosDePrecio } from '../../../shared/formato.js'
+import { signosDePrecio } from '../../../shared/formato.js'
 import { useCargarDatos } from '../../../shared/hooks/useCargarDatos.js'
 import { useSesion } from '../../../shared/hooks/useSesion.js'
 import NoEncontrado from '../../informacion/pages/NoEncontrado.jsx'
@@ -119,9 +119,6 @@ const FichaNegocio = () => {
             <span className="sobretitulo">UN LUGAR CON HISTORIA</span>
             <h2>El gusto de estar acá</h2>
             <p>{n.descripcion}</p>
-            <p className="real-date">
-              Información revisada el {fechaCorta(n.actualizadoEn)}. Solo se muestran datos aprobados.
-            </p>
           </section>
           {n.prestaciones.length > 0 && <Prestaciones prestaciones={n.prestaciones} />}
         </div>
