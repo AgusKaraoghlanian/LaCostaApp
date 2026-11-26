@@ -2262,15 +2262,7 @@
   outline-offset: 2px;
 }
 
-/* WhatsApp en la fila de canales: en verde, como lo reconoce todo el mundo. */
-.canal-icono.canal-whatsapp {
-  background: #25d366;
-  border-color: #25d366;
-  color: #fff;
-}
-.canal-icono.canal-whatsapp:hover {
-  background: #1ebe5a;
-}
+/* WhatsApp en la fila de canales: con su logo (globo verde), como lo reconoce todo el mundo. */
 
 /* Los datos de la tarjeta de contacto (dónde, horarios, contacto, precio) con letra mucho
    más grande que en la demo, que se leía muy chica. */
@@ -2431,4 +2423,23 @@
 }
 .contacto-tarjeta {
   padding-bottom: 18px;
+}
+
+/* "Llamar" a la misma altura que los botones-ícono (antes medía 48px contra 44px y parecía
+   más abajo). */
+.canales-contacto {
+  align-items: center;
+}
+.canales-contacto .canal-llamar {
+  height: 44px;
+  min-height: 44px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+/* En el celular el último dato se oculta y los horarios quedan al final: 30% menos de blanco
+   debajo (antes 26px de margen + 18px de relleno). */
+@media (max-width: 720px) {
+  .contacto-tarjeta .dato-contacto:has(+ .dato-contacto:last-child) {
+    margin-bottom: 13px;
+  }
 }

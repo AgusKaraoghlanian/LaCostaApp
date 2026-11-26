@@ -1,20 +1,9 @@
-import {
-  ArrowUpRight,
-  Clock,
-  Facebook,
-  Globe,
-  Instagram,
-  Mail,
-  MapPin,
-  MessageCircle,
-  Phone,
-  Utensils,
-} from 'lucide-react'
+import { ArrowUpRight, Clock, Facebook, Globe, Instagram, Mail, MapPin, Phone, Utensils } from 'lucide-react'
 import { NOMBRES_DE_PRECIO, resumenDeHorarios, signosDePrecio } from '../../../shared/formato.js'
 
 // Un canal del negocio (WhatsApp, web, redes) como botón-ícono, en otra pestaña. El nombre va
 // en aria-label (lectores de pantalla) y en title (cartelito al pasar el mouse).
-const CanalIcono = ({ href, nombre, Icono, clase = '' }) => (
+const CanalIcono = ({ href, nombre, Icono, clase = '', tamano = 20 }) => (
   <a
     className={`canal-icono ${clase}`.trim()}
     href={href}
@@ -23,8 +12,30 @@ const CanalIcono = ({ href, nombre, Icono, clase = '' }) => (
     aria-label={nombre}
     title={nombre}
   >
-    <Icono size={20} aria-hidden="true" />
+    <Icono size={tamano} aria-hidden="true" />
   </a>
+)
+
+// El logo de WhatsApp (globo verde con el tubo blanco, sobre su borde blanco), dibujado acá
+// para no sumar una dependencia. Recibe size como los íconos de lucide.
+const LogoWhatsApp = ({ size = 24 }) => (
+  <svg width={size} height={size} viewBox="0 0 48 48" aria-hidden="true">
+    <path
+      d="M24 3C12.4 3 3 12.4 3 24c0 3.8 1 7.4 2.8 10.5L3 45l10.8-2.8A21 21 0 0 0 24 45c11.6 0 21-9.4 21-21S35.6 3 24 3z"
+      fill="#fff"
+      stroke="#e3e3e3"
+      strokeWidth="1.5"
+    />
+    <path
+      d="M24 6.5C14.3 6.5 6.5 14.3 6.5 24c0 3.4 1 6.6 2.7 9.3L7.6 40.4l7.3-1.9A17.4 17.4 0 0 0 24 41.5c9.7 0 17.5-7.8 17.5-17.5S33.7 6.5 24 6.5z"
+      fill="#4cae50"
+    />
+    <path
+      transform="translate(14.6 14.2) scale(0.8)"
+      d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+      fill="#fff"
+    />
+  </svg>
 )
 
 // WhatsApp del negocio: el que cargó o, si no, su teléfono (wa.me con el número argentino:
@@ -65,7 +76,9 @@ const Contacto = ({ negocio: n }) => {
               Llamar
             </a>
           )}
-          {whatsapp && <CanalIcono href={whatsapp} nombre="WhatsApp" Icono={MessageCircle} clase="canal-whatsapp" />}
+          {whatsapp && (
+            <CanalIcono href={whatsapp} nombre="WhatsApp" Icono={LogoWhatsApp} clase="canal-whatsapp" tamano={30} />
+          )}
           {n.web && <CanalIcono href={n.web} nombre="Sitio oficial" Icono={Globe} />}
           {n.instagram && <CanalIcono href={n.instagram} nombre="Instagram" Icono={Instagram} />}
           <CanalIcono href={enlaceFacebook(n)} nombre="Facebook" Icono={Facebook} />
