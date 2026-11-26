@@ -1,10 +1,9 @@
-import { ArrowLeft, ArrowRight, CircleHelp, MapPin, Sparkles, Store } from 'lucide-react'
+import { ArrowLeft, CircleHelp, MapPin, Sparkles, Store } from 'lucide-react'
 import { Link, useLocation, useNavigate, useParams } from 'react-router'
-import { buscarNegocios, obtenerNegocio } from '../../../shared/api/negocios.api.js'
+import { obtenerNegocio } from '../../../shared/api/negocios.api.js'
 import BotonFavorito from '../../../shared/components/BotonFavorito.jsx'
 import EstadoCarga from '../../../shared/components/EstadoCarga.jsx'
 import Migas from '../../../shared/components/Migas.jsx'
-import Tarjeta from '../../../shared/components/Tarjeta.jsx'
 import TituloDePagina from '../../../shared/components/TituloDePagina.jsx'
 import { fechaCorta, signosDePrecio } from '../../../shared/formato.js'
 import { useCargarDatos } from '../../../shared/hooks/useCargarDatos.js'
@@ -22,7 +21,7 @@ const AVISOS_DE_ESTADO = {
   SIN_CONFIRMAR: 'La actividad actual del negocio necesita confirmación. Consultá la fuente antes de acercarte.',
 }
 
-// La ficha y hasta tres de la misma categoría para "También te pueden gustar".
+// La ficha (termina ahí: no sugiere otros lugares abajo).
 // Si no existe (o no está publicada), noExiste: se muestra la página de "no encontrado".
 const cargarFicha = async (slug) => {
   const negocio = await obtenerNegocio(slug).catch((e) => {
@@ -30,8 +29,7 @@ const cargarFicha = async (slug) => {
     throw e
   })
   if (!negocio) return { slug, noExiste: true }
-  const parecidos = await buscarNegocios({ categoria: negocio.categoria.clave })
-  return { negocio, relacionados: parecidos.negocios.filter((n) => n.slug !== slug).slice(0, 3) }
+  return { negocio }
 }
 
 const FichaNegocio = () => {
@@ -49,7 +47,7 @@ const FichaNegocio = () => {
   if (!vigente) return <EstadoCarga error={error} onReintentar={recargar} />
   if (datos.noExiste) return <NoEncontrado />
 
-  const { negocio: n, relacionados } = datos
+  const { negocio: n } = datos
   // Varias fotos si la ficha las trae (fotos); si no, la única de siempre (foto).
   const fotos = n.fotos?.length ? n.fotos : n.foto ? [n.foto] : []
 
@@ -115,6 +113,8 @@ const FichaNegocio = () => {
               </p>
             </div>
           )}
+          {/* La carta primero, arriba de todo; después la descripción y las prestaciones. */}
+          {n.carta.length > 0 && <Carta carta={n.carta} revisadaEl={n.actualizadoEn} nombreNegocio={n.nombre} />}
           <section className="detalle-seccion">
             <span className="sobretitulo">UN LUGAR CON HISTORIA</span>
             <h2>El gusto de estar acá</h2>
@@ -124,29 +124,10 @@ const FichaNegocio = () => {
             </p>
           </section>
           {n.prestaciones.length > 0 && <Prestaciones prestaciones={n.prestaciones} />}
-          {n.carta.length > 0 && <Carta carta={n.carta} revisadaEl={n.actualizadoEn} nombreNegocio={n.nombre} />}
         </div>
         <Contacto negocio={n} />
       </div>
 
-      {relacionados.length > 0 && (
-        <section className="seccion">
-          <div className="titulo-seccion">
-            <div>
-              <span className="sobretitulo">SEGUÍ DESCUBRIENDO</span>
-              <h2>También te pueden gustar</h2>
-            </div>
-            <Link to={`/categoria/${n.categoria.clave}`} className="enlace-flecha">
-              Ver más <ArrowRight size={17} />
-            </Link>
-          </div>
-          <div className="grilla-tarjetas">
-            {relacionados.map((r) => (
-              <Tarjeta key={r.slug} negocio={r} />
-            ))}
-          </div>
-        </section>
-      )}
     </main>
   )
 }

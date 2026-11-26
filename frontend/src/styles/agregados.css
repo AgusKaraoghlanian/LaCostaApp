@@ -2261,3 +2261,51 @@
   outline: 2px solid var(--naranja);
   outline-offset: 2px;
 }
+
+/* WhatsApp en la fila de canales: en verde, como lo reconoce todo el mundo. */
+.canal-icono.canal-whatsapp {
+  background: #25d366;
+  border-color: #25d366;
+  color: #fff;
+}
+.canal-icono.canal-whatsapp:hover {
+  background: #1ebe5a;
+}
+
+/* Los datos de la tarjeta de contacto (dónde, horarios, contacto, precio) con letra mucho
+   más grande que en la demo, que se leía muy chica. */
+.contacto-tarjeta .dato-contacto {
+  gap: 15px;
+  margin-bottom: 26px;
+}
+.contacto-tarjeta .dato-contacto strong {
+  font-size: 19px;
+  margin-bottom: 6px;
+}
+.contacto-tarjeta .dato-contacto span {
+  font-size: 17px;
+  line-height: 1.6;
+}
+.contacto-tarjeta .dato-contacto a {
+  font-size: 16px;
+}
+/* "Dónde estamos": el ícono, el título y la dirección llevan a Google Maps. */
+.contacto-tarjeta .dato-contacto a.dato-mapa {
+  display: block;
+  margin-top: 0;
+  color: inherit;
+}
+.dato-mapa:hover strong,
+.dato-mapa:focus-visible strong {
+  color: var(--naranja);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.contacto-tarjeta .dato-contacto a.dato-mapa-icono {
+  display: block;
+  margin-top: 0;
+  color: #8b9b78;
+}
+.dato-mapa-icono svg {
+  stroke-width: 1.5;
+}
