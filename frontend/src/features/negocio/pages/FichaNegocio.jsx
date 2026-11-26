@@ -114,7 +114,7 @@ const FichaNegocio = () => {
             </div>
           )}
           {/* La carta primero, arriba de todo; después la descripción y las prestaciones. */}
-          {n.carta.length > 0 && <Carta carta={n.carta} revisadaEl={n.actualizadoEn} nombreNegocio={n.nombre} />}
+          {n.carta.length > 0 && <Carta carta={n.carta} nombreNegocio={n.nombre} />}
           <section className="detalle-seccion">
             <span className="sobretitulo">UN LUGAR CON HISTORIA</span>
             <h2>El gusto de estar acá</h2>
