@@ -1,182 +1,59 @@
-import { ChevronDown, Search, X } from 'lucide-react'
-import { useEffect, useId, useMemo, useRef, useState } from 'react'
+import { Search, Sparkles } from 'lucide-react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import IconoCategoria from '../../../shared/components/IconoCategoria.jsx'
 import { useCatalogo } from '../../../shared/hooks/useCatalogo.jsx'
 import SelectorLocalidad from './SelectorLocalidad.jsx'
 
-// "Café" y "cafe" tienen que encontrar lo mismo.
-const normalizar = (texto) =>
-  texto
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-    .toLowerCase()
-    .trim()
-
-// El buscador grande de la portada: lleva a /explorar con lo que se buscó.
-// Al tocar "¿Qué se te antoja?" sugiere las categorías (las mismas de "¿Qué tenés ganas de
-// comer?") y las va filtrando mientras se escribe. Sigue el patrón de combobox con lista de
-// WAI-ARIA: el foco queda en el campo y la sugerencia activa se anuncia con aria-activedescendant.
+// El buscador grande de la portada. "¿Qué se te antoja?" y "¿Por dónde?" son los dos
+// selectores de lista (no se escribe: en el celular no abre el teclado y la lista sube como una
+// hoja desde abajo). Con una categoría elegida lleva a su página; si no, a /explorar. En los dos
+// casos respeta la localidad.
 const Buscador = () => {
   const navigate = useNavigate()
   const { categorias, localidades } = useCatalogo()
-  const idBase = useId()
-  const [texto, setTexto] = useState('')
+  const [categoria, setCategoria] = useState('')
   const [localidad, setLocalidad] = useState('')
-  const [abierto, setAbierto] = useState(false)
-  const [activa, setActiva] = useState(-1)
-  const campoRef = useRef(null)
 
-  // Las categorías que coinciden con lo escrito (todas si no se escribió nada): por su nombre
-  // o por sus palabras ("pizza" → Pizzerías, "birra" → Bares). Alcanza con que una palabra
-  // escrita de 3 letras o más sea el comienzo de una de ellas ("hela" ya sugiere Heladerías).
-  const sugerencias = useMemo(() => {
-    const buscado = normalizar(texto)
-    if (!buscado) return categorias
-    const escritas = buscado.split(/\s+/).filter((palabra) => palabra.length >= 3)
-    return categorias.filter(
-      (c) =>
-        normalizar(c.nombre).includes(buscado) ||
-        escritas.some((escrita) => (c.palabras ?? []).some((palabra) => palabra.startsWith(escrita))),
-    )
-  }, [categorias, texto])
-
-  const mostrarLista = abierto && sugerencias.length > 0
-  const idSugerencia = (i) => `${idBase}-sugerencia-${i}`
-
-  // Cierra las sugerencias si se toca o hace clic afuera del campo.
-  useEffect(() => {
-    if (!abierto) return
-    const alTocarAfuera = (e) => {
-      if (!campoRef.current?.contains(e.target)) setAbierto(false)
-    }
-    document.addEventListener('pointerdown', alTocarAfuera)
-    return () => document.removeEventListener('pointerdown', alTocarAfuera)
-  }, [abierto])
-
-  // Va a la página de la categoría elegida (respeta la localidad si se eligió una).
-  const irACategoria = (categoria) => {
-    setAbierto(false)
-    const params = localidad ? `?localidad=${localidad}` : ''
-    navigate(`/categoria/${categoria.clave}${params}`)
-  }
+  const opcionesDeCategoria = categorias.map((c) => ({ ...c, id: c.clave }))
 
   const buscar = (e) => {
     e.preventDefault()
-    const params = new URLSearchParams()
-    if (texto.trim()) params.set('q', texto.trim())
-    if (localidad) params.set('localidad', localidad)
-    navigate(`/explorar${params.size ? `?${params}` : ''}`)
-  }
-
-  // Flechas para recorrer las sugerencias, Enter para elegir y Escape para cerrar.
-  // Con ninguna sugerencia activa, Enter busca el texto como siempre.
-  const alPresionarTecla = (e) => {
-    const ultima = sugerencias.length - 1
-    if (e.key === 'ArrowDown') {
-      e.preventDefault()
-      setAbierto(true)
-      setActiva((a) => (mostrarLista ? Math.min(a + 1, ultima) : 0))
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault()
-      setActiva((a) => Math.max(a - 1, -1))
-    } else if (e.key === 'Enter' && mostrarLista && activa >= 0) {
-      e.preventDefault()
-      irACategoria(sugerencias[activa])
-    } else if (e.key === 'Escape' && abierto) {
-      e.preventDefault()
-      setAbierto(false)
-      setActiva(-1)
-    } else if (e.key === 'Tab') {
-      setAbierto(false)
-    }
+    const params = localidad ? `?localidad=${localidad}` : ''
+    navigate(categoria ? `/categoria/${categoria}${params}` : `/explorar${params}`)
   }
 
   return (
     <form className="buscador" onSubmit={buscar}>
-      <div className={`campo-buscar${mostrarLista ? ' abierto' : ''}`} ref={campoRef}>
-        <Search size={21} />
-        <label>
-          <span>¿Qué se te antoja?</span>
-          <input
-            role="combobox"
-            aria-label="Qué querés comer"
-            aria-autocomplete="list"
-            aria-expanded={mostrarLista}
-            aria-controls={`${idBase}-sugerencias`}
-            aria-activedescendant={mostrarLista && activa >= 0 ? idSugerencia(activa) : undefined}
-            autoComplete="off"
-            placeholder="Café, parrilla, pizza…"
-            value={texto}
-            onChange={(e) => {
-              setTexto(e.target.value)
-              setAbierto(true)
-              setActiva(-1)
-            }}
-            onFocus={() => setAbierto(true)}
-            onClick={() => setAbierto(true)}
-            onKeyDown={alPresionarTecla}
-          />
-        </label>
-        {/* La misma flechita que "¿Por dónde?": abre o cierra las sugerencias. */}
-        <ChevronDown
-          size={16}
-          className="selector-flecha antojo-flecha"
-          aria-hidden="true"
-          onPointerDown={(e) => e.preventDefault()}
-          onClick={() => {
-            if (mostrarLista) return setAbierto(false)
-            campoRef.current?.querySelector('input')?.focus()
-            setAbierto(true)
-          }}
-        />
-
-        <div className="selector-panel antojo-panel" hidden={!mostrarLista}>
-          <div className="antojo-cabecera">
-            <p className="selector-grupo" aria-hidden="true">
-              {texto.trim() ? 'Categorías que coinciden' : 'Seguí tu antojo'}
-            </p>
-            {/* Solo en el celular: cierra las sugerencias y baja el teclado. pointerdown +
-                preventDefault: el campo no pierde el foco antes del clic (como las opciones). */}
-            <button
-              type="button"
-              className="antojo-cerrar"
-              aria-label="Cerrar las sugerencias"
-              onPointerDown={(e) => e.preventDefault()}
-              onClick={() => {
-                setAbierto(false)
-                setActiva(-1)
-                campoRef.current?.querySelector('input')?.blur()
-              }}
-            >
-              <X size={18} />
-            </button>
-          </div>
-          <ul className="selector-lista" id={`${idBase}-sugerencias`} role="listbox" aria-label="Categorías">
-            {sugerencias.map((c, i) => (
-              <li
-                key={c.id}
-                id={idSugerencia(i)}
-                role="option"
-                aria-selected={i === activa}
-                className={`selector-opcion${i === activa ? ' activa' : ''}`}
-                onPointerMove={() => i !== activa && setActiva(i)}
-                // pointerdown + preventDefault: el campo no pierde el foco antes del clic.
-                onPointerDown={(e) => e.preventDefault()}
-                onClick={() => irACategoria(c)}
-              >
-                <span className="antojo-icono" style={{ background: c.color }} aria-hidden="true">
-                  <IconoCategoria icono={c.icono} size={17} strokeWidth={1.6} />
-                </span>
-                <span className="selector-opcion-nombre">{c.nombre}</span>
-                <small className="antojo-cantidad">
-                  {c.negocios} {c.negocios === 1 ? 'lugar' : 'lugares'}
-                </small>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+      <SelectorLocalidad
+        clase="campo-buscar selector-antojo"
+        localidades={opcionesDeCategoria}
+        valor={categoria}
+        onCambiar={setCategoria}
+        etiqueta="¿Qué se te antoja?"
+        textoTodas="De todo un poco"
+        textoVacio="Café, parrilla, pizza…"
+        titulo="Seguí tu antojo"
+        Icono={Search}
+        iconoDeOpcion={(c, i) =>
+          i === 0 ? (
+            <span className="selector-opcion-icono" aria-hidden="true">
+              <Sparkles size={14} />
+            </span>
+          ) : (
+            <span className="antojo-icono" style={{ background: c.color }} aria-hidden="true">
+              <IconoCategoria icono={c.icono} size={17} strokeWidth={1.6} />
+            </span>
+          )
+        }
+        detalleDeOpcion={(c) =>
+          c.negocios !== undefined && (
+            <small className="antojo-cantidad">
+              {c.negocios} {c.negocios === 1 ? 'lugar' : 'lugares'}
+            </small>
+          )
+        }
+      />
       <SelectorLocalidad localidades={localidades} valor={localidad} onCambiar={setLocalidad} />
       <button className="boton boton-naranja" type="submit">
         <Search size={17} />
