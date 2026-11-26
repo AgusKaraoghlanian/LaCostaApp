@@ -2448,3 +2448,21 @@
     margin-bottom: 13px;
   }
 }
+
+/* Tarjeta sin foto: "Un lugar para descubrir" centrado también cuando ocupa dos líneas. */
+.tarjeta-sin-foto span {
+  text-align: center;
+}
+/* Ficha en el celular: 15% menos de blanco arriba de "Dónde estamos" (debajo de la línea,
+   24px → 20px) y 15% menos debajo de los horarios (13px + 18px → 9px + 17px). */
+@media (max-width: 720px) {
+  .contacto-tarjeta hr {
+    margin-bottom: 20px;
+  }
+  .contacto-tarjeta .dato-contacto:has(+ .dato-contacto:last-child) {
+    margin-bottom: 9px;
+  }
+  .contacto-tarjeta {
+    padding-bottom: 17px;
+  }
+}
