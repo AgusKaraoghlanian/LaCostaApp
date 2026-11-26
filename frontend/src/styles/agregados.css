@@ -2299,3 +2299,39 @@
     display: none;
   }
 }
+
+/* Ficha: los canales de contacto en una sola fila. "Llamar" sigue en naranja y ocupa lo que
+   sobra; web, Instagram, WhatsApp y Facebook van como botones-ícono de 46px (área táctil
+   cómoda), con el nombre en el cartelito y para lectores de pantalla. */
+.canales-contacto {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.canales-contacto .canal-llamar {
+  flex: 1 1 120px;
+  font-size: 15px;
+}
+.canal-icono {
+  flex: 0 0 auto;
+  width: 46px;
+  height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #d8dcd0;
+  border-radius: 7px;
+  color: var(--verde);
+  transition:
+    background 0.18s,
+    transform 0.18s;
+}
+.canal-icono:hover {
+  background: #edeee6;
+  transform: translateY(-1px);
+}
+.canal-icono:focus-visible,
+.canales-contacto .canal-llamar:focus-visible {
+  outline: 2px solid var(--naranja);
+  outline-offset: 2px;
+}

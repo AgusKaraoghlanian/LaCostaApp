@@ -1,10 +1,22 @@
-import { ArrowUpRight, Clock, Mail, MapPin, Phone, Utensils } from 'lucide-react'
+import {
+  ArrowUpRight,
+  Clock,
+  Facebook,
+  Globe,
+  Instagram,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Phone,
+  Utensils,
+} from 'lucide-react'
 import { NOMBRES_DE_PRECIO, resumenDeHorarios, signosDePrecio } from '../../../shared/formato.js'
 
-// Un botón a un canal del negocio (WhatsApp, web, redes), en otra pestaña.
-const EnlaceExterno = ({ href, children }) => (
-  <a className="boton boton-borde ancho" href={href} target="_blank" rel="noreferrer">
-    {children} <ArrowUpRight size={15} />
+// Un canal del negocio (WhatsApp, web, redes) como botón-ícono, en otra pestaña. El nombre va
+// en aria-label (lectores de pantalla) y en title (cartelito al pasar el mouse).
+const CanalIcono = ({ href, nombre, Icono }) => (
+  <a className="canal-icono" href={href} target="_blank" rel="noreferrer" aria-label={nombre} title={nombre}>
+    <Icono size={20} aria-hidden="true" />
   </a>
 )
 
@@ -21,17 +33,17 @@ const Contacto = ({ negocio: n }) => {
     <aside>
       <div className="contacto-tarjeta">
         {hayCanales && (
-          <div className="botones-juntos">
+          <div className="canales-contacto">
             {n.telefono && (
-              <a className="boton boton-naranja ancho" href={`tel:${n.telefono}`}>
-                <Phone size={16} />
-                Llamar al negocio
+              <a className="boton boton-naranja canal-llamar" href={`tel:${n.telefono}`}>
+                <Phone size={16} aria-hidden="true" />
+                Llamar
               </a>
             )}
-            {n.whatsapp && <EnlaceExterno href={n.whatsapp}>WhatsApp</EnlaceExterno>}
-            {n.web && <EnlaceExterno href={n.web}>Visitar sitio oficial</EnlaceExterno>}
-            {n.instagram && <EnlaceExterno href={n.instagram}>Instagram</EnlaceExterno>}
-            {n.facebook && <EnlaceExterno href={n.facebook}>Facebook</EnlaceExterno>}
+            {n.whatsapp && <CanalIcono href={n.whatsapp} nombre="WhatsApp" Icono={MessageCircle} />}
+            {n.web && <CanalIcono href={n.web} nombre="Sitio oficial" Icono={Globe} />}
+            {n.instagram && <CanalIcono href={n.instagram} nombre="Instagram" Icono={Instagram} />}
+            {n.facebook && <CanalIcono href={n.facebook} nombre="Facebook" Icono={Facebook} />}
           </div>
         )}
         {hayCanales && <hr />}
