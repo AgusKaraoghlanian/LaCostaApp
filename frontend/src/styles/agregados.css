@@ -2380,11 +2380,30 @@
   .selector-orden .selector-valor {
     font-size: 14px;
   }
+  /* En el celular también se despliega debajo del botón (no como hoja ni sobre toda la
+     pantalla): sin fondo oscuro, sin barrita ni título. */
+  .selector-orden .selector-fondo,
+  .selector-orden .selector-agarradera,
+  .selector-orden .selector-cabecera {
+    display: none;
+  }
   .selector-orden .selector-panel {
-    width: 100%;
-    top: auto;
+    position: absolute;
+    z-index: 20;
+    top: calc(100% + 6px);
+    bottom: auto;
+    left: auto;
+    right: 0;
+    width: 250px;
+    max-height: none;
+    display: block;
+    padding: 8px;
+    border: 1px solid #e7e6da;
+    border-radius: 14px;
+    animation: selector-entrar 0.16s ease-out;
   }
   .selector-orden .selector-opcion {
-    font-size: 19px;
+    font-size: 16px;
+    padding: 10px;
   }
 }
