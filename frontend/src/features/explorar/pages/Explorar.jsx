@@ -40,7 +40,8 @@ const BuscadorListado = ({ inicial, onBuscar }) => {
 }
 
 // /explorar y /categoria/:clave. Los filtros viven en la URL (?q=café&localidad=3&precio=2
-// &prestacion=Reservas&orden=precio&pagina=2), así una búsqueda se puede compartir o volver atrás.
+// &prestacion=Reservas&pagina=2), así una búsqueda se puede compartir o volver atrás.
+// Los resultados van siempre por nombre (A-Z): no hay selector de orden.
 const Explorar = () => {
   const { clave } = useParams()
   const [params, setParams] = useSearchParams()
@@ -61,7 +62,6 @@ const Explorar = () => {
     localidad: params.get('localidad') ?? '',
     precio: params.get('precio') ?? '',
     prestaciones: params.getAll('prestacion'),
-    orden: params.get('orden') ?? 'recomendados',
     pagina: Number(params.get('pagina')) || 1,
   }
 
@@ -73,7 +73,7 @@ const Explorar = () => {
         localidadId: filtros.localidad,
         precio: filtros.precio,
         prestacion: filtros.prestaciones,
-        orden: filtros.orden,
+        orden: 'nombre',
         pagina: filtros.pagina,
       }),
     [clave, params.toString()],
@@ -176,14 +176,6 @@ const Explorar = () => {
             <span>
               <strong>{total}</strong> {total === 1 ? 'lugar para descubrir' : 'lugares para descubrir'}
             </span>
-            <label>
-              Ordenar por{' '}
-              <select aria-label="Ordenar resultados" value={filtros.orden} onChange={(e) => cambiar('orden', e.target.value)}>
-                <option value="recomendados">Recomendados</option>
-                <option value="precio">Menor precio</option>
-                <option value="nombre">Nombre</option>
-              </select>
-            </label>
           </div>
           {!datos ? (
             <EstadoCarga error={error} onReintentar={recargar} />

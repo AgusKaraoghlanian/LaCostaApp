@@ -2309,3 +2309,22 @@
 .dato-mapa-icono svg {
   stroke-width: 1.5;
 }
+
+/* Explorar: sin el "Ordenar por" (siempre por nombre), la barra de resultados queda en una
+   línea y más pegada a las tarjetas. En el celular la paginación va abajo de las tarjetas
+   (antes, con .resultados en display: contents, quedaba arriba y dejaba mucho blanco). */
+.barra-resultados {
+  margin-bottom: 14px;
+  min-height: 0;
+}
+@media (max-width: 720px) {
+  .barra-resultados {
+    gap: 8px;
+    margin-bottom: 0;
+  }
+  .resultados > .paginacion {
+    order: 3;
+    width: 100%;
+    margin-top: 22px;
+  }
+}
