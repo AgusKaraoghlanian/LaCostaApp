@@ -78,6 +78,12 @@ describe('listarNegociosSchema', () => {
     expect(listarNegociosSchema.validate({ plan: 'cualquiera' }).error).toBeDefined();
   });
 
+  it('ordena por favoritos con uno o varios slugs guardados', () => {
+    const { value, error } = listarNegociosSchema.validate({ orden: 'favoritos', favorito: 'la-orilla' });
+    expect(error).toBeUndefined();
+    expect(value.favorito).toEqual(['la-orilla']);
+  });
+
   it('convierte los números del query', () => {
     expect(listarNegociosSchema.validate({ pagina: '2', localidadId: '3' }).value).toMatchObject({ pagina: 2, localidadId: 3 });
   });

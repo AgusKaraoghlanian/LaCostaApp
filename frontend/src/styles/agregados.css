@@ -551,28 +551,28 @@
   /* Solo "¿Por dónde?" (el "¿Qué se te antoja?" usa el mismo selector, pero de a una por
      fila, con la cantidad de lugares): las localidades de a dos por fila ("Todas" ocupa el
      ancho), así la hoja es más baja. */
-  .selector-localidad:not(.selector-antojo) .selector-lista {
+  .selector-localidad:not(.selector-antojo):not(.selector-orden) .selector-lista {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2px 6px;
     align-content: start;
   }
-  .selector-localidad:not(.selector-antojo) .selector-lista > [data-indice="0"],
-  .selector-localidad:not(.selector-antojo) .selector-lista > li[role="presentation"] {
+  .selector-localidad:not(.selector-antojo):not(.selector-orden) .selector-lista > [data-indice="0"],
+  .selector-localidad:not(.selector-antojo):not(.selector-orden) .selector-lista > li[role="presentation"] {
     grid-column: 1 / -1;
   }
-  .selector-localidad:not(.selector-antojo) .selector-lista ul[role="group"] {
+  .selector-localidad:not(.selector-antojo):not(.selector-orden) .selector-lista ul[role="group"] {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2px 6px;
   }
-  .selector-localidad:not(.selector-antojo) .selector-opcion {
+  .selector-localidad:not(.selector-antojo):not(.selector-orden) .selector-opcion {
     gap: 8px;
     padding: 8px;
     font-size: 16px;
     line-height: 1.2;
   }
-  .selector-localidad:not(.selector-antojo) .selector-opcion-icono {
+  .selector-localidad:not(.selector-antojo):not(.selector-orden) .selector-opcion-icono {
     flex-shrink: 0;
     width: 26px;
     height: 26px;
@@ -2260,4 +2260,150 @@
 .canales-contacto .canal-llamar:focus-visible {
   outline: 2px solid var(--naranja);
   outline-offset: 2px;
+}
+
+/* WhatsApp en la fila de canales: en verde, como lo reconoce todo el mundo. */
+.canal-icono.canal-whatsapp {
+  background: #25d366;
+  border-color: #25d366;
+  color: #fff;
+}
+.canal-icono.canal-whatsapp:hover {
+  background: #1ebe5a;
+}
+
+/* Los datos de la tarjeta de contacto (dónde, horarios, contacto, precio) con letra mucho
+   más grande que en la demo, que se leía muy chica. */
+.contacto-tarjeta .dato-contacto {
+  gap: 15px;
+  margin-bottom: 26px;
+}
+.contacto-tarjeta .dato-contacto strong {
+  font-size: 19px;
+  margin-bottom: 6px;
+}
+.contacto-tarjeta .dato-contacto span {
+  font-size: 17px;
+  line-height: 1.6;
+}
+.contacto-tarjeta .dato-contacto a {
+  font-size: 16px;
+}
+/* "Dónde estamos": el ícono, el título y la dirección llevan a Google Maps. */
+.contacto-tarjeta .dato-contacto a.dato-mapa {
+  display: block;
+  margin-top: 0;
+  color: inherit;
+}
+.dato-mapa:hover strong,
+.dato-mapa:focus-visible strong {
+  color: var(--naranja);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.contacto-tarjeta .dato-contacto a.dato-mapa-icono {
+  display: block;
+  margin-top: 0;
+  color: #8b9b78;
+}
+.dato-mapa-icono svg {
+  stroke-width: 1.5;
+}
+
+/* Explorar: sin el "Ordenar por" (siempre por nombre), la barra de resultados queda en una
+   línea y más pegada a las tarjetas. En el celular la paginación va abajo de las tarjetas
+   (antes, con .resultados en display: contents, quedaba arriba y dejaba mucho blanco). */
+.barra-resultados {
+  margin-bottom: 14px;
+  min-height: 0;
+}
+@media (max-width: 720px) {
+  .barra-resultados {
+    gap: 8px;
+    margin-bottom: 0;
+  }
+  .resultados > .paginacion {
+    order: 3;
+    width: 100%;
+    margin-top: 22px;
+  }
+}
+
+/* Explorar: "Ordenar por" con el mismo desplegable que "¿Por dónde?", pero compacto y sin
+   recuadro: "Ordenar por  Nombre (A-Z) ⌄" en una línea, a la derecha de la cantidad. */
+.selector-orden {
+  position: relative;
+  margin-left: auto;
+}
+.selector-orden .selector-boton {
+  gap: 8px;
+  width: auto;
+  padding: 6px 10px;
+  margin: 0;
+  border-radius: 999px;
+}
+.selector-orden .selector-pin {
+  width: 16px;
+  height: 16px;
+}
+.selector-orden .selector-textos {
+  flex-direction: row;
+  align-items: baseline;
+  gap: 6px;
+  flex: none;
+}
+.selector-orden .selector-etiqueta {
+  font-size: 14px;
+  font-weight: 400;
+  color: #849078;
+}
+.selector-orden .selector-valor {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--verde);
+}
+.selector-orden .selector-flecha {
+  width: 14px;
+  height: 14px;
+}
+.selector-orden .selector-panel {
+  left: auto;
+  right: 0;
+  top: calc(100% + 8px);
+  width: 260px;
+}
+.selector-orden .selector-opcion {
+  font-size: 16px;
+}
+@media (max-width: 720px) {
+  .selector-orden .selector-etiqueta,
+  .selector-orden .selector-valor {
+    font-size: 14px;
+  }
+  /* En el celular también se despliega debajo del botón (no como hoja ni sobre toda la
+     pantalla): sin fondo oscuro, sin barrita ni título. */
+  .selector-orden .selector-fondo,
+  .selector-orden .selector-agarradera,
+  .selector-orden .selector-cabecera {
+    display: none;
+  }
+  .selector-orden .selector-panel {
+    position: absolute;
+    z-index: 20;
+    top: calc(100% + 6px);
+    bottom: auto;
+    left: auto;
+    right: 0;
+    width: 250px;
+    max-height: none;
+    display: block;
+    padding: 8px;
+    border: 1px solid #e7e6da;
+    border-radius: 14px;
+    animation: selector-entrar 0.16s ease-out;
+  }
+  .selector-orden .selector-opcion {
+    font-size: 16px;
+    padding: 10px;
+  }
 }

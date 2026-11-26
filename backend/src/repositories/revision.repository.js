@@ -20,6 +20,8 @@ const ORDENES = {
     recomendados: [{ destacado: "desc" }, { negocioId: "asc" }],
     precio: [{ precio: { sort: "asc", nulls: "last" } }, { nombre: "asc" }, { id: "asc" }],
     nombre: [{ nombre: "asc" }, { id: "asc" }],
+    // Los favoritos se separan aparte (ver buscarPublicadas); cada grupo va por nombre.
+    favoritos: [{ nombre: "asc" }, { id: "asc" }],
 };
 
 // Lo buscado (ya interpretado por utils/busqueda.js) como condiciones que se tienen que cumplir
@@ -42,7 +44,7 @@ const condicionesDeBusqueda = (busqueda) => {
 
 // Las revisiones que están en el sitio, con filtros. busqueda: lo buscado ya interpretado (lo
 // arma el service). prestaciones: tiene que tener todas.
-export const buscarPublicadas = async ({ categoriaId, localidadId, precio, prestaciones, destacado, plan, busqueda, orden = "recomendados", saltear, cantidad }) => {
+export const buscarPublicadas = async ({ categoriaId, localidadId, precio, prestaciones, destacado, plan, busqueda, orden = "recomendados", favoritos, saltear, cantidad }) => {
     const condiciones = condicionesDeBusqueda(busqueda);
     const where = {
         publicadaEn: { isNot: null },
@@ -54,6 +56,9 @@ export const buscarPublicadas = async ({ categoriaId, localidadId, precio, prest
         ...(prestaciones?.length ? { prestaciones: { hasEvery: prestaciones } } : {}),
         ...(condiciones.length ? { AND: condiciones } : {}),
     };
+    if (orden === "favoritos" && favoritos?.length) {
+        return buscarConFavoritosPrimero({ where, favoritos, saltear, cantidad });
+    }
     const [revisiones, total] = await Promise.all([
         prisma.revisionNegocio.findMany({
             where,
@@ -66,6 +71,36 @@ export const buscarPublicadas = async ({ categoriaId, localidadId, precio, prest
     ]);
     return { revisiones, total };
 }
+
+// orden=favoritos: primero los guardados (por nombre) y después el resto (por nombre). Se
+// paginan como una sola lista: la página puede empezar en los guardados y seguir en el resto.
+const buscarConFavoritosPrimero = async ({ where, favoritos, saltear, cantidad }) => {
+    const deFavoritos = { negocio: { slug: { in: favoritos } } };
+    const whereFavoritos = { AND: [where, deFavoritos] };
+    const whereResto = { AND: [where, { NOT: deFavoritos }] };
+    const consulta = (w, skip, take) =>
+        take > 0
+            ? prisma.revisionNegocio.findMany({
+                where: w,
+                orderBy: ORDENES.favoritos,
+                skip,
+                take,
+                include: { negocio: { select: { slug: true } } },
+            })
+            : [];
+
+    const [cantidadFavoritos, cantidadResto] = await Promise.all([
+        prisma.revisionNegocio.count({ where: whereFavoritos }),
+        prisma.revisionNegocio.count({ where: whereResto }),
+    ]);
+    const desdeFavoritos = Math.min(saltear, cantidadFavoritos);
+    const tomarFavoritos = Math.min(cantidad, cantidadFavoritos - desdeFavoritos);
+    const [primeros, resto] = await Promise.all([
+        consulta(whereFavoritos, desdeFavoritos, tomarFavoritos),
+        consulta(whereResto, Math.max(0, saltear - cantidadFavoritos), cantidad - tomarFavoritos),
+    ]);
+    return { revisiones: [...primeros, ...resto], total: cantidadFavoritos + cantidadResto };
+};
 
 // La revisión publicada del negocio con ese slug (o null si no existe o no está publicado).
 export const obtenerPublicadaPorSlug = async (slug) => {

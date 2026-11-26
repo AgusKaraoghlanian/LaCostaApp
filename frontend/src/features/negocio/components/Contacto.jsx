@@ -14,8 +14,15 @@ import { NOMBRES_DE_PRECIO, resumenDeHorarios, signosDePrecio } from '../../../s
 
 // Un canal del negocio (WhatsApp, web, redes) como botón-ícono, en otra pestaña. El nombre va
 // en aria-label (lectores de pantalla) y en title (cartelito al pasar el mouse).
-const CanalIcono = ({ href, nombre, Icono }) => (
-  <a className="canal-icono" href={href} target="_blank" rel="noreferrer" aria-label={nombre} title={nombre}>
+const CanalIcono = ({ href, nombre, Icono, clase = '' }) => (
+  <a
+    className={`canal-icono ${clase}`.trim()}
+    href={href}
+    target="_blank"
+    rel="noreferrer"
+    aria-label={nombre}
+    title={nombre}
+  >
     <Icono size={20} aria-hidden="true" />
   </a>
 )
@@ -27,6 +34,11 @@ const CanalIcono = ({ href, nombre, Icono }) => (
 const Contacto = ({ negocio: n }) => {
   const horarios = resumenDeHorarios(n.horarios, n.horariosEspeciales)
   const partido = n.localidad.partido?.replace(/^Partido de /, '') ?? 'La Costa'
+  // Google Maps en la dirección del negocio (si no la tiene, en la localidad).
+  const lugarEnMapa = [n.direccion || n.zonaAtencion, n.localidad.nombre, n.localidad.partido, n.localidad.provincia]
+    .filter(Boolean)
+    .join(', ')
+  const enlaceMapa = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(lugarEnMapa)}`
   const hayCanales = n.telefono || n.whatsapp || n.web || n.instagram || n.facebook
 
   return (
@@ -40,22 +52,36 @@ const Contacto = ({ negocio: n }) => {
                 Llamar
               </a>
             )}
-            {n.whatsapp && <CanalIcono href={n.whatsapp} nombre="WhatsApp" Icono={MessageCircle} />}
+            {n.whatsapp && (
+              <CanalIcono href={n.whatsapp} nombre="WhatsApp" Icono={MessageCircle} clase="canal-whatsapp" />
+            )}
             {n.web && <CanalIcono href={n.web} nombre="Sitio oficial" Icono={Globe} />}
             {n.instagram && <CanalIcono href={n.instagram} nombre="Instagram" Icono={Instagram} />}
             {n.facebook && <CanalIcono href={n.facebook} nombre="Facebook" Icono={Facebook} />}
           </div>
         )}
         {hayCanales && <hr />}
+        {/* El ícono, el título y la dirección abren la dirección en Google Maps. */}
         <div className="dato-contacto">
-          <MapPin size={19} />
+          <a
+            className="dato-mapa-icono"
+            href={enlaceMapa}
+            target="_blank"
+            rel="noreferrer"
+            aria-hidden="true"
+            tabIndex={-1}
+          >
+            <MapPin size={22} />
+          </a>
           <div>
-            <strong>Dónde estamos</strong>
-            <span>
-              {n.direccion || n.zonaAtencion || 'Dirección no informada'}
-              <br />
-              {n.localidad.nombre}, {partido}
-            </span>
+            <a className="dato-mapa" href={enlaceMapa} target="_blank" rel="noreferrer" title="Ver en Google Maps">
+              <strong>Dónde estamos</strong>
+              <span>
+                {n.direccion || n.zonaAtencion || 'Dirección no informada'}
+                <br />
+                {n.localidad.nombre}, {partido}
+              </span>
+            </a>
             <a
               href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
                 `${n.localidad.nombre}, ${n.localidad.partido ?? ''}, ${n.localidad.provincia ?? ''}`,
@@ -68,7 +94,7 @@ const Contacto = ({ negocio: n }) => {
           </div>
         </div>
         <div className="dato-contacto">
-          <Clock size={19} />
+          <Clock size={22} />
           <div>
             <strong>Horarios informados</strong>
             <span>{horarios || 'No informados'}</span>
@@ -76,15 +102,19 @@ const Contacto = ({ negocio: n }) => {
           </div>
         </div>
         <div className="dato-contacto">
-          <Mail size={19} />
+          <Mail size={22} />
           <div>
             <strong>Contacto</strong>
-            <span>{hayCanales ? 'Usá los canales publicados por el negocio.' : 'El negocio todavía no publicó un canal de contacto.'}</span>
+            <span>
+              {hayCanales
+                ? 'Usá los canales publicados por el negocio.'
+                : 'El negocio todavía no publicó un canal de contacto.'}
+            </span>
           </div>
         </div>
         {n.precio && (
           <div className="dato-contacto">
-            <Utensils size={19} />
+            <Utensils size={22} />
             <div>
               <strong>Precio orientativo</strong>
               <span>

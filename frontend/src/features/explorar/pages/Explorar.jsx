@@ -1,4 +1,4 @@
-import { Search, SlidersHorizontal } from 'lucide-react'
+import { ArrowDownAZ, Heart, Search, SlidersHorizontal } from 'lucide-react'
 import { useRef, useState } from 'react'
 import { useNavigate, useParams, useSearchParams } from 'react-router'
 import { buscarNegocios } from '../../../shared/api/negocios.api.js'
@@ -10,10 +10,15 @@ import TituloDePagina from '../../../shared/components/TituloDePagina.jsx'
 import Vacio from '../../../shared/components/Vacio.jsx'
 import { useCargarDatos } from '../../../shared/hooks/useCargarDatos.js'
 import { useCatalogo } from '../../../shared/hooks/useCatalogo.jsx'
+import { useFavoritos } from '../../../shared/hooks/useFavoritos.js'
+import SelectorLocalidad from '../../inicio/components/SelectorLocalidad.jsx'
 import NoEncontrado from '../../informacion/pages/NoEncontrado.jsx'
 import AtajosCategorias from '../components/AtajosCategorias.jsx'
 import Filtros from '../components/Filtros.jsx'
 import LocalidadElegida from '../components/LocalidadElegida.jsx'
+
+// Las otras formas de ordenar (la primera, "Nombre (A-Z)", es la de siempre).
+const ORDENES = [{ id: 'favoritos', nombre: 'Mis favoritos primero' }]
 
 // El buscador de arriba del listado.
 const BuscadorListado = ({ inicial, onBuscar }) => {
@@ -39,13 +44,15 @@ const BuscadorListado = ({ inicial, onBuscar }) => {
   )
 }
 
-// /explorar y /categoria/:clave. Los filtros viven en la URL (?q=café&localidad=3&precio=2
-// &prestacion=Reservas&orden=precio&pagina=2), así una búsqueda se puede compartir o volver atrás.
+// /explorar y /categoria/:clave. Los filtros viven en la URL (?q=café&localidad=3
+// &prestacion=Reservas&orden=favoritos&pagina=2), así una búsqueda se puede compartir o volver atrás.
+// Se ordena por nombre (A-Z) o con los favoritos del visitante primero (y después por nombre).
 const Explorar = () => {
   const { clave } = useParams()
   const [params, setParams] = useSearchParams()
   const navigate = useNavigate()
   const { categorias } = useCatalogo()
+  const { favoritos } = useFavoritos()
   const [filtrosAbiertos, setFiltrosAbiertos] = useState(false)
   const botonFiltrosRef = useRef(null)
   // Al cerrar los filtros (en el celular) se vuelve al botón Filtros: queda a la vista arriba
@@ -59,9 +66,8 @@ const Explorar = () => {
     q: params.get('q') ?? '',
     categoria: clave ?? params.get('categoria') ?? '',
     localidad: params.get('localidad') ?? '',
-    precio: params.get('precio') ?? '',
+    orden: params.get('orden') === 'favoritos' ? 'favoritos' : '',
     prestaciones: params.getAll('prestacion'),
-    orden: params.get('orden') ?? 'recomendados',
     pagina: Number(params.get('pagina')) || 1,
   }
 
@@ -71,12 +77,12 @@ const Explorar = () => {
         texto: filtros.q,
         categoria: filtros.categoria,
         localidadId: filtros.localidad,
-        precio: filtros.precio,
         prestacion: filtros.prestaciones,
-        orden: filtros.orden,
+        orden: filtros.orden || 'nombre',
+        favorito: filtros.orden ? favoritos : undefined,
         pagina: filtros.pagina,
       }),
-    [clave, params.toString()],
+    [clave, params.toString(), filtros.orden ? favoritos.join() : ''],
   )
 
   // Cambia la URL sin subir la pantalla. Cambiar un filtro vuelve a la primera página.
@@ -119,7 +125,7 @@ const Explorar = () => {
   // Con el catálogo ya cargado, una categoría que no existe es un 404.
   if (clave && categorias.length && !categoria) return <NoEncontrado />
 
-  const cantidadFiltros = [filtros.localidad, filtros.precio, params.get('categoria')].filter(Boolean).length + filtros.prestaciones.length
+  const cantidadFiltros = [filtros.localidad, params.get('categoria')].filter(Boolean).length + filtros.prestaciones.length
   const total = datos?.total ?? 0
 
   return (
@@ -128,7 +134,7 @@ const Explorar = () => {
         titulo={categoria ? `${categoria.nombre} en La Costa` : 'Descubrí lugares'}
         descripcion={
           categoria
-            ? `Descubrí ${categoria.nombre.toLowerCase()} en el Partido de La Costa. Filtrá por localidad, precio y servicios.`
+            ? `Descubrí ${categoria.nombre.toLowerCase()} en el Partido de La Costa. Filtrá por localidad y servicios.`
             : undefined
         }
       />
@@ -176,14 +182,22 @@ const Explorar = () => {
             <span>
               <strong>{total}</strong> {total === 1 ? 'lugar para descubrir' : 'lugares para descubrir'}
             </span>
-            <label>
-              Ordenar por{' '}
-              <select aria-label="Ordenar resultados" value={filtros.orden} onChange={(e) => cambiar('orden', e.target.value)}>
-                <option value="recomendados">Recomendados</option>
-                <option value="precio">Menor precio</option>
-                <option value="nombre">Nombre</option>
-              </select>
-            </label>
+            {/* El mismo desplegable que "¿Por dónde?" (en el celular, hoja desde abajo). */}
+            <SelectorLocalidad
+              clase="selector-orden"
+              localidades={ORDENES}
+              valor={filtros.orden}
+              onCambiar={(valor) => cambiar('orden', valor)}
+              etiqueta="Ordenar por"
+              textoTodas="Nombre (A-Z)"
+              titulo="Ordenar por"
+              Icono={filtros.orden ? Heart : ArrowDownAZ}
+              iconoDeOpcion={(o, i) => (
+                <span className="selector-opcion-icono" aria-hidden="true">
+                  {i === 0 ? <ArrowDownAZ size={14} /> : <Heart size={14} />}
+                </span>
+              )}
+            />
           </div>
           {!datos ? (
             <EstadoCarga error={error} onReintentar={recargar} />

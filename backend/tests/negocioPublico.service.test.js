@@ -57,6 +57,14 @@ describe('listarPublicados', () => {
     );
   });
 
+  it('pasa los favoritos guardados al repository para ordenarlos primero', async () => {
+    await negocioPublicoService.listarPublicados({ orden: 'favoritos', favorito: ['la-orilla'] });
+
+    expect(revisionRepository.buscarPublicadas).toHaveBeenCalledWith(
+      expect.objectContaining({ orden: 'favoritos', favoritos: ['la-orilla'] }),
+    );
+  });
+
   it('entiende comidas y localidades en lo que se escribe', async () => {
     await negocioPublicoService.listarPublicados({ texto: 'Pizza en San Bernardo' });
 
