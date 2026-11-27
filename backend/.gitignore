@@ -19,3 +19,6 @@ uploads/
 
 # Configuración local de Vercel (vercel link)
 .vercel
+
+# Descargas de OpenStreetMap del importador (prisma/importar-osm.js)
+prisma/osm/descargas/
