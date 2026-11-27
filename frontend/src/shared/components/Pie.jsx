@@ -41,7 +41,13 @@ const Pie = () => (
       </div>
       <div className="pie-abajo">
         <span>© {ANIO} Costa a la carta. Cada sabor, una historia.</span>
-        <span>Información revisada, con fuentes y decisiones editoriales.</span>
+        <span>
+          Algunos datos de los lugares: ©{' '}
+          <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">
+            colaboradores de OpenStreetMap
+          </a>
+          .
+        </span>
       </div>
     </div>
   </footer>
