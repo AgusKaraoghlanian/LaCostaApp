@@ -45,6 +45,10 @@ const Pie = () => (
           Algunos datos de los lugares: ©{' '}
           <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">
             colaboradores de OpenStreetMap
+          </a>{' '}
+          y{' '}
+          <a href="https://overturemaps.org" target="_blank" rel="noreferrer">
+            Overture Maps
           </a>
           .
         </span>
