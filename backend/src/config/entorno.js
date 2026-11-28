@@ -42,6 +42,11 @@ const validarEntorno = () => {
     avisos.push('SUPABASE_URL o SUPABASE_SERVICE_ROLE_KEY faltan: las fotos subidas se van a perder en cada deploy');
   }
 
+  // Sin esto las solicitudes de "Sumá tu lugar" se guardan pero no avisan por correo.
+  if (esProduccion() && !(process.env.SOLICITUDES_EMAIL && process.env.RESEND_API_KEY)) {
+    avisos.push('SOLICITUDES_EMAIL o RESEND_API_KEY faltan: las solicitudes de negocios solo se ven en el admin, sin aviso por correo');
+  }
+
   avisos.forEach((aviso) => console.warn(`Aviso: ${aviso}`));
   if (problemas.length > 0) {
     throw new Error(`Revisá las variables de entorno del backend:\n  - ${problemas.join('\n  - ')}`);

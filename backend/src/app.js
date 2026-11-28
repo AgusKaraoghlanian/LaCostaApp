@@ -8,6 +8,7 @@ import { catalogoRouterV1 } from "./routes/catalogo.router.v1.js";
 import { negocioRouterV1 } from "./routes/negocio.router.v1.js";
 import { negocioAdminRouterV1 } from "./routes/negocioAdmin.router.v1.js";
 import { fotoAdminRouterV1 } from "./routes/fotoAdmin.router.v1.js";
+import { solicitudRouterV1 } from "./routes/solicitud.router.v1.js";
 import { CARPETA_LOCAL } from "./repositories/foto.repository.js";
 import { errorMiddleware } from "./middlewares/error.middleware.js";
 import { logMiddleware } from "./middlewares/logger.middleware.js";
@@ -58,6 +59,7 @@ app.use("/v1", catalogoRouterV1);
 app.use("/v1/negocios", negocioRouterV1);
 app.use("/v1/admin/negocios", negocioAdminRouterV1);
 app.use("/v1/admin/fotos", fotoAdminRouterV1);
+app.use("/v1", solicitudRouterV1);
 
 // Middleware de manejo de errores
 app.use(errorMiddleware);

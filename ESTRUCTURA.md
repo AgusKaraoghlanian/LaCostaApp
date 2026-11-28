@@ -97,6 +97,9 @@ Las rutas de `/v1/admin` piden `Authorization: Bearer <token>` de un administrad
 | `POST /v1/admin/negocios/:id/retirar` | admin | lo saca del sitio: `{ revisionEsperada }` |
 | `POST /v1/admin/negocios/:id/restaurar` | admin | copia una revisión al borrador: `{ revisionId, revisionEsperada }` |
 | `POST /v1/admin/fotos` | admin | el archivo de la foto en el body (`Content-Type: image/jpeg`, `png` o `webp`, hasta 5 MB) → `{ url }`. El tipo se comprueba con los primeros bytes. Con `SUPABASE_URL` y `SUPABASE_SERVICE_ROLE_KEY` va a Supabase Storage (bucket público `SUPABASE_BUCKET`, `fotos` por defecto); sin eso, en desarrollo, a `backend/uploads` (servida en `/uploads`, fuera de git) |
+| `POST /v1/solicitudes` | **público** | el formulario de "Sumá tu lugar" / "Reclamar mi negocio": `{ tipo: SUMAR o RECLAMAR, nombreNegocio, celular, email }`. Se guarda en `SolicitudNegocio` y avisa por correo (Resend) a `SOLICITUDES_EMAIL`; si el correo falla, queda guardada igual. Hasta 5 por hora por conexión; `sitioWeb` es un campo oculto trampa para bots |
+| `GET /v1/admin/solicitudes?pagina` | admin | las solicitudes, las más nuevas primero, con cuántas `pendientes` hay |
+| `PATCH /v1/admin/solicitudes/:id` | admin | `{ atendida }` |
 | `POST /v1/admin/categorias` | admin | `{ nombre, descripcion }` (la clave sale del nombre) |
 | `POST /v1/admin/provincias`, `/partidos`, `/localidades` | admin | `{ nombre }`, `{ nombre, provinciaId }`, `{ nombre, partidoId }` |
 
@@ -120,13 +123,14 @@ src/features/explorar/            el listado con filtros (viven en la URL: ?q=&l
 src/features/negocio/             la ficha pública: descripción, prestaciones, carta, contacto y horarios
 src/features/guardados/           los lugares con corazón (se guardan en el navegador, por slug)
 src/features/informacion/         Nuestra Costa, Cómo funciona, "próximamente" y la página de no encontrado
+src/features/solicitudes/         "Sumá tu lugar" y "Reclamar mi negocio": formulario con nombre del negocio, celular y correo
 src/features/auth/                el ingreso del administrador
 src/features/admin/               el panel: inicio con números, lista de negocios, editor de la ficha
                                   (ficha, horarios, carta, historial; guardar, aprobar, publicar, retirar,
-                                  restaurar) y configuración (categorías y geografía)
+                                  restaurar), solicitudes de negocios y configuración (categorías y geografía)
 ```
 
-Comparado con la demo, a propósito no están las valoraciones, las reseñas ni el formulario de consulta (no hay datos reales de eso todavía; la versión anterior también los ocultaba en modo real). "Sumá tu lugar" y "Reclamar mi negocio" muestran que se habilitan más adelante. La ficha tiene una sola foto en vez de galería (el backend guarda una; la ficha ya pasa las fotos como carrusel si algún día llegan varias en `fotos`), y su recuadro de la derecha no lleva el "Armá tu próximo plan" ni el "¿Este es tu negocio?": muestra dónde está, horarios, contacto y precio.
+Comparado con la demo, a propósito no están las valoraciones, las reseñas ni el formulario de consulta (no hay datos reales de eso todavía; la versión anterior también los ocultaba en modo real). "Sumá tu lugar" y "Reclamar mi negocio" son un formulario (nombre, celular y correo) que avisa por correo al equipo y queda en el admin, en "Solicitudes"; todavía no hay cuentas de dueños. La ficha tiene una sola foto en vez de galería (el backend guarda una; la ficha ya pasa las fotos como carrusel si algún día llegan varias en `fotos`), y su recuadro de la derecha no lleva el "Armá tu próximo plan" ni el "¿Este es tu negocio?": muestra dónde está, horarios, contacto y precio.
 
 **Por qué todavía sin Tailwind** (VPUG lo usa):
 
@@ -141,7 +145,7 @@ Comparado con la demo, a propósito no están las valoraciones, las reseñas ni 
 
 Dos proyectos de Vercel del mismo repo: uno con Root Directory `backend` y otro con `frontend`.
 
-- **Backend**: corre en `iad1` (Washington), la misma zona que la base de Supabase (us-east-1). `api/index.js` exporta la app de Express y `vercel.json` manda todos los pedidos ahí (no usa `server.js`). En el build corre `npm run vercel-build` (genera el cliente de Prisma). Variables: `DATABASE_URL` (pooler de transacciones, puerto 6543), `JWT_SECRET`, `NODE_ENV=production`, `CORS_ORIGENES` (la URL del frontend), `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_BUCKET`. Las migraciones no corren en el deploy: se corren a mano con `DIRECT_URL` (`npx prisma migrate deploy --config prisma7.config.ts`).
+- **Backend**: corre en `iad1` (Washington), la misma zona que la base de Supabase (us-east-1). `api/index.js` exporta la app de Express y `vercel.json` manda todos los pedidos ahí (no usa `server.js`). En el build corre `npm run vercel-build` (genera el cliente de Prisma). Variables: `DATABASE_URL` (pooler de transacciones, puerto 6543), `JWT_SECRET`, `NODE_ENV=production`, `CORS_ORIGENES` (la URL del frontend), `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_BUCKET`, y para el aviso de las solicitudes `RESEND_API_KEY`, `SOLICITUDES_EMAIL` (y `CORREO_REMITENTE` cuando haya dominio propio verificado en Resend). Las migraciones no corren en el deploy: se corren a mano con `DIRECT_URL` (`npx prisma migrate deploy --config prisma7.config.ts`).
 - **Frontend**: Vite, con `vercel.json` para que las rutas de React (`/lugar/...`) no den 404. Variable: `VITE_API_BASE_URL` = URL del backend + `/v1`.
 - **Fotos**: bucket público `fotos` en Supabase Storage.
 

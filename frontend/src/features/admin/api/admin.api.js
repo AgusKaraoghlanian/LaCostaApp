@@ -53,3 +53,10 @@ export const subirFoto = async (archivo) => {
   if (!res.ok) throw new Error(data?.message || 'No pudimos subir la foto. Probá de nuevo.')
   return data
 }
+
+// Los negocios que pidieron sumarse o reclamar su ficha, las más nuevas primero.
+// Devuelve { solicitudes, total, pendientes, pagina, porPagina }.
+export const listarSolicitudes = ({ pagina }) => conToken('/admin/solicitudes', { query: { pagina } })
+
+export const marcarSolicitud = (id, atendida) =>
+  conToken(`/admin/solicitudes/${id}`, { method: 'PATCH', body: { atendida } })

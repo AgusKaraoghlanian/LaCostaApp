@@ -2466,3 +2466,108 @@
     padding-bottom: 17px;
   }
 }
+
+/* "Sumá tu lugar" y "Reclamar mi negocio": el formulario del login con letra más grande
+   (la de la demo queda chica: 14px como mínimo en pantallas nuevas). */
+.solicitud-pagina .acceso-presentacion p {
+  font-size: 17px;
+  line-height: 1.7;
+}
+.solicitud-pagina .formulario > p {
+  font-size: 15px;
+}
+.solicitud-pagina .formulario label {
+  font-size: 15px;
+}
+.solicitud-pagina .formulario input {
+  font-size: 16px; /* 16px: así el celular no hace zoom al tocar el campo */
+  min-height: 50px;
+}
+.solicitud-pagina .formulario small.error-campo {
+  font-size: 13px;
+}
+.solicitud-pagina .aviso-demo {
+  font-size: 14px !important;
+}
+.solicitud-pagina .boton.ancho {
+  font-size: 16px;
+  min-height: 50px;
+}
+.solicitud-otro {
+  margin: 20px 0 0;
+  text-align: center;
+  font-size: 14px;
+  color: #8a967d;
+}
+.solicitud-otro a {
+  color: var(--naranja);
+  font-weight: 500;
+}
+.solicitud-enviada {
+  text-align: center;
+}
+.solicitud-enviada > svg {
+  color: #7d955e;
+  margin-bottom: 14px;
+}
+.solicitud-enviada > p {
+  font-size: 15px !important;
+}
+
+/* Admin: la lista de solicitudes. */
+.solicitudes-admin .motor-list-row strong {
+  font-size: 15px;
+}
+.solicitudes-admin .motor-list-row small {
+  font-size: 13px;
+}
+.solicitudes-admin .estado {
+  font-size: 12px;
+}
+.solicitudes-admin .motor-list-row .boton {
+  font-size: 13px;
+}
+.solicitud-atendida {
+  opacity: 0.65;
+}
+.solicitud-sin-correo {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 8px;
+  color: #a5432e;
+}
+.solicitud-contacto {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin-top: 8px;
+  font-size: 14px;
+}
+.solicitud-contacto a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: inherit;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 720px) {
+  .solicitudes-admin .motor-list-row {
+    flex-wrap: wrap;
+  }
+  .solicitudes-admin .motor-list-row > div {
+    flex-basis: calc(100% - 60px);
+  }
+}
+
+/* Celular: las 4 pestañas del panel en 2 filas, así se ven todas sin deslizar. */
+@media (max-width: 720px) {
+  .motor-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .motor-tabs a {
+    padding-inline: 10px;
+  }
+}

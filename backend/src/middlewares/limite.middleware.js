@@ -29,6 +29,14 @@ const limiteRegistro = limite({
   mensaje: 'Demasiados registros desde esta conexión. Probá de nuevo en una hora.',
 });
 
+// Formulario de "Sumá tu lugar": 5 solicitudes por hora desde la misma conexión (cada una
+// manda un correo; así nadie llena la casilla).
+const limiteSolicitudes = limite({
+  minutos: 60,
+  maximo: 5,
+  mensaje: 'Ya recibimos varias solicitudes desde esta conexión. Probá de nuevo en una hora.',
+});
+
 // Toda la API: 3000 pedidos cada 15 minutos por conexión. Cada pantalla hace varios pedidos
 // y varias personas en el mismo wifi comparten la IP: 600 se quedaba corto para un grupo.
 const limiteGeneral = limite({
@@ -44,4 +52,4 @@ const limiteEa = limite({
   mensaje: 'Demasiadas búsquedas en EA. Probá de nuevo en unos minutos.',
 });
 
-export { limiteLogin, limiteRegistro, limiteGeneral, limiteEa };
+export { limiteLogin, limiteRegistro, limiteGeneral, limiteEa, limiteSolicitudes };
