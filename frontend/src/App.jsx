@@ -3,6 +3,7 @@ import AdminLayout from './features/admin/components/AdminLayout.jsx'
 import AdminConfiguracion from './features/admin/pages/AdminConfiguracion.jsx'
 import AdminInicio from './features/admin/pages/AdminInicio.jsx'
 import AdminNegocios from './features/admin/pages/AdminNegocios.jsx'
+import AdminSolicitudes from './features/admin/pages/AdminSolicitudes.jsx'
 import FichaAdmin from './features/admin/pages/FichaAdmin.jsx'
 import Login from './features/auth/pages/Login.jsx'
 import Categorias from './features/explorar/pages/Categorias.jsx'
@@ -10,9 +11,9 @@ import Explorar from './features/explorar/pages/Explorar.jsx'
 import Guardados from './features/guardados/pages/Guardados.jsx'
 import Informacion from './features/informacion/pages/Informacion.jsx'
 import NoEncontrado from './features/informacion/pages/NoEncontrado.jsx'
-import Proximamente from './features/informacion/pages/Proximamente.jsx'
 import Inicio from './features/inicio/pages/Inicio.jsx'
 import FichaNegocio from './features/negocio/pages/FichaNegocio.jsx'
+import SolicitudNegocio from './features/solicitudes/pages/SolicitudNegocio.jsx'
 import RutaProtegida from './shared/components/RutaProtegida.jsx'
 import SitioLayout from './shared/components/SitioLayout.jsx'
 import { CatalogoProvider } from './shared/hooks/useCatalogo.jsx'
@@ -32,14 +33,9 @@ function App() {
             <Route path="/guardados" element={<Guardados />} />
             <Route path="/sobre-la-costa" element={<Informacion tipo="costa" />} />
             <Route path="/como-funciona" element={<Informacion tipo="funciona" />} />
-            <Route
-              path="/sumar-lugar"
-              element={<Proximamente titulo="Tu negocio merece ser descubierto." pestana="Sumá tu lugar" />}
-            />
-            <Route
-              path="/reclamar"
-              element={<Proximamente titulo="Tu ficha, en buenas manos." pestana="Reclamar mi negocio" />}
-            />
+            {/* key: al pasar de uno al otro el formulario arranca de cero. */}
+            <Route path="/sumar-lugar" element={<SolicitudNegocio key="SUMAR" tipo="SUMAR" />} />
+            <Route path="/reclamar" element={<SolicitudNegocio key="RECLAMAR" tipo="RECLAMAR" />} />
             <Route path="/ingresar" element={<Login />} />
             <Route path="/mi-negocio" element={<Navigate to="/administracion" replace />} />
 
@@ -49,6 +45,7 @@ function App() {
                 <Route index element={<AdminInicio />} />
                 <Route path="negocios" element={<AdminNegocios />} />
                 <Route path="negocios/:id" element={<FichaAdmin />} />
+                <Route path="solicitudes" element={<AdminSolicitudes />} />
                 <Route path="configuracion" element={<AdminConfiguracion />} />
               </Route>
             </Route>

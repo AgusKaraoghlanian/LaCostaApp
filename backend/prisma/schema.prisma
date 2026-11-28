@@ -238,3 +238,24 @@ model RevisionNegocio {
   @@index([categoriaId])
   @@index([localidadId])
 }
+
+// "Sumá tu lugar" (SUMAR) o "Reclamar mi negocio" (RECLAMAR).
+enum TipoSolicitud {
+  SUMAR
+  RECLAMAR
+}
+
+// Un negocio que pidió sumarse a la guía o hacerse cargo de su ficha, desde el formulario del
+// sitio. Se guarda siempre (aunque el correo de aviso falle) y se ve en el admin.
+model SolicitudNegocio {
+  id            Int           @id @default(autoincrement())
+  tipo          TipoSolicitud
+  nombreNegocio String
+  celular       String
+  email         String
+  correoEnviado Boolean       @default(false) // si salió el aviso a SOLICITUDES_EMAIL
+  atendida      Boolean       @default(false) // el admin ya se comunicó
+  creadaEn      DateTime      @default(now())
+
+  @@index([creadaEn])
+}

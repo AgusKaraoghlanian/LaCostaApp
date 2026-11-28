@@ -1,4 +1,4 @@
-import { Home, LogOut, Settings, Store } from 'lucide-react'
+import { Home, Inbox, LogOut, Settings, Store } from 'lucide-react'
 import { NavLink, Outlet, useNavigate } from 'react-router'
 import { useSesion } from '../../../shared/hooks/useSesion.js'
 import TituloDePagina from '../../../shared/components/TituloDePagina.jsx'
@@ -6,6 +6,7 @@ import TituloDePagina from '../../../shared/components/TituloDePagina.jsx'
 const SECCIONES = [
   { ruta: '/administracion', texto: 'Inicio', icono: Home, exacta: true },
   { ruta: '/administracion/negocios', texto: 'Negocios', icono: Store },
+  { ruta: '/administracion/solicitudes', texto: 'Solicitudes', icono: Inbox },
   { ruta: '/administracion/configuracion', texto: 'Configuración', icono: Settings },
 ]
 

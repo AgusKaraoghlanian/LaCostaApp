@@ -3,6 +3,9 @@
 // Negocios por página en el listado público y en el del admin.
 export const NEGOCIOS_POR_PAGINA = 24;
 
+// Solicitudes de negocios ("Sumá tu lugar", "Reclamar mi negocio") por página en el admin.
+export const SOLICITUDES_POR_PAGINA = 30;
+
 // Productos que puede tener la carta de un negocio. Una carta más grande se divide.
 export const PRODUCTOS_MAXIMOS = 300;
 
